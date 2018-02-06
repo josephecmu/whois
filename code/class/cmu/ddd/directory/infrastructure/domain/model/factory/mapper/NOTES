@@ -1,0 +1,14 @@
+MAPPER will:
+1) normalize array structure for EITHER:
+	-DB 
+	-DOMAIN (ex. People requires a 'name' sub-array within the $array passed to it.)
+2) convert keys to something the DB expects
+
+
+Mapper::array_to_domain($array):array
+Mapper::array_to_db($array):array
+
+
+the array holding both the LDAP and DOMAIN array map can go in the config.ini file
+
+

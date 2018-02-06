@@ -1,0 +1,50 @@
+<?php
+
+namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod;
+
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
+
+class ModifyMethods
+{
+	protected $raw = [];
+	protected $temp = [];
+
+	protected $name_map = [];
+	protected $group_map = [];
+	protected $single_map = [];
+	protected $to_array_map = [];
+
+	public function __construct(AbstractMapper $obj)
+	{
+		
+		$this->raw = $obj->getRaw();
+		$this->name_map = $obj->getNameMap();
+		$this->group_map = $obj->GetGroupMap();
+		$this->to_array_map = $obj->GetToArray();
+		$this->single_map = $obj->GetSingleMap();
+
+	}
+
+	protected function act_on_single_array_depth($strategy_class) : array
+	{
+
+		//empty out $this->temp
+		$this->temp = [];
+		foreach ($this->raw as $k => $v) {
+
+			((new $strategy_class)->modify($k, $v));
+		}
+
+		return $this->temp;
+
+	}
+
+	public function returnModifiedArray() : array
+	{
+
+		return $this->temp;
+	}
+
+	//abstract protected function modify($k, $v);
+
+}
