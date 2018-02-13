@@ -1,0 +1,6 @@
+tags
+git.sh
+.*
+*.bak
+!/.gitignore
+*∼
