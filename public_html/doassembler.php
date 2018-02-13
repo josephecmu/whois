@@ -16,7 +16,7 @@ $factory = \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersis
 $id = new \cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject();
 
 $id->field("uid")
-	->eq("josephe");
+	->eq("florin");
 //	->field("test2")
 //	->gt("another")
 //	->lt("somethingelse");
@@ -42,5 +42,11 @@ echo "</pre>";
 //
 //
 $object = $doa->findOne($id);
+
+$array = (array) $object;
+echo "<pre>";
+print_r($array);
+echo "</pre>";
+
 //print_r($doa->findOne($id));
 $doa->insert($object);
