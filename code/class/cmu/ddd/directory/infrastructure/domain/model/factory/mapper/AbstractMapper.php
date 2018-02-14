@@ -90,10 +90,14 @@ abstract class AbstractMapper
 	}
 
 	//ignore for now
-//	public function return_array_to_db() : array
-//
-//	{
-//
-//	}
+	public function return_object_to_ldaparray() : array
+
+	{
+		//Fluent Interface 
+		$records[] = (new Mod($this, $raw))  //we pass the concrete child mapper
+
+
+
+	}
 
 }

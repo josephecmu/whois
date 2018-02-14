@@ -83,7 +83,14 @@ class DomainObjectAssembler
 		list($rdn, $input) = $upfact->newUpdate($obj);
 
 
-		//WHERE SHOULD THE MAPPER GO??????
+		//cast to array
+		$raw = (array) $obj;
+
+		$mapper = $this->factory->getMapper($raw);
+
+		//we need to call ENTITY Mapper below...
+		$ldap_array = $mapper->return_object_to_ldap_array();
+
 
 		// UPDATE
 		//$link = $this->ldap->update($location, $filter, $fields);  <- from function above
