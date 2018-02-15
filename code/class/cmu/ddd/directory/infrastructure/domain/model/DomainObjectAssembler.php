@@ -14,6 +14,7 @@ class DomainObjectAssembler
 	protected $ldap = null;   
 	public $ds;		//might be more efficient to keep the $ds handle avalailable?
 
+
 	/* listing 13.48 */
    //$factory = PersistenceFactory::getFactory(Venue::class);
    //$finder = new DomainObjectAssembler($factory);
@@ -25,7 +26,7 @@ class DomainObjectAssembler
         $this->ds = \cmu\wrappers\LdapWrapper::getLdapDs();
 
         $this->ldap = new \cmu\wrappers\LdapWrapper($this->ds);        //query LDAP
-		
+	
 	}
 
 	private function getStatement()
@@ -74,22 +75,49 @@ class DomainObjectAssembler
 
 	}
 
+	//Can we clean this up?
+	private function object_to_array(AbstractEntity $obj) : array
+	{
+
+		function obj_to_arr ($obj) {
+			if(is_object($obj)) {
+			   	$obj = (array) $obj;
+			}	
+			if(is_array($obj)) {
+				$new = array();
+				foreach($obj as $key => $val) {
+					$new[$key] = obj_to_arr($val);   //recursive function
+				}
+			} else { 
+				$new = $obj;
+			}
+			return $new; 
+		};
+
+		return obj_to_arr($obj);
+	}
+
 	public function insert(AbstractEntity $obj)
 	{
 
 		$upfact = $this->factory->getUpdateFactory();
 
-		//not finished..........................................
-		list($rdn, $input) = $upfact->newUpdate($obj);
+		$rdn = $upfact->newUpdate($obj);
 
+		$raw = $this->object_to_array($obj);
 
-		//cast to array
-		$raw = (array) $obj;
+		echo "this is the RAW array::";
+		echo "<pre>";
+		print_r($raw);
+		echo "</pre>";
 
 		$mapper = $this->factory->getMapper($raw);
-
 		//we need to call ENTITY Mapper below...
-		$ldap_array = $mapper->return_object_to_ldap_array();
+		echo "This is the LDAP ARRAY";
+		$input = $mapper->return_object_to_ldaparray();
+		echo "<pre>";
+		print_r( $input);
+		echo "</pre>";
 
 
 		// UPDATE
