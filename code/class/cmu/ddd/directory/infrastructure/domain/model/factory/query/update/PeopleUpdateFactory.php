@@ -8,10 +8,8 @@ class PeopleUpdateFactory extends AbstractUpdateFactory
 
 {
 
-	public function newUpdate(AbstractEntity $obj): array
+	public function newUpdate(AbstractEntity $obj): string
 	{
-
-		$return_array=[];
 
 	//get RDN		
 //		$aid=$obj->dynGet("andrewid")->getAndrewid();
@@ -35,10 +33,10 @@ class PeopleUpdateFactory extends AbstractUpdateFactory
 		// return array...[]0 = $rdn    [2] = LDAP array
 		
 		//pass the array to AbstractUpdateFactory::buildStatement()
-		$ldap_array = $this->buildStatement($obj_array);	
+//		$ldap_array = $this->buildStatement($obj_array);	
 
 
-		return [ $rdn, $ldap_aray ];
+		return $rdn;
 
 	}
 

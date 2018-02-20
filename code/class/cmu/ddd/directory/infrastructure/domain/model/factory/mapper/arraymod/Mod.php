@@ -70,6 +70,39 @@ class Mod
 	
 	}
 
+	public function move_elements_up_if_not_in_entity_map() : self
+	{
+
+		$this->final = $this->modify("MoveElementsUpIfNotInEntityMap");
+		return $this;
+
+	}
+
+	public function expose_protected() : self
+	{
+
+		$this->final = $this->modify("ExposeProtected");
+		return $this;
+
+	}
+
+
+	public function expose_private() : self
+	{
+
+		$this->final = $this->modify("ExposePrivate"); 
+		return $this;
+
+	}
+
+	public function reverse_remap_keys() : self
+	{
+
+		$this->final = $this->modify("ReverseRemapKeys");
+		return $this;
+
+	}
+
 	//This function is RECURSIVE.  It will not be able to be applied to the "one level ldap filtering"
 	public function remove_count_recursive() : self
 	{

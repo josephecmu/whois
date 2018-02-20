@@ -29,8 +29,9 @@ print_r($doa->find($id));
 echo "</pre>";
 
 echo "->findOne  Returns a hydrated object";
+$object = $doa->findOne($id);
 echo "<pre>";
-print_r($doa->findOne($id));
+print_r($object);
 echo "</pre>";
 //print_r($id);
 //$psf = new \cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\PeopleSelectionFactory;
@@ -41,12 +42,15 @@ echo "</pre>";
 //NOW LETS CONFIGURE IT FOR AN LDAP ARRAY
 //
 //
-$object = $doa->findOne($id);
 
-$array = (array) $object;
-echo "<pre>";
-print_r($array);
-echo "</pre>";
+//$array = (array) $object;
+//echo "<pre>";
+//print_r($array);
+//echo "</pre>";
 
 //print_r($doa->findOne($id));
-$doa->insert($object);
+echo $doa->insert($object);
+
+
+
+

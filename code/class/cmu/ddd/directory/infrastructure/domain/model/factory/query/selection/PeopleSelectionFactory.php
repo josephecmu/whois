@@ -10,6 +10,7 @@ class PeopleSelectionFactory extends AbstractSelectionFactory
 
 	public function newSelection(IdentityObject $obj): array
 	{
+		
 		$dn = "ou=people"; 
 //		$fields = '"' .  implode('", "', $obj->getObjectFields()) . '"';
 		$fields = $obj->getObjectFields();

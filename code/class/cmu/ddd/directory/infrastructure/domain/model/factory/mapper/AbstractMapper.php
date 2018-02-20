@@ -57,6 +57,11 @@ abstract class AbstractMapper
 		return $this->raw;
 
 	}
+	public function getEntityMap() : array
+	{
+		return $this->entity_map;
+
+	}
 	//END GETTERS
 	///here we prepare the $raw db array for domain hydration
 	public function return_ldap_collection_array_to_domain() : array 
@@ -94,9 +99,15 @@ abstract class AbstractMapper
 
 	{
 		//Fluent Interface 
-		$records[] = (new Mod($this, $raw))  //we pass the concrete child mapper
-
-
+		$record = (new Mod($this, $this->raw))  //we pass the concrete child mapper
+		->move_elements_up_if_not_in_entity_map()
+		->expose_protected()
+		->expose_private()
+		->reverse_remap_keys()
+		->returnFinalArray() 
+		;
+		
+		return $record;
 
 	}
 

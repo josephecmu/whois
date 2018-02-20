@@ -17,10 +17,15 @@ class PeopleMapper extends AbstractMapper
 
 	//determines which attrubes should be in subarray, and 'name' of sub-array
 	protected $group_map =[ 
-
 							 'firstname' => 'name',
 							 'lastname'  => 'name'
-
 					     ];
 	protected $to_array_map = ['peoplerdn'];
+	//////////////////////////////// (objects to LDAP array)
+	//tell mapper what properties are NATIVE to the Entity
+	protected $entity_map = [];
+	//
+	//
+	
+	//
 }
