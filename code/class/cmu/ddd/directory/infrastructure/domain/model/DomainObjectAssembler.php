@@ -55,9 +55,23 @@ class DomainObjectAssembler
 
 		$raw=$this->ldap->getEntries($link);
 
+		echo "RAW Array from LDAP DB";
+		echo "<pre>";
+		print_r($raw);
+		echo "</pre>";
+
+
 		//mapper here for LDAP records...
 		$mapper = $this->factory->getMapper($raw);
 		$norm_array_collection = $mapper->return_ldap_collection_array_to_domain(); 
+
+
+		echo "NORM ARRAY AFTER MAPPER BEFORE DOMAIN Submission";
+		echo "<pre>";
+		print_r($norm_array_collection);
+		echo "</pre>";
+		
+
 
 		return $this->factory->getCollection($norm_array_collection);
 	}

@@ -10,10 +10,14 @@ class PeopleMapper extends AbstractMapper
 	protected $name_map = [	'cn'=>'firstname', 
 							'sn'=>'lastname',
 							'dn'=>'peoplerdn',
-							'uid'=>'andrewid'];
+							'uid'=>'andrewid',
+							'employeetype' => 'roles',
+							'mail' => 'email'];
 
 	//mapping of attributed to SINGLE (s) or MULTIVALUE(m) attributes in subarray.	
 	protected $single_map = ['firstname', 'lastname', 'peoplerdn', 'andrewid' ];
+
+//	protected $multi_map = ['roles','email'];
 
 	//determines which attrubes should be in subarray, and 'name' of sub-array
 	protected $group_map =[ 
@@ -22,10 +26,7 @@ class PeopleMapper extends AbstractMapper
 					     ];
 	protected $to_array_map = ['peoplerdn'];
 	//////////////////////////////// (objects to LDAP array)
-	//tell mapper what properties are NATIVE to the Entity
-	protected $entity_map = [];
-	//
-	//
-	
+	//tell mapper what properties are NATIVE to the Entity (not objects)
+	protected $entity_map = ['roles'];
 	//
 }

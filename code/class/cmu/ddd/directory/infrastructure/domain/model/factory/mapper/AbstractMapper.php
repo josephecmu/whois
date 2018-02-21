@@ -100,9 +100,8 @@ abstract class AbstractMapper
 	{
 		//Fluent Interface 
 		$record = (new Mod($this, $this->raw))  //we pass the concrete child mapper
+		->recurse_expose_private_and_protected()
 		->move_elements_up_if_not_in_entity_map()
-		->expose_protected()
-		->expose_private()
 		->reverse_remap_keys()
 		->returnFinalArray() 
 		;

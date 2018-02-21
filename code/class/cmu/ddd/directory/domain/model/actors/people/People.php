@@ -13,7 +13,9 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
     protected $name;
     protected $andrewid;
     protected $peoplerdn;       
-														
+	protected $roles=[];  				                           //can be BOTH Staff and Faculty	
+	protected $email;
+
 	protected function getRequiredFields() : array				//returns array of required properties
 
 	{
@@ -38,6 +40,20 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
          $this->andrewid = new AndrewID($anid);
 
     }
+	
+	protected function setRoles (array $roles)
+	{
+
+		$this->roles = $roles;
+
+	}
+
+	protected function setEmail (array $email)
+	{
+
+		$this->email = new Email($email);
+
+	}
 
     protected function setPeoplerdn (string $anrdn)
 

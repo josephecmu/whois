@@ -113,13 +113,38 @@ class Mod
 	
 	private function remove_count(array &$array) 
 	{
-		foreach ($array as $value) { 
-			if (is_array($value)) { 
+		foreach ($array as &$value) {
+			if (is_array($value)) {
 				$this->remove_count($value);
-			} else {
-				unset($array['count']);
+			}
+			unset($array['count']);
+		}
+	}
+
+	public function recurse_expose_private_and_protected() : self
+	{
+
+		$this->r_expose_private_and_protected($this->final); 
+		return $this;
+
+	}
+
+
+	 private function r_expose_private_and_protected(array &$array)
+	{
+
+		foreach ($array as $k => $value) {
+			if (is_array($value)) {
+				$this->r_expose_private_and_protected($value);
+			}
+			if (strpos($k, "\0") !== false){	
+				unset ($array[$k]);
+				$aux = explode ("\0", $k);
+				$k = $aux[count($aux)-1];
+				$array[$k] = $value;	
 			}
 		}
+
 	}
 	//end recursive method
 	public function returnFinalArray() : array

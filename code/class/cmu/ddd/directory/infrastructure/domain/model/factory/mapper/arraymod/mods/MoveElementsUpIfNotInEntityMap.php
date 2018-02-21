@@ -7,19 +7,19 @@ class MoveElementsUpIfNotInEntityMap extends AbstractMods
 
 	public function modify($k, $v)
 	{
-
-		//If the first character of the key is NOT a letter, flatten array (move up)
+		//If the key is NOT in entitymap (move up)
 		$entity_map = $this->obj->getEntityMap();		
-		if (!in_array($k, $entity_map)) {
+		if (!in_array($k, $entity_map) && (!empty($v))) {
 			//move the elements up one level
 			foreach($v as $k1 => $v1) {
 
 				$this->temp[$k1] = $v1;			
 
-			}
+			} 
+		} else {       //leave it alone
+				$this->temp[$k] = $v;
+		}
 
-		}	
-
-	}
+	}	
 
 }
