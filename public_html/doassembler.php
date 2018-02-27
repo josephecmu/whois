@@ -16,7 +16,7 @@ $factory = \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersis
 $id = new \cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject();
 
 $id->field("uid")
-	->eq("josephe");
+	->eq("florin");
 //	->field("test2")
 //	->gt("another")
 //	->lt("somethingelse");
@@ -28,7 +28,7 @@ echo "<pre>";
 print_r($doa->find($id));
 echo "</pre>";
 
-echo "->findOne  Returns a hydrated object";
+//echo "->findOne  Returns a hydrated object";
 $object = $doa->findOne($id);
 echo "<pre>";
 print_r($object);

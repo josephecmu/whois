@@ -94,7 +94,6 @@ abstract class AbstractMapper
 		return $records;
 	}
 
-	//ignore for now
 	public function return_object_to_ldaparray() : array
 
 	{

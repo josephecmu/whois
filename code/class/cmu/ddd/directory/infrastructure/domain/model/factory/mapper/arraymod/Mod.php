@@ -13,25 +13,33 @@ class Mod
 	function __construct (AbstractMapper $obj, $raw = null) 
 	{
 		//this class is only instantiated ONCE, we must populate the final array to start mods.
-	
 		$this->final = ($raw) ?: $obj->getRaw();
 			
 		$this->obj = $obj;
 
 	}
 		
-	private function modify(string $class_name) : array   		//helper function to avoid typing below 
+	private function s_modify(string $class_name) : array   		//helper function to avoid typing below 
 	{
-		$class =  __NAMESPACE__  . '\\mods\\' . $class_name;	//all of our mods are in the 'mods' directory
+		$class =  __NAMESPACE__  . '\\mods\\single\\' . $class_name;	//all of our mods are in the 'mods' directory
 		$strat = new $class($this->obj); 						//STRATEGY class is called and instantiated each time.
 		$strat->act_on_single_array_depth($this->final);  		//here we pass the 'final' array for modification
 		return $strat->returnTemp();							//get the array after strategy is done with it.
 	}
 
+	private function r_modify(string $class_name) : array
+	{
+		$class =  __NAMESPACE__  . '\\mods\\recursive\\' . $class_name;    //all of our mods are in the 'mods' directory
+		$strat = new $class($this->obj);                        //STRATEGY class is called and instantiated each time.
+		$strat->act_on_recursive_array_depth($this->final);	    //here we pass the 'final' array for modification
+		return $strat->returnTemp();							//get the array after strategy is done with it.
+	}
+
+	//modifiers...they call the 'mods' using the helper functions above...fluent interface
 	public function remap_keys() : self
 
 	{
-		$this->final = $this->modify("RemapKeys");
+		$this->final = $this->s_modify("RemapKeys");
 		return $this;
 
 	}
@@ -39,7 +47,7 @@ class Mod
 	public function remove_int_keys() : self
 	{
 
-		 $this->final = $this->modify("RemoveIntKeys");
+		 $this->final = $this->s_modify("RemoveIntKeys");
 		 return $this;
 
 	}
@@ -47,7 +55,7 @@ class Mod
 	public function group_elements() : self
 
 	{
-		$this->final = $this->modify("GroupElements");
+		$this->final = $this->s_modify("GroupElements");
 		return $this;
 
 	}
@@ -56,16 +64,15 @@ class Mod
 	public function single_elements() : self
 	{
 
-		$this->final = $this->modify("SingleElements");
+		$this->final = $this->s_modify("SingleElements");
 		return $this;
 
 	}
 
-
 	public function to_array() : self
 	{
 
-		$this->final = $this->modify("ToArray");
+		$this->final = $this->s_modify("ToArray");
 		return $this;
 	
 	}
@@ -73,7 +80,7 @@ class Mod
 	public function move_elements_up_if_not_in_entity_map() : self
 	{
 
-		$this->final = $this->modify("MoveElementsUpIfNotInEntityMap");
+		$this->final = $this->s_modify("MoveElementsUpIfNotInEntityMap");
 		return $this;
 
 	}
@@ -81,7 +88,7 @@ class Mod
 	public function expose_protected() : self
 	{
 
-		$this->final = $this->modify("ExposeProtected");
+		$this->final = $this->s_modify("ExposeProtected");
 		return $this;
 
 	}
@@ -90,7 +97,7 @@ class Mod
 	public function expose_private() : self
 	{
 
-		$this->final = $this->modify("ExposePrivate"); 
+		$this->final = $this->s_modify("ExposePrivate"); 
 		return $this;
 
 	}
@@ -98,55 +105,25 @@ class Mod
 	public function reverse_remap_keys() : self
 	{
 
-		$this->final = $this->modify("ReverseRemapKeys");
+		$this->final = $this->s_modify("ReverseRemapKeys");
 		return $this;
 
 	}
 
-	//This function is RECURSIVE.  It will not be able to be applied to the "one level ldap filtering"
 	public function remove_count_recursive() : self
 	{
-
-		$this->remove_count($this->final);
+		$this->final=$this->r_modify("RemoveCount"); 
 		return $this;
 	}
 	
-	private function remove_count(array &$array) 
-	{
-		foreach ($array as &$value) {
-			if (is_array($value)) {
-				$this->remove_count($value);
-			}
-			unset($array['count']);
-		}
-	}
-
 	public function recurse_expose_private_and_protected() : self
 	{
 
-		$this->r_expose_private_and_protected($this->final); 
+		$this->final=$this->r_modify("ExposePrivateAndProtected");
 		return $this;
 
 	}
-
-
-	 private function r_expose_private_and_protected(array &$array)
-	{
-
-		foreach ($array as $k => $value) {
-			if (is_array($value)) {
-				$this->r_expose_private_and_protected($value);
-			}
-			if (strpos($k, "\0") !== false){	
-				unset ($array[$k]);
-				$aux = explode ("\0", $k);
-				$k = $aux[count($aux)-1];
-				$array[$k] = $value;	
-			}
-		}
-
-	}
-	//end recursive method
+	//end modifiers
 	public function returnFinalArray() : array
 
 	{

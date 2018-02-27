@@ -1,11 +1,11 @@
 <?php
 
-namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\mods;
+namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\mods\single;
 
-class MoveElementsUpIfNotInEntityMap extends AbstractMods
+class MoveElementsUpIfNotInEntityMap extends AbstractSingleMods
 {
 
-	public function modify($k, $v)
+	public function s_modify($k, $v)
 	{
 		//If the key is NOT in entitymap (move up)
 		$entity_map = $this->obj->getEntityMap();		

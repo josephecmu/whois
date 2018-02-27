@@ -162,14 +162,14 @@ class DomainObjectAssembler
 
 		$raw = $this->object_to_array($obj);
 
-		echo "this is the RAW array::";
+		echo "this is the RAW array casted::";
 		echo "<pre>";
 		print_r($raw);
 		echo "</pre>";
 
 		$mapper = $this->factory->getMapper($raw);
 		//we need to call ENTITY Mapper below...
-		echo "This is the LDAP ARRAY";
+		echo "This is the LDAP ARRAY after Mapper";
 		$input = $mapper->return_object_to_ldaparray();
 		echo "<pre>";
 		print_r( $input);
