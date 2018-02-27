@@ -17,27 +17,4 @@ class ExposePrivateAndProtected extends AbstractRecursiveMods
 
 	}
 
-
-//	public function r_modify(array &$array)
-//	{
-//
-//		foreach ($array as $k => &$v) {
-//			if (is_array($v)) {
-//					$this->r_modify($v);
-//				}
-//
-//			if (strpos($k, "\0") !== false){	
-//				unset ($array[$k]);
-//				$aux = explode ("\0", $k);
-//				$k = $aux[count($aux)-1];
-//				$array[$k] = $v;	
-//			} 
-//
-//			$array[$k] = $v;
-//
-//		}
-//
-//		return $array;
-//	}
-
 }

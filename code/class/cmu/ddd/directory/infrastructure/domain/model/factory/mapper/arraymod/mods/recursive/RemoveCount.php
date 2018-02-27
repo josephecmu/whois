@@ -10,20 +10,4 @@ class RemoveCount extends AbstractRecursiveMods
 		unset ($array['count']);
 	}
 
-//	public function r_modify(array &$array)
-//	{
-//		
-//		foreach ($array as $k => &$v) {
-//			if (is_array($v)) {
-//					$this->r_modify($v);
-//				}
-//
-//			unset ($array['count']);
-//
-//		}
-//
-//		return $array;
-//
-//	}
-
 }
