@@ -9,7 +9,6 @@ class Registry
 	private static $instance = null;
 	private $ldap = null; //this object is the class "LdapWrapper" since not 'PDO' class exists.
 	private $conf = null;
-	private $people = null;  //Mapper configs / array
 	//private $commands = null;
 
 	private function __construct() {}

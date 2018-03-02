@@ -91,32 +91,9 @@ class DomainObjectAssembler
 
 	}
 
-//	private	function dismount($object) 
-//	{
-//		$reflectionClass = new \ReflectionClass(get_class($object));
-//		$array = array();
-//		foreach ($reflectionClass->getProperties() as $property) {
-//			$property->setAccessible(true);
-//			$array[$property->getName()] = $property->getValue($object);
-//			$property->setAccessible(false);
-//		}
-//		return $array;
-//	}
-	//Can we clean this up? Should we move to Mod() ?
+	//Can we clean this up? Should we move to Mod() ?   CAST Function
 	private function object_to_array(AbstractEntity $obj) : array
 	{
-
-//		if (is_object($obj))  {
-//
-//			$array = $this->dismount($obj);
-//		}
-		
-		//return dismount($obj);
-
-//		if(!is_object($obj) && !is_array($obj))
-//			return $obj;
-//		return array_map(array($this, 'dismount'),  $obj);
-
 
 		function obj_to_arr ($obj) {
 			if(is_object($obj)) {
@@ -132,33 +109,14 @@ class DomainObjectAssembler
 			}
 			return $new; 
 		};
-//info https://ocramius.github.io/blog/fast-php-object-to-array-conversion/
 
-
-		//		https://secure.php.net/manual/en/function.get-object-vars.php
 		return obj_to_arr($obj);
-//		function obj2array ( &$Instance ) {
-//			$clone = (array) $Instance;
-//			$rtn = array ();
-//			$rtn['___SOURCE_KEYS_'] = $clone;
-//
-//			while ( list ($key, $value) = each ($clone) ) {
-//				$aux = explode ("\0", $key);
-//				$newkey = $aux[count($aux)-1];
-//				$rtn[$newkey] = &$rtn['___SOURCE_KEYS_'][$key];
-//			}
-//
-//			return $rtn;
-//		}
-//
-//		return obj2array($obj);
 
 	}
 
 	public function insert(AbstractEntity $obj)
 	{
 
-//		print_r($this->factory);
 		$upfact = $this->factory->getUpdateFactory();
 
 		$rdn = $upfact->newUpdate($obj);
@@ -170,10 +128,10 @@ class DomainObjectAssembler
 		print_r($raw);
 		echo "</pre>";
 
-		$imapper = $this->factory->getMapper($raw, $this->factory);
+		$mapper = $this->factory->getMapper($raw, $this->factory);
 		//we need to call ENTITY Mapper below...
 		echo "This is the LDAP ARRAY after Mapper";
-		$input = $imapper->return_object_to_ldaparray();
+		$input = $mapper->return_object_to_ldaparray();
 		echo "<pre>";
 		print_r( $input);
 		echo "</pre>";
