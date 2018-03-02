@@ -8,16 +8,19 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCollection;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\AbstractSelectionFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\update\AbstractUpdateFactory;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\config\AbstractConfig;
 
 abstract class AbstractPersistenceFactory
 
 {
 
 	abstract public function getDomainObjectFactory(): AbstractDomainObjectFactory;
-// 	abstract public function getMapper(): AbstractMapper;
+ 	abstract public function getMapper(array $raw): AbstractMapper;
 	abstract public function getCollection(array $raw): AbstractCollection;
 	abstract public function getSelectionFactory(): AbstractSelectionFactory;
-//	abstract public function getUpdateFactory(): AbstractUpdateFactory;
+	abstract public function getUpdateFactory(): AbstractUpdateFactory;
+	abstract public function getConfig(array $conf) : AbstractConfig;
+
 
 	public static function getFactory($target_class) : AbstractPersistenceFactory
 	

@@ -13,7 +13,7 @@ abstract class AbstractRecursiveMods extends AbstractMods
 	public function act_on_recursive_array_depth(array $array) 
 	{
 	
-		$this->temp=$this->r_modify($array);	
+		$this->temp=$this->r_modify($array);		//$this->temp must hold the array to be returned	
 	
 	}
 

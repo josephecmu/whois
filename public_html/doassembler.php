@@ -42,15 +42,6 @@ echo "</pre>";
 //NOW LETS CONFIGURE IT FOR AN LDAP ARRAY
 //
 //
-
-//$array = (array) $object;
-//echo "<pre>";
-//print_r($array);
-//echo "</pre>";
-
-//print_r($doa->findOne($id));
 echo $doa->insert($object);
-
-
 
 

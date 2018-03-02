@@ -10,6 +10,7 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCol
 class DomainObjectAssembler
 
 {
+	protected $factory;
 	private $statments;
 	protected $ldap = null;   
 	public $ds;		//might be more efficient to keep the $ds handle avalailable?
@@ -20,6 +21,7 @@ class DomainObjectAssembler
    //$finder = new DomainObjectAssembler($factory);
 	public function __construct(AbstractPersistenceFactory $factory) {
 		$this->factory = $factory;
+
 		$reg = \cmu\config\site\bin\Registry::instance();
 		//		$this->ldap = $reg->getLdap();    //Z uses registy, I will create new instance below
 
@@ -156,6 +158,7 @@ class DomainObjectAssembler
 	public function insert(AbstractEntity $obj)
 	{
 
+//		print_r($this->factory);
 		$upfact = $this->factory->getUpdateFactory();
 
 		$rdn = $upfact->newUpdate($obj);
@@ -167,10 +170,10 @@ class DomainObjectAssembler
 		print_r($raw);
 		echo "</pre>";
 
-		$mapper = $this->factory->getMapper($raw);
+		$imapper = $this->factory->getMapper($raw, $this->factory);
 		//we need to call ENTITY Mapper below...
 		echo "This is the LDAP ARRAY after Mapper";
-		$input = $mapper->return_object_to_ldaparray();
+		$input = $imapper->return_object_to_ldaparray();
 		echo "<pre>";
 		print_r( $input);
 		echo "</pre>";
