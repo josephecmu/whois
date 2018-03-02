@@ -10,22 +10,25 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCol
 class DomainObjectAssembler
 
 {
+	protected $factory;
 	private $statments;
 	protected $ldap = null;   
 	public $ds;		//might be more efficient to keep the $ds handle avalailable?
+
 
 	/* listing 13.48 */
    //$factory = PersistenceFactory::getFactory(Venue::class);
    //$finder = new DomainObjectAssembler($factory);
 	public function __construct(AbstractPersistenceFactory $factory) {
 		$this->factory = $factory;
+
 		$reg = \cmu\config\site\bin\Registry::instance();
 		//		$this->ldap = $reg->getLdap();    //Z uses registy, I will create new instance below
 
         $this->ds = \cmu\wrappers\LdapWrapper::getLdapDs();
 
         $this->ldap = new \cmu\wrappers\LdapWrapper($this->ds);        //query LDAP
-		
+	
 	}
 
 	private function getStatement()
@@ -54,9 +57,23 @@ class DomainObjectAssembler
 
 		$raw=$this->ldap->getEntries($link);
 
+		echo "RAW Array from LDAP DB";
+		echo "<pre>";
+		print_r($raw);
+		echo "</pre>";
+
+
 		//mapper here for LDAP records...
 		$mapper = $this->factory->getMapper($raw);
 		$norm_array_collection = $mapper->return_ldap_collection_array_to_domain(); 
+
+
+		echo "NORM ARRAY AFTER MAPPER BEFORE DOMAIN Submission";
+		echo "<pre>";
+		print_r($norm_array_collection);
+		echo "</pre>";
+		
+
 
 		return $this->factory->getCollection($norm_array_collection);
 	}
@@ -74,16 +91,93 @@ class DomainObjectAssembler
 
 	}
 
+//	private	function dismount($object) 
+//	{
+//		$reflectionClass = new \ReflectionClass(get_class($object));
+//		$array = array();
+//		foreach ($reflectionClass->getProperties() as $property) {
+//			$property->setAccessible(true);
+//			$array[$property->getName()] = $property->getValue($object);
+//			$property->setAccessible(false);
+//		}
+//		return $array;
+//	}
+	//Can we clean this up? Should we move to Mod() ?
+	private function object_to_array(AbstractEntity $obj) : array
+	{
+
+//		if (is_object($obj))  {
+//
+//			$array = $this->dismount($obj);
+//		}
+		
+		//return dismount($obj);
+
+//		if(!is_object($obj) && !is_array($obj))
+//			return $obj;
+//		return array_map(array($this, 'dismount'),  $obj);
+
+
+		function obj_to_arr ($obj) {
+			if(is_object($obj)) {
+			   	$obj = (array) $obj;
+			}	
+			if(is_array($obj)) {
+				$new = array();
+				foreach($obj as $key => $val) {
+					$new[$key] = obj_to_arr($val);   //recursive function
+				}
+			} else { 
+				$new = $obj;
+			}
+			return $new; 
+		};
+//info https://ocramius.github.io/blog/fast-php-object-to-array-conversion/
+
+
+		//		https://secure.php.net/manual/en/function.get-object-vars.php
+		return obj_to_arr($obj);
+//		function obj2array ( &$Instance ) {
+//			$clone = (array) $Instance;
+//			$rtn = array ();
+//			$rtn['___SOURCE_KEYS_'] = $clone;
+//
+//			while ( list ($key, $value) = each ($clone) ) {
+//				$aux = explode ("\0", $key);
+//				$newkey = $aux[count($aux)-1];
+//				$rtn[$newkey] = &$rtn['___SOURCE_KEYS_'][$key];
+//			}
+//
+//			return $rtn;
+//		}
+//
+//		return obj2array($obj);
+
+	}
+
 	public function insert(AbstractEntity $obj)
 	{
 
+//		print_r($this->factory);
 		$upfact = $this->factory->getUpdateFactory();
 
-		//not finished..........................................
-		list($rdn, $input) = $upfact->newUpdate($obj);
+		$rdn = $upfact->newUpdate($obj);
 
+		$raw = $this->object_to_array($obj);
 
-		//WHERE SHOULD THE MAPPER GO??????
+		echo "this is the RAW array casted::";
+		echo "<pre>";
+		print_r($raw);
+		echo "</pre>";
+
+		$imapper = $this->factory->getMapper($raw, $this->factory);
+		//we need to call ENTITY Mapper below...
+		echo "This is the LDAP ARRAY after Mapper";
+		$input = $imapper->return_object_to_ldaparray();
+		echo "<pre>";
+		print_r( $input);
+		echo "</pre>";
+
 
 		// UPDATE
 		//$link = $this->ldap->update($location, $filter, $fields);  <- from function above

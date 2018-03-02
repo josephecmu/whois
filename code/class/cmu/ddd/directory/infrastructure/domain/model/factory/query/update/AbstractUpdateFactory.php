@@ -8,11 +8,24 @@ abstract class AbstractUpdateFactory
 
 {
 	
-	abstract public function newUpdate(AbstractEntity $obj): array;
+	abstract public function newUpdate(AbstractEntity $obj): string;
 	
 	//needs to be modified for LDAP...............................	
-	protected function buildStatement(string $table, array $fields, array $conditions = null): array
-		{
+//	protected function buildStatement(string $table, array $fields, array $conditions = null): array
+
+	protected function buildStatement( array $obj_array) : array
+	
+
+	{
+
+
+
+
+
+
+
+
+
 
 //			$terms = array();
 //

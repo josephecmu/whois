@@ -9,6 +9,7 @@ class Registry
 	private static $instance = null;
 	private $ldap = null; //this object is the class "LdapWrapper" since not 'PDO' class exists.
 	private $conf = null;
+	private $people = null;  //Mapper configs / array
 	//private $commands = null;
 
 	private function __construct() {}
@@ -40,6 +41,7 @@ class Registry
 		return $this->conf;
 	}
 
+
 #	public function getDSN()
 #
 #	{
@@ -54,7 +56,6 @@ class Registry
 	{
 
 		$conf = $this->getConf();
-
 		return $conf->get("pass");
 
 	}
@@ -64,7 +65,6 @@ class Registry
 	{
 
 		$conf = $this->getConf();
-
 		return $conf->get("cred"); 
 
 	}
@@ -74,7 +74,6 @@ class Registry
 	{
 
 		$conf = $this->getConf();
-
 		return $conf->get("host"); 
 
 	}
@@ -84,7 +83,6 @@ class Registry
 	{
 
 		$conf = $this->getConf();
-
 		return $conf->get("port"); 
 
 	}
@@ -93,7 +91,6 @@ class Registry
 	{
 
 		$conf = $this->getConf();
-
 		return $conf->get("dn"); 
 
 	}

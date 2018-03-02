@@ -12,6 +12,8 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\object\PeopleDomainObj
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\AbstractDomainObjectFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\PeopleMapper;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\config\PeopleConfig;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\config\AbstractConfig;
 
 class PeoplePersistenceFactory extends AbstractPersistenceFactory
 
@@ -53,6 +55,14 @@ class PeoplePersistenceFactory extends AbstractPersistenceFactory
 	{
 
 		return new PeopleUpdateFactory();	
+
+	}
+
+	public function getConfig(array $config) : AbstractConfig
+
+	{
+
+		return new PeopleConf($config);
 
 	}
 

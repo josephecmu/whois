@@ -1,11 +1,11 @@
 <?php
 
-namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\mods;
+namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\mods\single;
 
-class GroupElements extends AbstractMods
+class GroupElements extends AbstractSingleMods
 {
 
-	public function modify($k, $v)
+	public function s_modify($k, $v)
 	{
 
 		
