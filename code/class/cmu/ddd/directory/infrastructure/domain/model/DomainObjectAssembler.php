@@ -45,6 +45,7 @@ class DomainObjectAssembler
 
 	public function findOne(IdentityObject $idobj): AbstractEntity
 	{
+
 		$collection = $this->find($idobj);
 		return $collection->next(); 		//return  only ONE (next)
 	}
@@ -57,14 +58,14 @@ class DomainObjectAssembler
 
 		$raw=$this->ldap->getEntries($link);
 
+		print_r( $this->factory);
 		echo "RAW Array from LDAP DB";
 		echo "<pre>";
 		print_r($raw);
 		echo "</pre>";
 
-
 		//mapper here for LDAP records...
-		$mapper = $this->factory->getMapper($raw);
+		$mapper = $this->factory->getMapper($raw, $this->factory);
 		$norm_array_collection = $mapper->return_ldap_collection_array_to_domain(); 
 
 
@@ -90,7 +91,7 @@ class DomainObjectAssembler
 		//this should handle form submission object creation. 
 
 	}
-
+	//CASTS to array
 	//Can we clean this up? Should we move to Mod() ?   CAST Function
 	private function object_to_array(AbstractEntity $obj) : array
 	{
@@ -127,7 +128,7 @@ class DomainObjectAssembler
 		echo "<pre>";
 		print_r($raw);
 		echo "</pre>";
-
+		echo "FACTORY IN DOA";
 		$mapper = $this->factory->getMapper($raw, $this->factory);
 		//we need to call ENTITY Mapper below...
 		echo "This is the LDAP ARRAY after Mapper";
