@@ -12,7 +12,6 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\Mod;
 use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfig;
 use cmu\config\site\bin\Conf;
 
-
 abstract class AbstractMapper
 {
 
@@ -27,17 +26,15 @@ abstract class AbstractMapper
 
 	function __construct(array $raw)
 	{
-		//This would work best in a seperate prive method as in AbstractIdentityObject
-			$this->setIniFile("mapper.ini"); 		//trait	
-			$options = $this->returnParseIniFile();	//trait
-
-			$this->conf = $this->returnConcreteConfigObject($options); 
 			
-			$this->name_map = $this->conf->get("name_map"); 
-			$this->single_map = $this->conf->get("single_map");
-			$this->entity_map = $this->conf->get('entity_map');	
-			$this->to_array_map = $this->conf->get("to_array_map");
-			$this->group_map = $this->conf->get("group_map");
+			$options = $this->getConfigArray("mapper.ini");
+			$conf = $this->returnConcreteConfigObject($options);    //returns child Conf object
+			//set
+			$this->name_map = $conf->get("name_map"); 
+			$this->single_map = $conf->get("single_map");
+			$this->entity_map = $conf->get('entity_map');	
+			$this->to_array_map = $conf->get("to_array_map");
+			$this->group_map = $conf->get("group_map");
 
 			$this->raw = $raw;
 	}

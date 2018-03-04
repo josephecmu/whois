@@ -8,25 +8,29 @@ trait TraitConfig
 
 {
 
-	protected $ini; 		     	// ini file to read	
-
 	abstract protected function returnConcreteConfigObject( array $options) : Conf;
 
-	protected function setIniFile(string $file)
+	private function returnIniFile(string $file) : string
 	{
 
-		$this->ini = CONFDIR . $file;	
-		//we need sanity check on existance of file
+		$fileandpath = CONFDIR . $file;
+
+		if (! file_exists($fileandpath)) {
+			throw new AppException("Could not find options file");
+			echo "Could not find options file";
+		}
+
+		return $fileandpath;
 	}
 
-	protected function returnParseIniFile() : array //return $options
+	protected function getConfigArray(string $file) : array 					//return the parsed .ini file
 	{
 
-		return parse_ini_file($this->ini, true);
-
+		$ini = $this->returnIniFile($file);
+		return parse_ini_file($ini, true);
 	}
 
-	protected function returnConfigObject( array $options) : Conf
+	protected function returnConfigObject( array $options) : Conf				//return Conf object, with specified [section] (people,etc.)
 	{
 
 		return new Conf($options);
