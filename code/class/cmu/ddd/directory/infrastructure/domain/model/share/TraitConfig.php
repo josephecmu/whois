@@ -8,14 +8,15 @@ trait TraitConfig
 
 {
 
-	protected $conf;      			//returns object that stores ini data of above maps
 	protected $ini; 		     	// ini file to read	
+
+	abstract protected function returnConcreteConfigObject( array $options) : Conf;
 
 	protected function setIniFile(string $file)
 	{
 
 		$this->ini = CONFDIR . $file;	
-
+		//we need sanity check on existance of file
 	}
 
 	protected function returnParseIniFile() : array //return $options
@@ -25,13 +26,11 @@ trait TraitConfig
 
 	}
 
-	protected function returnConfigObject($options) : Conf
+	protected function returnConfigObject( array $options) : Conf
 	{
 
-		return Conf($options);
+		return new Conf($options);
 
 	}
-
-	//$this->conf = $this->getConfig($factory, $options); 
 
 }

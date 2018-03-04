@@ -9,26 +9,29 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper;
  
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\Mod;
+use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfig;
 use cmu\config\site\bin\Conf;
-use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\config\AbstractConfig; 
-use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
+
 
 abstract class AbstractMapper
 {
+
+	use TraitConfig;
+
 	protected $name_map = []; 
 	protected $single_map = [];
 	protected $group_map = [];
 	protected $to_array_map = [];
 	protected $entity_map = [];
-	protected $conf;      							//returns object that stores ini data of above maps
 	protected $raw = [];
-	protected $ini = CONFDIR . "mapper.ini";     	// ini file to read	
 
-	function __construct(array $raw, AbstractPersistenceFactory $factory)
+	function __construct(array $raw)
 	{
-	
-			$options = parse_ini_file($this->ini, true);
-			$this->conf = $this->getConfig($factory, $options); 
+		//This would work best in a seperate prive method as in AbstractIdentityObject
+			$this->setIniFile("mapper.ini"); 		//trait	
+			$options = $this->returnParseIniFile();	//trait
+
+			$this->conf = $this->returnConcreteConfigObject($options); 
 			
 			$this->name_map = $this->conf->get("name_map"); 
 			$this->single_map = $this->conf->get("single_map");
@@ -38,8 +41,6 @@ abstract class AbstractMapper
 
 			$this->raw = $raw;
 	}
-
-	abstract protected function getConfig(AbstractPersistenceFactory $factory, $options) : AbstractConfig ;
 
 	//GETTERS
 	public function getNameMap() : array

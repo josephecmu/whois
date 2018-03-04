@@ -2,10 +2,14 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\idobject;
 
-class PeopleIdentityObject extends IdentityObject
+use cmu\config\site\bin\Conf;
+
+class PeopleIdentityObject extends AbstractIdentityObject
 {
-	public function __construct(string $field = null)
+
+	protected function returnConcreteConfigObject(array $options) : Conf
 	{
-		parent::__construct($field, ['sn','cn','uid','mail','employeetype']);  //<-these are LDAP attributes, have to be as this filters return LDAP attributes
+		return $this->returnConfigObject($options['people']);
 	}
+
 }

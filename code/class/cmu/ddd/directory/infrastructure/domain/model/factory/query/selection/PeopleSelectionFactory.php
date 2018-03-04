@@ -2,13 +2,13 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\selection;
 
-use  \cmu\ddd\directory\infrastructure\domain\model\idobject\IdentityObject ;
+use  \cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject ;
 
 class PeopleSelectionFactory extends AbstractSelectionFactory
 
 {
 
-	public function newSelection(IdentityObject $obj): array
+	public function newSelection(AbstractIdentityObject $obj): array
 	{
 		
 		$dn = "ou=people"; 
