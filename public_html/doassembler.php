@@ -9,7 +9,6 @@ use cmu\ddd\directory\domain\model\actors\people\People;
 
 $factory = \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory::getFactory(People::class);
 
-
 //$finder = new DomainObjectAssembler($factory);
 
 

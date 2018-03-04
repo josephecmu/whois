@@ -3,9 +3,7 @@
 namespace cmu\config\site\bin;
 //class to hold the .ini values in object.  no business logic
 
-use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\config\InterfaceConfig;
-
-class Conf implements InterfaceConfig 
+class Conf 
 {
 	private $vals = [];
 

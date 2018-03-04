@@ -20,13 +20,6 @@ abstract class AbstractUpdateFactory
 
 
 
-
-
-
-
-
-
-
 //			$terms = array();
 //
 //				if (! is_null($conditions)) {

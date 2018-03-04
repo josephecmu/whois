@@ -2,16 +2,14 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper;
 
-use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\config\PeopleConfig; 
-use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\config\AbstractConfig; 
+use cmu\config\site\bin\Conf;
 
 class PeopleMapper extends AbstractMapper
-
 {
 
-	protected function getConfig($options) : AbstractConfig 
+	protected function returnConcreteConfigObject(array $options) : Conf
 	{	
-		return new PeopleConfig($options['people']);		
+		return  $this->returnConfigObject($options['people']) ;
 
 	}	
 

@@ -2,15 +2,15 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\selection;
 
-use \cmu\ddd\directory\infrastructure\domain\model\idobject\IdentityObject;
+use \cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
 
 abstract class AbstractSelectionFactory
 
 {
 	
-abstract public function newSelection(IdentityObject $obj): array;
+abstract public function newSelection(AbstractIdentityObject $obj): array;
 
-public function buildFilter(IdentityObject $obj): string
+public function buildFilter(AbstractIdentityObject $obj): string
 
 {
 	

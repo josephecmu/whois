@@ -7,26 +7,36 @@
  */
 namespace cmu\ddd\directory\infrastructure\domain\model\idobject;
 
-class IdentityObject
+use cmu\config\site\bin\Conf;
+use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfig;
+
+abstract class AbstractIdentityObject
 {
+
+	use TraitConfig;
+
 	protected $currentfield = null;
 	protected $fields = [];
-	private $and = null;   //<--what is this for?
-	private $enforce = [];
-
-	// an identity object can start off empty, or with a field
-	 public function __construct(string $field = null, array $enforce = null)
-	 {
-		 if (! is_null($enforce)) {
-			 $this->enforce = $enforce;
-		 }
+	protected $and = null;   //<--what is this for?
+	protected $enforce = [];
 	
-		 if (! is_null($field)) {
-			 $this->field($field);
-		 }
+	// an identity object can start off empty, or with a field
+	 public function __construct(string $field = null)
+	 {
+			$options = $this->getConfigArray("idobj.ini");						//get enforce fields from .ini file
+			$conf=$this->returnConcreteConfigObject($options);                  //child implimentation 
+
+			if (! is_null($conf->get("enforceatt"))) {
+				$this->enforce = $conf->get("enforceatt");
+			}
+
+			 if (! is_null($field)) {
+				 $this->field($field);
+			 }
 	 }
+
 	// field names to which this is constrained
-	  public function getObjectFields()
+	public function getObjectFields()
 	  {
 		  return $this->enforce;
 	  }

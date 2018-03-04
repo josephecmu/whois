@@ -19,7 +19,6 @@ abstract class AbstractPersistenceFactory
 	abstract public function getSelectionFactory(): AbstractSelectionFactory;
 	abstract public function getUpdateFactory(): AbstractUpdateFactory;
 
-
 	public static function getFactory($target_class) : AbstractPersistenceFactory
 	
 	{
