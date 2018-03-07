@@ -9,13 +9,13 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper;
  
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\Mod;
-use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfig;
+use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfigDomain;
 use cmu\config\site\bin\Conf;
 
 abstract class AbstractMapper
 {
 
-	use TraitConfig;
+	use TraitConfigDomain;
 
 	protected $name_map = []; 
 	protected $single_map = [];
@@ -125,6 +125,18 @@ abstract class AbstractMapper
 		
 		return $record;
 
+	}
+
+	public function return_dto_to_domain_array() : array
+	{
+
+		//Fluent Interface
+		$record = (new Mod($this, $this->raw))  //we pass the concrete child mapper
+		->group_elements()
+		->returnFinalArray()			
+		;
+
+		return $record;
 	}
 
 }

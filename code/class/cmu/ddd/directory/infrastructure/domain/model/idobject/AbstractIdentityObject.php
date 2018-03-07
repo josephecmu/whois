@@ -8,12 +8,12 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\idobject;
 
 use cmu\config\site\bin\Conf;
-use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfig;
+use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfigDomain;
 
 abstract class AbstractIdentityObject
 {
 
-	use TraitConfig;
+	use TraitConfigDomain;
 
 	protected $currentfield = null;
 	protected $fields = [];

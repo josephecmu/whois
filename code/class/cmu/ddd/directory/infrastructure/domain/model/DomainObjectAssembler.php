@@ -13,7 +13,7 @@ class DomainObjectAssembler
 	protected $factory;
 	private $statments;
 	protected $ldap = null;   
-	public $ds;		//might be more efficient to keep the $ds handle avalailable?
+	public $ds;									//might be more efficient to keep the $ds handle avalailable?
 
 
 	/* listing 13.48 */

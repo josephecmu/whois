@@ -43,4 +43,36 @@ echo "</pre>";
 //
 echo $doa->insert($object);
 
+echo "from DTO to Domain array";
+echo "<br />";  
+//we need a DTO
+echo "DTO-------------------------";
+echo "<br />";
 
+$array=[
+		'firstname' => 'Joe',
+		 'lastname' => 'Evans',
+		    'email' => ['josephe@andrew.cmu.edu', 'secondemail@gmail.com']
+		];
+
+
+$dto = new \cmu\ddd\directory\infrastructure\domain\model\dto\DTO($array);	
+echo "<pre>";
+print_r($dto);
+
+$mapper = new \cmu\ddd\directory\infrastructure\domain\model\factory\mapper\PeopleMapper($dto->getDataArray());
+
+print_r($mapper);
+
+
+
+echo "domain array from AbstractMapper::return_dto_to_domain_array()::";
+echo "<br />";
+$domain_array=$mapper->return_dto_to_domain_array();
+print_r($domain_array);
+
+
+$people = new People($domain_array);
+
+print_r($people);
+echo "</pre>";
