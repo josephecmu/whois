@@ -7,6 +7,8 @@ use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObjec
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCollection;
 use cmu\ddd\directory\infrastructure\domain\model\dto\DTO;
+use cmu\config\site\bin\Registry;
+use cmu\wrappers\LdapWrapper;
 
 class DomainObjectAssembler
 
@@ -17,31 +19,17 @@ class DomainObjectAssembler
 	public $ds;									//might be more efficient to keep the $ds handle avalailable?
 
 
-	/* listing 13.48 */
    //$factory = PersistenceFactory::getFactory(Venue::class);
    //$finder = new DomainObjectAssembler($factory);
 	public function __construct(AbstractPersistenceFactory $factory) {
-		$this->factory = $factory;
+		$this->factory = $factory;											//we need to determine what obj to build
 
-		$reg = \cmu\config\site\bin\Registry::instance();
-		//		$this->ldap = $reg->getLdap();    //Z uses registy, I will create new instance below
+		$reg = Registry::instance();
 
-        $this->ds = \cmu\wrappers\LdapWrapper::getLdapDs();
+        $this->ds = LdapWrapper::getLdapDs();
 
-        $this->ldap = new \cmu\wrappers\LdapWrapper($this->ds);        //query LDAP
+        $this->ldap = new LdapWrapper($this->ds);        //query LDAP
 	
-	}
-
-	private function getStatement()
-	{	
-//	//This will need to change, LdapWrapper has no prepare() method...no PDOStatement to return	
-//	{
-//		if (! isset($this->statements[$str])) {
-//			$this->statements[$str] = $this->ldap->prepare($str);
-//		}
-//
-//		return $this->statements[$str];
-        $this->ldap = new \cmu\wrappers\LdapWrapper(static::$ds);        //query LDAP
 	}
 
 	public function findOne(AbstractIdentityObject $idobj): AbstractEntity
@@ -68,7 +56,6 @@ class DomainObjectAssembler
 		$mapper = $this->factory->getMapper($raw);
 		$norm_array_collection = $mapper->return_ldap_collection_array_to_domain(); 
 
-
 		echo "NORM ARRAY AFTER MAPPER BEFORE DOMAIN Submission";
 		echo "<pre>";
 		print_r($norm_array_collection);
@@ -84,7 +71,7 @@ class DomainObjectAssembler
 		$mapper = $this->factory->getMapper($raw);
 		$domain_array = $mapper->return_dto_to_domain_array();
 
-		//get Objectfactory and return
+		//get Objectfactory and return object
 		$dofact = $this->factory->getDomainObjectFactory();
 		$obj = $dofact->createObject($domain_array); 
 
