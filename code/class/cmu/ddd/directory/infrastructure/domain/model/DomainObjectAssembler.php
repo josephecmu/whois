@@ -6,6 +6,7 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFac
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCollection;
+use cmu\ddd\directory\infrastructure\domain\model\dto\DTO;
 
 class DomainObjectAssembler
 
@@ -73,15 +74,21 @@ class DomainObjectAssembler
 		print_r($norm_array_collection);
 		echo "</pre>";
 		
-
-
 		return $this->factory->getCollection($norm_array_collection);
 	}
-	
-	public function build(   ) :  AbstractEntity
+	//this should handle form submission object creation. 
+	public function build(DTO $dto) : AbstractEntity
  	{
+		//Get Mapper and convert data
+		$raw = $dto->getDataArray();
+		$mapper = $this->factory->getMapper($raw);
+		$domain_array = $mapper->return_dto_to_domain_array();
 
-		//this should handle form submission object creation. 
+		//get Objectfactory and return
+		$dofact = $this->factory->getDomainObjectFactory();
+		$obj = $dofact->createObject($domain_array); 
+
+		return $obj;
 
 	}
 

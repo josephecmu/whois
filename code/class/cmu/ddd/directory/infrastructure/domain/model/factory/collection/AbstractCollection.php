@@ -21,8 +21,6 @@ abstract class AbstractCollection implements \Iterator
 		if (count($raw) && ! is_null($dofact)) {
 			$this->raw = $raw;
 			$this->total = count($raw);
-			//we need to get the php supplied 'count' of records returned
-			//$this->total = $raw['count'];
 		}
 
 		$this->dofact = $dofact;

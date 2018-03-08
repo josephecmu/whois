@@ -75,4 +75,16 @@ print_r($domain_array);
 $people = new People($domain_array);
 
 print_r($people);
+
+
+echo "now we can build objects directly from DTO with DomainObjectAssembler::build()";
+
+$obj = $doa->build($dto);
+
+print_r($obj);
+
+
+
+
+
 echo "</pre>";

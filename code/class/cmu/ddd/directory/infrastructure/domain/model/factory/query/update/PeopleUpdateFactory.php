@@ -13,7 +13,6 @@ class PeopleUpdateFactory extends AbstractUpdateFactory
 
 		$rdn=$obj->dynGet("peoplerdn")->dynGet("dn");
 
-
 		$raw = $this->object_to_array($obj);
 
 		$this->mapper = $this->factory->getMapper($raw);
