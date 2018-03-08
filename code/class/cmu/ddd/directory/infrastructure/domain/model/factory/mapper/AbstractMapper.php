@@ -8,6 +8,7 @@
  */
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper;
  
+use cmu\ddd\directory\infrastructure\domain\model\dto\DTO;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\Mod;
 use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfig;
 use cmu\config\site\bin\Conf;
@@ -127,4 +128,16 @@ abstract class AbstractMapper
 
 	}
 
+	public function return_object_to_dto() : array
+
+    {
+        //Fluent Interface
+        $record = (new Mod($this, $this->raw))
+            ->recurse_expose_private_and_protected()
+            ->move_elements_up_if_not_in_entity_map()
+            ->returnFinalArray()
+            ;
+
+        return $record;
+    }
 }
