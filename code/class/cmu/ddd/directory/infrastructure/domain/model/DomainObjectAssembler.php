@@ -78,40 +78,10 @@ class DomainObjectAssembler
 		return $this->factory->getCollection($norm_array_collection);
 	}
 	
-	//I created...
-	//we need a way to build a Domain Object for insert()
-	//pass a Data Transfer Object (request)
-	//however we have TWO types of array, 
-	//1- form submission -> dto -> array
-	//2- Params -> LDAP return (find(), above)
 	public function build(   ) :  AbstractEntity
  	{
 
 		//this should handle form submission object creation. 
-
-	}
-	//CASTS to array
-	//Can we clean this up? Should we move to Mod() ?   CAST Function
-	//can we re-factor this using closures????
-	private function object_to_array(AbstractEntity $obj) : array
-	{
-
-		function obj_to_arr ($obj) {
-			if(is_object($obj)) {
-			   	$obj = (array) $obj;
-			}	
-			if(is_array($obj)) {
-				$new = array();
-				foreach($obj as $key => $val) {
-					$new[$key] = obj_to_arr($val);   //recursive function
-				}
-			} else { 
-				$new = $obj;
-			}
-			return $new; 
-		};
-
-		return obj_to_arr($obj);
 
 	}
 
@@ -120,19 +90,9 @@ class DomainObjectAssembler
 
 		$upfact = $this->factory->getUpdateFactory();
 
-		$rdn = $upfact->newUpdate($obj);
+		list($rdn, $input) = $upfact->newUpdate($obj);
 
-		$raw = $this->object_to_array($obj);
-
-		echo "this is the RAW array casted::";
-		echo "<pre>";
-		print_r($raw);
-		echo "</pre>";
-		echo "FACTORY IN DOA";
-		$mapper = $this->factory->getMapper($raw);
-		//we need to call ENTITY Mapper below...
 		echo "This is the LDAP ARRAY after Mapper";
-		$input = $mapper->return_object_to_ldaparray();
 		echo "<pre>";
 		print_r( $input);
 		echo "</pre>";

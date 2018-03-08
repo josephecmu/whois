@@ -52,7 +52,7 @@ class PeoplePersistenceFactory extends AbstractPersistenceFactory
 	
 	{
 
-		return new PeopleUpdateFactory();	
+		return new PeopleUpdateFactory($this);	
 
 	}
 
