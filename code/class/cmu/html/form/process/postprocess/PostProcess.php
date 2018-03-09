@@ -17,7 +17,7 @@ class PostProcess
 
     }
 
-    function doSomething()
+    function doSomething() : bool
 
     {
 

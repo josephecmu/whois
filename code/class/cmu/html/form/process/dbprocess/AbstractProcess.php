@@ -36,7 +36,7 @@ abstract class AbstractProcess
     
     {
 
-        if ($this->returnpostobj->getValue('ou')) {                             //ou may alreay be passed ADD, if so, just return it.
+        if ($this->returnpostobj->getValue('ou')) {           //ou may alreay be passed ADD, if so, just return it.
 
             return $this->returnpostobj->getValue('ou');
 

@@ -6,7 +6,7 @@ class CommandFactory
 {
     private static $dir = 'commands';
  
-    static function getCommand( $action = 'Default' ) 
+    static function getCommand( $action = 'Default' ) : AbstractCommand 
 
     {
 

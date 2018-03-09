@@ -13,7 +13,7 @@ class DbprocessCommand extends AbstractCommand
 
 {
 
-    function execute( CommandContext $context )
+    function execute(CommandContext $context ) : bool
 
     {
 

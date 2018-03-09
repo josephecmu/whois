@@ -4,7 +4,7 @@ namespace cmu\html\base;
 class LdapValues extends AbstractValues 
 
 {
-
+	//this might work better from Mapper ???
     private function returnLdapNormValuesArray (array $array)   : array                 //could be recursive function
 
     {

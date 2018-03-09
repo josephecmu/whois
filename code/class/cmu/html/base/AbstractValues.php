@@ -32,7 +32,7 @@ abstract class AbstractValues
             return $this->values[$key];
 
         }
-
+	//	echo "WRONG VALUE";
         return null;
 
     }

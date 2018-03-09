@@ -10,10 +10,10 @@ class Mod
 	private $final; 											//our array
 	private $obj; 												//concrete Mapper
 
-	function __construct (AbstractMapper $obj, array $raw = null) 
+	function __construct (AbstractMapper $obj, array $raw) 
 	{
 		//this class is only instantiated ONCE, we must populate the final array to start mods.
-		$this->final = ($raw) ?: $obj->getRaw();
+		$this->final = $raw;
 			
 		$this->obj = $obj;
 

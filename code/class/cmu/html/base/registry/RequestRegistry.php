@@ -1,17 +1,21 @@
 <?php 
 namespace cmu\html\base\registry;
 
+use \cmu\html\base\Request;
+
 class RequestRegistry extends AbstractRegistry 
 
 {
  
-    static function getRequest() {
+	static function getRequest() : Request 
+	
+	{
 
         $inst = self::getInstance();
 
         if ( is_null( $inst->get( "request" ) ) ) {
 
-            $inst->set('request', new \cmu\html\base\Request() );
+            $inst->set('request', new Request );
         }
 
         return $inst->get( "request" );
