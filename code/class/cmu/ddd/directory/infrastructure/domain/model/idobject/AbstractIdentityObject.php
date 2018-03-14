@@ -47,7 +47,7 @@ abstract class AbstractIdentityObject
 			throw new \Exception("Incomplete field");
 		}
 
-#		$this->enforceField($fieldname);
+//		$this->enforceField($fieldname);
 
 		if (isset($this->fields[$fieldname])) {
 			$this->currentfield = $this->fields[$fieldname];
@@ -66,13 +66,13 @@ abstract class AbstractIdentityObject
 	}
 
 	// is the given fieldname legal?
-#	 public function enforceField(string $fieldname)
-#	 {
-#		 if (! in_array($fieldname, $this->enforce) && ! empty($this->enforce)) {
-#			 $forcelist = implode(', ', $this->enforce);
-#			 throw new \Exception("{$fieldname} not a legal field ($forcelist)");
-#		 }
-#	 }
+//	 public function enforceField(string $fieldname)
+//	 {
+//		 if (! in_array($fieldname, $this->enforce) && ! empty($this->enforce)) {
+//			 $forcelist = implode(', ', $this->enforce);
+//			 throw new \Exception("{$fieldname} not a legal field ($forcelist)");
+//		 }
+//	 }
 
 	// add an equality operator to the current field
 	 // ie 'age' becomes age=40
@@ -130,5 +130,3 @@ abstract class AbstractIdentityObject
 		  return implode(" AND ", $ret);
 	  }
 }
-
-

@@ -10,7 +10,7 @@ class ReverseRemapKeys extends AbstractSingleMods
 
 		$name_map = $this->obj->getNameMap();
 		$name_map = array_flip($name_map);
-
+	
 		if (array_key_exists($k, $name_map)) {
 			$k=$name_map[$k];
 		}

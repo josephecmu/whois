@@ -8,8 +8,15 @@ class MoveElementsUpIfNotInEntityMap extends AbstractSingleMods
 	public function s_modify($k, $v)
 	{
 		//If the key is NOT in entitymap (move up)
-		$entity_map = $this->obj->getEntityMap();		
-		if (!in_array($k, $entity_map) && (!empty($v))) {
+		$entity_map = $this->obj->getEntityMap();	
+
+		//check if is array
+
+		if (!in_array($k, $entity_map)  
+			&& 
+			(!empty($v) 
+			&& 
+			is_array($v))) {
 			//move the elements up one level
 			foreach($v as $k1 => $v1) {
 

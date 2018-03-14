@@ -32,7 +32,7 @@ abstract class AbstractProcess
     
     abstract function modify();
     //below should be part of idgenerator
-    protected function getOu(string $dn = null)                                        //recursive method to get to 'ou' from any prepending string on dn, remove prepending...
+    protected function getOu(string $dn = null)   //recursive method to get to 'ou' from any prepending string on dn, remove prepending...
     
     {
 

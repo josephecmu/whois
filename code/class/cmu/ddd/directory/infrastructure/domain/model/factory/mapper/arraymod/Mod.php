@@ -102,6 +102,14 @@ class Mod
 
 	}
 
+	public function reverse_to_array() : self
+	{
+
+		$this->final = $this->s_modify("ReverseToArray"); 
+		return $this;
+
+	}
+
 	public function reverse_remap_keys() : self
 	{
 

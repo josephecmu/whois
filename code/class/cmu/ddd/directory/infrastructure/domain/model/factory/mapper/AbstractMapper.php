@@ -14,6 +14,7 @@ use cmu\config\site\bin\Conf;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\ObjectToLdapConverter;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\DtoToDomainConverter;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\LdapToDomainConverter;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\ObjectToDTOConverter;
 
 abstract class AbstractMapper
 {
@@ -84,11 +85,9 @@ abstract class AbstractMapper
 
 	}
 	//END GETTERS
-	///here we prepare the $raw db array for domain hydration
+
 	public function return_ldap_collection_array_to_domain() : array 
 	{
-
-		//return (new ClassName($this))->convertArray();
 
 		//total ldap records
 		$count = $this->raw['count'];
@@ -102,16 +101,6 @@ abstract class AbstractMapper
 			$raw = $this->raw[$i]; 		
 
 			$records[] = (new LdapToDomainConverter($this, $raw))->returnConvertedArray();
-			//Fluent Interface
-//			 $records[] = (new Mod($this, $raw))  //we pass the concrete child mapper
-//				->remap_keys()
-//				->to_array()
-//				->single_elements()
-//				->remove_int_keys()
-//				->group_elements()
-//				->remove_count_recursive()
-//				->returnFinalArray()
-//				;
 
 		}
 
@@ -130,6 +119,13 @@ abstract class AbstractMapper
 
 		return (new DtoToDomainConverter($this))->returnConvertedArray();
 	
+	}
+
+	public function return_object_to_dto_array() : array
+	{
+
+		return (new ObjectToDTOConverter($this))->returnConvertedArray();
+
 	}
 
 }

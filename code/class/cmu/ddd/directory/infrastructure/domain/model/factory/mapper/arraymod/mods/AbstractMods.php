@@ -9,7 +9,7 @@ abstract class AbstractMods
 
 	protected $temp = [];
 
-	protected $obj; //the Abstract Mapper Object
+	protected $obj; 							//the [ENTITY] Mapper Object (People, etc)
 
 	function __construct(AbstractMapper $obj)
 	{
