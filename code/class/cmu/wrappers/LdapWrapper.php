@@ -1,9 +1,15 @@
 <?php 
 namespace cmu\wrappers;
 //php LDAP WRAPPER
+
+use cmu\config\site\bin\Conf;
+use cmu\config\site\bin\TraitConfig;
+
 class LdapWrapper 
 
 {
+
+	use TraitConfig;
 
     private $ds;      	//returned by ldap_connect(server, port)
     private $r;			//returned by ldap_bind($ds, user, pass)
@@ -16,10 +22,16 @@ class LdapWrapper
     static $host; 		// = 'localhost';
 
 	static $reg;
+//	private $conf;		//Conf object
 
     function __construct($ds)
 
     {
+
+//		$options = $this->getConfigArray("config.ini");	
+//		$this->conf = $this->returnConfigObject($options["ldap_config"]);
+
+//		print_r($this->conf);
 
 	    $this->ds = $ds;
 

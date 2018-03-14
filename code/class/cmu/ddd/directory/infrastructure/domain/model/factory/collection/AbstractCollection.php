@@ -3,6 +3,7 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\collection;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\AbstractDomainObjectFactory; 
+use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
 abstract class AbstractCollection implements \Iterator
 
@@ -21,14 +22,12 @@ abstract class AbstractCollection implements \Iterator
 		if (count($raw) && ! is_null($dofact)) {
 			$this->raw = $raw;
 			$this->total = count($raw);
-			//we need to get the php supplied 'count' of records returned
-			//$this->total = $raw['count'];
 		}
 
 		$this->dofact = $dofact;
 	}
 
-	 public function add(DomainObject $object)
+	 public function add(AbstractEntity $object)
 	 {
 		 $class = $this->targetClass();
 

@@ -1,14 +1,15 @@
 <?php
 
-namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\update;
+namespace cmu\ddd\directory\infrastructure\domain\model\factory\dto;
 
-use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
-use \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
-use \cmu\ddd\directory\infrastructure\domain\model\factory\query\AbstractQuery;
+use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
+use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
+use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
-abstract class AbstractUpdateFactory
-
+abstract class AbstractDTOFactory
 {
+
 	protected $factory;
 
 	function __construct(AbstractPersistenceFactory $factory)
@@ -17,6 +18,8 @@ abstract class AbstractUpdateFactory
 		$this->factory = $factory;
 
 	}
+
+	abstract public function getDTO(AbstractEntity $obj) : DTO;
 
 	//CASTS to array
 	protected function object_to_array(AbstractEntity $obj) : array
@@ -40,7 +43,5 @@ abstract class AbstractUpdateFactory
 		return obj_to_arr($obj);
 
 	}
-
-	abstract public function newUpdate(AbstractEntity $obj): array;
 
 }

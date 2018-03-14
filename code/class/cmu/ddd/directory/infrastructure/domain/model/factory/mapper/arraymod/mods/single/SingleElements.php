@@ -4,7 +4,7 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\
 
 class SingleElements extends AbstractSingleMods
 {
-
+	//keys in $single_map are Single Values Attributes
 	public function s_modify($k, $v)
 	{
 		$single_map = $this->obj->GetSingleMap();

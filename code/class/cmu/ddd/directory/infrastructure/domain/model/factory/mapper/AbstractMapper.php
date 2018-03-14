@@ -9,13 +9,17 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper;
  
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\Mod;
-use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfig;
+use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfigDomain;
 use cmu\config\site\bin\Conf;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\ObjectToLdapConverter;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\DtoToDomainConverter;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\LdapToDomainConverter;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\ObjectToDTOConverter;
 
 abstract class AbstractMapper
 {
 
-	use TraitConfig;
+	use TraitConfigDomain;
 
 	protected $name_map = []; 
 	protected $single_map = [];
@@ -81,7 +85,7 @@ abstract class AbstractMapper
 
 	}
 	//END GETTERS
-	///here we prepare the $raw db array for domain hydration
+
 	public function return_ldap_collection_array_to_domain() : array 
 	{
 
@@ -96,16 +100,7 @@ abstract class AbstractMapper
 		
 			$raw = $this->raw[$i]; 		
 
-			 //Fluent Interface
-			 $records[] = (new Mod($this, $raw))  //we pass the concrete child mapper
-				->remap_keys()
-				->to_array()
-				->single_elements()
-				->remove_int_keys()
-				->group_elements()
-				->remove_count_recursive()
-				->returnFinalArray()
-				;
+			$records[] = (new LdapToDomainConverter($this, $raw))->returnConvertedArray();
 
 		}
 
@@ -115,15 +110,21 @@ abstract class AbstractMapper
 	public function return_object_to_ldaparray() : array
 
 	{
-		//Fluent Interface 
-		$record = (new Mod($this, $this->raw))  //we pass the concrete child mapper
-		->recurse_expose_private_and_protected()
-		->move_elements_up_if_not_in_entity_map()
-		->reverse_remap_keys()
-		->returnFinalArray() 
-		;
-		
-		return $record;
+		return (new ObjectToLdapConverter($this))->returnConvertedArray();
+
+	}
+
+	public function return_dto_to_domain_array() : array
+	{
+
+		return (new DtoToDomainConverter($this))->returnConvertedArray();
+	
+	}
+
+	public function return_object_to_dto_array() : array
+	{
+
+		return (new ObjectToDTOConverter($this))->returnConvertedArray();
 
 	}
 

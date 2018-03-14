@@ -6,7 +6,7 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 {
                                                
     private $state;
-    private $checkemptyarray =      ['Add', 'Update'];                           //we might public need accessors for these arrays.....
+    private $checkemptyarray =      ['Add', 'Update'];     //we might public need accessors for these arrays.....
     private $confirmarray =         ['Delete'];
     private $validatearray =        ['Add', 'Update'];
 	private $novalidatearray =      ['Confirm Delete'];
@@ -37,7 +37,7 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
     }
 
-    function getState()                                                                         //used by 'buttons'
+    public function getState()	: string                           //used by 'buttons'
 
     {
 
@@ -45,7 +45,7 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
     }
 
-    private function setFormState()                                                 //used to set state of form and build buttons
+    private function setFormState()   //:void                //used to set state of form and build buttons
 
     {
 
@@ -57,7 +57,7 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
         	        
         	} else {   
 
-                $this->state = 'existing';                                          //data passed, but not confirm, must be existing
+                $this->state = 'existing';                  //data passed, but not confirm, must be existing
 
             }
 
@@ -69,13 +69,13 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
     }
     
-    function buildForm()                                                        //BUILD
+    public function buildForm()    //: void                                                    //BUILD
 
     {
 
         foreach ($this->totalobj->getTotalArray() as $totalarray) {
             
-            $class = str_replace(' ', '',  ucwords(str_replace('_', ' ', $totalarray['builder']))); //parse out the BUILDER
+            $class = str_replace(' ', '',  ucwords(str_replace('_', ' ', $totalarray['builder'])));//parse out the BUILDER
 
             $obj = "Composite" . $class . "Builder";
 
@@ -94,11 +94,11 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
         (new \cmu\html\form\formbuttons\FormButtonsContext())->process($this);                      //Buttons Strategy
     }
 
-    function checkChangeForm()
+    public function checkChangeForm() : bool
 
     {
         
-        if (in_array($this->request->getValue('action'), $this->checkemptyarray)) {                 //condition to check
+        if (in_array($this->request->getValue('action'), $this->checkemptyarray)) {  //condition to check
 
             if ($this->display->checkChange()) {
 
@@ -106,7 +106,7 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
             } else {
 
-                $this->display->setHintmessage('No Changes Made.');                                 //false, set error message
+                $this->display->setHintmessage('No Changes Made.');                  //false, set error message
 
                 return false;                                                                   
 
@@ -118,25 +118,25 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
     }
 
-    function validateForm()                                                             //VALIDATE
+    public function validateForm()                                                       //VALIDATE
 
 	{
 		
-		if (null == $this->request->getValue('action')) {                         	    //check if 'action' set (we know it was submitted)
+		if (null == $this->request->getValue('action')) { 	    //check if 'action' set (we know it was submitted)
 
-            return false;                                                               //stop checking and return false if no ACTION     
+            return false;                                       //stop checking and return false if no ACTION     
 
         }
 
-        if (in_array($this->request->getValue('action'), $this->novalidatearray)) {		//no validate, return true (deleting)
+        if (in_array($this->request->getValue('action'), $this->novalidatearray)) {	//no validate, return true (deleting)
         
-            return true;                                                                //exit true
+            return true;                                                           
         
         }
 
-        if (in_array($this->request->getValue('action'), $this->validatearray)) {      	//see if the 'action' value is in validatearray
+        if (in_array($this->request->getValue('action'), $this->validatearray)) {   	//see if the 'action' value is in validatearray
 
-            if ($this->display->validateForm())  {          							//check for validation
+            if ($this->display->validateForm())  {          						//check for validation
 
                 return true;
 
@@ -150,21 +150,21 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
             
     } 
 
-    function processForm()                                                              //PROCESS 
+    public function processForm(): bool	                                                              //PROCESS 
 
     {
         //'postprocess',  <- other COMMAND object 'hook' to handle postprocessing
-        $commands = ['dbprocess'];                                                      //could also be a class property member??                
+        $commands = ['dbprocess'];                              //could also be a class property member??                
 
-        $returnpostobj = new \cmu\html\base\ReturnPost();                               //build from form objects products PARAMETERS
+        $returnpostobj = new \cmu\html\base\ReturnPost();               //build from form objects products PARAMETERS
        
-        $returnpostobj->setValues($this->display->buildAndReturnPost());                //wrap the buildAndReturnPost() array in an object
+        $returnpostobj->setValues($this->display->buildAndReturnPost());//wrap the buildAndReturnPost() array in an object
 
-        $context = new \cmu\html\form\commands\CommandContext();                        //context for COMMAND
+        $context = new \cmu\html\form\commands\CommandContext();     //context for COMMAND
 
-        $context->addParam('returnpostobj', $returnpostobj);                            //adds param of the array object of above
+        $context->addParam('returnpostobj', $returnpostobj);   //adds param of the array object of above
 
-        $context->addParam('request',  $this->request);                                 //adds param for request object from REGISTRY in this class
+        $context->addParam('request',  $this->request);       //adds param for request object from REGISTRY in this class
 
         $processor = new \cmu\html\form\commands\ProcessFormDic($commands, $context);   //pass both here to DI
 

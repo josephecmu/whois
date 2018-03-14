@@ -1,14 +1,10 @@
 <?php
 
-namespace cmu\ddd\directory\infrastructure\domain\model\share;
-
-use cmu\config\site\bin\Conf;
+namespace cmu\config\site\bin;
 
 trait TraitConfig
 
 {
-
-	abstract protected function returnConcreteConfigObject( array $options) : Conf;
 
 	private function returnIniFile(string $file) : string
 	{
@@ -23,14 +19,14 @@ trait TraitConfig
 		return $fileandpath;
 	}
 
-	protected function getConfigArray(string $file) : array 					//return the parsed .ini file
+	protected function getConfigArray(string $file) : array 			//return the parsed .ini file
 	{
 
 		$ini = $this->returnIniFile($file);
 		return parse_ini_file($ini, true);
 	}
 
-	protected function returnConfigObject( array $options) : Conf				//return Conf object, with specified [section] (people,etc.)
+	protected function returnConfigObject( array $options) : Conf		//return Conf object, with specified [section] (people,etc.)
 	{
 
 		return new Conf($options);
