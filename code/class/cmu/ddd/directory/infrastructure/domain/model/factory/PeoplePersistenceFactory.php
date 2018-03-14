@@ -54,16 +54,16 @@ class PeoplePersistenceFactory extends AbstractPersistenceFactory
 	public function getUpdateFactory() : AbstractUpdateFactory 
 	
 	{
-
-		return new PeopleUpdateFactory($this);	
+		
+		return new PeopleUpdateFactory($this);	//$this is needed to get the mapper inside the PeopleUpdateFactory
 
 	}
 
-	public function getDTOFactory (AbstractEntity $obj) : AbstractDTOFactory
+	public function getDTOFactory () : AbstractDTOFactory
 	
 	{
 
-		return new PeopleDTOFactory($obj, $this);
+		return new PeopleDTOFactory($this); //$this is needed to get the mapper inside the PeopleDTOFactory
 
 	}
 

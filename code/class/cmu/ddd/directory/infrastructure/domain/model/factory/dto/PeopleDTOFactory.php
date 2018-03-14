@@ -3,14 +3,15 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\dto;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
 class PeopleDTOFactory extends AbstractDTOFactory
 {
 
-	public function getDTO() : DTO
+	public function getDTO(AbstractEntity $obj) : DTO
 	{
 
-		$raw = $this->object_to_array($this->obj); 
+		$raw = $this->object_to_array($obj); 
 
 		$mapper = $this->factory->getMapper($raw);
 

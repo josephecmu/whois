@@ -11,17 +11,15 @@ abstract class AbstractDTOFactory
 {
 
 	protected $factory;
-	protected $obj;
 
-	function __construct(AbstractEntity $obj, AbstractPersistenceFactory $factory)
+	function __construct(AbstractPersistenceFactory $factory)
 	{
 
 		$this->factory = $factory;
 
-		$this->obj = $obj;
 	}
 
-	abstract public function getDTO() : DTO;
+	abstract public function getDTO(AbstractEntity $obj) : DTO;
 
 	//CASTS to array
 	protected function object_to_array(AbstractEntity $obj) : array

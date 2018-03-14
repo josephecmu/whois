@@ -48,18 +48,9 @@ class DomainObjectAssembler
 
 		$raw=$this->ldap->getEntries($link);
 
-//		echo "DOA::find() RAW Array from LDAP DB";
-//		echo "<pre>";
-//		print_r($raw);
-//		echo "</pre>";
 		$mapper = $this->factory->getMapper($raw);
 		$norm_array_collection = $mapper->return_ldap_collection_array_to_domain(); 
 
-//		echo "DOA::find() NORM ARRAY AFTER MAPPER BEFORE DOMAIN Submission";
-//		echo "<pre>";
-//		print_r($norm_array_collection);
-//		echo "</pre>";
-		
 		return $this->factory->getCollection($norm_array_collection);
 	}
 
@@ -85,12 +76,6 @@ class DomainObjectAssembler
 		$upfact = $this->factory->getUpdateFactory();
 
 		list($rdn, $input) = $upfact->newUpdate($obj);
-
-		echo "<strong>DOA:insert() This is the LDAP ARRAY from getUpdateFactory()</strong>"; 
-		echo "<pre>";
-		print_r( $input);
-		echo "</pre>";
-
 
 		// UPDATE
 		//$link = $this->ldap->update($location, $filter, $fields);  <- from function above

@@ -3,6 +3,7 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\collection;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\AbstractDomainObjectFactory; 
+use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
 abstract class AbstractCollection implements \Iterator
 
@@ -26,7 +27,7 @@ abstract class AbstractCollection implements \Iterator
 		$this->dofact = $dofact;
 	}
 
-	 public function add(DomainObject $object)
+	 public function add(AbstractEntity $object)
 	 {
 		 $class = $this->targetClass();
 

@@ -15,9 +15,9 @@ class PeopleUpdateFactory extends AbstractUpdateFactory
 
 		$raw = $this->object_to_array($obj);
 
-		$this->mapper = $this->factory->getMapper($raw);
+		$mapper = $this->factory->getMapper($raw);
 
-		$input = $this->mapper->return_object_to_ldaparray();
+		$input = $mapper->return_object_to_ldaparray();
 
 		return [$rdn, $input];
 

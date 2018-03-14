@@ -54,8 +54,8 @@ print_r($object);
 //
 echo "Now to DTO.............";
 echo "<br />";  
-$dto_fact = $factory->getDTOFactory($object);
-$dto = $dto_fact->getDTO();
+$dto_fact = $factory->getDTOFactory();
+$dto = $dto_fact->getDTO($object);
 print_r($dto);
 //
 //

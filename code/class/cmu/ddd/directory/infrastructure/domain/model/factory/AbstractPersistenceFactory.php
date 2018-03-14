@@ -21,7 +21,7 @@ abstract class AbstractPersistenceFactory
 	abstract public function getCollection(array $raw): AbstractCollection;
 	abstract public function getSelectionFactory(): AbstractSelectionFactory;
 	abstract public function getUpdateFactory(): AbstractUpdateFactory;
-	abstract public function getDTOFactory(AbstractEntity $obj): AbstractDTOFactory;
+	abstract public function getDTOFactory(): AbstractDTOFactory;
 
 	public static function getFactory($target_class) : AbstractPersistenceFactory
 	
