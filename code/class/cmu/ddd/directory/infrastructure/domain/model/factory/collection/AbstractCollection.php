@@ -4,10 +4,14 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\collection;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\AbstractDomainObjectFactory; 
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
+use cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
+
 
 abstract class AbstractCollection implements \Iterator
 
 {
+
+	use TraitTargetClass;
 
 	protected $dofact = null;
 	protected $total = 0;
@@ -29,15 +33,12 @@ abstract class AbstractCollection implements \Iterator
 
 	 public function add(AbstractEntity $object)
 	 {
-		 $class = $this->targetClass();
+		 $this->VerifyTargetClass($object);
 
-		 if (! ($object instanceof $class )) {
-			 throw new Exception("This is a {$class} collection");
-
-			 $this->notifyAccess();
-			 $this->objects[$this->total] = $object;
-			 $this->total++;
-		 }
+		 $this->notifyAccess();
+		 $this->objects[$this->total] = $object;
+		 $this->total++;
+		 
 	}
 
 	abstract public function targetClass(): string;
@@ -58,9 +59,6 @@ abstract class AbstractCollection implements \Iterator
 		  if (isset($this->objects[$num])) {
 			  return $this->objects[$num];
 		  }
-
-//			echo "ROW::" . $num;
-
 
 		  //This creates objects//////////	
 		  if (isset($this->raw[$num])) {
@@ -88,8 +86,6 @@ abstract class AbstractCollection implements \Iterator
 	public function next()
 	{
 		$row = $this->getRow($this->pointer);
-
-	//	echo "POINTER::" . $this->pointer;
 
 		if ($row) {
 			$this->pointer++;

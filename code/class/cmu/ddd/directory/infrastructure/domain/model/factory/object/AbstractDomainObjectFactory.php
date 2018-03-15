@@ -12,11 +12,9 @@ abstract class AbstractDomainObjectFactory
 			return ObjectWatcher::exists($class, $id);
 		}
 
-		protected function addToMap(DomainObject $obj): AbstractEntity
+		protected function addToMap(AbstractEntity $obj): AbstractEntity
 		{
 			return ObjectWatcher::add($obj);
 		}
-
-		abstract public function createObject(array $array): AbstractEntity;
 
 }

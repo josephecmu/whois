@@ -4,18 +4,22 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\selection;
 
 use \cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\query\AbstractQuery;
+use cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
 
 abstract class AbstractSelectionFactory
 
 {
-	
-//	abstract public function newSelection(AbstractIdentityObject $obj): array;
-	abstract protected function getDn() : string;
 
+	use TraitTargetClass;
+		
+	abstract protected function getDn() : string;
+	
 	public function buildFilter(AbstractIdentityObject $obj): string
 
 	{
 		
+		$this->verifyTargetClass($obj);	
+
 		if ($obj->isVoid()) {
 			return ["", []];
 		}
