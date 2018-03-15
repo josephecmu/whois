@@ -21,7 +21,10 @@ class DTOAssembler
 		return new DTO($this->data); 
 
 	}
-
-
+	//leon
+	public function serialize()
+	{
+		return json_encode($this->data);
+	}
 
 }
