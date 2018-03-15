@@ -18,6 +18,8 @@ abstract class AbstractUpdateFactory
 
 	}
 
+	abstract protected function getRdn(AbstractEntity $obj) : string;
+
 	//CASTS to array
 	protected function object_to_array(AbstractEntity $obj) : array
 	{
@@ -41,6 +43,18 @@ abstract class AbstractUpdateFactory
 
 	}
 
-	abstract public function newUpdate(AbstractEntity $obj): array;
+	public function newUpdate(AbstractEntity $obj) : array
+	{
+		$rdn = $this->getRdn($obj);
+
+		$raw = $this->object_to_array($obj);
+
+		$mapper = $this->factory->getMapper($raw);
+
+		$input = $mapper->return_object_to_ldaparray();
+
+		return [$rdn, $input];
+
+	}
 
 }

@@ -28,7 +28,7 @@ abstract class AbstractPersistenceFactory
 	{
 
 		switch ($target_class) {
-		case People::class:
+			case People::class:
 				return new PeoplePersistenceFactory();
 				break;
 			case Rooms::class:

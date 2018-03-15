@@ -8,20 +8,12 @@ class PeopleUpdateFactory extends AbstractUpdateFactory
 
 {
 
-	public function newUpdate(AbstractEntity $obj): array
+	protected function getRdn(AbstractEntity $obj ) : string
+
 	{
 
-		$rdn=$obj->dynGet("peoplerdn")->dynGet("dn");
-
-		$raw = $this->object_to_array($obj);
-
-		$mapper = $this->factory->getMapper($raw);
-
-		$input = $mapper->return_object_to_ldaparray();
-
-		return [$rdn, $input];
+		return $obj->dynGet("peoplerdn")->dynGet("dn");
 
 	}
 
 }
-

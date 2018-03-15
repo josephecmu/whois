@@ -115,6 +115,7 @@ abstract class AbstractMapper
 	}
 
 	public function return_dto_to_domain_array() : array
+
 	{
 
 		return (new DtoToDomainConverter($this))->returnConvertedArray();
@@ -122,6 +123,7 @@ abstract class AbstractMapper
 	}
 
 	public function return_object_to_dto_array() : array
+
 	{
 
 		return (new ObjectToDTOConverter($this))->returnConvertedArray();

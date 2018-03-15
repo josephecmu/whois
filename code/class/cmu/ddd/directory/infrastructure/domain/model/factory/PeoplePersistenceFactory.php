@@ -47,7 +47,7 @@ class PeoplePersistenceFactory extends AbstractPersistenceFactory
 
 	{
 
-		return new PeopleMapper($raw) ;
+		return new PeopleMapper($raw);
 
 	}
 

@@ -10,11 +10,10 @@ $factory = \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersis
 
 //$finder = new DomainObjectAssembler($factory);
 
-
 $id = new \cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject();
 
-$id->field("uid")
-	->eq("josephe");
+$id->field("sn")
+	->eq("evans");
 //	->field("test2")
 //	->gt("another")
 //	->lt("somethingelse");
@@ -30,10 +29,6 @@ echo "<strong> doassembler.php     ->findOne  Returns a hydrated object</strong>
 echo "<br />";
 $object = $doa->findOne($id);
 print_r($object);
-
-
-
-
 
 ////print_r($id);
 ////$psf = new \cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\PeopleSelectionFactory;
@@ -71,7 +66,7 @@ $mapper = new \cmu\ddd\directory\infrastructure\domain\model\factory\mapper\Peop
 //echo "<br />";
 //print_r($object);
 //
-echo "domain array from AbstractMapper::return_dto_to_domain_array()::";
+echo "<strong>domain array from AbstractMapper::return_dto_to_domain_array()::</strong>";
 echo "<br />";
 $domain_array=$mapper->return_dto_to_domain_array();
 //print_r($domain_array);
@@ -83,11 +78,11 @@ $people = new People($domain_array);
 print_r($people);
 //
 //
-//echo "now we can build objects directly from DTO with DomainObjectAssembler::build()";
+echo "<strong>now we can build objects directly from DTO with DomainObjectAssembler::build()</strong>";
+echo "<br />";
+$obj = $doa->build($dto);
 //
-//$obj = $doa->build($dto);
-//
-//print_r($obj);
+print_r($obj);
 //
 //
 echo "</pre>";

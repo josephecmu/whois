@@ -53,8 +53,7 @@ class DomainObjectAssembler
 
 		return $this->factory->getCollection($norm_array_collection);
 	}
-
-	//this should handle form submission object creation. 
+	//this should handle DTO object creation. 
 	public function build(DTO $dto) : AbstractEntity
  	{
 		//Get Mapper and convert data
@@ -75,7 +74,7 @@ class DomainObjectAssembler
 
 		$upfact = $this->factory->getUpdateFactory();
 
-		list($rdn, $input) = $upfact->newUpdate($obj);
+		list($rdn, $input) = $upfact->newUpdate($obj);    	//get $rdn and $input for ldap update() below
 
 		// UPDATE
 		//$link = $this->ldap->update($location, $filter, $fields);  <- from function above
@@ -90,8 +89,6 @@ class DomainObjectAssembler
 //		}
 //
 //		$obj->markClean();	
-
-		//not finished
 
 	}
 	
