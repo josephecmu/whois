@@ -40,4 +40,9 @@ class DTO
 		return $this->data_array;
 	}
 
+	public function seralize() : array
+	{
+		return json_encode($this->data_array);
+
+	}
 }

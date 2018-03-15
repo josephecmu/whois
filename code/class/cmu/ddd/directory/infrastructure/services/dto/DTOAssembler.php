@@ -5,26 +5,12 @@ namespace cmu\ddd\directory\infrastructure\services\dto;
 class DTOAssembler
 
 {
-
-	private $data;
-
-	function __construct(array $data)
-	{
-
-		$this->data=$data;
-
-	}
 	
-	public function returnDTO() : DTO
+	public static function returnDTO(array $data) : DTO
 	{
 
-		return new DTO($this->data); 
+		return new DTO($data); 
 
-	}
-	//leon
-	public function serialize()
-	{
-		return json_encode($this->data);
 	}
 
 }
