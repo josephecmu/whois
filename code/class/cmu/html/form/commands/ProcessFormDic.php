@@ -18,7 +18,7 @@ class ProcessFormDic                            //Dependency Injection Container
 
     }
 
-    function process()
+    function process() : bool
 
     {
 
