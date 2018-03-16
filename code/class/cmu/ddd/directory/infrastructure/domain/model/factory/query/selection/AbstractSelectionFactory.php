@@ -43,7 +43,7 @@ abstract class AbstractSelectionFactory
 	public function newSelection(AbstractIdentityObject $obj): array
 	{
 
-		$dn = $this->getDn();								//concrete implimentation
+		$dn = $this->getDn();								//concrete implementation
 		$fields = $obj->getObjectFields();
 		$filter = $this->buildFilter($obj);
 		$location = $this->getLocation($dn);

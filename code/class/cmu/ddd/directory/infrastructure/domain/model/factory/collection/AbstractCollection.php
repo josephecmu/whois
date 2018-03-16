@@ -31,6 +31,8 @@ abstract class AbstractCollection implements \Iterator
 		$this->dofact = $dofact;
 	}
 
+	abstract public function targetClass(): string;
+
 	 public function add(AbstractEntity $object)
 	 {
 		 $this->VerifyTargetClass($object);
@@ -40,8 +42,6 @@ abstract class AbstractCollection implements \Iterator
 		 $this->total++;
 		 
 	}
-
-	abstract public function targetClass(): string;
 
 	protected function notifyAccess()
 	{

@@ -15,7 +15,7 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\dto\AbstractDTOFactory
 abstract class AbstractPersistenceFactory
 
 {
-
+	//if we don't want to force return type, children can force Object return of Concrete type
 	abstract public function getDomainObjectFactory(): AbstractDomainObjectFactory;
  	abstract public function getMapper(array $raw): AbstractMapper;
 	abstract public function getCollection(array $raw): AbstractCollection;
