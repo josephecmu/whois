@@ -26,6 +26,7 @@ abstract class AbstractMapper
 	protected $group_map = [];
 	protected $to_array_map = [];
 	protected $entity_map = [];
+	protected $object_class_map = [];
 	protected $raw = [];
 
 	function __construct(array $raw)
@@ -39,6 +40,7 @@ abstract class AbstractMapper
 			$this->entity_map = $conf->get('entity_map');	
 			$this->to_array_map = $conf->get("to_array_map");
 			$this->group_map = $conf->get("group_map");
+			$this->object_class_map = $conf->get("object_class_map");
 
 			$this->raw = $raw;
 	}
@@ -84,6 +86,11 @@ abstract class AbstractMapper
 		return $this->entity_map;
 
 	}
+	public function getObjectClassMap() : array
+	{
+		return $this->object_class_map;
+	}
+
 	//END GETTERS
 
 	public function return_ldap_collection_array_to_domain() : array 
