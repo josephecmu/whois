@@ -76,6 +76,14 @@ class DomainObjectAssembler
 
 		list($rdn, $input) = $upfact->newUpdate($obj);    	//get $rdn and $input for ldap update() below
 
+		echo "<br />";
+		echo "<strong>INPUT for LDAP array</strong>";
+		echo "<br />";
+		print_r($input);
+		echo "<br />";
+		echo "<br />";
+
+
 		// UPDATE
 		//$link = $this->ldap->update($location, $filter, $fields);  <- from function above
 		//		below LdapWrapper::update() is from line 115 LdapWrapper()

@@ -44,7 +44,7 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 			$ldap->close();
 
         } 																						    
-																							//WE MUST CHANGE REQUEST TO LOWER CASE KEYS!!!																					
+								//WE MUST CHANGE REQUEST TO LOWER CASE KEYS!!!																					
 		$values = array_merge($values_ldap, array_change_key_case($values_request));  		//merge, 2nd array overwrites identical keys of first array
 
         $this->metaobject->setValues($values);							//set above values internally in object

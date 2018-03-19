@@ -22,7 +22,7 @@ class ProcessFormDic                            //Dependency Injection Container
 
     {
 
-        foreach($this->commands as $command) {
+        foreach($this->commands as $command) {			//loop over COMMANDS
 
             $cmd = CommandFactory::getCommand($command);
             
@@ -30,7 +30,10 @@ class ProcessFormDic                            //Dependency Injection Container
         
         }
 
-        if (!in_array(0, $result)) {   return true ;   }     //check if any of the commands returns 'false(0)', then retun 'true'
+        if (!in_array(0, $result))  {     //check if any of the commands returns 'false(0)', then retun 'true'
+	   
+			return true ;   
+		}
 
     }
 

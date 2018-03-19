@@ -1,4 +1,4 @@
-i<?php
+<?php
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\update;
 
@@ -8,7 +8,7 @@ class PeopleUpdateFactory extends AbstractUpdateFactory
 
 {
 
-	protected function getRdn(People $obj ) : string
+	protected function getRdn($obj ) : string
 
 	{
 		
@@ -19,7 +19,7 @@ class PeopleUpdateFactory extends AbstractUpdateFactory
 	protected function targetClass() : string
 	{
 
-		return PeopleIdentityObject::class;
+		return People::class;
 
 	}
 

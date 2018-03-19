@@ -1,19 +1,22 @@
 <?php
 namespace cmu\html\form\process\dbprocess;
 
+use \cmu\html\base\ReturnPost;
+use \cmu\html\base\Request;
+
 class ProcessContext
 
 {
 
     private $strategy;
 
-    function __construct(\cmu\html\base\ReturnPost $returnpostobj_in, \cmu\html\base\Request $request_in)
+    function __construct(ReturnPost $returnpostobj_in, Request $request_in)
 
     {
 
         $button_name = $request_in->getValue('action');                    
 
-        $parts = preg_split('/(?=[A-Z])/', $button_name, -1, PREG_SPLIT_NO_EMPTY); //we should grab the action by retreiveing the last capital word
+        $parts = preg_split('/(?=[A-Z])/', $button_name, -1, PREG_SPLIT_NO_EMPTY); //we should grab the action by retrieveing the last capital word
 
         $class = "\\cmu\html\\form\\process\\dbprocess\\Process" . end($parts) ;
 
@@ -25,7 +28,7 @@ class ProcessContext
 
     {
 
-        return $this->strategy->modify();
+        return $this->strategy->modify();				//calls Add, Delete, Update Strategies
 
     }
 

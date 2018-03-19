@@ -31,7 +31,7 @@ $object = $doa->findOne($id);
 print_r($object);
 
 ////print_r($id);
-////$psf = new \cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\PeopleSelectionFactory;
+//$psf = new \cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\PeopleSelectionFactory;
 ////print_r($psf->newSelection($id)); 
 ////
 ////
@@ -39,7 +39,7 @@ print_r($object);
 ////NOW LETS CONFIGURE IT FOR AN LDAP ARRAY
 ////
 ////
-//echo $doa->insert($object);
+echo $doa->insert($object);
 //
 //echo "from DTO to Domain array";
 //echo "<br />";  

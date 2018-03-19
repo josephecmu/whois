@@ -21,7 +21,7 @@ abstract class AbstractUpdateFactory
 
 	}
 
-	abstract protected function getRdn($obj) : string
+	abstract protected function getRdn($obj) : string;
 
 	//CASTS to array
 	protected function object_to_array(AbstractEntity $obj) : array

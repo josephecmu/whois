@@ -17,7 +17,7 @@
 
     if ($control->validateForm()) {                                         //if validate, process and return errors
 
-        if ($control->checkChangeForm()) {                                  //see if the form has changed before we go any further!!
+        if ($control->checkChangeForm()) {                 //see if the form has changed before we go any further!!
     
             try {
 
@@ -36,5 +36,3 @@
     } 
 
     echo $control->returnDisplay(); 
-
-                                    
