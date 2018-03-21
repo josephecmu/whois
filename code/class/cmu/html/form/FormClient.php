@@ -150,11 +150,12 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
             
     } 
 
-    public function processForm(): bool	                                                              //PROCESS 
+    public function processForm()    : bool	                                                              //PROCESS 
 
     {
         //'postprocess',  <- other COMMAND object 'hook' to handle postprocessing
-        $commands = ['dbprocess'];                              //could also be a class property member??                
+       // $commands = ['dbprocess'];               //could also be a class property member??                
+		$commands = ['dtotoservice'];
 
         $returnpostobj = new \cmu\html\base\ReturnPost();               //build from form objects products PARAMETERS
        
@@ -164,7 +165,7 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
         $context->addParam('returnpostobj', $returnpostobj);   //adds param of the array object of above
 
-        $context->addParam('request',  $this->request);       //adds param for request object from REGISTRY in this class
+		$context->addParam('request',  $this->request);       //adds param for request object from REGISTRY in this class
 
         $processor = new \cmu\html\form\commands\ProcessFormDic($commands, $context);   //pass both here to DI
 

@@ -10,9 +10,10 @@ class ProcessAdd extends AbstractProcess
     function modify() : bool
 
     {
-		/////////MUCH OF THIS WILL NEED MOVED TO MAPPER	DtoToDomainConverter 
+		/////////THIS TO MAPPER	DtoToDomainConverter 
     	$schemaarray = $this->getLdapAttributes($this->objectclasses);             //returns all the attributes available in the schemas selected
 
+		/////////can be used at moved to DeleteKey single mod
         $remove_schema_key_array = array_diff($schemaarray, $this->removeattributes);//MANUALLY remove attributes to be inserted
 
         $finalpostarray = $this->removeNonAttKeys($this->returnpostobj->getValues(), $remove_schema_key_array);    //remove non-att keys from $postarray based on $schemaarray
@@ -20,7 +21,7 @@ class ProcessAdd extends AbstractProcess
 //////////////////////////////////////////////////////////////////////////////////
 
 
-		//below can go to ObjectToLdapConverter
+		//below is in ObjectToLdapConverter
         $finalpostarray['objectClass'] = $this->objectclasses; //go to mapper //inject [objectClasses] key for submission
 /////////////////////////////////////////////////////////////////////////////////////////////////////
         $ldap = new \cmu\wrappers\LdapWrapper($this->ds);                    //instantiate new LdapWrapper()

@@ -118,6 +118,14 @@ class Mod
 
 	}
 
+	public function delete_key() : self
+	{
+
+		$this->final = $this->s_modify("DeleteKey");
+		return $this;
+
+	}
+
 	public function reverse_remap_keys() : self
 	{
 
@@ -133,7 +141,6 @@ class Mod
 		return $this;
 
 	}
-
 
 	public function remove_count_recursive() : self
 	{

@@ -3,12 +3,13 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\update;
 
 use \cmu\ddd\directory\domain\model\actors\people\People;
+use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
 class PeopleUpdateFactory extends AbstractUpdateFactory
 
 {
 
-	protected function getRdn($obj ) : string
+	protected function getRdn(AbstractEntity $obj) : string
 
 	{
 		

@@ -146,7 +146,7 @@ class LdapWrapper
 		ldap_close($this->ds);
 	}
 
-    private function getSubschema($ds)
+    private function getSubschema($ds) : array
 
     {
 

@@ -27,6 +27,7 @@ abstract class AbstractMapper
 	protected $to_array_map = [];
 	protected $entity_map = [];
 	protected $object_class_map = [];
+	protected $delete_key_map = [];
 	protected $raw = [];
 
 	function __construct(array $raw)
@@ -41,6 +42,7 @@ abstract class AbstractMapper
 			$this->to_array_map = $conf->get("to_array_map");
 			$this->group_map = $conf->get("group_map");
 			$this->object_class_map = $conf->get("object_class_map");
+			$this->delete_key_map = $conf->get("delete_key_map");
 
 			$this->raw = $raw;
 	}
@@ -89,6 +91,11 @@ abstract class AbstractMapper
 	public function getObjectClassMap() : array
 	{
 		return $this->object_class_map;
+	}
+
+	public function getDeleteKeyMap() : array
+	{
+		return $this->delete_key_map;
 	}
 
 	//END GETTERS

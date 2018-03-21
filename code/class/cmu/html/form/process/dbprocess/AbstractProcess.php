@@ -24,7 +24,7 @@ abstract class AbstractProcess
 
         $this->dn = $dn_in;
 
-        $this->ds = LdapWrapper::getLdapDs();                     //connection handle
+        $this->ds = LdapWrapper::getLdapDs();    	                  //connection handle
         
         $context = new ContextSetProperties($this->getOu($this->dn)); //STRATEGY setter based on ou
 
