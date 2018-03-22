@@ -2,7 +2,7 @@
 
 namespace cmu\ddd\directory\application\services;
 
-class AddUserService extends \cmu\ddd\directory\application\services\lib\AbstractService 
+class Addpeopleservice extends AbstractService 
 
 {
 

@@ -7,7 +7,7 @@
 namespace cmu\html\form\commands;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTOAssembler;
-
+use cmu\ddd\directory\application\services\RunService;
 class DtotoserviceCommand extends AbstractCommand
 
 {
@@ -24,23 +24,17 @@ class DtotoserviceCommand extends AbstractCommand
 	
 		$action = $request->getValue('action'); 
 
+		$dto->set('action', $action);				//include the $action, this packages nicely
+
 		echo "<pre>";
 		
-//			print_r($returnpostobj);
-
-		echo "<br />";
-
-//			print_r($returnpostobj);
-
-		echo "<br />";
-
 		print_r($dto);
-
 
 		echo "</pre>";
 
-		//send the $action and the $dto  to the service layer
+		//send the $dto to the service layer
 
+		return RunService::init($dto);
 
     }
 

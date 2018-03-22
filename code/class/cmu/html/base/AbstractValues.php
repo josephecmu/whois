@@ -15,7 +15,7 @@ abstract class AbstractValues
 
     }
 
-    function getValues() 
+    function getValues() : array
     
     {
 

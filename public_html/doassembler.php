@@ -6,19 +6,23 @@ include_once '../code/class/cmu/config/site/whois.conf';
 use cmu\ddd\directory\domain\model\actors\people\People;
 //$factory = PersistenceFactory::getFactory(Venue::class);
 
-$factory = \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory::getFactory(People::class);
 
 //$finder = new DomainObjectAssembler($factory);
 
+
+$factory = \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory::getFactory(People::class);
+$doa = new \cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler($factory);
+
+
+
 $id = new \cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject();
 
-$id->field("sn")
-	->eq("evans");
+$id->field("uid")
+	->eq("florin");
 //	->field("test2")
 //	->gt("another")
 //	->lt("somethingelse");
 
-$doa = new \cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler($factory);
 
 echo "<pre>";
 echo "<strong> doassembler.php       ->find return Collection </strong>";
