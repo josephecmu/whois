@@ -9,7 +9,7 @@ abstract class AbstractSetProperties
     protected $objectclasses = array();
 
 
-    function getProperty(string $property)
+    function getProperty(string $property)  //string or array
 
     {
 

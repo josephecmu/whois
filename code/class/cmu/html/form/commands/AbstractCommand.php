@@ -5,6 +5,6 @@ abstract class AbstractCommand
 
 {
 
-    abstract function execute(CommandContext $context);
+    abstract function execute(CommandContext $context) : bool;
 
 }

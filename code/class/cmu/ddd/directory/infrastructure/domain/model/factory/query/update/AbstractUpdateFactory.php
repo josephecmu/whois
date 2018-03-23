@@ -4,11 +4,14 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\update;
 
 use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
-use \cmu\ddd\directory\infrastructure\domain\model\factory\query\AbstractQuery;
+use cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
 
 abstract class AbstractUpdateFactory
 
 {
+	
+	use TraitTargetClass;
+
 	protected $factory;
 
 	function __construct(AbstractPersistenceFactory $factory)
@@ -18,9 +21,13 @@ abstract class AbstractUpdateFactory
 
 	}
 
+	abstract protected function getRdn(AbstractEntity $obj) : string;
+
 	//CASTS to array
 	protected function object_to_array(AbstractEntity $obj) : array
 	{
+
+		$this->verifyTargetClass($obj);
 
 		function obj_to_arr ($obj) {
 			if(is_object($obj)) {
@@ -41,6 +48,21 @@ abstract class AbstractUpdateFactory
 
 	}
 
-	abstract public function newUpdate(AbstractEntity $obj): array;
+	public function newUpdate(AbstractEntity $obj) : array
+	{
+
+		$this->verifyTargetClass($obj);
+
+		$rdn = $this->getRdn($obj);
+
+		$raw = $this->object_to_array($obj);
+
+		$mapper = $this->factory->getMapper($raw);
+
+		$input = $mapper->return_object_to_ldaparray();
+
+		return [$rdn, $input];
+
+	}
 
 }

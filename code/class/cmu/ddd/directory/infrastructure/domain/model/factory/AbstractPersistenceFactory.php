@@ -15,20 +15,21 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\dto\AbstractDTOFactory
 abstract class AbstractPersistenceFactory
 
 {
-
+	//if we don't want to force return type, children can force Object return of Concrete type
 	abstract public function getDomainObjectFactory(): AbstractDomainObjectFactory;
  	abstract public function getMapper(array $raw): AbstractMapper;
 	abstract public function getCollection(array $raw): AbstractCollection;
 	abstract public function getSelectionFactory(): AbstractSelectionFactory;
 	abstract public function getUpdateFactory(): AbstractUpdateFactory;
-	abstract public function getDTOFactory(): AbstractDTOFactory;
+//nothing special at this point about DTO at this point any Entity could use, ...delete??  but may expand DTO.
+	abstract public function getDTOFactory(): AbstractDTOFactory;			
 
 	public static function getFactory($target_class) : AbstractPersistenceFactory
 	
 	{
 
 		switch ($target_class) {
-		case People::class:
+			case People::class:
 				return new PeoplePersistenceFactory();
 				break;
 			case Rooms::class:

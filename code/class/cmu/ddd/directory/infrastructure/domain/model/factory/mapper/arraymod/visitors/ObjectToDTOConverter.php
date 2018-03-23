@@ -18,8 +18,6 @@ class ObjectToDTOConverter extends AbstractVisitor
 				->move_elements_up_if_not_in_entity_map()
 				->returnFinalArray()
 				;
-			echo "RECORD";
-			print_r($record);
 
 			return $record;
 		}

@@ -40,4 +40,16 @@ class DTO
 		return $this->data_array;
 	}
 
+	public function unset(string $key)
+	{
+	
+		unset($this->data_array[$key]);
+		
+	}
+
+	public function seralize() : array
+	{
+		return json_encode($this->data_array);
+
+	}
 }

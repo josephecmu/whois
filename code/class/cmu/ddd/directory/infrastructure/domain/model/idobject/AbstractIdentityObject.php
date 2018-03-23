@@ -36,7 +36,7 @@ abstract class AbstractIdentityObject
 	 }
 
 	// field names to which this is constrained
-	public function getObjectFields()
+	public function getObjectFields() : array
 	  {
 		  return $this->enforce;
 	  }
@@ -119,7 +119,7 @@ abstract class AbstractIdentityObject
 	      return $ret;
 	  }
 
-	  public function __toString()
+	  public function __toString() : string
 	  {
 		  $ret = [];
 

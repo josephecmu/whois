@@ -16,7 +16,7 @@ class ContextSetProperties
 
     }
 
-    function returnProperty( string $property)
+    function returnProperty(string $property)
 
     {
 

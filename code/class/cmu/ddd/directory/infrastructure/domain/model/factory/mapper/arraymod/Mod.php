@@ -35,6 +35,14 @@ class Mod
 		return $strat->returnTemp();							//get the array after strategy is done with it.
 	}
 
+	private function a_modify(string $class_name) : array
+	{
+		$class =  __NAMESPACE__  . '\\mods\\append\\' . $class_name;    //all of our mods are in the 'mods' directory
+		$strat = new $class($this->obj);                        //STRATEGY class is called and instantiated each time.
+		$strat->append_array($this->final);	    //here we pass the 'final' array for modification
+		return $strat->returnTemp();							//get the array after strategy is done with it.
+	}
+
 	//modifiers...they call the 'mods' using the helper functions above...fluent interface
 	public function remap_keys() : self
 
@@ -110,10 +118,26 @@ class Mod
 
 	}
 
+	public function delete_key() : self
+	{
+
+		$this->final = $this->s_modify("DeleteKey");
+		return $this;
+
+	}
+
 	public function reverse_remap_keys() : self
 	{
 
 		$this->final = $this->s_modify("ReverseRemapKeys");
+		return $this;
+
+	}
+
+	public function add_object_class() : self
+	{
+
+		$this->final = $this->a_modify("AddObjectClass");
 		return $this;
 
 	}

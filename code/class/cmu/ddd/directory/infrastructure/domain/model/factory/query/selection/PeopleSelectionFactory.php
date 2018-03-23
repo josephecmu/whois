@@ -2,21 +2,24 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\selection;
 
-use  \cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject ;
+use  \cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject;
 
 class PeopleSelectionFactory extends AbstractSelectionFactory
 
 {
 
-	public function newSelection(AbstractIdentityObject $obj): array
+	protected function getDn() : string
 	{
-		
-		$dn = "ou=people"; 
-//		$fields = '"' .  implode('", "', $obj->getObjectFields()) . '"';
-		$fields = $obj->getObjectFields();
-		$filter = $this->buildFilter($obj);
-		$location = $this->getLocation($dn);
-		return [$location, $fields, $filter];
+
+		return "ou=people";
+
+	}
+
+	protected function targetClass() : string
+	{
+
+		return PeopleIdentityObject::class;
+
 	}
 
 }
