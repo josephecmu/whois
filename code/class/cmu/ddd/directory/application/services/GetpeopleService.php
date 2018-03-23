@@ -12,7 +12,7 @@ class GetpeopleService extends AbstractService
 
 {
 
-	public function execute(DTO $dto) : DTO
+	public function execute(DTO $dto, string $action) : DTO
 
 	{
 		
@@ -37,4 +37,5 @@ class GetpeopleService extends AbstractService
 		return $dto_fact->getDTO($object);
 
 	}
+
 }

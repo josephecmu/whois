@@ -8,16 +8,12 @@ use cmu\ddd\directory\infrastructure\services\dto\DTO;
 class RunService
 {
 
-	static public function init(DTO $dto) : DTO
+	static public function init(DTO $dto, string $action) : DTO
 	{
-
-		$action = $dto->get('action');
 
 		$svc = CommandFactory::getCommand($action);
 
-		$dto->unset('action');
-
-		return $svc->execute($dto);
+		return $svc->execute($dto, $action);
 
 	}
 
