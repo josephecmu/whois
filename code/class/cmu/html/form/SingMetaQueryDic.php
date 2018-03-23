@@ -52,9 +52,9 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 
 		$dto = DTOAssembler::returnDTO($dto_array);
 
-		$dto->set('action', 'get');
-		
-		$rdto =  RunService::init($dto);
+		$action = "get";
+
+		$rdto =  RunService::init($dto, $action );
 
 		//3-22-18    value here must be an array
 		//[values:protected] => Array
@@ -74,17 +74,18 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 			$values_ldap[$k] = $v;
 
 		}	
+
+
 ///////////////////////////////////////////// END NEW TO SERVICE LAYER
 
         } 																						    
 		//WE MUST CHANGE REQUEST TO LOWER CASE KEYS!!!																					
-		$values = array_merge($values_ldap, array_change_key_case($values_request));  		//merge, 2nd array overwrites identical keys of first array
-
+##		$values = array_merge($values_ldap, array_change_key_case($values_request));  		//merge, 2nd array overwrites identical keys of first array
+		$values = array_merge($values_ldap, $values_request);								//merge, 2nd array overwrites identical keys of first array
 
         $this->metaobject->setValues($values);							//set above values internally in object
 
         $this->metaobject->setSingleTotalArray('values');	//populate the meta totalarray property with correct value key
-
         return $this->metaobject;			//return TOTAL object with total array stored in totalarray property
 
 		

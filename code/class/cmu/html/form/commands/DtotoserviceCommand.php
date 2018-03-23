@@ -24,8 +24,6 @@ class DtotoserviceCommand extends AbstractCommand
 	
 		$action = $request->getValue('action'); 
 
-		$dto->set('action', $action);				//include the $action, this packages nicely
-
 		echo "<pre>";
 		
 		print_r($dto);
@@ -34,7 +32,7 @@ class DtotoserviceCommand extends AbstractCommand
 
 		//send the $dto to the service layer
 
-		return RunService::init($dto);
+		return RunService::init($dto, $action);
 
     }
 
