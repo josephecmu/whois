@@ -17,13 +17,13 @@ class Name extends \cmu\ddd\directory\domain\model\lib\AbstractImmutable
 
 		{
 
-			if ($this->isValid($aname["firstname"],["validlettersonly"])) {
+			if ($this->isValid("firstname", $aname["firstname"],["validlettersonly"])) {
 
 				$this->firstname = $aname["firstname"];
 
 			}
 
-			if ($this->isValid($aname["lastname"],["notNull"])) {
+			if ($this->isValid("lastname", $aname["lastname"],["notNull"])) {
 
 				$this->lastname = $aname["lastname"];
 

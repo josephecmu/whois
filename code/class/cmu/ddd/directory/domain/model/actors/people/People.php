@@ -20,7 +20,7 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 
 	{
 
-		return ["name"];	
+		return ["name", "peoplerdn"];	
 		
 	}
 

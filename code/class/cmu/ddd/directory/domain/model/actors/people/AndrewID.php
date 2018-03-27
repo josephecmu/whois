@@ -18,7 +18,7 @@ class AndrewID extends \cmu\ddd\directory\domain\model\lib\AbstractImmutable
 
 			$validator=["validLCaseString"];
 
-			if ($this->isValid($anid, $validator)) {			
+			if ($this->isValid("andrewid", $anid, $validator)) {			
 
 					$this->andrewid = $anid;
 		
