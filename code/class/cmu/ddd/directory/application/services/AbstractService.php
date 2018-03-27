@@ -7,7 +7,7 @@ abstract class AbstractService
 
 {
 
-	abstract function execute (DTO $dto, string $action);  //can return DTO(R), or can return bool (CUD)
+	abstract function execute (DTO $dto);  //can return DTO(R), or can return bool (CUD)
 
 
 }

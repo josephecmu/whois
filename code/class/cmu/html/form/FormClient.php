@@ -155,7 +155,7 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
     {
         //'postprocess',  <- other COMMAND object 'hook' to handle postprocessing
        // $commands = ['dbprocess'];               //could also be a class property member??                
-		$commands = ['dtotoservice'];
+		$commands = ['dtoprocess'];
 
         $returnpostobj = new \cmu\html\base\ReturnPost();               //build from form objects products PARAMETERS
        

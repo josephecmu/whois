@@ -53,7 +53,7 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 		$dto = DTOAssembler::returnDTO($dto_array);
 
 		$action = "get";
-
+		//retrin from service layer
 		$rdto =  RunService::init($dto, $action );
 
 		//3-22-18    value here must be an array

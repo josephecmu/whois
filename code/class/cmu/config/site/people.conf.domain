@@ -45,19 +45,54 @@ $person_array = array(
                   'compreqnumber' => 1
                                                 ),
 
-//    'andrewid'=>        array( 'label' => "Andrew ID",
-//                          'class' => "value",
-//                     'filtertype' => "letterspunct",
-//                            'alt' => "altvalue",
-//                           'type' => "text",
-//                        'builder' => "textbox",
-//                           'name' => "uid",
-//                  'compreqnumber' => 1,
-//                    'placeholder' => "andrewid",
-//                          'state' => ['add']
-//                    
-//                                                )
+    'andrewid'=>        array( 'label' => "Andrew ID",
+                          'class' => "value",
+                     'filtertype' => "letterspunct",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "andrewid",
+                  'compreqnumber' => 1,
+                    'placeholder' => "andrewid",
+                          'state' => ['add']
+                    
+                                                ),
                                                 
+    'homedirectory'=>    array( 'label' => "Home Directory",
+                           'class' => "hd",
+                     //'filtertype' => "integers",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "homedirectory",
+                  'compreqnumber' => 1,
+                  'hintmessage' => 'required'
+		
+			  									),
+                          							
+    'gidnumber'=>    [    'label' => "GIDNumber",
+                          'class' => "gid",
+                     'filtertype' => "integers",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "gidnumber",
+                  'compreqnumber' => 1,
+                  	'hintmessage' => 'required'
+		
+                          							],
+                          							
+    'uidnumber'=>    [    'label' => "UIDNumber",
+                          'class' => "uid",
+                     'filtertype' => "integers",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "uidnumber",
+                  'compreqnumber' => 1,
+                  	'hintmessage' => 'required'
+		
+                          							],
     
                                                 ); //end $totalarray
 

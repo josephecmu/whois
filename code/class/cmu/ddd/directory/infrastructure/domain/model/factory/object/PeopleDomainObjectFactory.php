@@ -12,9 +12,8 @@ class PeopleDomainObjectFactory extends AbstractDomainObjectFactory
 
 	{
 
-		$obj = new People($norm_array);
-
-		return $obj;
+		return new People($norm_array);
+		
 	}
 
 }

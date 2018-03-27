@@ -83,6 +83,10 @@ class DomainObjectAssembler
 		echo "<br />";
 		echo "<br />";
 
+		return $this->ldap->add($rdn, $input);
+
+
+
 
 		// UPDATE
 		//$link = $this->ldap->update($location, $filter, $fields);  <- from function above
