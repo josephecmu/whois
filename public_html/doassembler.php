@@ -45,7 +45,7 @@ print_r($object);
 ////NOW LETS CONFIGURE IT FOR AN LDAP ARRAY
 ////
 ////
-echo $doa->insert($object);
+echo $doa->add($object);
 //
 //echo "from DTO to Domain array";
 //echo "<br />";  

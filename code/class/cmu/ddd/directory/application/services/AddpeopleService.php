@@ -39,7 +39,7 @@ class AddpeopleService extends AbstractService
 
 		print_r($obj);
 
-		return $doa->insert($obj);	
+		return $doa->add($obj);
 
 	}
 

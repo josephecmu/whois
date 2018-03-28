@@ -69,7 +69,16 @@ class DomainObjectAssembler
 
 	}
 
-	public function insert(AbstractEntity $obj)
+	public function update(AbstractEntity $obj)
+    {
+        $upfact = $this->factory->getUpdateFactory();
+
+        list($rdn, $input) = $upfact->newUpdate($obj); //$rdn and $input
+
+        return $this->ldap->update($rdn, $input);
+    }
+
+	public function add(AbstractEntity $obj)
 	{
 
 		$upfact = $this->factory->getUpdateFactory();
