@@ -22,7 +22,7 @@ class AbstractEntity
 
 	{
 
-		return array();
+		return array();		//incase we have no required fields
 
 	}
 

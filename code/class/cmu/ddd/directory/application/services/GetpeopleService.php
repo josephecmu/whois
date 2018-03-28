@@ -12,7 +12,7 @@ class GetpeopleService extends AbstractService
 
 {
 
-	public function execute(DTO $dto, string $action) : DTO
+	public function execute(DTO $dto) : DTO
 
 	{
 		

@@ -69,7 +69,7 @@ class DomainObjectAssembler
 
 	}
 
-	public function insert(AbstractEntity $obj)
+	public function add(AbstractEntity $obj)
 	{
 
 		$upfact = $this->factory->getUpdateFactory();
@@ -82,6 +82,10 @@ class DomainObjectAssembler
 		print_r($input);
 		echo "<br />";
 		echo "<br />";
+
+		return $this->ldap->add($rdn, $input);
+
+
 
 
 		// UPDATE

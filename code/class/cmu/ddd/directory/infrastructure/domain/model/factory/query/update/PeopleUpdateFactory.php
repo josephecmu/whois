@@ -8,12 +8,11 @@ use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 class PeopleUpdateFactory extends AbstractUpdateFactory
 
 {
-
 	protected function getRdn(AbstractEntity $obj) : string
 
 	{
 		
-		return $obj->dynGet("peoplerdn")->dynGet("dn");
+		return $obj->dynGet("dn")->dynGet("dn");
 
 	}
 
