@@ -10,10 +10,10 @@ class Mod
 	private $final; 											//our array
 	private $obj; 												//concrete Mapper
 
-	function __construct (AbstractMapper $obj, array $raw = null) 
+	function __construct (AbstractMapper $obj, array $raw) 
 	{
 		//this class is only instantiated ONCE, we must populate the final array to start mods.
-		$this->final = ($raw) ?: $obj->getRaw();
+		$this->final = $raw;
 			
 		$this->obj = $obj;
 
@@ -32,6 +32,14 @@ class Mod
 		$class =  __NAMESPACE__  . '\\mods\\recursive\\' . $class_name;    //all of our mods are in the 'mods' directory
 		$strat = new $class($this->obj);                        //STRATEGY class is called and instantiated each time.
 		$strat->act_on_recursive_array_depth($this->final);	    //here we pass the 'final' array for modification
+		return $strat->returnTemp();							//get the array after strategy is done with it.
+	}
+
+	private function a_modify(string $class_name) : array
+	{
+		$class =  __NAMESPACE__  . '\\mods\\append\\' . $class_name;    //all of our mods are in the 'mods' directory
+		$strat = new $class($this->obj);                        //STRATEGY class is called and instantiated each time.
+		$strat->append_array($this->final);	    //here we pass the 'final' array for modification
 		return $strat->returnTemp();							//get the array after strategy is done with it.
 	}
 
@@ -102,10 +110,34 @@ class Mod
 
 	}
 
+	public function reverse_to_array() : self
+	{
+
+		$this->final = $this->s_modify("ReverseToArray"); 
+		return $this;
+
+	}
+
+	public function delete_key() : self
+	{
+
+		$this->final = $this->s_modify("DeleteKey");
+		return $this;
+
+	}
+
 	public function reverse_remap_keys() : self
 	{
 
 		$this->final = $this->s_modify("ReverseRemapKeys");
+		return $this;
+
+	}
+
+	public function add_object_class() : self
+	{
+
+		$this->final = $this->a_modify("AddObjectClass");
 		return $this;
 
 	}

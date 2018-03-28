@@ -12,6 +12,9 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\object\PeopleDomainObj
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\AbstractDomainObjectFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\PeopleMapper;
+use cmu\ddd\directory\domain\model\lib\AbstractEntity;
+use cmu\ddd\directory\infrastructure\domain\model\factory\dto\AbstractDTOFactory;
+use cmu\ddd\directory\infrastructure\domain\model\factory\dto\PeopleDTOFactory;
 
 class PeoplePersistenceFactory extends AbstractPersistenceFactory
 
@@ -44,15 +47,23 @@ class PeoplePersistenceFactory extends AbstractPersistenceFactory
 
 	{
 
-		return new PeopleMapper($raw) ;
+		return new PeopleMapper($raw);
 
 	}
 
 	public function getUpdateFactory() : AbstractUpdateFactory 
 	
 	{
+		
+		return new PeopleUpdateFactory($this);	//$this is needed to get the mapper inside the PeopleUpdateFactory
 
-		return new PeopleUpdateFactory();	
+	}
+
+	public function getDTOFactory () : AbstractDTOFactory
+	
+	{
+
+		return new PeopleDTOFactory($this); //$this is needed to get the mapper inside the PeopleDTOFactory
 
 	}
 

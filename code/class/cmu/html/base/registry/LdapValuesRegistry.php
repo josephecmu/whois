@@ -1,11 +1,13 @@
 <?php 
 namespace cmu\html\base\registry;
 
+use \cmu\html\base\LdapValues;
+
 class LdapValuesRegistry extends AbstractRegistry 
 
 {
  
-    static function getLdapValues() 
+    static function getLdapValues() : LdapValues
 
     {
 
@@ -13,7 +15,7 @@ class LdapValuesRegistry extends AbstractRegistry
 
         if ( is_null( $inst->get( "ldap_values" ) ) ) {
 
-            $inst->set('ldap_values', new \cmu\html\base\LdapValues() );
+            $inst->set('ldap_values', new LdapValues );
         }
 
         return $inst->get( "ldap_values" );

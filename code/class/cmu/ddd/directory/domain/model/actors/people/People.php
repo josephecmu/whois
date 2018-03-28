@@ -15,12 +15,15 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
     protected $peoplerdn;       
 	protected $roles=[];  				                           //can be BOTH Staff and Faculty	
 	protected $email;
+	protected $uidnumber;
+	protected $gidnumber;
+	protected $homedirectory;
 
 	protected function getRequiredFields() : array				//returns array of required properties
 
 	{
 
-		return ["name"];	
+		return ["name", "peoplerdn", "gidnumber", "uidnumber", "homedirectory"];	
 		
 	}
 
@@ -62,6 +65,26 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
         $this->peoplerdn = new \cmu\ddd\directory\domain\model\lib\Dn($anrdn);
 
     }
+	protected function setUidnumber (int $auidnumber)
+	{
+
+		$this->uidnumber = new UidNumber($auidnumber);	
+
+	}
+	protected function setGidnumber (int $agidnumber)
+	{
+
+		$this->gidnumber = new GidNumber($agidnumber);	
+
+	}
+
+	protected function setHomedirectory($ahomedirectory)
+	{
+
+		$this->homedirectory = new HomeDirectory($ahomedirectory);
+
+	}
+
     //The room must exist in the code below.  The Service layer should make sure of that. (findRoomOrFail)
     public function assignUserToRoom($room) : cmu\ddd\directory\domain\model\locations\Rooms
 

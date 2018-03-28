@@ -1,0 +1,100 @@
+<?php
+// vi:syntax=php
+//this includes our configuraton for the people OU brach of the LDAP tree
+//configured for DOMAIN (attributes)
+
+
+$person_array = array(
+
+    'peoplerdn'     => array('label' => "RDN",
+                        'type'=>'text',
+                     'builder'=>'textbox',
+                        'name'=>'peoplerdn',
+                    'readonly'=>'readonly',
+                        'alt' => 'altvalue',
+                       'class'=>'rdn',
+                      'state' => ['confirm', 'existing']
+
+                        ),
+
+   'ou' =>       array(   'type' => 'hidden',
+                       'builder' => "hidden",
+                          'name' => 'ou',
+				         'value' => 'ou=people',	//3/9/18 was unable to pass ou=ou=people via URL , so added and worked
+                         'state' => ['add']
+                                                ),
+
+    'firstname' =>       array(  'label' => 'First Name',
+                          'class' => 'value',
+                     'filtertype' => "letterspunct",
+                            'alt' => 'First Name',
+                           'type' => 'text',
+                  'compreqnumber' => 1,
+                        'builder' => "textbox",
+                           'name' => 'firstname',
+                                                ),
+
+
+    'lastname' =>       array(  'label' => "Last Name",
+                          'class' => "value",
+                     'filtertype' => "letterspunct",
+                            'alt' => "Last Name",
+                        'builder' => "textbox",
+                           'type' => 'text',
+                           'name' => "lastname",
+                  'compreqnumber' => 1
+                                                ),
+
+    'andrewid'=>        array( 'label' => "Andrew ID",
+                          'class' => "value",
+                     'filtertype' => "letterspunct",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "andrewid",
+                  'compreqnumber' => 1,
+                    'placeholder' => "andrewid",
+                          'state' => ['add']
+                    
+                                                ),
+                                                
+    'homedirectory'=>    array( 'label' => "Home Directory",
+                           'class' => "hd",
+                     //'filtertype' => "integers",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "homedirectory",
+                  'compreqnumber' => 1,
+                  'hintmessage' => 'required'
+		
+			  									),
+                          							
+    'gidnumber'=>    [    'label' => "GIDNumber",
+                          'class' => "gid",
+                     'filtertype' => "integers",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "gidnumber",
+                  'compreqnumber' => 1,
+                  	'hintmessage' => 'required'
+		
+                          							],
+                          							
+    'uidnumber'=>    [    'label' => "UIDNumber",
+                          'class' => "uid",
+                     'filtertype' => "integers",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "uidnumber",
+                  'compreqnumber' => 1,
+                  	'hintmessage' => 'required'
+		
+                          							],
+    
+                                                ); //end $totalarray
+
+
+?>

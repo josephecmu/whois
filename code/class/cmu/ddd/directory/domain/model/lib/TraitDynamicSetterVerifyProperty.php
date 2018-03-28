@@ -20,18 +20,17 @@ trait TraitDynamicSetterVerifyProperty
 
 	}
 
-	protected function confirmFieldsAndConfirmSetProperties ( array $fields, array $required_fields=[] )
+	protected function confirmFieldsAndConfirmSetProperties ( array $fields, array $required_fields )
 
 	{
 
 		$flip = $this->flipArrayAndNull($required_fields);
-		$merge = array_merge($flip, $fields );
-		
+		$merge = array_merge($flip, $fields);						//merge the keys of passed keys and required keys.
+
 		foreach ($merge as $name => $value) {
 
 			if (in_array($name, $required_fields)) {
-				$this->isValid($name, ["notNull"]); 	//check if required value is populated
-
+				$this->isValid($name, $value, ["notNull"]); 	//check if required value is populated
 			}
 
 			if (!empty($value)) {

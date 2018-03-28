@@ -1,0 +1,133 @@
+<?php
+// vi:syntax=php
+//this includes our configuraton for the people OU brach of the LDAP tree
+
+$person_array = array(
+
+    'dn'     => array('label' => "RDN",
+                        'type'=>'text',
+                     'builder'=>'textbox',
+                        'name'=>'dn',
+                    'readonly'=>'readonly',
+                        'alt' => 'altvalue',
+                       'class'=>'rdn',
+                      'state' => ['confirm', 'existing']
+
+                        ),
+
+   'ou' =>       array(   'type' => 'hidden',
+                       'builder' => "hidden",
+                          'name' => 'ou',
+				         'value' => 'ou=people',	//3/9/18 was unable to pass ou=ou=people via URL , so added and worked
+                         'state' => ['add']
+                                                ),
+
+    'cn' =>       array(  'label' => 'First Name',
+                          'class' => 'value',
+                     'filtertype' => "letterspunct",
+                            'alt' => 'First Name',
+                           'type' => 'text',
+                  'compreqnumber' => 1,
+                        'builder' => "textbox",
+                           'name' => 'cn',
+                                                ),
+
+
+    'sn' =>       array(  'label' => "Last Name",
+                          'class' => "value",
+                     'filtertype' => "letterspunct",
+                            'alt' => "Last Name",
+                        'builder' => "textbox",
+                           'type' => 'text',
+                           'name' => "sn",
+                  'compreqnumber' => 1
+                                                ),
+
+    'uid'=>        array( 'label' => "Andrew ID",
+                          'class' => "value",
+                     'filtertype' => "letterspunct",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "uid",
+                  'compreqnumber' => 1,
+                    'placeholder' => "andrewid",
+                          'state' => ['add']
+                    
+                                                ),
+                                                
+    'homeDirectory'=>    [ 'label' => "Home Directory",
+                           'class' => "hd",
+                     //'filtertype' => "integers",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "homeDirectory",
+                  'compreqnumber' => 1,
+                  'hintmessage' => 'required'
+		
+                          							],
+                          							
+    'gidNumber'=>    [    'label' => "GIDNumber",
+                          'class' => "gid",
+                     'filtertype' => "integers",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "gidNumber",
+                  'compreqnumber' => 1,
+                  	'hintmessage' => 'required'
+		
+                          							],
+                          							
+    'uidNumber'=>    [    'label' => "UIDNumber",
+                          'class' => "uid",
+                     'filtertype' => "integers",
+                            'alt' => "altvalue",
+                           'type' => "text",
+                        'builder' => "textbox",
+                           'name' => "uidNumber",
+                  'compreqnumber' => 1,
+                  	'hintmessage' => 'required'
+		
+                          							],
+
+
+    'userPassword' => array('label' => "Password",
+                            'class' => "class_value",
+                              'alt' => "altvalue",
+                             'type' => "password",
+                          'builder' => "textbox",
+                             'name' => "userPassword",
+                             //'id' => 'txtNewPassword'     //was used for javascript compare
+                       'filtertype' => 'compare',
+                  'validateagainst' => 'confirmuserPassword',
+                            'state' => ['add']
+
+    
+                                                ),
+
+
+    //'confirmuserPassword' => array('label' => "Confirm Password",
+                          //'class' => "text",
+                          //  'alt' => "altvalue",
+                           //'type' => "password",
+    //                    'builder' => "passwordmatch",
+    //                    'name' => "confirmuserPassword"
+                        
+                        
+                        
+    'confirmuserPassword' => array('label' => "Confirm Password",
+                          'class' => "text",
+                            'alt' => "altvalue",
+                           'type' => "password",
+                        'builder' => "textbox",
+                           'name' => "confirmuserPassword",
+                          'state' => ['add']
+    
+                                                )
+    
+                                                ); //end $totalarray
+
+
+?>

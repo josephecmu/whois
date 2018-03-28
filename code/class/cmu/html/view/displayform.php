@@ -17,24 +17,22 @@
 
     if ($control->validateForm()) {                                         //if validate, process and return errors
 
-        if ($control->checkChangeForm()) {                                  //see if the form has changed before we go any further!!
+//        if ($control->checkChangeForm()) {                 //see if the form has changed before we go any further!!
     
-            try {
+//            try {
 
                 $control->processForm();
                 
-                $this->forward( '../code/class/cmu/html/view/success.php' );
+//                $this->forward( '../code/class/cmu/html/view/success.php' );
             
-            } catch ( \Exception $e ) {
+//            } catch ( \Exception $e ) {
 
                 $this->forward( '../code/class/cmu/html/view/error.php' );
 
-            }
+ //           }
 
         } 
 
-    } 
+//    } 
 
     echo $control->returnDisplay(); 
-
-                                    

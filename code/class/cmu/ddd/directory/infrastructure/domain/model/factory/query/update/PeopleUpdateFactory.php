@@ -2,20 +2,25 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\update;
 
+use \cmu\ddd\directory\domain\model\actors\people\People;
 use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
 class PeopleUpdateFactory extends AbstractUpdateFactory
 
 {
+	protected function getRdn(AbstractEntity $obj) : string
 
-	public function newUpdate(AbstractEntity $obj): string
+	{
+		
+		return $obj->dynGet("peoplerdn")->dynGet("dn");
+
+	}
+
+	protected function targetClass() : string
 	{
 
-		$rdn=$obj->dynGet("peoplerdn")->dynGet("dn");
-
-		return $rdn;
+		return People::class;
 
 	}
 
 }
-

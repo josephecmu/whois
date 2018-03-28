@@ -6,6 +6,10 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFac
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCollection;
+use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\config\site\bin\Registry;
+use cmu\wrappers\LdapWrapper;
+
 
 class DomainObjectAssembler
 
@@ -13,34 +17,20 @@ class DomainObjectAssembler
 	protected $factory;
 	private $statments;
 	protected $ldap = null;   
-	public $ds;		//might be more efficient to keep the $ds handle avalailable?
+	public $ds;									//might be more efficient to keep the $ds handle avalailable?
 
 
-	/* listing 13.48 */
    //$factory = PersistenceFactory::getFactory(Venue::class);
    //$finder = new DomainObjectAssembler($factory);
 	public function __construct(AbstractPersistenceFactory $factory) {
-		$this->factory = $factory;
+		$this->factory = $factory;											//we need to determine what obj to build
 
-		$reg = \cmu\config\site\bin\Registry::instance();
-		//		$this->ldap = $reg->getLdap();    //Z uses registy, I will create new instance below
+		$reg = Registry::instance();
 
-        $this->ds = \cmu\wrappers\LdapWrapper::getLdapDs();
+        $this->ds = LdapWrapper::getLdapDs();
 
-        $this->ldap = new \cmu\wrappers\LdapWrapper($this->ds);        //query LDAP
+        $this->ldap = new LdapWrapper($this->ds);        //query LDAP
 	
-	}
-
-	private function getStatement()
-	{	
-//	//This will need to change, LdapWrapper has no prepare() method...no PDOStatement to return	
-//	{
-//		if (! isset($this->statements[$str])) {
-//			$this->statements[$str] = $this->ldap->prepare($str);
-//		}
-//
-//		return $this->statements[$str];
-        $this->ldap = new \cmu\wrappers\LdapWrapper(static::$ds);        //query LDAP
 	}
 
 	public function findOne(AbstractIdentityObject $idobj): AbstractEntity
@@ -58,60 +48,24 @@ class DomainObjectAssembler
 
 		$raw=$this->ldap->getEntries($link);
 
-		echo "RAW Array from LDAP DB";
-		echo "<pre>";
-		print_r($raw);
-		echo "</pre>";
-
-		//mapper here for LDAP records...
 		$mapper = $this->factory->getMapper($raw);
 		$norm_array_collection = $mapper->return_ldap_collection_array_to_domain(); 
 
-
-		echo "NORM ARRAY AFTER MAPPER BEFORE DOMAIN Submission";
-		echo "<pre>";
-		print_r($norm_array_collection);
-		echo "</pre>";
-		
-
-
 		return $this->factory->getCollection($norm_array_collection);
 	}
-	
-	//I created...
-	//we need a way to build a Domain Object for insert()
-	//pass a Data Transfer Object (request)
-	//however we have TWO types of array, 
-	//1- form submission -> dto -> array
-	//2- Params -> LDAP return (find(), above)
-	public function build(   ) :  AbstractEntity
+	//this should handle DTO object creation. 
+	public function build(DTO $dto) : AbstractEntity
  	{
+		//Get Mapper and convert data
+		$raw = $dto->getDataArray();
+		$mapper = $this->factory->getMapper($raw);
+		$domain_array = $mapper->return_dto_to_domain_array();
 
-		//this should handle form submission object creation. 
+		//get Objectfactory and return object
+		$dofact = $this->factory->getDomainObjectFactory();
+		$obj = $dofact->createObject($domain_array); 
 
-	}
-	//CASTS to array
-	//Can we clean this up? Should we move to Mod() ?   CAST Function
-	//can we re-factor this using closures????
-	private function object_to_array(AbstractEntity $obj) : array
-	{
-
-		function obj_to_arr ($obj) {
-			if(is_object($obj)) {
-			   	$obj = (array) $obj;
-			}	
-			if(is_array($obj)) {
-				$new = array();
-				foreach($obj as $key => $val) {
-					$new[$key] = obj_to_arr($val);   //recursive function
-				}
-			} else { 
-				$new = $obj;
-			}
-			return $new; 
-		};
-
-		return obj_to_arr($obj);
+		return $obj;
 
 	}
 
@@ -120,22 +74,18 @@ class DomainObjectAssembler
 
 		$upfact = $this->factory->getUpdateFactory();
 
-		$rdn = $upfact->newUpdate($obj);
+		list($rdn, $input) = $upfact->newUpdate($obj);    	//get $rdn and $input for ldap update() below
 
-		$raw = $this->object_to_array($obj);
+		echo "<br />";
+		echo "<strong>INPUT for LDAP array</strong>";
+		echo "<br />";
+		print_r($input);
+		echo "<br />";
+		echo "<br />";
 
-		echo "this is the RAW array casted::";
-		echo "<pre>";
-		print_r($raw);
-		echo "</pre>";
-		echo "FACTORY IN DOA";
-		$mapper = $this->factory->getMapper($raw);
-		//we need to call ENTITY Mapper below...
-		echo "This is the LDAP ARRAY after Mapper";
-		$input = $mapper->return_object_to_ldaparray();
-		echo "<pre>";
-		print_r( $input);
-		echo "</pre>";
+		return $this->ldap->add($rdn, $input);
+
+
 
 
 		// UPDATE
@@ -151,8 +101,6 @@ class DomainObjectAssembler
 //		}
 //
 //		$obj->markClean();	
-
-		//not finished
 
 	}
 	

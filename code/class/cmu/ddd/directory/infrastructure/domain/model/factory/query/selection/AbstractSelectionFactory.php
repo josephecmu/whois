@@ -3,36 +3,50 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\selection;
 
 use \cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
+use \cmu\ddd\directory\infrastructure\domain\model\factory\query\AbstractQuery;
+use \cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
 
 abstract class AbstractSelectionFactory
 
 {
-	
-abstract public function newSelection(AbstractIdentityObject $obj): array;
 
-public function buildFilter(AbstractIdentityObject $obj): string
-
-{
+	use TraitTargetClass;
+		
+	abstract protected function getDn() : string;
 	
-	if ($obj->isVoid()) {
-		return ["", []];
+	public function buildFilter(AbstractIdentityObject $obj): string
+
+	{
+		
+		$this->verifyTargetClass($obj);	
+
+		if ($obj->isVoid()) {
+			return ["", []];
+		}
+
+		$compstrings = [];
+		foreach ($obj->getComps() as $comp) {
+			$compstrings[] = "({$comp['name']}{$comp['operator']}{$comp['value']})";
+		}
+		$filter = "(&" .  implode(" ",$compstrings) . ")" ;
+		return $filter;
+		
 	}
 
-	$compstrings = [];
-	foreach ($obj->getComps() as $comp) {
-		$compstrings[] = "({$comp['name']}{$comp['operator']}{$comp['value']})";
+	##added josephe 10-12-17
+	protected function getLocation ($path) {
+
+		return $path . ",dc=mcs,dc=cmu,dc=edu";
+
 	}
-	$filter = "(&" .  implode(" ",$compstrings) . ")" ;
-	return $filter;
-	
 
-}
+	public function newSelection(AbstractIdentityObject $obj): array
+	{
 
-##added josephe 10-12-17
-protected function getLocation ($path) {
-
-	return $path . ",dc=mcs,dc=cmu,dc=edu";
-
-}
-
+		$dn = $this->getDn();								//concrete implementation
+		$fields = $obj->getObjectFields();
+		$filter = $this->buildFilter($obj);
+		$location = $this->getLocation($dn);
+		return [$location, $fields, $filter];
+	}
 }
