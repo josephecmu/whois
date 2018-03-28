@@ -31,13 +31,13 @@ class AddpeopleService extends AbstractService
 		echo "<pre>";
 	
 		//we need to create a proper RDN to insert.
-		$peoplerdn = 'uid=' . $andrewid . ",ou=people,dc=mcs,dc=cmu,dc=edu";
+		$dn = 'uid=' . $andrewid . ",ou=people,dc=mcs,dc=cmu,dc=edu";
 
-		$dto->set('peoplerdn', $peoplerdn);
+		$dto->set('dn', $dn);
 
 		$obj = $doa->build($dto);
 
-		print_r($obj);
+//		print_r($obj);
 
 		return $doa->add($obj);
 

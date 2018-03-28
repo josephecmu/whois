@@ -25,7 +25,6 @@ abstract class AbstractRegistry
             self::$instances[$class] = new $class;
 
         }
-
         return self::$instances[$class];
 
     }  

@@ -12,7 +12,7 @@ class PeopleUpdateFactory extends AbstractUpdateFactory
 
 	{
 		
-		return $obj->dynGet("peoplerdn")->dynGet("dn");
+		return $obj->dynGet("dn")->dynGet("dn");
 
 	}
 

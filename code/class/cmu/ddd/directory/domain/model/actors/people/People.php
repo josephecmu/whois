@@ -12,7 +12,7 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 
     protected $name;
     protected $andrewid;
-    protected $peoplerdn;       
+    protected $dn;       
 	protected $roles=[];  				                           //can be BOTH Staff and Faculty	
 	protected $email;
 	protected $uidnumber;
@@ -23,7 +23,7 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 
 	{
 
-		return ["name", "peoplerdn", "gidnumber", "uidnumber", "homedirectory"];	
+		return ["name", "dn", "gidnumber", "uidnumber", "homedirectory"];	
 		
 	}
 
@@ -58,11 +58,11 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 
 	}
 
-    protected function setPeoplerdn (string $anrdn)
+    protected function setDn (string $adn)
 
     {
 
-        $this->peoplerdn = new \cmu\ddd\directory\domain\model\lib\Dn($anrdn);
+        $this->dn = new \cmu\ddd\directory\domain\model\lib\Dn($adn);
 
     }
 	protected function setUidnumber (int $auidnumber)
@@ -90,14 +90,14 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 
     {
 
-		return new cmu\ddd\directory\domain\model\locations\Rooms ($this->peoplerdn, $room);
+		return new cmu\ddd\directory\domain\model\locations\Rooms ($this->dn, $room);
 
     }
 	#The computer must be assigned to a room before assigned to a user. The service layer should verify?
 	public function assignUserToComputer($computer) : cmu\ddd\directory\domain\model\equipment\computers\Computer
 
 	{
-		return new cmu\ddd\directory\domain\model\equipment\computers\Computer ($this->peoplerdn, $computer);
+		return new cmu\ddd\directory\domain\model\equipment\computers\Computer ($this->dn, $computer);
 
 	}
 

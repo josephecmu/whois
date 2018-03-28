@@ -5,29 +5,29 @@ class CheckChangeVisitor extends AbstractVisitor
 
 {
 
-    private $ldapvalues = array();
+    private $dovalues = array();
     private $atts;
 
     function __construct() 
 
     {
 
-        $ldap = \cmu\html\base\registry\LdapValuesRegistry::getLdapValues();
+		$do_reg = \cmu\html\base\registry\DoValuesRegistry::getDoValues();
 
-        $this->ldapvalues = $ldap->returnSingleLdapNormValuesArray();	
-            
-        $this->atts = array_keys($this->ldapvalues);
+		$this->dovalues = $do_reg->GetValues();	
+
+        $this->atts = array_keys($this->dovalues);
 
     }
     //watch for LOWERCASE key returns on LDAP sets LDAP return key lowercase!!!!
-    private function compareChange($value, $name)                                               	//convienince function
+    private function compareChange($value, $name)                                  	//convienince function
 
     {
 
         if (in_array(strtolower($name), $this->atts)) {                                             //match
 
-            if (!in_array($value, $this->ldapvalues[strtolower($name)], true)) {
-	
+			//if (!in_array($value, $this->ldapvalues[strtolower($name)], true)) {              //removed type checking
+            if (!in_array($value, $this->dovalues[strtolower($name)])) {
 
                 return true;
 
@@ -35,12 +35,12 @@ class CheckChangeVisitor extends AbstractVisitor
 
         }
 
-        if ($this->ldapvalues == null && $value != null) {                              //no values pulled from DB
+        if ($this->dovalues == null && $value != null) {                              //no values pulled from DB
 
             return true;
 
         }
-        
+
     }
 
     function visitInput(\cmu\html\form\products\Input $component)                           //compare NAME
