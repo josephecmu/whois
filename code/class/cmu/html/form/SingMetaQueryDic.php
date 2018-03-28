@@ -28,10 +28,11 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 
        	}
        	
-        $values_ldap = array();
+        $values_do = array();
 
         if (null !== $this->requestobject->getValue('dn')) {      //GET  //set $values_ldap
 
+		$do_registry = \cmu\html\base\registry\DoValuesRegistry::getDoValues();		
 //            $ldap_registry = \cmu\html\base\registry\LdapValuesRegistry::getLdapValues();  //instantiate LdapValues, but stores object in Registry
 //
 //            $ds = \cmu\wrappers\LdapWrapper::getLdapDs();
@@ -63,6 +64,8 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 		//     (
 		//              [0] => Jack
 		//     )                                                                   )
+		//
+		//    SHOULD DO IN DoValues
 		foreach ($rdto->getDataArray() as $k => $v)
 
 		{
@@ -71,17 +74,19 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 				$v = [$v] ;	
 			}
 
-			$values_ldap[$k] = $v;
+			$values_do[$k] = $v;
 
 		}	
+    // $ldap_registry = \cmu\html\base\registry\LdapValuesRegistry::getLdapValues();
 
-
+		$do_registry->setValues($values_do);
+//		print_r( $do_registry );
 ///////////////////////////////////////////// END NEW TO SERVICE LAYER
 
         } 																						    
 		//WE MUST CHANGE REQUEST TO LOWER CASE KEYS!!!																					
 ##		$values = array_merge($values_ldap, array_change_key_case($values_request));  		//merge, 2nd array overwrites identical keys of first array
-		$values = array_merge($values_ldap, $values_request);								//merge, 2nd array overwrites identical keys of first array
+		$values = array_merge($values_do, $values_request);								//merge, 2nd array overwrites identical keys of first array
 
         $this->metaobject->setValues($values);							//set above values internally in object
 

@@ -48,9 +48,9 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
     private function setFormState()   //:void                //used to set state of form and build buttons
 
     {
-
-        if (!empty($this->request->getValue('dn'))) {                               //we have data passed
-
+		if (!empty($this->request->getValue('dn'))) {                               //we have data passed
+//        if ($this->request->contains('dn')) {   //check is key 'contains'                      //we have data passed
+			
             if ( in_array($this->request->getValue('action'), $this->confirmarray))  {  // 'Confirm" is not in button, echo confirmation button
 
                 $this->state = 'confirm';
@@ -60,7 +60,6 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
                 $this->state = 'existing';                  //data passed, but not confirm, must be existing
 
             }
-
             return;
 
         } 
@@ -152,7 +151,9 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
     public function processForm()    : bool	                                                              //PROCESS 
 
-    {
+	{
+		echo "<br />";
+		echo "<strong>We are processing...</strong>";
         //'postprocess',  <- other COMMAND object 'hook' to handle postprocessing
        // $commands = ['dbprocess'];               //could also be a class property member??                
 		$commands = ['dtoprocess'];

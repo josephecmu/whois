@@ -9,7 +9,7 @@ class LdapValues extends AbstractValues
 
     {
 
-        $values_ldap = array();
+        $do_ldap = array();
 
         foreach($array as $k => $v) {
 
@@ -45,7 +45,7 @@ class LdapValues extends AbstractValues
 
     }
 
-    private function getCheckValue($key)                      //return array, not null, used below
+    public function getCheckValue($key)                  //return array, not null, used below
 
     {
 

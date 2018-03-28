@@ -69,7 +69,7 @@ class DomainObjectAssembler
 
 	}
 
-	public function insert(AbstractEntity $obj)
+	public function add(AbstractEntity $obj)
 	{
 
 		$upfact = $this->factory->getUpdateFactory();
