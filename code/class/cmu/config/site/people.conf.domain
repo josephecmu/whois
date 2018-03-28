@@ -80,10 +80,9 @@ $person_array = array(
                           'state' => ['add']
                     
                                                 ),
-                                                
-    'homedirectory'=>    array( 'label' => "Home Directory",
+
+    'homedirectory'=>    [ 'label' => "Home Directory",
                            'class' => "hd",
-                     //'filtertype' => "integers",
                             'alt' => "altvalue",
                            'type' => "text",
                         'builder' => "textbox",
@@ -91,7 +90,7 @@ $person_array = array(
                   'compreqnumber' => 1,
                   'hintmessage' => 'required'
 		
-			  									),
+			  ],
                           							
     
                                                 ); //end $totalarray

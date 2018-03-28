@@ -15,6 +15,9 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visito
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\DtoToDomainConverter;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\LdapToDomainConverter;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\ObjectToDTOConverter;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\ObjectToLdapConverterAdd;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\ObjectToLdapConverterUpdate;
+
 
 abstract class AbstractMapper
 {
@@ -144,4 +147,18 @@ abstract class AbstractMapper
 
 	}
 
+		
+	public function return_object_to_ldaparray_update() : array
+
+	{
+		return (new ObjectToLdapConverterUpdate($this))->returnConvertedArray();
+
+	}
+
+	public function return_object_to_ldaparray_add() : array
+
+	{
+		return (new ObjectToLdapConverterAdd($this))->returnConvertedArray();
+
+	}
 }
