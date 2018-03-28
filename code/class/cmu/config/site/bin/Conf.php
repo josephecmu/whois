@@ -14,10 +14,13 @@ class Conf
 
 	public function get(string $key)
 	{
-		if (isset($this->vals[$key])) {
-			return $this->vals[$key];
-		}
-		return null;
+		
+		return $this->vals[$key] ?? null;
+
+//		if (isset($this->vals[$key])) {
+//			return $this->vals[$key];
+//		}
+//		return null;
 	}
 
 	public function set(string $key, $val)
