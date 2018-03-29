@@ -80,4 +80,11 @@ abstract class AbstractModifyFactory
 
 	}
 
+	public function newDelete(AbstractEntity $obj) : string
+	{
+
+		return $this->getRdn($obj);
+
+	}
+
 }

@@ -69,7 +69,7 @@ class DomainObjectAssembler
 
 	}
 
-	public function add(AbstractEntity $obj)
+	public function add(AbstractEntity $obj) : bool
 	{
 
 		$addfact = $this->factory->getModifyFactory();
@@ -95,7 +95,7 @@ class DomainObjectAssembler
 
 	}
 	
-	public function update(AbstractEntity $obj)
+	public function update(AbstractEntity $obj) :bool
 	{
 
 		$updatefact = $this->factory->getModifyFactory();
@@ -105,4 +105,16 @@ class DomainObjectAssembler
 		return $this->ldap->update($rdn, $input);
 	}
 
+
+	public function delete(AbstractEntity $obj) : bool
+
+	{
+
+		$delfactory = $this->factory->getModifyFactory();
+
+		$rdn = $delfactory->newDelete($obj);		
+
+		return $this->ldap->delete($rdn);	
+
+	}
 }
