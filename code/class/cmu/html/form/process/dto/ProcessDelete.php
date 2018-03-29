@@ -8,3 +8,11 @@ class ProcessDelete extends AbstractProcess
 
 {
 
+	public function modify() : bool
+	{
+
+		return RunService::init($this->dto, 'delete');
+
+	}
+	
+}
