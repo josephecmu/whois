@@ -27,13 +27,15 @@ class CommandContext
 
     {
 
-        if ( isset( $this->params[$key] ) ) {
+		return $this->params[$key] ?? null;
 
-            return $this->params[$key];
-
-        }
-
-        return null;
+//        if ( isset( $this->params[$key] ) ) {
+//
+//            return $this->params[$key];
+//
+//        }
+//
+//        return null;
 
     }
 
