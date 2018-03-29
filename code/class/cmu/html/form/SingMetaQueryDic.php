@@ -54,33 +54,13 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 		$dto = DTOAssembler::returnDTO($dto_array);
 
 		$action = "get";
-		//retrin from service layer
+		//retrive from service layer
 		$rdto =  RunService::init($dto, $action );
 
-		//3-22-18    value here must be an array
-		//[values:protected] => Array
-		//        (
-		//     [firstname] => Array
-		//     (
-		//              [0] => Jack
-		//     )                                                                   )
-		//
-		//    SHOULD DO IN DoValues
-		foreach ($rdto->getDataArray() as $k => $v)
+		$do_registry->setValues($rdto->getDataArray());
 
-		{
+		$values_do = $do_registry->getValues();
 
-			if (! is_array($v)) {
-				$v = [$v] ;	
-			}
-
-			$values_do[$k] = $v;
-
-		}	
-    // $ldap_registry = \cmu\html\base\registry\LdapValuesRegistry::getLdapValues();
-
-		$do_registry->setValues($values_do);
-//		print_r( $do_registry );
 ///////////////////////////////////////////// END NEW TO SERVICE LAYER
 
         } 																						    
