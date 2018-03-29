@@ -14,7 +14,6 @@ class Updatepeopleservice extends AbstractService
 	public function execute(DTO $dto) : bool
 	{
 
-
 		$factory = AbstractPersistenceFactory::getFactory(People::class);	
 		$doa = new DomainObjectAssembler($factory);
 
@@ -26,7 +25,6 @@ class Updatepeopleservice extends AbstractService
 		$dn = $dto->get('dn');					//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
     	$andrewid = substr(substr($dn, 0, strpos( $dn, ',', 0)), 4);        //get to first comma, then strip 'uid='
 
-			
 		$dto->set('andrewid', $andrewid);
 
 		$obj = $doa->build($dto);

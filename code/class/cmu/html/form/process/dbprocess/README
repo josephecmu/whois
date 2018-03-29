@@ -1,3 +1,0 @@
-This directory contains the actual CRUD commands that call the LDAP wrapper class to modify the DB.
-
-It is structured as a Strategy pattern.
