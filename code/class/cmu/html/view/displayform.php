@@ -21,10 +21,10 @@
   
             try {
 
-              $control->processForm();
-              
+            $control->processForm();
+            
                 $this->forward( '../code/class/cmu/html/view/success.php' );
-          
+        
             } catch ( \Exception $e ) {
 
               $this->forward( '../code/class/cmu/html/view/error.php' );
