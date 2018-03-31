@@ -14,7 +14,7 @@ class DeletePeopleService extends AbstractPeopleService
 		
 		$dn = $dto->get('dn');					//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
 
-		$andrewid = $this->getUid($dn);		
+		$andrewid = $this->getUid($dn);			//the andrew id SHOULD be passed via the form (bug)
 
 		$dto->set('andrewid', $andrewid);
 

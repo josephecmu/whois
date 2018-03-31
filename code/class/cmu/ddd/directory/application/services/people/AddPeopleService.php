@@ -21,10 +21,10 @@ class AddPeopleService extends AbstractPeopleService
 
 		$andrewid = $dto->get('andrewid');
 
-		//we need to create a proper RDN to insert.
-		$dn = 'uid=' . $andrewid . ",ou=people,dc=mcs,dc=cmu,dc=edu";
+		//we need to create a proper DN to insert.
+		$dn = $this->idatt . "=" . $andrewid . "," . $this->ou . "," . $this->dc ;
 
-		$dto->set('dn', $dn);
+		$dto->set('dn', $dn);		//we need to pass the $dn we just constructed
 
 		$obj = $this->doa->build($dto);
 
