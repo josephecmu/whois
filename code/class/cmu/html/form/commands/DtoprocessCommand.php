@@ -20,7 +20,7 @@ class DtoprocessCommand extends AbstractCommand
 
         $request = $context->get('request');                //break out $request from $context
 
-        $dtoprocess = new ProcessContext($returnpostobj, $request);
+        $dtoprocess = new ProcessContext($returnpostobj, $request);				//determine  CRUD
 
         return $dtoprocess->modifyLdap();
 		

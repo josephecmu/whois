@@ -1,21 +1,14 @@
 <?php
 
-namespace cmu\ddd\directory\application\services;
+namespace cmu\ddd\directory\application\services\people;
 
-use cmu\ddd\directory\domain\model\actors\people\People;
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
-use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
-use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
-use cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject;
 
-class Updatepeopleservice extends AbstractService
+class UpdatePeopleservice extends AbstractPeopleService 
 {
 
 	public function execute(DTO $dto) : bool
 	{
-
-		$factory = AbstractPersistenceFactory::getFactory(People::class);	
-		$doa = new DomainObjectAssembler($factory);
 
 		////some checking confirming the a userID does not already exist	
 		//identity generator reference here??????
@@ -27,9 +20,9 @@ class Updatepeopleservice extends AbstractService
 
 		$dto->set('andrewid', $andrewid);
 
-		$obj = $doa->build($dto);
+		$obj = $this->doa->build($dto);
 
-		return $doa->update($obj);	
+		return $this->doa->update($obj);	
 
 	}
 

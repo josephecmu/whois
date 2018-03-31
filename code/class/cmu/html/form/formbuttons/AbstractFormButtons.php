@@ -1,5 +1,9 @@
 <?php
+
 namespace cmu\html\form\formbuttons;
+
+use \cmu\html\form\builders\VariableSingleBuilder;
+use \cmu\html\products\AbstractHtmlDisplayClient;
 
 abstract class AbstractFormButtons
 
@@ -7,7 +11,7 @@ abstract class AbstractFormButtons
 
     protected $formclient;
     
-    function __construct(\cmu\html\products\AbstractHtmlDisplayClient $formclient_in)
+    function __construct(AbstractHtmlDisplayClient $formclient_in)
 
     {
 
@@ -21,7 +25,7 @@ abstract class AbstractFormButtons
 
     {
 
-        $button = new \cmu\html\form\builders\VariableSingleBuilder("Input", array ('name' => 'action', 'value'=>$value, 'type'=>'submit'));
+        $button = new VariableSingleBuilder("Input", ['name' => 'action', 'value'=>$value, 'type'=>'submit']);
 
         $button->build($this->formclient->getDisplay());
 
