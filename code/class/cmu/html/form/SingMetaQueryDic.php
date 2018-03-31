@@ -1,4 +1,5 @@
 <?php
+
 namespace cmu\html\form;
 
 use \cmu\html\products\AbstractMetaQueryDic;

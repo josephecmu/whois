@@ -14,7 +14,7 @@ abstract class AbstractMetaQueryDic
     function __construct(\cmu\html\base\Meta $metaobject_in, array $ldap_parms_in) 
 
     {
-
+		//table needs this.
         foreach ($ldap_parms_in as $prop => $v) {
 
             if (property_exists($this, $prop)) {

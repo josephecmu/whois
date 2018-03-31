@@ -24,19 +24,12 @@ class Meta extends AbstractValues
 
     }
 
-    function getProperty( $key ) 
+    function getProperty(string $key ) 
 
     {    
 
 		return $this->properties[$key] ?? null;
-//
-//        if ( isset( $this->properties[$key] ) ) {
-//
-//            return $this->properties[$key];
-//
-//        }
-//
-//        return null;
+
     }
  
     protected function setProperty( $key, $val ) //added scope

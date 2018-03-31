@@ -2,14 +2,14 @@
 
     include'../code/class/cmu/config/site/people.conf';
 
-    $ldap_parms = ['att' => array_keys($person_array), 
-                'filter' => "(objectClass=*)"];                             //'dn' => set internally 
+    $domain_parms = ['att' => array_keys($person_array)];
+                //'filter' => "(objectClass=*)"];                             //'dn' => set internally 
 
     $meta = (new \cmu\html\base\Meta());                                    //instantiate new META to hold array
 
     $meta->setProperties($person_array);                                    //assign meta array to META object
 
-    $dic = new \cmu\html\form\SingMetaQueryDic($meta, $ldap_parms);         //build Depandency Injection Container
+    $dic = new \cmu\html\form\SingMetaQueryDic($meta, $domain_parms);         //build Depandency Injection Container
 
     $control = $dic->returnDisplayObject();                                 //returns new instance of FormClient()
 
