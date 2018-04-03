@@ -107,6 +107,14 @@ class LdapWrapper
         return $result = ldap_get_entries($this->ds, $r);
 
     }
+    //ldap_count_entries
+    public function countEntries($r)
+
+    {
+
+        return $result = ldap_count_entries($this->ds, $r);
+
+    }
     //search
     public function search($base_dn, $filter, array $attributes = array(), $attrsonly = null,  $sizelimit = null, $timelimit = null)
 

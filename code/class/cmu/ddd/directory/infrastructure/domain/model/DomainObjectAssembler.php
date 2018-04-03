@@ -117,4 +117,19 @@ class DomainObjectAssembler
 		return $this->ldap->delete($rdn);	
 
 	}
+
+    public function verifyUnique (DTO $dto, string $dn, array $unique, int $max)
+    {
+        foreach($unique as $key => $value)
+        {
+            $val = $dto->get($value);
+            $filter = "(".$key."=".$val.")";
+            $r = $this->ldap->search($dn,$filter);
+            $c = $this->ldap->countEntries($r);
+            //TODO: better error handling, push it up the pipeline somehow
+            if($c > $max) return false;
+        }
+
+        return true;
+    }
 }

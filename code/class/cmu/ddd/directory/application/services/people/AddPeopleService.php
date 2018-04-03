@@ -15,9 +15,21 @@ class AddPeopleService extends AbstractPeopleService
 
 		$dto->unset('ou'); 					//this administrative key is not needed here.
 
-		////some checking confirming the a userID does not already exist	
 		//identity generator reference here??????
 		//also check for existance of gidnumber and uidnumber and homedirectory
+
+        //Check for uniquness of gidnumber, andrewid, uidnumber and homedirectory
+        //TODO: better way to pass the array, maye with the mapper?
+        $basedn = $this->ou . "," . $this->dc;
+        $unique = array("uidnumber" => "uidnumber",
+                        "uid" => "andrewid",
+                        "gidnumber" => "gidnumber",
+                        "homedirectory" => "homedirectory");
+        if(!$this->doa->verifyUnique($dto, $basedn, $unique, 0)) {
+            print_r("NOT UNIQUE!");
+            Throw new \ErrorException("Not Unique");
+        }
+
 
 		$andrewid = $dto->get('andrewid');
 
