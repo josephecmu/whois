@@ -11,6 +11,7 @@ abstract class AbstractService
 {
 	protected $doa;
 	protected $factory;
+	protected $dc = "dc=mcs,dc=cmu,dc=edu"; 
 
 	function __construct()
 	{
@@ -26,7 +27,7 @@ abstract class AbstractService
 	protected function getUid(string $dnorou) : string
 	{
 
-		return ldap_explode_dn($dnorou, 1)[0];	
+		return ldap_explode_dn($dnorou, 1)[0];	//the uid will always be the first element, regardless
 
 	}
 

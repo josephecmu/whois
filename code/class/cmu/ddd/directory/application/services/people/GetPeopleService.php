@@ -15,7 +15,7 @@ class GetPeopleService extends AbstractPeopleService
 
 		$dn = $dto->get('dn');					//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
 
-		$uid = $this->getUid($dn);
+		$uid = $this->getUid($dn);				//the andrew id SHOULD be passed via the form (bug)
 
 		$id = new PeopleIdentityObject();
 		$id->field("uid")
