@@ -4,7 +4,7 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\AbstractSelectionFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\PeopleSelectionFactory;
-use cmu\ddd\directory\infrastructure\domain\model\factory\query\update\AbstractUpdateFactory;
+#use cmu\ddd\directory\infrastructure\domain\model\factory\query\update\AbstractUpdateFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\update\PeopleUpdateFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\PeopleCollection;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCollection;
@@ -15,6 +15,8 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\PeopleMapper;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\domain\model\factory\dto\AbstractDTOFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\dto\PeopleDTOFactory;
+use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\AbstractModifyFactory;
+use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\PeopleModifyFactory;
 
 class PeoplePersistenceFactory extends AbstractPersistenceFactory
 
@@ -51,11 +53,11 @@ class PeoplePersistenceFactory extends AbstractPersistenceFactory
 
 	}
 
-	public function getUpdateFactory() : AbstractUpdateFactory 
+	public function getModifyFactory() : AbstractModifyFactory 
 	
 	{
 		
-		return new PeopleUpdateFactory($this);	//$this is needed to get the mapper inside the PeopleUpdateFactory
+		return new PeopleModifyFactory($this);	//$this is needed to get the mapper inside the PeopleUpdateFactory
 
 	}
 

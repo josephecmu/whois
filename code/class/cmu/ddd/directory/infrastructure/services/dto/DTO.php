@@ -18,13 +18,15 @@ class DTO
 	public function get($key)
 	{
 
-		if (array_key_exists($key, $this->data_array)) {
+		return $this->data_array[$key] ?? null;
 
-			return $this->data_array[$key];
-		
-		}
-
-		return null;
+//		if (array_key_exists($key, $this->data_array)) {
+//
+//			return $this->data_array[$key];
+//		
+//		}
+//
+//		return null;
 
 	}
 

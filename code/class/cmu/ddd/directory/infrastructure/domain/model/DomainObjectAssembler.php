@@ -69,32 +69,14 @@ class DomainObjectAssembler
 
 	}
 
-	public function update(AbstractEntity $obj)
-    {
-        $upfact = $this->factory->getUpdateFactory();
-
-        list($rdn, $input) = $upfact->newUpdate($obj); //$rdn and $input
-
-        return $this->ldap->update($rdn, $input);
-    }
-
-	public function add(AbstractEntity $obj)
+	public function add(AbstractEntity $obj) : bool
 	{
 
-		$upfact = $this->factory->getUpdateFactory();
+		$addfact = $this->factory->getModifyFactory();
 
-		list($rdn, $input) = $upfact->newUpdate($obj);    	//get $rdn and $input for ldap update() below
-
-		echo "<br />";
-		echo "<strong>INPUT for LDAP array</strong>";
-		echo "<br />";
-		print_r($input);
-		echo "<br />";
-		echo "<br />";
+		list($rdn, $input) = $addfact->newAdd($obj);    	//get $rdn and $input for ldap update() below
 
 		return $this->ldap->add($rdn, $input);
-
-
 
 
 		// UPDATE
@@ -113,4 +95,26 @@ class DomainObjectAssembler
 
 	}
 	
+	public function update(AbstractEntity $obj) :bool
+	{
+
+		$updatefact = $this->factory->getModifyFactory();
+
+		list($rdn, $input) = $updatefact->newUpdate($obj);    	//get $rdn and $input for ldap update() below
+
+		return $this->ldap->update($rdn, $input);
+	}
+
+
+	public function delete(AbstractEntity $obj) : bool
+
+	{
+
+		$delfactory = $this->factory->getModifyFactory();
+
+		$rdn = $delfactory->newDelete($obj);		
+
+		return $this->ldap->delete($rdn);	
+
+	}
 }

@@ -1,12 +1,13 @@
 <?php
 
-namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\update;
+namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\modify;
 
 use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
 use cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
+use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
 
-abstract class AbstractUpdateFactory
+abstract class AbstractModifyFactory
 
 {
 	
@@ -48,7 +49,7 @@ abstract class AbstractUpdateFactory
 
 	}
 
-	public function newUpdate(AbstractEntity $obj) : array
+	protected function getModify(AbstractEntity $obj, string $mapperfunction) : array
 	{
 
 		$this->verifyTargetClass($obj);
@@ -57,11 +58,32 @@ abstract class AbstractUpdateFactory
 
 		$raw = $this->object_to_array($obj);
 
-		$mapper = $this->factory->getMapper($raw);
+		$mapper =  $this->factory->getMapper($raw);
 
-		$input = $mapper->return_object_to_ldaparray();
+		$input = $mapper->$mapperfunction();
 
 		return [$rdn, $input];
+
+	}
+
+	public function newUpdate(AbstractEntity $obj) : array
+	{
+
+		return $this->getModify($obj, "return_object_to_ldaparray_update");
+
+	}
+
+	public function newAdd(AbstractEntity $obj) : array
+	{
+
+		return $this->getModify($obj, "return_object_to_ldaparray_add");
+
+	}
+
+	public function newDelete(AbstractEntity $obj) : string
+	{
+
+		return $this->getRdn($obj);
 
 	}
 

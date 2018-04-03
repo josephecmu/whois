@@ -23,7 +23,7 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 
 	{
 
-		return ["name", "dn", "gidnumber", "uidnumber", "homedirectory"];	
+		return ["name", "dn", "gidnumber", "uidnumber", "homedirectory", "andrewid"];	
 		
 	}
 

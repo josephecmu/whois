@@ -5,8 +5,8 @@ class Meta extends AbstractValues
 
 {
 
-    private $totalarray = array();                 	//inject meta array with values
-    private $properties = array();					//the meta array without values
+    private $totalarray = [];                 	//inject meta array with values
+    private $properties = [];					//the meta array without values
 
     function getProperties() : array
 
@@ -24,17 +24,12 @@ class Meta extends AbstractValues
 
     }
 
-    function getProperty( $key ) 
+    function getProperty(string $key ) 
 
     {    
 
-        if ( isset( $this->properties[$key] ) ) {
+		return $this->properties[$key] ?? null;
 
-            return $this->properties[$key];
-
-        }
-
-        return null;
     }
  
     protected function setProperty( $key, $val ) //added scope

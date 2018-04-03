@@ -33,13 +33,15 @@ abstract class AbstractRegistry
 
     {
 
-        if ( isset( $this->values[$key] ) ) {
+		return  $this->values[$key] ?? null;
 
-            return $this->values[$key];
-
-        }
-
-        return null;
+//        if ( isset( $this->values[$key] ) ) {
+//
+//            return $this->values[$key];
+//
+//        }
+//
+//        return null;
 
     }
  

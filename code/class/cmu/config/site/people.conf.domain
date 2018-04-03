@@ -30,6 +30,7 @@ $person_array = array(
                             'alt' => 'First Name',
                            'type' => 'text',
                   'compreqnumber' => 1,
+				  'hintmessage' => 'required',
                         'builder' => "textbox",
                            'name' => 'firstname',
                                                 ),
@@ -41,6 +42,7 @@ $person_array = array(
                             'alt' => "Last Name",
                         'builder' => "textbox",
                            'type' => 'text',
+						   'hintmessage' => 'required',
                            'name' => "lastname",
                   'compreqnumber' => 1
                                                 ),
@@ -76,14 +78,14 @@ $person_array = array(
                         'builder' => "textbox",
                            'name' => "andrewid",
                   'compreqnumber' => 1,
+				  'hintmessage' => 'required',
                     'placeholder' => "andrewid",
                           'state' => ['add']
                     
                                                 ),
-                                                
-    'homedirectory'=>    array( 'label' => "Home Directory",
+
+    'homedirectory'=>    [ 'label' => "Home Directory",
                            'class' => "hd",
-                     //'filtertype' => "integers",
                             'alt' => "altvalue",
                            'type' => "text",
                         'builder' => "textbox",
@@ -91,7 +93,7 @@ $person_array = array(
                   'compreqnumber' => 1,
                   'hintmessage' => 'required'
 		
-			  									),
+			  ],
                           							
     
                                                 ); //end $totalarray
