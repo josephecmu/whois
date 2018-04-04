@@ -4,6 +4,7 @@ namespace cmu\ddd\directory\infrastructure\domain\model;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCollection;
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
@@ -118,18 +119,16 @@ class DomainObjectAssembler
 
 	}
 
-    public function verifyUnique (DTO $dto, string $dn, array $unique, int $max)
+    public function verifyUnique (AbstractIdentityObject $idobj)
     {
-        foreach($unique as $key => $value)
-        {
-            $val = $dto->get($value);
-            $filter = "(".$key."=".$val.")";
-            $r = $this->ldap->search($dn,$filter);
-            $c = $this->ldap->countEntries($r);
-            //TODO: better error handling, push it up the pipeline somehow
-            if($c > $max) return false;
-        }
+        $selfact = $this->factory->getSelectionFactory();              // returns PeopleSelectionFactory, etc.
+        list ($location, $fields, $filter) = $selfact->newOrSelection($idobj); // creates $location, $fields, $filter
 
+        $link = $this->ldap->search($location, $filter, $fields);
+        $count = $this->ldap->countEntries($link);
+
+        if($count > 0)
+            return false;
         return true;
     }
 }

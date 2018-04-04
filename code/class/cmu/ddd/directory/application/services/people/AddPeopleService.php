@@ -3,6 +3,7 @@
 namespace cmu\ddd\directory\application\services\people;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject;
 
 class AddPeopleService extends AbstractPeopleService
 
@@ -20,12 +21,30 @@ class AddPeopleService extends AbstractPeopleService
 
         //Check for uniquness of gidnumber, andrewid, uidnumber and homedirectory
         //TODO: better way to pass the array, maye with the mapper?
+        /**
         $basedn = $this->ou . "," . $this->dc;
         $unique = array("uidnumber" => "uidnumber",
                         "uid" => "andrewid",
                         "gidnumber" => "gidnumber",
                         "homedirectory" => "homedirectory");
         if(!$this->doa->verifyUnique($dto, $basedn, $unique, 0)) {
+            print_r("NOT UNIQUE!");
+            Throw new \ErrorException("Not Unique");
+        }
+         * **/
+
+        //TODO: Update AbstractSelectionFactory to work better with both AND and OR
+        $id = new PeopleIdentityObject();
+        $id->field("uid")
+            ->eq($dto->get("andrewid"))
+            ->field("gidnumber")
+            ->eq($dto->get("gidnumber"))
+            ->field("uidnumber")
+            ->eq($dto->get("uidnumber"))
+            ->field("homedirectory")
+            ->eq($dto->get("homedirectory"));
+
+        if(!$this->doa->verifyUnique($id)) {
             print_r("NOT UNIQUE!");
             Throw new \ErrorException("Not Unique");
         }

@@ -33,6 +33,25 @@ abstract class AbstractSelectionFactory
 		
 	}
 
+    public function buildOrFilter(AbstractIdentityObject $obj): string
+
+    {
+
+        $this->verifyTargetClass($obj);
+
+        if ($obj->isVoid()) {
+            return ["", []];
+        }
+
+        $compstrings = [];
+        foreach ($obj->getComps() as $comp) {
+            $compstrings[] = "({$comp['name']}{$comp['operator']}{$comp['value']})";
+        }
+        $filter = "(|" .  implode(" ",$compstrings) . ")" ;
+        return $filter;
+
+    }
+
 	##added josephe 10-12-17
 	protected function getLocation ($path) {
 
@@ -49,4 +68,14 @@ abstract class AbstractSelectionFactory
 		$location = $this->getLocation($dn);
 		return [$location, $fields, $filter];
 	}
+
+    public function newOrSelection(AbstractIdentityObject $obj): array
+    {
+
+        $dn = $this->getDn();								//concrete implementation
+        $fields = $obj->getObjectFields();
+        $filter = $this->buildOrFilter($obj);
+        $location = $this->getLocation($dn);
+        return [$location, $fields, $filter];
+    }
 }
