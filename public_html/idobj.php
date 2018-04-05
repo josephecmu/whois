@@ -18,6 +18,6 @@ $id->field("test")
 
 $psf = new \cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\PeopleSelectionFactory;
 
-print_r($psf->newSelection($id)); 
+print_r($psf->newAndSelection($id)); 
 
 

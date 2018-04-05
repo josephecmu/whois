@@ -14,7 +14,7 @@ abstract class AbstractSelectionFactory
 		
 	abstract protected function getDn() : string;
 	
-	public function buildFilter(AbstractIdentityObject $obj): string
+	public function buildAndFilter(AbstractIdentityObject $obj): string
 
 	{
 		
@@ -59,12 +59,12 @@ abstract class AbstractSelectionFactory
 
 	}
 
-	public function newSelection(AbstractIdentityObject $obj): array
+	public function newAndSelection(AbstractIdentityObject $obj): array
 	{
 
 		$dn = $this->getDn();								//concrete implementation
 		$fields = $obj->getObjectFields();
-		$filter = $this->buildFilter($obj);
+		$filter = $this->buildAndFilter($obj);
 		$location = $this->getLocation($dn);
 		return [$location, $fields, $filter];
 	}

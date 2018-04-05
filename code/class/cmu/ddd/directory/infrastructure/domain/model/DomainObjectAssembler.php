@@ -44,7 +44,7 @@ class DomainObjectAssembler
 	public function find(AbstractIdentityObject $idobj) : AbstractCollection
 	{
 		$selfact = $this->factory->getSelectionFactory();              // returns PeopleSelectionFactory, etc.
-		list ($location, $fields, $filter) = $selfact->newSelection($idobj); // creates $location, $fields, $filter
+		list ($location, $fields, $filter) = $selfact->newAndSelection($idobj); // creates $location, $fields, $filter
 		$link = $this->ldap->search($location, $filter, $fields);
 
 		$raw=$this->ldap->getEntries($link);
