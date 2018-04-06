@@ -2,6 +2,7 @@
 
     include'../code/class/cmu/config/site/people.conf';
 
+	//switch here for different array.conf ...should go in SingMetaQueryDic????
     $domain_parms = ['att' => array_keys($person_array)];
                 //'filter' => "(objectClass=*)"];                             //'dn' => set internally 
 
