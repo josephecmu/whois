@@ -43,7 +43,7 @@ class EntitySelector
 				throw new \Exception("Action '" . $action .   "' passed is invalid.");
 		}
 
-			return $entity;
+		return $entity;
 		
 	}
 
