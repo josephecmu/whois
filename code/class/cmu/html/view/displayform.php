@@ -1,6 +1,5 @@
 <?php
 
-    include'../code/class/cmu/config/site/people.conf';
 
 	$dic = new \cmu\html\form\SingMetaQueryDic(); 
 
