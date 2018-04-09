@@ -161,7 +161,6 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 		echo "<br />";
 		echo "<strong>We are processing...</strong>";
         //'postprocess',  <- other COMMAND object 'hook' to handle postprocessing
-       // $commands = ['dbprocess'];               //could also be a class property member??                
 		$commands = ['dtoprocess'];
 
         $returnpostobj = new ReturnPost;               //build from form objects products PARAMETERS

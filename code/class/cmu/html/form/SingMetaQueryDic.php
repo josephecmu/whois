@@ -23,8 +23,8 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 		$dto = DTOAssembler::returnDTO($dnarray);
 
 		$action = "get";
-		//retrive from service layer
-		return RunService::init($dto, $action );
+		
+		return RunService::init($dto, $action );			//retrive from service layer
 	}
 
     protected function returnTotalObject() : Meta
@@ -36,12 +36,12 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
         $values_do = array();
 
 		  if (isset($this->dn)) {						// better way to check?	
-			//send to service layer
-			$dto_array = ['dn' => $this->dn];
+			
+			$dto_array = ['dn' => $this->dn];				//send to service layer
 
 			$rdto = $this->returnDomainDto($dto_array);
-			//set values in registry
-			$do_registry = DoValuesRegistry::getDoValues();		
+			
+			$do_registry = DoValuesRegistry::getDoValues();		//set values in registry
 
 			$do_registry->setValues($rdto->getDataArray());
 
