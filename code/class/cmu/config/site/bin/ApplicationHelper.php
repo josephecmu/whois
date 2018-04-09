@@ -8,9 +8,6 @@ class ApplicationHelper
 
 	private $config = __DIR__ . "/../config.ini";
 	private $reg;
-	
-//	static $ldapconfig = [];
-
 
 	public function __construct()
 	{
@@ -21,16 +18,6 @@ class ApplicationHelper
 	{
 
 		$this->setupOptions();
-//		if (isset($_SERVER['REQUEST_METHOD'])) {
-//			$request = new HttpRequest();
-//		} else {
-//			$request = new CliRequest();
-//		}
-
-//		$this->reg->setRequest($request);
-
-
-
 	}
 	
 	private function setupOptions()
@@ -46,12 +33,6 @@ class ApplicationHelper
 		$conf = new Conf($options['ldap_config']);
 
 		$this->reg->setConf($conf);
-
-//		self::$ldapconfig = $conf;
-
-//		$commands = new Conf($options['commands']);
-
-//		$this->reg->setCommands($commands);
 
 	}
 

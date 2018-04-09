@@ -9,7 +9,6 @@ class Registry
 	private static $instance = null;
 	private $ldap = null; //this object is the class "LdapWrapper" since not 'PDO' class exists.
 	private $conf = null;
-	//private $commands = null;
 
 	private function __construct() {}
 
@@ -39,16 +38,6 @@ class Registry
 
 		return $this->conf;
 	}
-
-
-//	public function getDSN()
-//
-//	{
-//		$conf = $this->getConf();  
-//
-//		return $conf->get("dsn");
-//
-//	}
 
 	public function getPass() : string
 
@@ -93,26 +82,5 @@ class Registry
 		return $conf->get("dn"); 
 
 	}
-
-//	public function getLdap() : \cmu\wrappers\LdapWrapper 
-//
-//	{
-//		if (is_null ($this->ldap)) {
-//			$port = $this->getPort();
-//			$host = $this->getHost();
-//
-//			if (is_null($port)) {
-//				throw new AppException ("No Port");
-//			}
-//			if (is_null($host)) {
-//				throw new AppException ("No Host");
-//			}
-//
-//			$this->ldap = \cmu\wrappers\LdapWrapper::getLdapDs($host, $port);
-//		}
-//
-//		return $this->ldap;
-//
-//	}
 
 }
