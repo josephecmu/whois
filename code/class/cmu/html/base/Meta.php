@@ -8,6 +8,14 @@ class Meta extends AbstractValues
     private $totalarray = [];                 	//inject meta array with values
     private $properties = [];					//the meta array without values
 
+	function __construct(array $properties_in = null )		//added 4-9-18 to make setting easier and less code.
+	{
+
+		if (!is_null($properties_in)) {
+			$this->properties = $properties_in;
+		}
+	}
+
     function getProperties() : array
 
     {

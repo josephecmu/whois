@@ -19,7 +19,7 @@ abstract class AbstractHtmlDisplayClient
 
         $this->totalobj = $totalobj_in;
 
-		$this->request = $request_in ?? null ;	
+		$this->request = $request_in ?? null;	
 
     }
 

@@ -4,7 +4,7 @@
 //configured for DOMAIN (attributes)
 
 
-$person_array = array(
+$people_array = array(
 
     'dn'     => array('label' => "RDN",
                         'type'=>'text',
