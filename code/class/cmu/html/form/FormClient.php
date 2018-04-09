@@ -1,6 +1,13 @@
 <?php
 namespace cmu\html\form;
 
+use \cmu\html\base\Request;
+use \cmu\html\form\products\CompositeForm;
+use \cmu\html\base\Meta;
+use \cmu\html\base\ReturnPost;
+use \cmu\html\form\commands\CommandContext;
+use \cmu\html\form\commands\ProcessFormDic;
+
 class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
 {
@@ -11,15 +18,15 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
     private $validatearray =        ['Add', 'Update'];
 	private $novalidatearray =      ['Confirm Delete'];
 
-    function __construct($totalobj_in)            
+    function __construct(Meta $totalobj_in, Request $request_in)            
 
     {
 
-        parent::__construct($totalobj_in);
+        parent::__construct($totalobj_in, $request_in);
 
         $this->setFormState();                                                      
 
-        $this->display = new \cmu\html\form\products\CompositeForm;
+        $this->display = new CompositeForm;
 
         $this->display->setClass("thisform");
 
@@ -49,7 +56,6 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
     {
 		if (!empty($this->request->getValue('dn'))) {                               //we have data passed
-//        if ($this->request->contains('dn')) {   //check is key 'contains'                      //we have data passed
 			
             if ( in_array($this->request->getValue('action'), $this->confirmarray))  {  // 'Confirm" is not in button, echo confirmation button
 
@@ -158,17 +164,17 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
        // $commands = ['dbprocess'];               //could also be a class property member??                
 		$commands = ['dtoprocess'];
 
-        $returnpostobj = new \cmu\html\base\ReturnPost();               //build from form objects products PARAMETERS
+        $returnpostobj = new ReturnPost;               //build from form objects products PARAMETERS
        
         $returnpostobj->setValues($this->display->buildAndReturnPost());//wrap the buildAndReturnPost() array in an object
 
-        $context = new \cmu\html\form\commands\CommandContext();     //context for COMMAND
+        $context = new CommandContext;     //context for COMMAND
 
         $context->addParam('returnpostobj', $returnpostobj);   //adds param of the array object of above
 
 		$context->addParam('request',  $this->request);       //adds param for request object from REGISTRY in this class
 
-        $processor = new \cmu\html\form\commands\ProcessFormDic($commands, $context);   //pass both here to DI
+        $processor = new ProcessFormDic($commands, $context);   //pass both here to DI
 
         return $processor->process();                                                   //return 'true' or nothing (false)
 
