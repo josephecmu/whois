@@ -12,7 +12,7 @@ abstract class AbstractMetaQueryDic
     protected $filter = "(objectClass=*)"; 
     protected $att = array();
     protected $dn;
-	protected $request_registry;
+//	protected $request_registry;
 	//
 	//we may not pass the array $config_array, it needs to be determined based on REQUEST
     function __construct(\cmu\html\base\Meta $metaobject_in, array $config_array_in = null) 
@@ -41,7 +41,7 @@ abstract class AbstractMetaQueryDic
 
 		}
 		//can we eliminate the singleton here somehow????????
-		$this->request_registry = RequestRegistry::getRequest();
+//		//$this->request_registry = RequestRegistry::getRequest();
 
 	}
 

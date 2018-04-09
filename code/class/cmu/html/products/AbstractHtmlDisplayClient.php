@@ -1,5 +1,9 @@
 <?php
+
 namespace cmu\html\products;
+
+use \cmu\html\base\Request;
+use cmu\html\base\Meta;
 
 abstract class AbstractHtmlDisplayClient
 
@@ -9,14 +13,17 @@ abstract class AbstractHtmlDisplayClient
     protected $display; //'old singleton' to hold components
     protected $request; //request object from registry
 
-    function __construct(\cmu\html\base\Meta $totalobj_in)
+    function __construct(Meta $totalobj_in, Request $request_in = null)
     
     {
 
         $this->totalobj = $totalobj_in;
 
-        $this->request = \cmu\html\base\registry\RequestRegistry::getRequest();         //assign object from REGISTRY
-    
+//        $this->request = \cmu\html\base\registry\RequestRegistry::getRequest();         //assign object from REGISTRY
+
+		$this->request = $request_in ?? null ;	
+	//	$this->request=$request_in;
+
     }
 
     public function returnDisplay()
