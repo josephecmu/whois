@@ -17,10 +17,6 @@ class Conf
 		
 		return $this->vals[$key] ?? null;
 
-//		if (isset($this->vals[$key])) {
-//			return $this->vals[$key];
-//		}
-//		return null;
 	}
 
 	public function set(string $key, $val)
