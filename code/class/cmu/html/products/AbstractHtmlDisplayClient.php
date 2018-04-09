@@ -11,7 +11,7 @@ abstract class AbstractHtmlDisplayClient
 
     protected $totalobj; //the entire meta and values object
     protected $display; //'old singleton' to hold components
-    protected $request; //request object from registry
+    protected $request; //request object
 
     function __construct(Meta $totalobj_in, Request $request_in = null)
     
@@ -19,10 +19,7 @@ abstract class AbstractHtmlDisplayClient
 
         $this->totalobj = $totalobj_in;
 
-//        $this->request = \cmu\html\base\registry\RequestRegistry::getRequest();         //assign object from REGISTRY
-
 		$this->request = $request_in ?? null ;	
-	//	$this->request=$request_in;
 
     }
 

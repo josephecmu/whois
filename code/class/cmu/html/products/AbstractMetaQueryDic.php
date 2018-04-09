@@ -40,8 +40,6 @@ abstract class AbstractMetaQueryDic
 			$this->dn = $this->requestobject->getValue('dn');
 
 		}
-		//can we eliminate the singleton here somehow????????
-//		//$this->request_registry = RequestRegistry::getRequest();
 
 	}
 

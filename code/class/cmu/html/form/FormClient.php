@@ -56,7 +56,6 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
 
     {
 		if (!empty($this->request->getValue('dn'))) {                               //we have data passed
-//        if ($this->request->contains('dn')) {   //check is key 'contains'                      //we have data passed
 			
             if ( in_array($this->request->getValue('action'), $this->confirmarray))  {  // 'Confirm" is not in button, echo confirmation button
 
