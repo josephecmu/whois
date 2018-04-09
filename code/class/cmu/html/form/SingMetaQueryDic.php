@@ -31,21 +31,14 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
     
     {
        
-        $values_request =  array();
-
-       	if (null !== $this->requestobject) {
-
-            $request_registry = RequestRegistry::getRequest();
-
-            $values_request = $request_registry->returnNormalizeProperties();
-
-       	}
+	  $values_request = $this->request_registry->returnNormalizeProperties(); //either array with values, or empty array
        	
         $values_do = array();
-
-        if ($this->requestobject->getValue('dn')) {      //GET  //set $values_ldap
+		//dn is already set in parent............................change........isset() not_null, etc
+//        if ($this->requestobject->getValue('dn')) {      //GET  //set $values_ldap
+		  if (isset($this->dn)) {						// better way to check?	
 			//send to service layer
-			$dto_array = ['dn' => $this->requestobject->getValue('dn')];
+			$dto_array = ['dn' => $this->dn];
 
 			$rdto = $this->returnDomainDto($dto_array);
 			//set values in registry

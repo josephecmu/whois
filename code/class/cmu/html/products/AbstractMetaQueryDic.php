@@ -1,6 +1,8 @@
 <?php
 namespace cmu\html\products;
 
+use \cmu\html\base\registry\RequestRegistry;
+
 abstract class AbstractMetaQueryDic
 
 { 
@@ -10,12 +12,16 @@ abstract class AbstractMetaQueryDic
     protected $filter = "(objectClass=*)"; 
     protected $att = array();
     protected $dn;
+	protected $request_registry;
+	//
+	//we may not pass the array $config_array, it needs to be determined based on REQUEST
+    function __construct(\cmu\html\base\Meta $metaobject_in, array $config_array_in = null) 
 
-    function __construct(\cmu\html\base\Meta $metaobject_in, array $ldap_parms_in) 
+	{
 
-    {
+		$config_array =  $config_array_in ??  $this->getConfigArray() ;
 		//table needs this.
-        foreach ($ldap_parms_in as $prop => $v) {
+        foreach ($config_array as $prop => $v) {
 
             if (property_exists($this, $prop)) {
 
@@ -27,13 +33,29 @@ abstract class AbstractMetaQueryDic
 
         $this->metaobject = $metaobject_in;
 
-        $this->requestobject = (new \cmu\html\base\Request());
+        $this->requestobject = (new \cmu\html\base\Request());		//create a new Request
 
-    }
+		if ($this->requestobject->getValue('dn'))
+		{	
+			$this->dn = $this->requestobject->getValue('dn');
+
+		}
+		//can we eliminate the singleton here somehow????????
+		$this->request_registry = RequestRegistry::getRequest();
+
+	}
 
     abstract function returnDisplayObject();
 
     abstract protected function returnTotalObject();
+	//we need a function to get the correct config array
+	protected function getConfigArray() : array
+	{
+		//$entity = ldap_explode_dn($this->dn, 1)[0];
+		//
+		//we now need to get the config array
+
+	}
 
     public function setFilter( string $filter_in)
 
@@ -74,8 +96,7 @@ abstract class AbstractMetaQueryDic
     
         //$meta->injectValuesAndSet();
 
-        //return $meta->getProperties();
-
+        
 	//}
 
 }
