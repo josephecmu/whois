@@ -8,15 +8,41 @@ use \cmu\html\form\FormClient;
 use \cmu\ddd\directory\infrastructure\services\dto\DTOAssembler;
 use \cmu\ddd\directory\infrastructure\services\dto\DTO;
 use \cmu\ddd\directory\application\services\RunService;
-use \cmu\html\base\registry\RequestRegistry;
 use \cmu\html\base\registry\DoValuesRegistry;
+use \cmu\config\site\bin\TraitConfig; 
+use \cmu\html\base\Request;
 
 class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Container
 
 {
+	use TraitConfig;
 
-    //constructor from parent: SingMetaQueryDic($meta, $ldap_parms);
-	
+    function __construct() 
+	{
+
+        $this->requestobject = new Request;		//create a new Request, reading from the native form REQUEST
+
+		$this->dn = $this->requestobject->getValue('dn') ?? null;
+
+		if ($this->dn) {
+			$entity = ldap_explode_dn($this->dn, 1)[1];
+		} else {
+			$ou = $this->requestobject->getValue('ou');
+			$entity =  ldap_explode_dn($ou, 1)[0];
+		}
+
+		$this->metaobject = new Meta($this->getDomainArray($entity));
+	}
+	//get the file. include it. return array.
+	private function getDomainArray($entity) : array
+	{
+
+		$filename = $entity . ".conf";    			//we now need to get the config array based on entity
+		include	$this->returnIniFile($filename);    //include the file in this method		
+
+		return ${$entity . "_array"};				//return people_array, rooms_array, etc. 
+	}
+
 	private function returnDomainDto(array $dnarray) : DTO
 	{
 
@@ -33,14 +59,14 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
        
 		$values_request = $this->requestobject->returnNormalizeProperties();
 
-        $values_do = array();
+		$values_do = array();
 
-		  if (isset($this->dn)) {						// better way to check?	
-			
+	  	if (isset($this->dn)) {						// better way to check?	
+		
 			$dto_array = ['dn' => $this->dn];				//send to service layer
 
 			$rdto = $this->returnDomainDto($dto_array);
-			
+		
 			$do_registry = DoValuesRegistry::getDoValues();		//set values in registry
 
 			$do_registry->setValues($rdto->getDataArray());

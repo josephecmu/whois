@@ -1,14 +1,30 @@
 <?php
 namespace cmu\html\table;
 
-class TableMetaQueryDic extends \cmu\html\products\AbstractMetaQueryDic             //Dependancy Injection Container
+use \cmu\html\base\Meta;
+use \cmu\html\base\Request; 
+use \cmu\html\table\TableClient;
 
+class TableMetaQueryDic extends \cmu\html\products\AbstractMetaQueryDic             //Dependancy Injection Container
 {
 
-    protected function returnTotalObject()
+    protected $filter = "(objectClass=*)"; 
+	
+	function __construct(Meta $metaobject_in, array $config_array_in) 
+	{
+		$config_array =  $config_array_in  ;
+		
+		foreach ($config_array as $prop => $v) {
+		  if (property_exists($this, $prop)) {
+			 $this->$prop = $v;
+		  }
+		}
+		$this->metaobject = $metaobject_in;
+	}
+
+ 	protected function returnTotalObject() : Meta
 
     {
-
 
         $ds = \cmu\wrappers\LdapWrapper::getLdapDs();
 
@@ -30,11 +46,11 @@ class TableMetaQueryDic extends \cmu\html\products\AbstractMetaQueryDic         
 
     }
 
-    function returnDisplayObject()
+    function returnDisplayObject() : TableClient
 
     {                         
     
-        return new \cmu\html\table\TableClient($this->returnTotalObject(), $this->requestobject);  //calls method above
+        return new TableClient($this->returnTotalObject(), $this->requestobject);  //calls method above
     
     }
 

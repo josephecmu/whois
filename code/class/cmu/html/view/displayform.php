@@ -2,15 +2,7 @@
 
     include'../code/class/cmu/config/site/people.conf';
 
-	//switch here for different array.conf ...should go in SingMetaQueryDic????
-    $domain_parms = ['att' => array_keys($person_array)];
-                //'filter' => "(objectClass=*)"];                             //'dn' => set internally 
-
-    $meta = (new \cmu\html\base\Meta());                                    //instantiate new META to hold array
-
-    $meta->setProperties($person_array);                                    //assign meta array to META object
-
-    $dic = new \cmu\html\form\SingMetaQueryDic($meta, $domain_parms);         //build Depandency Injection Container
+	$dic = new \cmu\html\form\SingMetaQueryDic(); 
 
     $control = $dic->returnDisplayObject();                                 //returns new instance of FormClient()
 
