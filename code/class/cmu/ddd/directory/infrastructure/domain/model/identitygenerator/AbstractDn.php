@@ -1,40 +1,11 @@
 <?php 
 
-namespace cmu\infrastructure\identitygenerator\directory;
+namespace cmu\ddd\directory\infrastructure\domain\model\identitygenerator;
 
-class PeopleDn extends AbstractDn
+abstract class AbstractDn
 
 {
 
-    protected $dn;
-
-    function __construct()
-
-    {
-
-        
-
-    }
-
-    abstract protected function generateDn();
-
-    protected function create() : string
-
-    {
-
-        $this->generateDn();
-
-        return $this->returnDn();
-
-    }
-
-    protected function returnDn() : string
-
-    {
-        
-        return $this->dn;
-
-    }
-
+	static $dc = "dc=mcs,dc=cmu,dc=edu";
 
 }

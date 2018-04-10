@@ -3,6 +3,8 @@
 namespace cmu\ddd\directory\application\services\people;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\PeopleDn;
+
 
 class AddPeopleService extends AbstractPeopleService
 
@@ -21,8 +23,7 @@ class AddPeopleService extends AbstractPeopleService
 
 		$andrewid = $dto->get('andrewid');
 
-		//we need to create a proper DN to insert. IDENTITY
-		$dn = $this->idatt . "=" . $andrewid . "," . $this->ou . "," . $this->dc ;
+		$dn = PeopleDn::buildDn($andrewid);
 
 		$dto->set('dn', $dn);		//we need to pass the $dn we just constructed
 
