@@ -17,4 +17,8 @@ class PeopleRoomsFormController extends AbstractController
 
     }
  
+<<<<<<< HEAD
 }
+=======
+
+>>>>>>> 0232bd8788ca446fd2ee6b3cb88098c1232b4261
