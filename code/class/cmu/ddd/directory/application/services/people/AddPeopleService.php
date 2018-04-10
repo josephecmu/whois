@@ -5,7 +5,6 @@ namespace cmu\ddd\directory\application\services\people;
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\PeopleDn;
 
-
 class AddPeopleService extends AbstractPeopleService
 
 {
