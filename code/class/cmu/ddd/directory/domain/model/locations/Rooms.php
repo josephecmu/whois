@@ -7,32 +7,35 @@
  */
 namespace cmu\ddd\directory\domain\model\locations;
 
-class Rooms extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
+use \cmu\ddd\directory\domain\model\lib\Dn;
+use \cmu\ddd\directory\domain\model\equipment\outlets\Outlet;
+use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
+class Rooms extends AbstractEntity
 {
 
 	protected $roomrdn;
-	protected $outlets=[]; //should be list of outlet objects 
+	protected $outlets=[]; 							//should be list of outlet objects 
 	protected $roomnumber;
 
     protected function setRoomrdn (string $anrdn)
 
     {
 
-        $this->roomrdn = new \cmu\ddd\directory\domain\model\lib\Dn($anrdn);
+        $this->roomrdn = new Dn($anrdn);
 
     }
 
-	private function outletFactory (array $properties) : \cmu\ddd\directory\domain\model\equipment\outlets\Outlet
+	private function outletFactory (array $properties) : Outlet
 
 	{   
 
-		$properties["outletrdn"] = new \cmu\ddd\directory\domain\model\lib\Dn($properties["outletrdn"]);
+		$properties["outletrdn"] = new Dn($properties["outletrdn"]);
 
-		return new \cmu\ddd\directory\domain\model\equipment\outlets\Outlet ($properties);
+		return new Outlet ($properties);
 
 	}
-	public function assignOutletToRoom (array $properties) 
+	private function assignOutletToRoom (array $properties) 
 
 	{
 		

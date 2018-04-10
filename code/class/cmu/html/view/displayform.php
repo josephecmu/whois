@@ -1,6 +1,5 @@
 <?php
 
-
 	$dic = new \cmu\html\form\SingMetaQueryDic(); 
 
     $control = $dic->returnDisplayObject();                                 //returns new instance of FormClient()

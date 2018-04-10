@@ -21,7 +21,7 @@ class AddPeopleService extends AbstractPeopleService
 
 		$andrewid = $dto->get('andrewid');
 
-		//we need to create a proper DN to insert.
+		//we need to create a proper DN to insert. IDENTITY
 		$dn = $this->idatt . "=" . $andrewid . "," . $this->ou . "," . $this->dc ;
 
 		$dto->set('dn', $dn);		//we need to pass the $dn we just constructed

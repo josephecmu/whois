@@ -6,6 +6,11 @@ class PeopleDn extends AbstractDn
 
 {
 
+	protected $ou = "ou=people";
+	protected $idatt = "uid";
+
+
+
     
 
 }
