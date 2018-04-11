@@ -54,21 +54,21 @@ abstract class AbstractMapper
 	public function getNameMap() : array
 	{
 
-		return $this->name_map;
+		return $this->name_map ?? [];
 
 	}
 
 	public function getSingleMap() : array
 	{
 
-		return $this->single_map;
+		return $this->single_map ?? [];
 
 	}
 
 	public function getGroupMap() : array
 	{
 
-		return $this->group_map;
+		return $this->group_map ?? [];
 
 	}
 
@@ -76,7 +76,7 @@ abstract class AbstractMapper
 
 	{
 
-		return $this->to_array_map;
+		return $this->to_array_map ?? [];
 
 	}
 
@@ -88,7 +88,7 @@ abstract class AbstractMapper
 	}
 	public function getEntityMap() : array
 	{
-		return $this->entity_map;
+		return $this->entity_map ?? [];
 
 	}
 	public function getObjectClassMap() : array
@@ -98,7 +98,7 @@ abstract class AbstractMapper
 
 	public function getDeleteKeyMap() : array
 	{
-		return $this->delete_key_map;
+		return $this->delete_key_map ?? [];
 	}
 
 	//END GETTERS
