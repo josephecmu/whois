@@ -3,15 +3,16 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory;
 
 use cmu\ddd\directory\domain\model\actors\people\People;
+use cmu\ddd\directory\domain\model\locations\Rooms;
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\AbstractDomainObjectFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCollection;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\AbstractSelectionFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\read\AbstractReadFactory;
-#use cmu\ddd\directory\infrastructure\domain\model\factory\query\update\AbstractUpdateFactory;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\domain\model\factory\dto\AbstractDTOFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\AbstractModifyFactory;
+
 
 abstract class AbstractPersistenceFactory
 
@@ -37,7 +38,7 @@ abstract class AbstractPersistenceFactory
 				return new RoomsPersistenceFactory();
 				break;
 			default: 
-				echo "no class found";
+				echo "no class found " . $target_class ." in AbstractPersistenceFactory";
 
 		}
 	}

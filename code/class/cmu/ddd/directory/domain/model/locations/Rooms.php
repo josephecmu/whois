@@ -14,23 +14,45 @@ use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 class Rooms extends AbstractEntity
 {
 
-	protected $roomrdn;
-	protected $outlets=[]; 							//should be list of outlet objects 
+	protected $dn;
+	protected $roomid;
 	protected $roomnumber;
+	protected $outlets=[]; 							//should be list of ethernet outlet objects 
 
-    protected function setRoomrdn (string $anrdn)
+	protected function getRequiredFields() : array				//returns array of required properties
+
+	{
+
+		return ["roomid", "dn", "roomnumber" ];	
+		
+	}
+
+    protected function setDn (string $adn)
 
     {
 
-        $this->roomrdn = new Dn($anrdn);
+        $this->dn = new Dn($adn);
 
     }
+	protected function setRoomid(string $aroomid)
+	{
+
+		$this->roomid = $aroomid;		//no ValueObject
+
+	}
+
+	protected function setRoomnumber(string $aroomnumber)
+	{
+
+		$this->roomnumber = $aroomnumber;		//no ValueObject
+
+	}
 
 	private function outletFactory (array $properties) : Outlet
 
 	{   
 
-		$properties["outletrdn"] = new Dn($properties["outletrdn"]);
+		$properties["outletdn"] = new Dn($properties["outletdn"]);
 
 		return new Outlet ($properties);
 

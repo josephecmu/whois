@@ -12,7 +12,7 @@ class Dn extends AbstractImmutable
 
 			$validators= ["validAll"];
 
-			if ($this->isValid('The entity RDN', $adn, $validators)) {
+			if ($this->isValid('The entity DN', $adn, $validators)) {
 
 				$this->dn = $adn;
 

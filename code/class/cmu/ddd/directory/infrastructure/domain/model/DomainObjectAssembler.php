@@ -102,6 +102,10 @@ class DomainObjectAssembler
 
 		list($rdn, $input) = $updatefact->newUpdate($obj);    	//get $rdn and $input for ldap update() below
 
+		echo "<pre>";
+		echo $rdn;
+		print_r($input);
+
 		return $this->ldap->update($rdn, $input);
 	}
 
