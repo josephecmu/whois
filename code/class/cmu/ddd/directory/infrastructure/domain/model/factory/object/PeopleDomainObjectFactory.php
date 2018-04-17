@@ -13,7 +13,7 @@ class PeopleDomainObjectFactory extends AbstractDomainObjectFactory
 	{
 
 		return new People($norm_array);
-		
+
 	}
 
 }

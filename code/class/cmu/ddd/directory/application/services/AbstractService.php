@@ -23,7 +23,7 @@ abstract class AbstractService
 	abstract function execute (DTO $dto);  //can return DTO(R), or can return bool (CUD)
 	abstract function targetClass() : string;
 
-	protected function getUid(string $dnorou) : string
+	protected function getId(string $dnorou) : string
 	{
 
 		return ldap_explode_dn($dnorou, 1)[0];	//the uid will always be the first element, regardless

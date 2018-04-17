@@ -19,9 +19,6 @@ class DomainObjectAssembler
 	protected $ldap = null;   
 	public $ds;									//might be more efficient to keep the $ds handle avalailable?
 
-
-   //$factory = PersistenceFactory::getFactory(Venue::class);
-   //$finder = new DomainObjectAssembler($factory);
 	public function __construct(AbstractPersistenceFactory $factory) {
 		$this->factory = $factory;											//we need to determine what obj to build
 

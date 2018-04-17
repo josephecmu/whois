@@ -12,9 +12,9 @@ class DeleteRoomsService extends AbstractRoomsService
 
 	{
 		
-		$dn = $dto->get('dn');					//returns uid=jacke,ou=rooms,dc=mcs,dc=cmu,dc=edu
+		$dn = $dto->get('dn');					//returns cn=WH6102,ou=rooms,dc=mcs,dc=cmu,dc=edu
 
-		$roomid = $this->getUid($dn);			//the andrew id SHOULD be passed via the form (bug)
+		$roomid = $this->getUid($dn);			//the roomid id SHOULD be passed via the form (bug)
 
 		$dto->set('roomid', $roomid);
 

@@ -12,7 +12,7 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\query\read\AbstractRea
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\domain\model\factory\dto\AbstractDTOFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\AbstractModifyFactory;
-
+use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
 
 abstract class AbstractPersistenceFactory
 
@@ -23,9 +23,10 @@ abstract class AbstractPersistenceFactory
 	abstract public function getCollection(array $raw): AbstractCollection;
 	abstract public function getSelectionFactory(): AbstractSelectionFactory;
 	abstract public function getModifyFactory(): AbstractModifyFactory;
-//	abstract public function getAddFactory():  AbstractModifyFactory;
+	abstract public function getRepository() : AbstractRepository;
 //nothing special at this point about DTO at this point any Entity could use, ...delete??  but may expand DTO.
 	abstract public function getDTOFactory(): AbstractDTOFactory;			
+
 	public static function getFactory($target_class) : AbstractPersistenceFactory
 	
 	{

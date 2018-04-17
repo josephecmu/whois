@@ -17,6 +17,8 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\dto\AbstractDTOFactory
 use cmu\ddd\directory\infrastructure\domain\model\factory\dto\PeopleDTOFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\AbstractModifyFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\PeopleModifyFactory;
+use cmu\ddd\directory\infrastructure\domain\model\factory\repository\PeopleRepository;
+use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
 
 class PeoplePersistenceFactory extends AbstractPersistenceFactory
 
@@ -66,6 +68,13 @@ class PeoplePersistenceFactory extends AbstractPersistenceFactory
 	{
 
 		return new PeopleDTOFactory($this); //$this is needed to get the mapper inside the PeopleDTOFactory
+
+	}
+
+	public function getRepository() : AbstractRepository  
+	{
+
+		return new PeopleRepository;
 
 	}
 

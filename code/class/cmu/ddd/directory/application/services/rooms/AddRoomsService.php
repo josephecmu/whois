@@ -16,10 +16,6 @@ class AddRoomsService extends AbstractRoomsService
 
 		$dto->unset('ou'); 					//this administrative key is not needed here.
 
-		////some checking confirming the a userID does not already exist	
-		//identity generator reference here??????
-		//also check for existance of gidnumber and uidnumber and homedirectory
-
 		$roomid = $dto->get('roomid');
 
 		$dn = RoomsDn::buildDn($roomid);
