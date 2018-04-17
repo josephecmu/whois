@@ -1,11 +1,15 @@
 <?php 
 namespace cmu\html\form\builders;
 
+use \cmu\html\products\InterfaceComposite;
+use \cmu\html\form\products\CompositeControl;
+use \cmu\html\builders\TraitCompositeBuilder;
+
 abstract class AbstractCompositeBuilder extends AbstractFormBuilder
 
 {
 
-    use \cmu\html\builders\TraitCompositeBuilder;
+    use TraitCompositeBuilder;
 
     function __construct(array $metaarray_in) {
         //include the setters in AbstractBuilder.php
@@ -13,7 +17,7 @@ abstract class AbstractCompositeBuilder extends AbstractFormBuilder
         //parse out options array
         self::$optionsarray = !empty(self::$metaarray['optionsarray']) ? self::$metaarray['optionsarray'] : null ;
         //create Composite Control per ELEMENT BLOCK
-		$this->composite = new \cmu\html\form\products\CompositeControl;
+		$this->composite = new CompositeControl;
         //DYNAMIC composite SETTER
         //if the first 4 characters of the array key are "comp", map to $this->composite
         //this allows us to map to the CONTAINER holding the elements.
@@ -37,7 +41,7 @@ abstract class AbstractCompositeBuilder extends AbstractFormBuilder
 
     }
     //overrride parent addToComposite() due to array
-    function addToComposite(\cmu\html\products\InterfaceComposite $composite)
+    function addToComposite(InterfaceComposite $composite)
 
     {
 

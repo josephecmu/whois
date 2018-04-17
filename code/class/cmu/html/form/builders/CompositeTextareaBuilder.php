@@ -14,7 +14,7 @@ class CompositeTextareaBuilder extends AbstractCompositeBuilder
 
                                  );
         
-        $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder("Label", $labeloverrrides));
+        $this->addBuilder(new VariableLeafBuilder("Label", $labeloverrrides));
 
         
 
@@ -30,7 +30,7 @@ class CompositeTextareaBuilder extends AbstractCompositeBuilder
 
                                     );
         
-        $this->addBuilder(new \cmu\html\form\builders\LeafTextareaBuilder($textareaoverrrides));
+        $this->addBuilder(new LeafTextareaBuilder($textareaoverrrides));
 
     }
 

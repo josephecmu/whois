@@ -17,7 +17,7 @@ class CompositeTextboxarrayBuilder extends AbstractCompositeBuilder
                                      
                                  );
         
-        $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder("Label", $labeloverrrides));
+        $this->addBuilder(new VariableLeafBuilder("Label", $labeloverrrides));
 
         $textoverrrides =   [   
 
@@ -25,7 +25,7 @@ class CompositeTextboxarrayBuilder extends AbstractCompositeBuilder
                                      
                             ];
 
-        $this->addBuilder( new \cmu\html\form\builders\LeafTextBuilder($textoverrrides));
+        $this->addBuilder( new LeafTextBuilder($textoverrrides));
 
     }
 

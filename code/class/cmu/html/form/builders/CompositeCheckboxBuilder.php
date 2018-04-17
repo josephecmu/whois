@@ -13,7 +13,7 @@ class CompositeCheckboxBuilder extends AbstractCompositeBuilder
 
                                     );
         
-        $fieldset = $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder("Fieldset"));
+        $fieldset = $this->addBuilder(new VariableLeafBuilder("Fieldset"));
         
 
         ///////////LEGEND///////////////////////////
@@ -21,14 +21,14 @@ class CompositeCheckboxBuilder extends AbstractCompositeBuilder
 
                                     );
         
-        $legend = $this->addBuilder( new \cmu\html\form\builders\VariableLeafBuilder("Legend", $legendoverrides) );
+        $legend = $this->addBuilder( new VariableLeafBuilder("Legend", $legendoverrides) );
 
         ////LABEL///////////////////////////////////////////////
         $labeloverrrides = array    (  array('replace', 'label', 'checkboxoverride') 
 
                                     );
         
-        $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder ("Label", $labeloverrrides) );
+        $this->addBuilder(new VariableLeafBuilder ("Label", $labeloverrrides) );
 
 
         /////CHECKBOX//////////////////////////////////////////////////////
@@ -40,11 +40,11 @@ class CompositeCheckboxBuilder extends AbstractCompositeBuilder
 
                                     );
 
-        $this->addBuilder(new \cmu\html\form\builders\LeafCheckboxBuilder ($checkboxoverrrides) );
+        $this->addBuilder(new LeafCheckboxBuilder ($checkboxoverrrides) );
 
         $closefieldsetoverrrides = array( array('replace', 'tag', 'SOMETHING'));
 
-        $this->addBuilder( new \cmu\html\form\builders\VariableLeafBuilder("CloseTag", $closefieldsetoverrrides));
+        $this->addBuilder( new VariableLeafBuilder("CloseTag", $closefieldsetoverrrides));
 
         
 

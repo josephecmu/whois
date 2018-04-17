@@ -1,10 +1,12 @@
 <?php 
 namespace cmu\html\form\builders;
 
+use \cmu\html\builders\TraitLeafBuilder;
+
 abstract class AbstractLeafBuilder extends AbstractFormBuilder
 
 {
-    use \cmu\html\builders\TraitLeafBuilder;
+    use TraitLeafBuilder;
        
     function __construct(array $overrides_in = null)
 

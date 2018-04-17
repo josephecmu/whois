@@ -16,7 +16,7 @@ class CompositeHiddenBuilder extends AbstractCompositeBuilder
 
         //}
 
-        $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder("Input", $hiddenoverrrides)); 
+        $this->addBuilder(new VariableLeafBuilder("Input", $hiddenoverrrides));
 
     }
 

@@ -16,7 +16,7 @@ class CompositePasswordmatchBuilder extends AbstractCompositeBuilder
                                      
                                  //);
         
-        $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder("Label"));
+        $this->addBuilder(new VariableLeafBuilder("Label"));
 
 
         $pass2overrrides = array(   
@@ -32,7 +32,7 @@ class CompositePasswordmatchBuilder extends AbstractCompositeBuilder
                                      
                                 );
         //we can use a variable builder here because the values are not re-populated
-        $this->addBuilder( new \cmu\html\form\builders\LeafTextBuilder($pass2overrrides));
+        $this->addBuilder( new LeafTextBuilder($pass2overrrides));
 
 
         $divoverrrides = array(   
@@ -41,7 +41,7 @@ class CompositePasswordmatchBuilder extends AbstractCompositeBuilder
                                      
                                 );
 
-        $this->addBuilder( new \cmu\html\general\builders\VariableLeafBuilder('Div', $divoverrrides));
+        $this->addBuilder( new VariableLeafBuilder('Div', $divoverrrides));
         
     }
 
