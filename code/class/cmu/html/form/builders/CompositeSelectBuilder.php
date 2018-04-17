@@ -13,7 +13,7 @@ class CompositeSelectBuilder extends AbstractCompositeBuilder
 
                                  );
         
-        $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder ("Label", $labeloverrrides));
+        $this->addBuilder(new VariableLeafBuilder ("Label", $labeloverrrides));
 
 
         /////SELECT//////////////////////////////////////////////////////
@@ -28,7 +28,7 @@ class CompositeSelectBuilder extends AbstractCompositeBuilder
          //echo key(self::$elementarray);
 
 
-        $this->addBuilder(new \cmu\html\form\builders\LeafSelectBuilder($selectoverrrides));
+        $this->addBuilder(new LeafSelectBuilder($selectoverrrides));
 
     }
 

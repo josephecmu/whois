@@ -7,7 +7,7 @@ trait TraitVariableLeafBuilder
 
     private $class;
 
-    function returnSimpleLeaf($class)
+    function returnSimpleLeaf(string $class)
 
     {
         

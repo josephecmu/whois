@@ -1,11 +1,13 @@
 <?php 
 namespace cmu\html\form\builders;
 
+use \cmu\html\form\products\Input;
+
 class LeafRadioBuilder extends AbstractLeafBuilder
 
 {
 
-    function returnLeaf()
+    function returnLeaf() : array
 
     {
         //checkbox/////////////////////////////////////////////////////////////////////////////////////
@@ -19,7 +21,7 @@ class LeafRadioBuilder extends AbstractLeafBuilder
 
         for ($i = 0; $i < $n; $i++) { 
 
-            $this->obj = new \cmu\html\form\products\Input;
+            $this->obj = new Input;
             //below will check for value and set CHECKED
             $this->changeProperty('replace', 'value', array_values(self::$optionsarray)[$i]);
 

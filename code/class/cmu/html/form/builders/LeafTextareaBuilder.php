@@ -1,11 +1,13 @@
 <?php 
 namespace cmu\html\form\builders;
 
+use \cmu\html\form\products\TextArea;
+
 class LeafTextareaBuilder extends AbstractLeafBuilder
 
 {
 
-    function returnLeaf()
+    function returnLeaf() : array
 
     {
 
@@ -13,7 +15,7 @@ class LeafTextareaBuilder extends AbstractLeafBuilder
 
         for ($i = 0; $i < $n; $i++) { 
 
-        $this->obj = new \cmu\html\form\products\TextArea;
+        $this->obj = new TextArea;
 
             if (isset(self::$valuesarray)) { //TEXT holds the value for the textarea object
 

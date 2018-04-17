@@ -1,11 +1,13 @@
 <?php 
 namespace cmu\html\form\builders;
 
+use \cmu\html\form\products\Select;
+
 class LeafSelectBuilder extends AbstractLeafBuilder
 
 {
 
-    function returnLeaf()
+    function returnLeaf() : array
 
     {
 
@@ -13,7 +15,7 @@ class LeafSelectBuilder extends AbstractLeafBuilder
 
         for ($i = 0; $i < $n; $i++) { 
 
-        $this->obj = new \cmu\html\form\products\Select;
+        $this->obj = new Select;
 
             if (isset(self::$valuesarray)) { //value is equal to checked per <option> group
 

@@ -1,11 +1,13 @@
 <?php 
 namespace cmu\html\form\builders;
 
+use \cmu\html\form\products\Input;
+
 class LeafTextBuilder extends AbstractLeafBuilder
 
 {
 
-    function returnLeaf()
+    function returnLeaf() : array
 
     {
         
@@ -13,7 +15,7 @@ class LeafTextBuilder extends AbstractLeafBuilder
 
         for ($i = 0; $i < $n; $i++) { 
 
-        $this->obj = new \cmu\html\form\products\Input;
+        $this->obj = new Input;
 
             if (isset(self::$valuesarray)) { //only print values if values array exists
 

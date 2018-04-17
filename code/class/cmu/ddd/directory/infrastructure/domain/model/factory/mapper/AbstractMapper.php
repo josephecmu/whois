@@ -8,6 +8,7 @@
  */
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper;
  
+use cmu\ddd\directory\infrastructure\domain\model\dto\DTO;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\Mod;
 use cmu\ddd\directory\infrastructure\domain\model\share\TraitConfigDomain;
 use cmu\config\site\bin\Conf;

@@ -16,7 +16,7 @@ class CompositeRadioBuilder extends AbstractCompositeBuilder
 
                                     );
         
-        $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder("Label", $labeloverrrides) );
+        $this->addBuilder(new VariableLeafBuilder("Label", $labeloverrrides) );
 
 
         /////CHECKBOX//////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ class CompositeRadioBuilder extends AbstractCompositeBuilder
 
                                     );
         
-        $this->addBuilder(new \cmu\html\form\builders\LeafRadioBuilder ($radiooverrrides));
+        $this->addBuilder(new LeafRadioBuilder ($radiooverrrides));
 
     }
 
