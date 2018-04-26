@@ -23,6 +23,8 @@ abstract class AbstractService
 	abstract function execute (DTO $dto);  //can return DTO(R), or can return bool (CUD)
 	abstract function targetClass() : string;
 
+//moved to AbstractRepository
+	//still needed due to form bug
 	protected function getId(string $dnorou) : string
 	{
 

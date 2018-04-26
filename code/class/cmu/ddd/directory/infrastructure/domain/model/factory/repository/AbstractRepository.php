@@ -9,8 +9,6 @@ use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\domain\model\actors\people\People;
-use cmu\ddd\directory\domain\model\actors\locations\Rooms;
-use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
 
 abstract class AbstractRepository
 {
@@ -84,6 +82,36 @@ abstract class AbstractRepository
 		$this->new[$this->globalKey($dn)] = $obj;
 	}
 
+	public function addDelete(DTO $dto)
+	{
+
+		$dn = $dto->get('dn');
+
+		$obj = $this->doa->build($dto);
+
+		$key = $this->globalKey($dn);
+
+		$this->delete[$key] = $obj;
+
+	}
+
+	public function addDirty(DTO $dto)
+	{
+
+		$dn = $dto->get('dn');
+
+ 		$obj = $this->doa->build($dto);
+
+		$key = $this->globalKey($dn);
+
+		if (! array_key_exists($key)) {
+
+			$this->dirty[$key] = $obj;
+
+		}
+
+	}
+
 	public function performOperations() : bool
 	{
 
@@ -95,9 +123,15 @@ abstract class AbstractRepository
 		foreach ($this->new as $key => $obj) {
 			$result[] = $this->getDoa($obj)->add($obj);
 		}
+
+		foreach ($this->delete as $key => $obj) {
+			$result[] = $this->getDoa($obj)->delete($obj);
+		}
+
 		//reset
 		$this->dirty = [];
 		$this->new = [];
+		$this->delete = [];
 
         return (!in_array(0, $result)) ? true : false;
 

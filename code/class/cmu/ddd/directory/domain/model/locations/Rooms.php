@@ -17,7 +17,7 @@ class Rooms extends AbstractEntity
 	protected $dn;
 	protected $roomid;
 	protected $roomnumber;
-	protected $outlets=[]; 							//should be list of ethernet outlet objects 
+	protected $outlets; 							//should be list of ethernet outlet objects 
 
 	protected function getRequiredFields() : array				//returns array of required properties
 
@@ -78,4 +78,11 @@ class Rooms extends AbstractEntity
 
 	}
 
+	public function getOutlets() : array
+
+	{
+
+		return $this->outlets;
+
+	}
 }

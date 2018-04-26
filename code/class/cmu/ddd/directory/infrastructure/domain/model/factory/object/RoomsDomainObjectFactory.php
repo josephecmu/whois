@@ -26,39 +26,13 @@ class RoomsDomainObjectFactory extends AbstractDomainObjectFactory
 
 		$room = new Rooms($norm_array);
 
-
 		if ($outlets) {		//if we set $outlets above
 
-			// loop to add to find the outlets
-
-				foreach($outlets as $outlet) {
-
-						
-					//lookup the outlet
-					//
-					//
-					//get the array
-
-
-
-
-					$room->assign($outlet_properties);		//room will create object and add to Room::outlets
-
-
-
-				}	
-
-
-			//or add the outlet????
-
+			$room->assignOutletToRoom($outlet_properties);		//room will create object and add to Room::outlets
 
 		}	
 
-
-
-
 		return $room;
-
 
 	}
 

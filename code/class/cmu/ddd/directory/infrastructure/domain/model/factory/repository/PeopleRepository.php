@@ -38,6 +38,14 @@ class PeopleRepository extends AbstractRepository
 		return $idobj;
 	}
 
+	protected function getDomainKey() : string
+	{
+
+		
+	  	return "andrewid";
+
+	}
+
 	public function remove() 
 	{
 

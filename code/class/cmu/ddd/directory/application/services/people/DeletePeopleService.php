@@ -3,6 +3,7 @@
 namespace cmu\ddd\directory\application\services\people;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\infrastructure\domain\model\factory\repository\PeopleRepository;
 
 class DeletePeopleService extends AbstractPeopleService 
 
@@ -11,16 +12,23 @@ class DeletePeopleService extends AbstractPeopleService
 	public function execute(DTO $dto) : bool
 
 	{
-		
+
+		/////////////////BUG, we can't pass andrewID in the form////////////////////////
 		$dn = $dto->get('dn');					//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
 
 		$andrewid = $this->getId($dn);			//the andrew id SHOULD be passed via the form (bug)
 
 		$dto->set('andrewid', $andrewid);
+////////////////////////////////////////////////////////////////////////
 
-		$obj = $this->doa->build($dto);
+//		$obj = $this->doa->build($dto);
 
-		return $this->doa->delete($obj);
+//		return $this->doa->delete($obj);
+		$repo = new PeopleRepository($this->doa);
+
+		$repo->addDelete($dto);
+
+		return $repo->performOperations();	
 
 	}
 
