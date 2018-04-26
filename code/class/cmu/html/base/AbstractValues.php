@@ -29,14 +29,6 @@ abstract class AbstractValues
 
 		return $this->values[$key] ?? null;
 
-//        if ( isset( $this->values[$key] ) ) {
-//
-//            return $this->values[$key];
-//
-//        }
-//
-//        return null;
-
     }
 
 	//3/28/18
