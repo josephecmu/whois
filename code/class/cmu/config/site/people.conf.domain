@@ -6,13 +6,13 @@
 
 $people_array = array(
 
-    'dn'     => array('label' => "RDN",
+    'dn'     => array('label' => "DN",
                         'type'=>'text',
                      'builder'=>'textbox',
                         'name'=>'dn',
                     'readonly'=>'readonly',
                         'alt' => 'altvalue',
-                       'class'=>'rdn',
+                       'class'=>'dn',
                       'state' => ['confirm', 'existing']
 
                         ),
@@ -80,7 +80,7 @@ $people_array = array(
                   'compreqnumber' => 1,
 				  'hintmessage' => 'required',
                     'placeholder' => "andrewid",
-                          'state' => ['add']
+//                          'state' => ['add']
                     
                                                 ),
 

@@ -12,11 +12,11 @@ class UpdatePeopleservice extends AbstractPeopleService
 	{
 
 		//these lines should not be needed, we need to pass the andrewID via the form  BUG		
-		$dn = $dto->get('dn');
+//		$dn = $dto->get('dn');
 
-		$id = $this->getId($dn);					//we need to set the 'id' (andrewid, etc) in the DTO.
+//		$id = $this->getId($dn);					//we need to set the 'id' (andrewid, etc) in the DTO.
 
-		$dto->set('andrewid', $id);					//sets $id from above to Entity 'key' andrewid, etc.
+//		$dto->set('andrewid', $id);					//sets $id from above to Entity 'key' andrewid, etc.
 		////////////////////////////////////////////////////////
 		$obj = $this->doa->build($dto);
 

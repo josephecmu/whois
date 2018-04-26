@@ -13,10 +13,8 @@ class GetPeopleService extends AbstractPeopleService
 	public function execute(DTO $dto) : DTO
 
 	{
-//////////////////////////////////////////////////////bug
 		$dn = $dto->get('dn');							//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
 
-//////////////////////////////////bug
 		$object = $this->repo->findByDn($dn);
 
 		$dto_fact = $this->factory->getDTOFactory();

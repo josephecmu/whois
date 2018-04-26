@@ -12,9 +12,8 @@ class AddPeopleService extends AbstractPeopleService
 	public function execute(DTO $dto) : bool
 
 	{
-		$ou_eq = $dto->get('ou');			//the DTO for 'ADD' contains the key 'ou'
 
-		$dto->unset('ou'); 					//this administrative key is not needed here.
+		$dto->unset('ou'); 							//this administrative key is not needed here.
 
 		////some checking confirming the a userID does not already exist	
 		//identity generator reference here??????
@@ -23,8 +22,8 @@ class AddPeopleService extends AbstractPeopleService
 		$andrewid = $dto->get('andrewid');
 
 		$dn = $this->repo->buildDn($andrewid);		//get the ID from the repo
-		$dto->set('dn', $dn);					//we need to pass the $dn we just constructed
-		$obj = $this->doa->build($dto);			//build the object
+		$dto->set('dn', $dn);						//we need to pass the $dn we just constructed
+		$obj = $this->doa->build($dto);				//build the object
 
 		$this->repo->addNew($obj);
 		return $this->repo->performOperations();	
