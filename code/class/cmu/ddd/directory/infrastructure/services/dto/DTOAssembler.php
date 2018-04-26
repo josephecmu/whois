@@ -6,7 +6,7 @@ class DTOAssembler
 
 {
 	
-	public static function returnDTO(array $data, string $entity = null) : DTO
+	public static function returnDTO(array $data, string $entity) : DTO
 	{
 
 		switch ($entity) {
