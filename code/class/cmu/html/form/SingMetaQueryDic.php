@@ -17,6 +17,8 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 {
 	use TraitConfig;
 
+	private $entity;
+
     function __construct() 
 	{
 
@@ -25,13 +27,13 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 		$this->dn = $this->requestobject->getValue('dn') ?? null;
 
 		if ($this->dn) {
-			$entity = ldap_explode_dn($this->dn, 1)[1];
+			$this->entity = ldap_explode_dn($this->dn, 1)[1];
 		} else {
 			$ou = $this->requestobject->getValue('ou');
-			$entity =  ldap_explode_dn($ou, 1)[0];
+			$this->entity =  ldap_explode_dn($ou, 1)[0];
 		}
 
-		$this->metaobject = new Meta($this->getDomainArray($entity));
+		$this->metaobject = new Meta($this->getDomainArray($this->entity));
 	}
 	//get the file. include it. return array.
 	private function getDomainArray($entity) : array
@@ -43,10 +45,10 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 		return ${$entity . "_array"};				//return people_array, rooms_array, etc. 
 	}
 
-	private function returnDomainDto(array $dnarray) : DTO
+	private function returnDomainDto(array $dnarray, string $entity) : DTO
 	{
 
-		$dto = DTOAssembler::returnDTO($dnarray);
+		$dto = DTOAssembler::returnDTO($dnarray, $entity);
 
 		return RunService::init($dto, 'get' );			//retrive from service layer
 	}
@@ -59,13 +61,13 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 
 		$values_do = array();
 
-	  	if ($this->dn) {						// better way to check?	
+	  	if ($this->dn) {											// better way to check?	
 		
-			$dto_array = ['dn' => $this->dn];				//send to service layer
+			$dto_array = ['dn' => $this->dn];						//send to service layer
 
-			$rdto = $this->returnDomainDto($dto_array);
+			$rdto = $this->returnDomainDto($dto_array, $this->entity);
 		
-			$do_registry = DoValuesRegistry::getDoValues();		//set values in registry
+			$do_registry = DoValuesRegistry::getDoValues();			//set values in registry
 
 			$do_registry->setValues($rdto->getDataArray());
 
