@@ -16,9 +16,8 @@ class GetPeopleService extends AbstractPeopleService
 //////////////////////////////////////////////////////bug
 		$dn = $dto->get('dn');							//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
 
-		$id = $this->getId($dn); //jacke				//the andrew id SHOULD be passed via the form (bug)
 //////////////////////////////////bug
-		$object = (new PeopleRepository($this->doa))->findById($id);
+		$object = $this->repo->findByDn($dn);
 
 		$dto_fact = $this->factory->getDTOFactory();
 

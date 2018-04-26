@@ -7,21 +7,20 @@ use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\domain\model\actors\people\People;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
+use cmu\ddd\directory\infrastructure\domain\model\factory\PeoplePersistenceFactory;
+use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 
 class PeopleRepository extends AbstractRepository 
 {
 
-	public function getDn(DTO $dto) : string
+	protected function getRootDoa() : DomainObjectAssembler
 	{
 
-		$andrewid = $dto->get('andrewid');
+		return new DomainObjectAssembler(new PeoplePersistenceFactory);
 
-		$dn = $this->buildDn($andrewid);
-
-		return $dn;
 	}
 
-	protected function buildDn(string $id) : string
+	public function buildDn(string $id) : string
 	{
 	
 		return PeopleDn::buildDn($id);
@@ -32,7 +31,7 @@ class PeopleRepository extends AbstractRepository
 	{
 
 		$idobj = new PeopleIdentityObject();
-
+			
 		$idobj->field("uid")->eq($id);
 
 		return $idobj;

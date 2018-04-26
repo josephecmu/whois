@@ -11,12 +11,15 @@ abstract class AbstractService
 {
 	protected $doa;
 	protected $factory;
-
+	protected $repo;
 	function __construct()
 	{
 
 		$this->factory = AbstractPersistenceFactory::getFactory($this->targetClass());	
+
 		$this->doa = new DomainObjectAssembler($this->factory);
+
+		$this->repo = $this->factory->getRepository(); 
 
 	}
 

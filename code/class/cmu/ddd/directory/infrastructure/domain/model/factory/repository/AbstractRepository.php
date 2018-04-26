@@ -7,7 +7,7 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\RoomsPersistenceFactor
 use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;   
 use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
-use cmu\ddd\directory\infrastructure\services\dto\DTO;
+//use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\domain\model\actors\people\People;
 
 abstract class AbstractRepository
@@ -17,19 +17,13 @@ abstract class AbstractRepository
 	protected $new = [];
 	protected $dirty = [];
 	protected $delete = [];
-	protected $doa;						//we need this for the initial root Entity build
-
-	function __construct(DomainObjectAssembler $doa)
-	{
-		$this->doa = $doa;
-
-	}
+	protected $doa;						
 
 	abstract public function remove();
 
-	abstract public function getDn(DTO $doa) : string;				//return the dn
-
 	abstract protected function getIdObjectSearchById(string $id);
+
+	abstract protected function getRootDoa() : DomainObjectAssembler;		//needed for building new 
 
 	private function globalKey(string $unique): string
 	{
@@ -37,8 +31,8 @@ abstract class AbstractRepository
 		$key = $unique;
 		return $key;
 	}
-
-	private function getDoa(AbstractEntity $obj) : DomainObjectAssembler 
+	//this is needed for a collection of objects to iterate.  (getFactory)
+	private function getDoaFromObject(AbstractEntity $obj) : DomainObjectAssembler 
 	{
 
 		$class= get_class($obj);
@@ -50,61 +44,67 @@ abstract class AbstractRepository
 	protected function add(AbstractEntity $obj)
 	{
 
-		$dn = $obj->getUid();
-		$this->all[$this->globalKey($dn)] = $obj;
+		$uniqid = $obj->getUid();
+
+		$this->all[$this->globalKey($uniqid)] = $obj;
 	}
 
-	public function findById($id) : AbstractEntity
+	public function findByDn(string $dn) : AbstractEntity
 	{
 
-		$dn = $this->buildDn($id);
+		$uniqid = $dn;
 
-		if (array_key_exists($this->globalKey($dn), $this->all)) {
-			return $this->all[$this->globalKey($dn)];
+		$key = $this->globalKey($uniqid);
+
+		if (array_key_exists($key, $this->all)) {
+			return $this->all[$key];
 		}
+	
+		$id = ldap_explode_dn($dn, 1)[0];		//we have to find by $id, can't search currently with DN
 
 		$idobj = $this->getIdObjectSearchById($id);
 
-		return $this->doa->findOne($idobj);
+		return $this->getRootDoa()->findOne($idobj);
 
 	}
 
-	public function addNew(DTO $dto)
+	public function findById(string $id) : AbstractEntity
 	{
+		$uniqid = $this->buildDn($id);
 
-		$dn = $this->getDn($dto);		
+		return $this->findByDn($uniqid);
 
-		$dto->set('dn', $dn);		//we need to pass the $dn we just constructed
-
-		$obj = $this->doa->build($dto);
-
-		$dn = $obj->getUid();
-		$this->new[$this->globalKey($dn)] = $obj;
 	}
 
-	public function addDelete(DTO $dto)
+	public function addNew(AbstractEntity $obj)
 	{
 
-		$dn = $dto->get('dn');
+		$uniqid = $obj->getUid();
 
-		$obj = $this->doa->build($dto);
+		$key = $this->globalKey($uniqid);
 
-		$key = $this->globalKey($dn);
+		$this->new[$key] = $obj;
+	}
+
+	public function addDelete(AbstractEntity $obj)
+	{
+
+		$uniqid = $obj->getUid();
+
+		$key = $this->globalKey($uniqid);
 
 		$this->delete[$key] = $obj;
 
 	}
 
-	public function addDirty(DTO $dto)
+	public function addDirty(AbstractEntity $obj)
 	{
 
-		$dn = $dto->get('dn');
+		$uniqid = $obj->getUid();
 
- 		$obj = $this->doa->build($dto);
+		$key = $this->globalKey($uniqid);
 
-		$key = $this->globalKey($dn);
-
-		if (! array_key_exists($key)) {
+		if (! array_key_exists($key, $this->dirty)) {
 
 			$this->dirty[$key] = $obj;
 
@@ -116,16 +116,16 @@ abstract class AbstractRepository
 	{
 
 		foreach ($this->dirty as $key => $obj) {
-			$result[] = $this->getDoa($obj)->update($obj);
+			$result[] = $this->getDoaFromObject($obj)->update($obj);
 
 		}
 
 		foreach ($this->new as $key => $obj) {
-			$result[] = $this->getDoa($obj)->add($obj);
+			$result[] = $this->getDoaFromObject($obj)->add($obj);
 		}
 
 		foreach ($this->delete as $key => $obj) {
-			$result[] = $this->getDoa($obj)->delete($obj);
+			$result[] = $this->getDoaFromObject($obj)->delete($obj);
 		}
 
 		//reset

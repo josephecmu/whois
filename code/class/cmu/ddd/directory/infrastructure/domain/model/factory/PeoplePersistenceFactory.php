@@ -4,7 +4,6 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\AbstractSelectionFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\selection\PeopleSelectionFactory;
-#use cmu\ddd\directory\infrastructure\domain\model\factory\query\update\AbstractUpdateFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\update\PeopleUpdateFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\PeopleCollection;
 use cmu\ddd\directory\infrastructure\domain\model\factory\collection\AbstractCollection;

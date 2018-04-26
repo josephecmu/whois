@@ -7,7 +7,9 @@ use cmu\ddd\directory\application\services\AbstractService;
 
 abstract class AbstractPeopleService extends AbstractService 
 {
-	
+
+	protected $repo;
+
 	public function targetClass(): string
 	{
 		return People::class;

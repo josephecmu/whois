@@ -3,7 +3,6 @@
 namespace cmu\ddd\directory\application\services\people;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
-use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\PeopleDn;
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\PeopleRepository;
 
 class AddPeopleService extends AbstractPeopleService
@@ -21,9 +20,14 @@ class AddPeopleService extends AbstractPeopleService
 		//identity generator reference here??????
 		//also check for existance of gidnumber and uidnumber and homedirectory
 
-		$repo = new PeopleRepository($this->doa);
-		$repo->addNew($dto);
-		return $repo->performOperations();	
+		$andrewid = $dto->get('andrewid');
+
+		$dn = $this->repo->buildDn($andrewid);		//get the ID from the repo
+		$dto->set('dn', $dn);					//we need to pass the $dn we just constructed
+		$obj = $this->doa->build($dto);			//build the object
+
+		$this->repo->addNew($obj);
+		return $this->repo->performOperations();	
 
 	}
 

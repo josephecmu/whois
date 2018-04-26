@@ -21,14 +21,11 @@ class DeletePeopleService extends AbstractPeopleService
 		$dto->set('andrewid', $andrewid);
 ////////////////////////////////////////////////////////////////////////
 
-//		$obj = $this->doa->build($dto);
+		$obj = $this->doa->build($dto);
 
-//		return $this->doa->delete($obj);
-		$repo = new PeopleRepository($this->doa);
+		$this->repo->addDelete($obj);
 
-		$repo->addDelete($dto);
-
-		return $repo->performOperations();	
+		return $this->repo->performOperations();	
 
 	}
 
