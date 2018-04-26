@@ -33,7 +33,7 @@ abstract class AbstractDTOFactory
 
 		$data_array = $mapper->return_object_to_dto_array();
 
-		return DTOAssembler::returnDTO($data_array);
+		return DTOAssembler::returnDTO($data_array, $this->returnEntity());
 
 	}
 	//CASTS to array

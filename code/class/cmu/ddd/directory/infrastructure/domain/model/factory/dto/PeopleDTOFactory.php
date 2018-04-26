@@ -14,4 +14,9 @@ class PeopleDTOFactory extends AbstractDTOFactory
 
 	}
 
+	protected function returnEntity() : string
+	{
+		return 'people';
+
+	}
 }

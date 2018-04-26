@@ -14,5 +14,10 @@ class RoomsDTOFactory extends AbstractDTOFactory
 
 	}
 
+	protected function returnEntity() : string
+	{
+		return 'rooms';
+
+	}
 }
 
