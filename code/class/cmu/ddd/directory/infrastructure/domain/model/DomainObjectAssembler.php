@@ -75,21 +75,6 @@ class DomainObjectAssembler
 
 		return $this->ldap->add($rdn, $input);
 
-
-		// UPDATE
-		//$link = $this->ldap->update($location, $filter, $fields);  <- from function above
-		//		below LdapWrapper::update() is from line 115 LdapWrapper()
-//		$link = $this->ldap->update($rdn, $input);
-
-//		$stmt = $this->getStatement($update);
-//		$stmt->execute($values);
-//
-//		if ($obj->getId() < 0) {
-//			$obj->setId((int)$this->pdo->lastInsertId());
-//		}
-//
-//		$obj->markClean();	
-
 	}
 	
 	public function update(AbstractEntity $obj) :bool
@@ -98,10 +83,6 @@ class DomainObjectAssembler
 		$updatefact = $this->factory->getModifyFactory();
 
 		list($rdn, $input) = $updatefact->newUpdate($obj);    	//get $rdn and $input for ldap update() below
-
-		echo "<pre>";
-		echo $rdn;
-		print_r($input);
 
 		return $this->ldap->update($rdn, $input);
 	}

@@ -7,7 +7,6 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\RoomsPersistenceFactor
 use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;   
 use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
-//use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\domain\model\actors\people\People;
 
 abstract class AbstractRepository
@@ -17,7 +16,6 @@ abstract class AbstractRepository
 	protected $new = [];
 	protected $dirty = [];
 	protected $delete = [];
-	protected $doa;						
 
 	abstract public function remove();
 
