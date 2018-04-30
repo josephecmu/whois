@@ -57,12 +57,16 @@ abstract class AbstractRepository
 		if (array_key_exists($key, $this->all)) {
 			return $this->all[$key];
 		}
-	
+
 		$id = ldap_explode_dn($dn, 1)[0];		//we have to find by $id, can't search currently with DN
 
 		$idobj = $this->getIdObjectSearchById($id);
 
-		return $this->getRootDoa()->findOne($idobj);
+		$obj = $this->getRootDoa()->findOne($idobj);
+		
+		$this->all[$key] = $obj;
+
+		return $obj;
 
 	}
 
