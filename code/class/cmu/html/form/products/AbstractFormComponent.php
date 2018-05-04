@@ -1,7 +1,9 @@
 <?php
 namespace cmu\html\form\products;
 
-abstract class AbstractFormComponent extends \cmu\html\products\AbstractProduct
+use \cmu\html\products\AbstractProduct;
+
+abstract class AbstractFormComponent extends AbstractProduct
 
 {
 

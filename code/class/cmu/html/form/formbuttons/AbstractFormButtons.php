@@ -21,7 +21,7 @@ abstract class AbstractFormButtons
     
     abstract function addToForm();              //hook each concrete implimentation will impliment
     
-    protected function createButton($value)     //Factory Method
+    protected function createButton(string $value)     //Factory Method
 
     {
 

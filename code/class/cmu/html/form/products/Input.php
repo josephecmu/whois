@@ -25,7 +25,7 @@ class Input extends AbstractControls
 
     }
 
-    function setCheckedvalue($checkedvalue_in)
+    function setCheckedvalue($checkedvalue_in) //not sure what type this is
 
     {
 

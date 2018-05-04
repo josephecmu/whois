@@ -5,6 +5,7 @@ class CloseTag extends AbstractFormComponent
 
 {
 
+    //does this do anything
     use \cmu\html\products\TraitCloseTag;
 
 }

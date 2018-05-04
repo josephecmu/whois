@@ -27,7 +27,7 @@ class Select extends AbstractControls
     }
     
     //concrete class implimentation to create a 'selected' drop down
-    private function selectHook($value, $v)
+    private function selectHook(string $value, string $v) : string
 
     {
     	//shortahand for $selected value

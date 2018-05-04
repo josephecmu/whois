@@ -23,7 +23,7 @@ abstract class AbstractComposite extends AbstractControls implements \cmu\html\p
     
     }
 
-    function checkChange()
+    function checkChange() : bool
     
     {
 
@@ -40,7 +40,8 @@ abstract class AbstractComposite extends AbstractControls implements \cmu\html\p
             }
 
     	}  
-    
+
+    	return false; //default return should be false?
     }
 
     protected function buildPost()

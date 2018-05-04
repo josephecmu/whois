@@ -17,6 +17,7 @@ class PostProcess
 
     }
 
+    //What is this used for?
     function doSomething() : bool
 
     {

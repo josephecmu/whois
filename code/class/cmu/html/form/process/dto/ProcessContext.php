@@ -16,7 +16,7 @@ class ProcessContext
 
         $button_name = $request_in->getValue('action');                    
 
-        $parts = preg_split('/(?=[A-Z])/', $button_name, -1, PREG_SPLIT_NO_EMPTY); //we should grab the action by retrieveing the last capital word
+        $parts = preg_split('/(?=[A-Z])/', $button_name, -1, PREG_SPLIT_NO_EMPTY); //we should grab the action by retrieving the last capital word
 
         $class = "\\cmu\html\\form\\process\\dto\\Process" . end($parts) ;				//action
 

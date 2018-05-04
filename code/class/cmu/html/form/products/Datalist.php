@@ -7,7 +7,7 @@ class Datalist extends AbstractFormComponent
 
     use TraitOption;
     //Datalist does not select anything, only provides lookups
-    private function selectHook($value, $v)
+    private function selectHook(string $value, string $v) : string //function is not used??
 
     {
 
