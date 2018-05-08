@@ -11,11 +11,6 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\RoomsPersistenceFactor
 class RoomsRepository extends AbstractRepository 
 {
 
-//	public function getRootDoa() : DomainObjectAssembler
-//	{
-//		return new DomainObjectAssembler(new RoomsPersistenceFactory);
-//
-//	}
 
 	public function getDn(DTO $dto) : string
 	{
@@ -33,16 +28,6 @@ class RoomsRepository extends AbstractRepository
 		return RoomsDn::buildDn($id);
 
 	}
-//was used to BUILD objects
-//	protected function getIdObjectSearchById(string $id) : RoomsIdentityObject
-//	{
-//
-//		$idobj = new RoomsIdentityObject();
-//
-//		$idobj->field('cn')->eq($id);
-//
-//		return $idobj;
-//	}
 
 	public function remove() 
 	{
