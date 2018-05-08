@@ -70,7 +70,7 @@ $people_array = array(
 		
                           							],
 
-    'andrewid'=>        array( 'label' => "Andrew ID",
+    'andrewid'=>        array( 'label' => "Andrew ID DONT CHANGE",
                           'class' => "value",
                      'filtertype' => "letterspunct",
                             'alt' => "altvalue",
