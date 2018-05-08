@@ -3,6 +3,7 @@
 namespace cmu\ddd\directory\application\services\rooms;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\infrastructure\domain\model\factory\repository\RoomsRepository;
 
 class DeleteRoomsService extends AbstractRoomsService 
 
@@ -12,15 +13,20 @@ class DeleteRoomsService extends AbstractRoomsService
 
 	{
 		
-		$dn = $dto->get('dn');					//returns cn=WH6102,ou=rooms,dc=mcs,dc=cmu,dc=edu
+		//$dn = $dto->get('dn');					//returns cn=WH6102,ou=rooms,dc=mcs,dc=cmu,dc=edu
 
-		$roomid = $this->getUid($dn);			//the roomid id SHOULD be passed via the form (bug)
+		//$roomid = $this->getUid($dn);			//the roomid id SHOULD be passed via the form (bug)
 
-		$dto->set('roomid', $roomid);
+		//$dto->set('roomid', $roomid);
 
+		//$obj = $this->doa->build($dto);
+
+		//return $this->doa->delete($obj);
 		$obj = $this->doa->build($dto);
 
-		return $this->doa->delete($obj);
+		$this->repo->addDelete($obj);
+
+		return $this->repo->performOperations();	
 
 	}
 

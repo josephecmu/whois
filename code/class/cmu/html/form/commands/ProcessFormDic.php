@@ -33,7 +33,13 @@ class ProcessFormDic                            //Dependency Injection Container
         if (!in_array(0, $result))  {     //check if any of the commands returns 'false(0)', then retun 'true'
 	   
 			return true ;   
-		}
+		} 
+
+		return false;		
+
+	
+
+	//	throw new \Exception ("An error occurred.");
 
     }
 

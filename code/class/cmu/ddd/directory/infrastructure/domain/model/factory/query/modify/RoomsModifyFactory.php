@@ -8,6 +8,7 @@ use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 class RoomsModifyFactory extends AbstractModifyFactory
 
 {
+	//should be in parent    should rename to getDn  FU
 	protected function getRdn(AbstractEntity $obj) : string
 
 	{

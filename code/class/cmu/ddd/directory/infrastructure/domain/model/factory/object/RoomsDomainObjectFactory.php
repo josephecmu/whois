@@ -1,34 +1,40 @@
 <?php
-
+//(This factory id the DOA for Outlets).
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\object;
 
 use \cmu\ddd\directory\domain\model\locations\Rooms;
+use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsCreateArray;
+use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsReadArray;
+use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsUpdateArray;
 
-class RoomsDomainObjectFactory extends AbstractDomainObjectFactory
+class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 
 {
 
 	public function createObject(array $norm_array) : Rooms
 
 	{
-
-		//strip out the outlets
+		
 		if (array_key_exists('outlets', $norm_array)) {
 
-			$outlets=$norm_array['outlets'];
 
+			$outlets=$norm_array['outlets'];
 			unset($norm_array['outlets']);
+
+			$outletstemp = [];
+			foreach ($outlets as $outlet) { 
+
+				$outletstemp[] = $this->returnNormDataArray($outlet);
+				
+			}	
 
 		}
 
-		echo "<pre>";
-		print_r($norm_array);
-
 		$room = new Rooms($norm_array);
 
-		if ($outlets) {		//if we set $outlets above
+		if (isset($outletstemp)) {		//if we set $outlets above
 
-			$room->assignOutletToRoom($outlet_properties);		//room will create object and add to Room::outlets
+			$room->assignOutletToRoom($outletstemp);		//room will create object and add to Room::outlets
 
 		}	
 
@@ -36,5 +42,40 @@ class RoomsDomainObjectFactory extends AbstractDomainObjectFactory
 
 	}
 
+	protected function getAction(array $dataarray) : string
+	{
+
+		if (isset($dataarray['outletid']) && (isset($dataarray['dn']))) {							//UPDATE
+
+			return "update";
+
+		} elseif (isset($dataarray['outletid']))  { 											//CREATE
+
+			return "create";
+
+		} elseif (isset($dataarray['dn'])) {													//READ
+
+			return "read";
+
+		}
+
+	}
+
+	protected function returnNormDataArray(array $dataarray) : array
+	{
+
+		$action = $this->getAction($dataarray);	
+
+		switch ($action) {
+			case "create":						
+				return (new OutletsCreateArray($dataarray))->returnArray();
+
+			case "read":					
+				return (new OutletsReadArray($dataarray))->returnArray();
+
+			case "update":				
+				return (new OutletsUpdateArray($dataarray))->returnArray();
+		}
+	}
 }
 

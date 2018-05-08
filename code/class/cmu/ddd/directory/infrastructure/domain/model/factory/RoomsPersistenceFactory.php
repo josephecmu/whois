@@ -16,6 +16,8 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\dto\AbstractDTOFactory
 use cmu\ddd\directory\infrastructure\domain\model\factory\dto\RoomsDTOFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\AbstractModifyFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\RoomsModifyFactory;
+use cmu\ddd\directory\infrastructure\domain\model\factory\repository\RoomsRepository;
+use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
 
 class RoomsPersistenceFactory extends AbstractPersistenceFactory
 
@@ -66,6 +68,13 @@ class RoomsPersistenceFactory extends AbstractPersistenceFactory
 
 		return new RoomsDTOFactory($this); //$this is needed to get the mapper inside the RoomsDTOFactory
 
+	}
+
+	public function getRepository () : AbstractRepository
+
+	{
+
+		return new RoomsRepository;
 	}
 
 }

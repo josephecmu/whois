@@ -3,13 +3,19 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\repository;
 
 use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\RoomsDn;
-use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\domain\model\actors\people\Rooms;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\RoomsIdentityObject;
-use cmu\ddd\directory\domain\model\lib\AbstractEntity;
+use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
+use cmu\ddd\directory\infrastructure\domain\model\factory\RoomsPersistenceFactory;
 
 class RoomsRepository extends AbstractRepository 
 {
+
+	public function getRootDoa() : DomainObjectAssembler
+	{
+		return new DomainObjectAssembler(new RoomsPersistenceFactory);
+
+	}
 
 	public function getDn(DTO $dto) : string
 	{
@@ -21,7 +27,7 @@ class RoomsRepository extends AbstractRepository
 		return $dn;
 	}
 
-	protected function buildDn(string $id) : string
+	public function buildDn(string $id) : string
 	{
 	
 		return RoomsDn::buildDn($id);
@@ -76,16 +82,16 @@ class RoomsRepository extends AbstractRepository
 		}
 	}
 
-	public function performOperations() : bool
-
-	{
-
-		$results[] = $this->modify($this->dirty, 'update');
-
-		$results[] = $this->modify($this->new, 'add');
-
-        return (!in_array(0, $result)) ? true : false;
-
-	}
+//	public function performOperations() : bool
+//
+//	{
+//
+//		$results[] = $this->modify($this->dirty, 'update');
+//
+//		$results[] = $this->modify($this->new, 'add');
+//
+//        return (!in_array(0, $result)) ? true : false;
+//
+//	}
 
 }
