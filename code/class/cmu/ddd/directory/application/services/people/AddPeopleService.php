@@ -12,7 +12,13 @@ class AddPeopleService extends AbstractPeopleService
 	public function execute(DTO $dto) : bool
 
 	{
-
+		// FU  we can remove this in mapper and not clutter Services??????????????????
+		// mapper works on ARRAYS, DTO is already an object
+		// special DTO that calls  mapper???
+		// maybe:
+		//$mapper = $this->factory->getMapper($dto->getDataArray());
+		//$dto = new DTO($mapper->return_dto_to_domain_array());
+		//
 		$dto->unset('ou'); 							//this administrative key is not needed here.
 
 		////some checking confirming the a userID does not already exist	
