@@ -71,9 +71,9 @@ class DomainObjectAssembler
 
 		$addfact = $this->factory->getModifyFactory();
 
-		list($rdn, $input) = $addfact->newAdd($obj);    	//get $rdn and $input for ldap update() below
+		list($dn, $input) = $addfact->newAdd($obj);    	//get $dn and $input for ldap update() below
 
-		return $this->ldap->add($rdn, $input);
+		return $this->ldap->add($dn, $input);
 
 	}
 	
@@ -82,9 +82,9 @@ class DomainObjectAssembler
 
 		$updatefact = $this->factory->getModifyFactory();
 
-		list($rdn, $input) = $updatefact->newUpdate($obj);    	//get $rdn and $input for ldap update() below
+		list($dn, $input) = $updatefact->newUpdate($obj);    	//get $dn and $input for ldap update() below
 
-		return $this->ldap->update($rdn, $input);
+		return $this->ldap->update($dn, $input);
 	}
 
 
@@ -94,9 +94,9 @@ class DomainObjectAssembler
 
 		$delfactory = $this->factory->getModifyFactory();
 
-		$rdn = $delfactory->newDelete($obj);		
+		$dn = $delfactory->newDelete($obj);		
 
-		return $this->ldap->delete($rdn);	
+		return $this->ldap->delete($dn);	
 
 	}
 }
