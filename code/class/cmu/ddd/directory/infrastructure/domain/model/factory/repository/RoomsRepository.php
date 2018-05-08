@@ -12,26 +12,10 @@ class RoomsRepository extends AbstractRepository
 {
 
 
-	public function getDn(DTO $dto) : string
-	{
-
-		$cn = $dto->get('cn');
-
-		$dn = $this->buildDn($cn);
-
-		return $dn;
-	}
-
 	public function buildDn(string $id) : string
 	{
 	
 		return RoomsDn::buildDn($id);
-
-	}
-
-	public function remove() 
-	{
-
 
 	}
 

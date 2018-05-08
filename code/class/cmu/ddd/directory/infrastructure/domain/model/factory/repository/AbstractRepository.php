@@ -17,7 +17,7 @@ abstract class AbstractRepository
 	protected $dirty = [];
 	protected $delete = [];
 
-	abstract public function remove();
+	abstract public function buildDn (string $id) : string;
 
 	private function globalKey(string $unique): string
 	{

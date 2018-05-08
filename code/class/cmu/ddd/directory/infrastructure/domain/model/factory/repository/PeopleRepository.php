@@ -18,11 +18,4 @@ class PeopleRepository extends AbstractRepository
 		return PeopleDn::buildDn($id);
 
 	}
-
-	public function remove() 
-	{
-
-
-	}
-
 }
