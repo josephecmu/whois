@@ -14,24 +14,16 @@ class GetRoomsService extends AbstractRoomsService
 
 	{
 
-//		$dn = $dto->get('dn');					//returns cn=WH6102,ou=rooms,dc=mcs,dc=cmu,dc=edu
-//
-//		$cn = $this->getUid($dn);			// we have a cn as the Unique Identifier 	
-//
-//		$id = new RoomsIdentityObject();
-//		$id->field("cn")
-//			->eq($cn);
-//
-//		$this->doa->find($id);
-//		$object = $this->doa->findOne($id);
-//
-//		$dto_fact = $this->factory->getDTOFactory();
+		$dn = $dto->get('dn');					//returns cn=WH6102,ou=rooms,dc=mcs,dc=cmu,dc=edu
 
-//		return $dto_fact->getDTO($object);
+		$cn = ldap_explode_dn($dn, 1)[0]; 
 
-		$dn = $dto->get('dn');							//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
+		$id = new RoomsIdentityObject();
+		$id->field("cn")
+			->eq($cn);
 
-		$object = $this->repo->findByDn($dn);
+		$this->doa->find($id);
+		$object = $this->doa->findOne($id);
 
 		$dto_fact = $this->factory->getDTOFactory();
 

@@ -11,12 +11,12 @@ use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 class PeopleRepository extends AbstractRepository 
 {
 
-	protected function getRootDoa() : DomainObjectAssembler
-	{
-
-		return new DomainObjectAssembler(new PeoplePersistenceFactory);
-
-	}
+//	protected function getRootDoa() : DomainObjectAssembler
+//	{
+//
+//		return new DomainObjectAssembler(new PeoplePersistenceFactory);
+//
+//	}
 
 	public function buildDn(string $id) : string
 	{
@@ -24,16 +24,16 @@ class PeopleRepository extends AbstractRepository
 		return PeopleDn::buildDn($id);
 
 	}
-
-	protected function getIdObjectSearchById(string $id) : PeopleIdentityObject
-	{
-
-		$idobj = new PeopleIdentityObject();
-			
-		$idobj->field("uid")->eq($id);
-
-		return $idobj;
-	}
+//was used when BUILDING objects
+//	protected function getIdObjectSearchById(string $id) : PeopleIdentityObject
+//	{
+//
+//		$idobj = new PeopleIdentityObject();
+//			
+//		$idobj->field("uid")->eq($id);
+//
+//		return $idobj;
+//	}
 
 	public function remove() 
 	{

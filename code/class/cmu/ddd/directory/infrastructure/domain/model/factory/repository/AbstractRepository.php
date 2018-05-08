@@ -19,9 +19,9 @@ abstract class AbstractRepository
 
 	abstract public function remove();
 
-	abstract protected function getIdObjectSearchById(string $id);
+//	abstract protected function getIdObjectSearchById(string $id);
 
-	abstract protected function getRootDoa() : DomainObjectAssembler;		//needed for building new 
+//	abstract protected function getRootDoa() : DomainObjectAssembler;		//needed for building new 
 
 	private function globalKey(string $unique): string
 	{
@@ -57,16 +57,16 @@ abstract class AbstractRepository
 		if (array_key_exists($key, $this->all)) {
 			return $this->all[$key];
 		}
+		//below used to BUILD objects, service does that now, I don't like the repo building
+//		$id = ldap_explode_dn($dn, 1)[0];		//we have to find by $id, can't search currently with DN
 
-		$id = ldap_explode_dn($dn, 1)[0];		//we have to find by $id, can't search currently with DN
+//		$idobj = $this->getIdObjectSearchById($id);
 
-		$idobj = $this->getIdObjectSearchById($id);
+//		$obj = $this->getRootDoa()->findOne($idobj);
 
-		$obj = $this->getRootDoa()->findOne($idobj);
-		
-		$this->all[$key] = $obj;
+//		$this->all[$key] = $obj;
 
-		return $obj;
+//		return $obj;
 
 	}
 
