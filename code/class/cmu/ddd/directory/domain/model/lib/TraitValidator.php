@@ -62,4 +62,14 @@ trait TraitValidator
 			return true;
 	}
 
+	protected function validDN ( $key, string $string) {
+
+        if (!preg_match("/([a-zA-Z0-9]*=[a-zA-Z0-9]*,)*[a-zA-Z0-9]*=[a-zA-Z0-9]*/",$string)) {
+            throw new \InvalidArgumentException("'$key':: Not a valid DN pattern");
+        }
+
+        return true; //default
+
+    }
+
 }
