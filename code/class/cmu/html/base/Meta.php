@@ -32,6 +32,13 @@ class Meta extends AbstractValues
 
     }
 
+	function unsetProperties(string $key) 
+	{
+
+		unset($this->properties[$key]);
+
+	}
+
     function getProperty(string $key ) 
 
     {    
@@ -40,7 +47,7 @@ class Meta extends AbstractValues
 
     }
  
-    protected function setProperty( $key, $val ) //added scope
+    function setProperty( $key, $val ) //added scope
 
     { 
 

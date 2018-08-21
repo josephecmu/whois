@@ -37,11 +37,6 @@ class SetPropertyRowregistry extends AbstractSetProperty
             //echo $replacement;
 
 
-          echo "<br />";  
-
-
-            print_r($rowregistry->getProperties());
- echo "<br />";
             $single_pattern = "/" . $matches[0][$i]. "/";
 
             $this->value = preg_replace($single_pattern, $replacement, $this->value);

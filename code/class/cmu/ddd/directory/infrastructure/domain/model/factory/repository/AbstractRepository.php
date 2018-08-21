@@ -17,9 +17,19 @@ abstract class AbstractRepository
 	protected $dirty = [];
 	protected $delete = [];
 
+//	function __construct()
+//	
+//		$this->factory = AbstractPersistenceFactory::getFactory($this->targetClass());	
+//
+//		$this->doa = new DomainObjectAssembler($this->factory);
+//
+//		$this->repo = $this->factory->getRepository(); 
+//
+//	}
+
 	abstract public function buildDn (string $id) : string;
 
-	private function globalKey(string $unique): string
+	protected function globalKey(string $unique): string
 	{
 
 		$key = $unique;

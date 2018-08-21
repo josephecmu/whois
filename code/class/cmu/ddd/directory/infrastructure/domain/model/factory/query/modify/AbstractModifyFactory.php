@@ -30,24 +30,31 @@ abstract class AbstractModifyFactory
 
 		$this->verifyTargetClass($obj);
 
-		function obj_to_arr ($obj) {
-			if(is_object($obj)) {
-			   	$obj = (array) $obj;
-			}	
-			if(is_array($obj)) {
-				$new = array();
-				foreach($obj as $key => $val) {
-					$new[$key] = obj_to_arr($val);   //recursive function
-				}
-			} else { 
-				$new = $obj;
-			}
-			return $new; 
-		};
 
-		return obj_to_arr($obj);
+		return $this->obj_to_arr($obj);
 
 	}
+
+	private function obj_to_arr($value)
+	{
+
+//		function obj_to_arr ($obj) {
+			if(is_object($value)) {
+			   	$value = (array) $value;
+			}	
+			if(is_array($value)) {
+				$new = array();
+				foreach($value as $key => $val) {
+					$new[$key] = $this->obj_to_arr($val);   //recursive function
+				}
+			} else { 
+				$new = $value;
+			}
+			return $new; 
+//		};
+
+	}
+
 
 	protected function getModify(AbstractEntity $obj, string $mapperfunction) : array
 	{

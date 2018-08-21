@@ -13,8 +13,16 @@ class Outlet extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 {
 
     protected $outletid;
-	protected $outletdn;
-	protected $computerdn=[];		//outlets hold multiple computers we only hold reference by ID. Not in aggregate.
+	protected $dn;
+	protected $computers=[];		//outlets hold multiple computers we only hold reference by ID. Not in aggregate.
+
+	protected function getRequiredFields() : array				//returns array of required properties
+
+	{
+
+		return ["outletid", "dn"];	
+		
+	}
 
 	public function setOutletid ($anoutletid)
 
@@ -24,27 +32,6 @@ class Outlet extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 
 	}
 
-	public function getOutletid() : string
-	{
-
-		return $this->outletid;
-
-	}
-
-	public function getOutletdn() : string
-
-	{
-
-		return $this->outletdn;                                                                                         
-
-	}
-
-	public function getComputerdn() : array
-
-	{
-		return $this->computerdn;
-
-	}	
     public function setOutletdn (Dn $anoutletdn)
 
 	{
@@ -52,12 +39,33 @@ class Outlet extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 		$this->outletdn = $anoutletdn;
 
 	}
+	public function getOutletid() : string
+	{
+
+		return $this->outletid;
+
+	}
+
+	public function getOutletdn() : Dn
+
+	{
+
+		return $this->outletdn;                                                                                         
+
+	}
+
+	public function getComputers() : array
+
+	{
+		return $this->computers;
+
+	}	
 
 	public function addComputerToOutlet (Dn $acomputerdn) 
 
 	{
 
-		$this->computerdn[] = $acomputerdn;
+		$this->computers[] = $acomputerdn;
 
 	}
 

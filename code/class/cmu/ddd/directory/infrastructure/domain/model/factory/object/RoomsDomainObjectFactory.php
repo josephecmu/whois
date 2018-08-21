@@ -1,8 +1,9 @@
 <?php
-//(This factory id the DOA for Outlets).
+//(This Rooms factory is the CRU Service for Outlets).
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\object;
 
 use \cmu\ddd\directory\domain\model\locations\Rooms;
+use cmu\ddd\directory\domain\model\equipment\outlets\Outlet;  
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsCreateArray;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsReadArray;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsUpdateArray;
@@ -14,67 +15,66 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 	public function createObject(array $norm_array) : Rooms
 
 	{
-		
-		if (array_key_exists('outlets', $norm_array)) {
 
-
+		if (isset($norm_array['outlets'])) {
 			$outlets=$norm_array['outlets'];
 			unset($norm_array['outlets']);
-
-			$outletstemp = [];
-			foreach ($outlets as $outlet) { 
-
-				$outletstemp[] = $this->returnNormDataArray($outlet);
-				
-			}	
-
 		}
 
 		$room = new Rooms($norm_array);
 
-		if (isset($outletstemp)) {		//if we set $outlets above
+		if (isset($outlets)) {
+			foreach ($outlets as $outlet) {
 
-			$room->assignOutletToRoom($outletstemp);		//room will create object and add to Room::outlets
+				$norm_outlet =  $this->returnNormOutletArray($outlet, 'read');
+				$room->assignOutletToRoom($norm_outlet);
+			}
 
-		}	
+		}
 
 		return $room;
 
 	}
 
-	protected function getAction(array $dataarray) : string
+	public function returnNewOutlet(array $outlet, string $action)
 	{
 
-		if (isset($dataarray['outletid']) && (isset($dataarray['dn']))) {							//UPDATE
+		$outlet_norm_array = $this->returnNormOutletArray($outlet, $action); 
 
-			return "update";
-
-		} elseif (isset($dataarray['outletid']))  { 											//CREATE
-
-			return "create";
-
-		} elseif (isset($dataarray['dn'])) {													//READ
-
-			return "read";
-
-		}
+		return new Outlet($outlet_norm_array);
 
 	}
-
-	protected function returnNormDataArray(array $dataarray) : array
+	
+	//This can most likely be a Strategy or Visitor pattern and pushed up if we need to re-use
+	public function returnNormOutletArray(array $subobjarray, string $action)
 	{
-
-		$action = $this->getAction($dataarray);	
 
 		switch ($action) {
 			case "create":						
-				return (new OutletsCreateArray($dataarray))->returnArray();
+				return (new OutletsCreateArray())->returnArray($subobjarray);
 
 			case "read":					
-				return (new OutletsReadArray($dataarray))->returnArray();
+				return (new OutletsReadArray())->returnArray($subobjarray);
 
 			case "update":				
-				return (new OutletsUpdateArray($dataarray))->returnArray();
+				return (new OutletsUpdateArray())->returnArray($subobjarray);
+		}
+	}
+	//if re-use move the atts to config file.	
+	public function getAction(array $subobjarray) : string
+	{
+
+		if (isset($subobjarray['outletid']) && (isset($subobjarray['dn'])))  {
+			return "update";
+
+		} elseif (isset($subobjarray['dn']))  { 
+			return "read";
+
+		} elseif (isset($subobjarray['outletid']))  { 											
+			return "create";
+	
+		} else { 
+			throw new \Exception("I don't have a good action!");
 		}
 	}
 }

@@ -76,11 +76,11 @@ trait TraitLeafBuilder
 
         }
             
-            self::$elementarray[$key] =  $replace_value;                                                    //assign to array key
+            self::$elementarray[$key] =  $replace_value;                               //assign to array key
 
     }
     
-    protected function arrayChangeProperty()                                                                //calls function above, iterate through [object]OVERRRIDES making changes
+    protected function arrayChangeProperty()   //calls function above, iterate through [object]OVERRRIDES making changes
     
     {
         
@@ -88,7 +88,9 @@ trait TraitLeafBuilder
     
             foreach ($this->overrides as $value) {
 
-                $this->changeProperty($value[0], $value[1], $value[2], $value[3] = null);
+				$value[3] = $value[3] ?? null ;
+
+                $this->changeProperty($value[0], $value[1], $value[2], $value[3]);
 
             }
 

@@ -17,13 +17,13 @@ class Rooms extends AbstractEntity
 	protected $dn;
 	protected $roomid;
 	protected $roomnumber;
-	protected $outlets; 							//should be list of ethernet outlet objects 
+	protected $outlets = null; 							//should be list of ethernet outlet objects 
 
 	protected function getRequiredFields() : array				//returns array of required properties
 
 	{
 
-		return ["roomid", "dn", "roomnumber" ];	
+		return ["roomid", "dn", "roomnumber"];	
 		
 	}
 
@@ -51,13 +51,18 @@ class Rooms extends AbstractEntity
 	private function outletFactory (array $properties) : Outlet
 
 	{   
+		if (!isset($properties["dn"])){
 
-		$properties["outletdn"] = new Dn($properties["outletdn"]);
+			throw new \Exception("I can't hydrate 'Outlets' without a DN!");
+
+		}
+
+		$properties["dn"] = new Dn($properties["dn"]);
 
 		return new Outlet ($properties);
 
 	}
-	private function assignOutletToRoom (array $properties) 
+	 public function assignOutletToRoom (array $properties) 
 
 	{
 		
@@ -78,11 +83,10 @@ class Rooms extends AbstractEntity
 
 	}
 
-	public function getOutlets() : array
+	public function getOutlets() 		//may return null or array
 
 	{
-
-		return $this->outlets;
+		return $this->outlets ?? null;
 
 	}
 }

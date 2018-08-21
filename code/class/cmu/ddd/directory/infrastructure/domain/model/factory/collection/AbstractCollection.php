@@ -23,12 +23,18 @@ abstract class AbstractCollection implements \Iterator
 
 	public function __construct(array $raw = [], AbstractDomainObjectFactory $dofact = null)
 	{
-		if (count($raw) && ! is_null($dofact)) {
-			$this->raw = $raw;
-			$this->total = count($raw);
-		}
+		//changed 8-9 to support no DOA passed (for rooms(outlets))
+//		if (count($raw) && ! is_null($dofact)) {
+//			$this->raw = $raw;
+//			$this->total = count($raw);
+//		}
 
 		$this->dofact = $dofact;
+		$this->raw = $raw;
+
+			
+		$this->total = count($raw) ?: 0;
+
 	}
 
 	abstract public function targetClass(): string;
@@ -41,6 +47,11 @@ abstract class AbstractCollection implements \Iterator
 		 $this->objects[$this->total] = $object;
 		 $this->total++;
 		 
+	}
+
+	public function getTotal()
+	{
+		return $this->total;
 	}
 
 	protected function notifyAccess()
@@ -98,5 +109,18 @@ abstract class AbstractCollection implements \Iterator
 	{
 		return (! is_null($this->current()));
 	}
+
+	////josephe 8-9 to return raw without creating object
+	public function returnRawKey($key) {
+
+		return $this->raw[$key];
+
+	}
+
+	public function returnRaw() {
+
+		return $this->raw;
+	}
+
 
 }

@@ -22,9 +22,10 @@ class DeleteRoomsService extends AbstractRoomsService
 		//$obj = $this->doa->build($dto);
 
 		//return $this->doa->delete($obj);
-		$obj = $this->doa->build($dto);
 
-		$this->repo->addDelete($obj);
+//		$obj = $this->doa->build($dto);
+
+		$this->repo->buildDelete($dto);
 
 		return $this->repo->performOperations();	
 

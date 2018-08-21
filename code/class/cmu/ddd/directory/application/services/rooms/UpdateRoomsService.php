@@ -10,7 +10,6 @@ class UpdateRoomsservice extends AbstractRoomsService
 
 	public function execute(DTO $dto) : bool
 	{
-
 		//we need to get the Andrewid from DN
 //		$dn = $dto->get('dn');										//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
 //
@@ -21,11 +20,23 @@ class UpdateRoomsservice extends AbstractRoomsService
 //		$obj = $this->doa->build($dto);
 //
 //		return $this->doa->update($obj);	
-		$obj = $this->doa->build($dto);
 
-		$this->repo->addDirty($obj);
 
-		return $this->repo->performOperations();	
+
+
+//		$obj = $this->doa->build($dto);
+
+//		$this->repo->addDirty($obj);
+
+//		return $this->repo->performOperations();	
+
+
+//		$this->repo->addDto($dto);
+
+		$this->repo->buildUpdate($dto);  	//this should create subobjects and add them approp locations (add, dirty)
+
+		return $this->repo->performOperations(); //run
+
 
 	}
 

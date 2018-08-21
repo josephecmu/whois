@@ -6,7 +6,7 @@ class Dn extends AbstractImmutable
 {
 		protected $dn;
 
-		function __construct( string $adn ) 
+		function __construct(string $adn ) 
 
 		{
 
@@ -17,6 +17,13 @@ class Dn extends AbstractImmutable
 				$this->dn = $adn;
 
 			}
+
+		}
+
+		public function getDn() : string
+		{
+		
+			return $this->dn;
 
 		}
 

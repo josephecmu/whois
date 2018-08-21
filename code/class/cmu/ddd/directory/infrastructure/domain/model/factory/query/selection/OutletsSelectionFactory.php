@@ -2,25 +2,26 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\selection;
 
-use cmu\ddd\directory\infrastructure\domain\model\idobject\RoomsIdentityObject;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\OutletsIdentityObject;
 use cmu\config\site\bin\Conf;
 
-class RoomsSelectionFactory extends AbstractSelectionFactory
+class OutletsSelectionFactory extends AbstractSelectionFactory
 
 {
 
 	protected function getDn() : string
 	{
 
-		return "ou=rooms";
+		return "ou=outlets,ou=devices";
 
 	}
 
 	protected function targetClass() : string
 	{
 
-		return RoomsIdentityObject::class;
+		return OutletsIdentityObject::class;
 
 	}
 
 }
+

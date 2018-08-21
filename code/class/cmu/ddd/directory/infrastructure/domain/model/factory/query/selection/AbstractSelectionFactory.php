@@ -11,13 +11,14 @@ abstract class AbstractSelectionFactory
 {
 
 	use TraitTargetClass;
-		
+
+
 	abstract protected function getDn() : string;
-	
+
 	public function buildFilter(AbstractIdentityObject $obj): string
 
 	{
-		
+
 		$this->verifyTargetClass($obj);	
 
 		if ($obj->isVoid()) {
@@ -28,9 +29,12 @@ abstract class AbstractSelectionFactory
 		foreach ($obj->getComps() as $comp) {
 			$compstrings[] = "({$comp['name']}{$comp['operator']}{$comp['value']})";
 		}
-		$filter = "(&" .  implode(" ",$compstrings) . ")" ;
-		return $filter;
 		
+		$filter = "(" .  $obj->getGlobalcondition()    .   implode("",$compstrings) . ")" ;
+
+		return $filter;
+
+
 	}
 
 	##added josephe 10-12-17

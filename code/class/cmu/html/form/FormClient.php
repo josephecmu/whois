@@ -7,8 +7,10 @@ use \cmu\html\base\Meta;
 use \cmu\html\base\ReturnPost;
 use \cmu\html\form\commands\CommandContext;
 use \cmu\html\form\commands\ProcessFormDic;
+use \cmu\html\products\AbstractHtmlDisplayClient;
+use \cmu\html\form\formbuttons\FormButtonsContext;
 
-class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
+class FormClient extends AbstractHtmlDisplayClient
 
 {
                                                
@@ -21,7 +23,7 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
     function __construct(Meta $totalobj_in, Request $request_in)            
 
     {
-
+	
         parent::__construct($totalobj_in, $request_in);
 
         $this->setFormState();                                                      
@@ -77,26 +79,18 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
     public function buildForm()    //: void                                                    //BUILD
 
     {
+        foreach ($this->totalobj->getTotalArray() as $totkey => $totalarray) {
 
-        foreach ($this->totalobj->getTotalArray() as $totalarray) {
-            
-            $class = str_replace(' ', '',  ucwords(str_replace('_', ' ', $totalarray['builder'])));//parse out the BUILDER
+				$class = str_replace(' ', '',  ucwords(str_replace('_', ' ', $totalarray['builder'])));//parse out BUILDER
 
-            $obj = "Composite" . $class . "Builder";
+				$obj = "Composite" . $class . "Builder";
 
-            $obj = "\\cmu\\html\\form\\builders\\" . $obj;
-
-            if (isset($totalarray['state']) && !in_array($this->state, $totalarray['state'])) {     //skip if "state" meta key and not in array.
-            
-                continue;                                                                           
- 
-            }   
-
-            (new $obj($totalarray))->build($this->display);   //build control  //eliminate Singleton by passing same instantiated object as parameter
+				$obj = "\\cmu\\html\\form\\builders\\" . $obj;
+				(new $obj($totalarray))->build($this->display);
 
         }
                           
-        (new \cmu\html\form\formbuttons\FormButtonsContext())->process($this);                      //Buttons Strategy
+        (new FormButtonsContext())->process($this);                      //Buttons Strategy
     }
 
     public function checkChangeForm() : bool
@@ -155,16 +149,13 @@ class FormClient extends \cmu\html\products\AbstractHtmlDisplayClient
             
     } 
 
-    public function processForm()    : bool	                                                              //PROCESS 
+    public function processForm()  : bool	                                                              //PROCESS 
 
 	{
-		echo "<br />";
-		echo "<strong>We are processing...</strong>";
-        //'postprocess',  <- other COMMAND object 'hook' to handle postprocessing
 		$commands = ['dtoprocess'];
 
         $returnpostobj = new ReturnPost;               //build from form objects products PARAMETERS
-       
+
         $returnpostobj->setValues($this->display->buildAndReturnPost());//wrap the buildAndReturnPost() array in an object
 
         $context = new CommandContext;     //context for COMMAND

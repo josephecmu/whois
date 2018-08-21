@@ -12,17 +12,15 @@ class AddRoomsService extends AbstractRoomsService
 	public function execute(DTO $dto) : bool
 
 	{
-
-		$dto->unset('ou'); 					//this administrative key is not needed here.
-
+		$dto->unset('ou'); 					//this service key is not needed here.
 
 		$roomid = $dto->get('roomid');
 
 		$dn = $this->repo->buildDn($roomid);		//get the ID from the repo
 		$dto->set('dn', $dn);						//we need to pass the $dn we just constructed
-		$obj = $this->doa->build($dto);				//build the object
 
-		$this->repo->addNew($obj);
+		$this->repo->buildNew($dto);
+
 		return $this->repo->performOperations();	
 
 	}

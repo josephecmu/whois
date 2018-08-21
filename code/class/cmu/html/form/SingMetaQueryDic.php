@@ -39,10 +39,12 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
 	private function getDomainArray($entity) : array
 	{
 
-		$filename = $entity . ".conf";    			//we now need to get the config array based on entity
+		$state = $this->getState();
+
+		$filename = $entity . "_" . $state . ".conf";    			//we now need to get the config array based on entity
 		include	$this->returnIniFile($filename);    //include the file in this method		
 
-		return ${$entity . "_array"};				//return people_array, rooms_array, etc. 
+		return ${$entity . "_" . $state . "_array"};				//return people_array, rooms_array, etc. 
 	}
 
 	private function returnDomainDto(array $dnarray, string $entity) : DTO
@@ -82,6 +84,21 @@ class SingMetaQueryDic extends AbstractMetaQueryDic  //Dependancy Injection Cont
         $this->metaobject->setSingleTotalArray('values');	//populate the meta totalarray property with correct value key
 
         return $this->metaobject;			//return TOTAL object with total array stored in totalarray property
+
+
+
+    }
+
+    private function getState()                   //used to set state of form and build buttons
+
+    {
+		if (!empty($this->requestobject->getValue('dn'))) {                               //we have data passed
+			
+			return 'existing';    
+
+		}
+
+        return 'new';                                                   //default 'add'
 
     }
 

@@ -18,16 +18,22 @@ class GetRoomsService extends AbstractRoomsService
 
 		$cn = ldap_explode_dn($dn, 1)[0]; 
 
+		$dto->set('action', 'get');
+
+		//check repository if object already exists...
+
+
+		//this could go in the repository
 		$id = new RoomsIdentityObject();
 		$id->field("cn")
 			->eq($cn);
 
-		$this->doa->find($id);
-		$object = $this->doa->findOne($id);
+		$obj = $this->doa->findOne($id);
 
 		$dto_fact = $this->factory->getDTOFactory();
 
-		return $dto_fact->getDTO($object);
+		return $dto_fact->getDTO($obj);
+
 
 	}
 

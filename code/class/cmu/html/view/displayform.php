@@ -10,17 +10,21 @@
 
         if ($control->checkChangeForm()) {                 //see if the form has changed before we go any further!!
   
-//            try {
+            try {
 
             $control->processForm();
             
 //                $this->forward( '../code/class/cmu/html/view/success.php' );
-        
-//            } catch ( \Exception $e ) {
+//				$this->forward ( 'results.php' );
+			header ('Location: http://whois.math.cmu.edu/results.php');				
 
-//              $this->forward( '../code/class/cmu/html/view/error.php' );
 
-//           }
+
+        } catch ( \Exception $e ) {
+
+		   $this->forward( '../code/class/cmu/html/view/error.php' );
+
+		 }
 
       } 
 

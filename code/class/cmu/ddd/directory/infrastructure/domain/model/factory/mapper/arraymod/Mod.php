@@ -134,6 +134,14 @@ class Mod
 
 	}
 
+	public function copy_sub_obj_dn() : self
+	{
+
+		 $this->final = $this->s_modify("CopySubObjectDn");
+		 return $this;
+
+	}
+
 	public function add_object_class() : self
 	{
 

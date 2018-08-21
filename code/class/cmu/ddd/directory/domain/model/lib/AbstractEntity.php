@@ -12,18 +12,18 @@ class AbstractEntity
 
     use TraitDynamicSetterVerifyProperty;
 
+    public function __construct(array $fields = array()) {
+    
+		$this->confirmFieldsAndConfirmSetProperties($fields, $this->getRequiredFields());
+
+    }
+
 	public function getUid() : string		//we need a uniq public identifier
 	{
 
 		return $this->dn->dynGet('dn');
 
 	}
-
-    public function __construct(array $fields = array()) {
-    
-		$this->confirmFieldsAndConfirmSetProperties($fields, $this->getRequiredFields());
-
-    }
 
 	protected function getRequiredFields() : array
 

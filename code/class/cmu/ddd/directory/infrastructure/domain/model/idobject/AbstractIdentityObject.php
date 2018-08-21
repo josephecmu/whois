@@ -20,6 +20,10 @@ abstract class AbstractIdentityObject
 	protected $and = null;   //<--what is this for?
 	protected $enforce = [];
 	
+	private $globalcondition="&";
+
+
+
 	// an identity object can start off empty, or with a field
 	 public function __construct(string $field = null)
 	 {
@@ -34,6 +38,15 @@ abstract class AbstractIdentityObject
 				 $this->field($field);
 			 }
 	 }
+	public function setGlobalCondition($cond_in){
+
+		$this->globalcondition = $cond_in;
+
+	}
+
+	public function getGlobalCondition() {
+		return $this->globalcondition;
+	}
 
 	// field names to which this is constrained
 	public function getObjectFields() : array

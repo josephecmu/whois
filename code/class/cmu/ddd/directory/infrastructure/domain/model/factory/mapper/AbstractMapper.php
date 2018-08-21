@@ -32,6 +32,7 @@ abstract class AbstractMapper
 	protected $object_class_map = [];
 	protected $delete_key_map = [];
 	protected $raw = [];
+	protected $sub_object_map=[];
 
 	function __construct(array $raw)
 	{
@@ -46,6 +47,7 @@ abstract class AbstractMapper
 			$this->group_map = $conf->get("group_map");
 			$this->object_class_map = $conf->get("object_class_map");
 			$this->delete_key_map = $conf->get("delete_key_map");
+			$this->sub_object_map = $conf->get("sub_object_map");
 
 			$this->raw = $raw;
 	}
@@ -101,6 +103,11 @@ abstract class AbstractMapper
 		return $this->delete_key_map ?? [];
 	}
 
+	public function getSubObjectMap() : array
+	{
+		return $this->sub_object_map ?? [];
+	}
+
 	//END GETTERS
 
 	public function return_ldap_collection_array_to_domain() : array 
@@ -122,6 +129,15 @@ abstract class AbstractMapper
 		}
 
 		return $records;
+	}
+
+
+	public function return_ldap_array_to_domain() : array	//ldap deals with collections by default (above), return one.
+	{
+
+
+		return $this->return_ldap_collection_array_to_domain()[0];
+
 	}
 
 	public function return_object_to_ldaparray() : array
