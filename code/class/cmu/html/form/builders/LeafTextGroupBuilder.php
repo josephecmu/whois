@@ -2,6 +2,7 @@
 namespace cmu\html\form\builders;
 
 use \cmu\html\form\products\Input;
+use \cmu\html\form\products\Button;
 
 class LeafTextGroupBuilder extends AbstractLeafBuilder
 
@@ -35,23 +36,27 @@ class LeafTextGroupBuilder extends AbstractLeafBuilder
 
 				}
 				//below gives us:
-				//entity[x][d]  i.e. outlets[0][outletid]
+				//entity[x][d]  (i.e. outlets[0][outletid])
 				//this is needed to return a proper POST array.
 				$this->changeProperty( 'replace', 'appendname', '[' . $i   . ']' , '[' . $key . ']' );
 
 				$this->changeProperty( 'replace', 'alt', self::$metaarray['textboxes'][$t]);
-
+			
 				$this->arrayChangeProperty();
 			
 				$this->setProperty();
-				
+
 				$objects[] = $this->obj;
+
+
 			}
+
 
 			//create the <div>
 			//this should go in CompositeTextboxgrouparrayBuilder
 			//we need to return a new close div and open div tag here
 			$objects[]	= new \cmu\html\general\products\Div;
+
 
 		}
 

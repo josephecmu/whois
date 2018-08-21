@@ -11,7 +11,7 @@ trait TraitLeafBuilder
 
     abstract function returnLeaf();
     //this method could be converted to STRATEGY PATTERN if much bigger?
-    protected function changeProperty($action, $key, $value1, $value2 = null)
+    protected function changeProperty($action, $key, $value1=null, $value2 = null)
 
     {
         
@@ -67,7 +67,11 @@ trait TraitLeafBuilder
                     }
 
                 break;
+				case "delete";
 
+					unset(self::$elementarray[$key]);
+					return;	
+					
                 default:
                     
                     echo "incorrect action specified";
