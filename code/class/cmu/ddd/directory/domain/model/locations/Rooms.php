@@ -89,4 +89,16 @@ class Rooms extends AbstractEntity
 		return $this->outlets ?? null;
 
 	}
+
+	public function removeOutletFromRoom (Outlet $outlet)
+	{
+
+		$dn = $outlet->getOutletdn()->getDn();	//The Dn is an object 
+
+		$key = array_search($dn, $outlets);
+
+		unset($this->outlets[$key]);
+
+	}
+
 }

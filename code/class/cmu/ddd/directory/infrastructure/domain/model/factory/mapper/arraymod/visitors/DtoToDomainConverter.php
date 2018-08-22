@@ -13,6 +13,7 @@ class DtoToDomainConverter extends AbstractVisitor
 
 		$record = $this->mod 
 		->group_elements()
+		->remove_key()
 		->returnFinalArray()			
 		;
 

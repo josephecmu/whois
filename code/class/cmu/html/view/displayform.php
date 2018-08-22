@@ -10,7 +10,7 @@
 
         if ($control->checkChangeForm()) {                 //see if the form has changed before we go any further!!
   
-            try {
+//            try {
 
             $control->processForm();
             
@@ -20,11 +20,11 @@
 
 
 
-        } catch ( \Exception $e ) {
+  //      } catch ( \Exception $e ) {
 
-		   $this->forward( '../code/class/cmu/html/view/error.php' );
+//		   $this->forward( '../code/class/cmu/html/view/error.php' );
 
-		 }
+//		 }
 
       } 
 

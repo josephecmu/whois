@@ -77,6 +77,14 @@ class Mod
 
 	}
 
+	public function remove_key() : self
+	{
+
+		$this->final = $this->s_modify("RemoveKey"); 
+		return $this;
+
+	}
+
 	public function to_array() : self
 	{
 

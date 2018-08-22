@@ -2,13 +2,15 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets;
 
+use \cmu\ddd\directory\infrastructure\domain\model\factory\mapper\OutletsMapper;
+
 class OutletsUpdateArray extends AbstractOutlets
 {
 
-		public function returnArray(array $dataarray) : array
+		public function returnNormArray(array $dataarray) : array
 		{
 
-			return $dataarray;
+			return (new OutletsMapper($dataarray))->return_dto_to_domain_array(); 
 
 		}
 

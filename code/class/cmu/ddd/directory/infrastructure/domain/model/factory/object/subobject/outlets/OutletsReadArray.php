@@ -5,7 +5,7 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject
 class OutletsReadArray extends AbstractOutlets
 {
 
-		public function returnArray(array $dataarray) : array
+		public function returnNormArray(array $dataarray) : array
 		{
 
  			$outletid = ldap_explode_dn($dataarray['dn'], 1)[0];
@@ -14,7 +14,7 @@ class OutletsReadArray extends AbstractOutlets
 
 			$raw = $this->returnRawArrayFromIdobject($idobj);
 
-			return $this->returnNormArray($raw);
+			return $this->returnSingleNormArray($raw);
 		}
 
 }

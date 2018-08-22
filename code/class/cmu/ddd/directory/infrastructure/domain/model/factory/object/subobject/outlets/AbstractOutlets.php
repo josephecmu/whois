@@ -11,7 +11,7 @@ use \cmu\ddd\directory\infrastructure\domain\model\factory\collection\OutletsCol
 abstract class AbstractOutlets extends AbstractSubObject
 {
 
-	abstract public function returnArray(array $subobjarray) : array ;
+	abstract public function returnNormArray(array $subobjarray) : array ;
 
 	protected function returnSelfact() : OutletsSelectionFactory
 	{

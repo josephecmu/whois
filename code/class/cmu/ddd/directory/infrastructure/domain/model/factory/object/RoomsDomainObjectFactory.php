@@ -51,13 +51,13 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 
 		switch ($action) {
 			case "create":						
-				return (new OutletsCreateArray())->returnArray($subobjarray);
+				return (new OutletsCreateArray())->returnNormArray($subobjarray);
 
 			case "read":					
-				return (new OutletsReadArray())->returnArray($subobjarray);
+				return (new OutletsReadArray())->returnNormArray($subobjarray);
 
 			case "update":				
-				return (new OutletsUpdateArray())->returnArray($subobjarray);
+				return (new OutletsUpdateArray())->returnNormArray($subobjarray);
 		}
 	}
 	//if re-use move the atts to config file.	

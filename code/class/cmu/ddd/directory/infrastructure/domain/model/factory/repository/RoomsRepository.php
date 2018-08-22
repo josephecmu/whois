@@ -74,10 +74,12 @@ class RoomsRepository extends AbstractRepository
 	
 	}
 	//FU  This could be broken up.
-	private function build(DTO $dto, string $type) 
+	private function build(DTO $dto, string $state) 
 	
 	{
-		switch ($type) {
+	
+		//get the proper function to store the Room.
+		switch ($state) {
 		case 'new':
 			$function='addNew';
 			break;
@@ -112,8 +114,6 @@ class RoomsRepository extends AbstractRepository
 			}
 		}	
 
-		$this->$function($room);
-
 		if ($room->getOutlets()) {
 
 			foreach ($room->getOutlets() as $obj) { 		
@@ -127,11 +127,23 @@ class RoomsRepository extends AbstractRepository
 					case "update":				
 						$this->addDirty($obj);
 						break;
+					case "delete":
+						$this->addDelete($obj);
+						break;
 
 				}	
+
+				if ($cur_action == 'delete') {		//the subobject must be removed from the list of outlets
+				
+					$room->removeOutletFromRoom($obj);
+
+				}
+
 			}
 
 		}
+
+		$this->$function($room);
 
 	}
 

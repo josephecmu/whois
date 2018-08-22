@@ -40,7 +40,7 @@ abstract class AbstractSubObject
 
 	}
 
-	protected function returnNormArray(array $raw) : array   //return ONE record
+	protected function returnSingleNormArray(array $raw) : array   //return ONE record
 	{
 		return $this->returnMapper($raw)->return_ldap_array_to_domain(); 
 

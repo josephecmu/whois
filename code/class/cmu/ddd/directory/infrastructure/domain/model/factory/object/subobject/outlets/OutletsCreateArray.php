@@ -4,10 +4,13 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject
 
 use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\OutletsDn;
 
+use \cmu\ddd\directory\infrastructure\domain\model\factory\mapper\OutletsMapper;
+
+
 class OutletsCreateArray extends AbstractOutlets
 {
 
-		public function returnArray(array $dataarray) : array
+		public function returnNormArray(array $dataarray) : array
 		{
 
 			$outletid = $dataarray['outletid'];
@@ -18,13 +21,12 @@ class OutletsCreateArray extends AbstractOutlets
 
 				throw new \Exception("This " .  $outletid . "  exists!!");
 			}
-
 			//need a new identity
 			$dn = (new OutletsDn())->buildDn($outletid);
 
 			$dataarray['dn']=$dn;
 
-			return $dataarray;
+			return (new OutletsMapper($dataarray))->return_dto_to_domain_array();
 
 		}
 
