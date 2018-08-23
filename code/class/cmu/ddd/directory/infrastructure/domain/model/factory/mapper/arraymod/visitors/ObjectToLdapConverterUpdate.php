@@ -17,6 +17,7 @@ class ObjectToLdapConverterUpdate extends AbstractVisitor
 			->copy_sub_obj_dn()
 			->reverse_remap_keys()
 			->delete_key()
+			->delete_empty_key()			//new 8-18
 			->returnFinalArray() 
 			;
 

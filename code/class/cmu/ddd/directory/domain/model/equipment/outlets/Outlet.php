@@ -50,7 +50,7 @@ class Outlet extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 
 	{
 
-		return $this->outletdn;                                                                                         
+		return $this->dn;                                                                                         
 
 	}
 
@@ -68,5 +68,6 @@ class Outlet extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 		$this->computers[] = $acomputerdn;
 
 	}
+
 
 }

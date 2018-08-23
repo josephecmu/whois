@@ -137,15 +137,11 @@ class RoomsRepository extends AbstractRepository
 				}	
 
 				if ($cur_action == 'delete') {		//the subobject must be removed from the list of outlets
-				
-					$room->removeOutletFromRoom($obj);
-					
-					//we need to remove the Attribute outletDN if no outlets exist. (garbage collection, cleanup).
-//					if (!$room->getOutlets()) {
-				
-						//remove the attribute from the record
 
-//					}
+					echo "<br>RoomsRepository.php obj141<pre><br>";
+					print_r($obj);
+
+					$room->removeOutletFromRoom($obj);
 
 				}
 

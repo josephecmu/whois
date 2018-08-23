@@ -95,7 +95,7 @@ class Rooms extends AbstractEntity
 
 		$dn = $outlet->getOutletdn()->getDn();	//The Dn is an object 
 
-		$key = array_search($dn, $outlets);
+		$key = array_search($dn, $this->outlets);
 
 		unset($this->outlets[$key]);
 

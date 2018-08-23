@@ -68,17 +68,17 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 	public function getAction(array $subobjarray) : string     //should be "getSubObjectAction"
 	{
 
-		if (isset($subobjarray['delete']) && ($subobjarray['delete'] == 'yes')): 
-			echo "DELETE";
+		if (!empty($subobjarray['delete']) && ($subobjarray['delete'] == 'yes')): 
+			echo " RoomsDomainObjectFactory.php...DELETE";
 			return "delete";
 
-		elseif (isset($subobjarray['outletid']) && (isset($subobjarray['dn']))):  
+		elseif (!empty($subobjarray['outletid']) && (!empty($subobjarray['dn']))):  
 			return "update";
 
-		elseif (isset($subobjarray['dn'])):
+		elseif (!empty($subobjarray['dn'])):
 			return "read";
 
-		elseif (isset($subobjarray['outletid'])):											
+		elseif (!empty($subobjarray['outletid'])):											
 			return "create";
 	
 		else:
