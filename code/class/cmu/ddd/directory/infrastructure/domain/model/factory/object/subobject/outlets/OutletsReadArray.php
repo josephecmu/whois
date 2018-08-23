@@ -14,7 +14,7 @@ class OutletsReadArray extends AbstractOutlets
 
 			$raw = $this->returnRawArrayFromIdobject($idobj);
 
-			return $this->returnSingleNormArray($raw);
+			return $this->returnSingleNormArrayLdapToDomain($raw);
 		}
 
 }

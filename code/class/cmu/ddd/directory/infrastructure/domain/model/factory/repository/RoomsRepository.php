@@ -46,6 +46,7 @@ class RoomsRepository extends AbstractRepository
 
 		$room_norm_array = $this->getRoomNormArray($dto);
 
+
 		if (isset($room_norm_array['outlets'])) {
 			$outlets=$room_norm_array['outlets'];
 			unset($room_norm_array['outlets']);
@@ -61,7 +62,9 @@ class RoomsRepository extends AbstractRepository
 
 			foreach($outlets as $outlet) {
 
-				$room->assignOutletToRoom($outlet); //no need to normalize.
+				$outletnormarray = $fact->returnNormOutletArray($outlet, 'delete');
+
+				$room->assignOutletToRoom($outletnormarray); //no need to normalize.
 				
 			}
 		}	
@@ -77,7 +80,7 @@ class RoomsRepository extends AbstractRepository
 	private function build(DTO $dto, string $state) 
 	
 	{
-	
+
 		//get the proper function to store the Room.
 		switch ($state) {
 		case 'new':
@@ -88,16 +91,16 @@ class RoomsRepository extends AbstractRepository
 			break;
 		}
 
-		$room_norm_array = $this->getRoomNormArray($dto);
-		
-		if (isset($room_norm_array['outlets'])) {
+		$room_norm_array = $this->getRoomNormArray($dto);   //runs through the mapper listed above
+
+		if (!empty($room_norm_array['outlets'])) {
 			$outlets=$room_norm_array['outlets'];
 			unset($room_norm_array['outlets']);
 		}
 
 		$room = (new RoomsDomainObjectFactory())->createObject($room_norm_array);
 
-		if (isset($outlets)) {	
+		if (isset($outlets)) {			
 
 			$fact = new RoomsDomainObjectFactory;
 
@@ -136,6 +139,13 @@ class RoomsRepository extends AbstractRepository
 				if ($cur_action == 'delete') {		//the subobject must be removed from the list of outlets
 				
 					$room->removeOutletFromRoom($obj);
+					
+					//we need to remove the Attribute outletDN if no outlets exist. (garbage collection, cleanup).
+//					if (!$room->getOutlets()) {
+				
+						//remove the attribute from the record
+
+//					}
 
 				}
 

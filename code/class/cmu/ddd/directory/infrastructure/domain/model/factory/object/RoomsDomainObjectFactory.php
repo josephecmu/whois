@@ -7,6 +7,7 @@ use cmu\ddd\directory\domain\model\equipment\outlets\Outlet;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsCreateArray;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsReadArray;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsUpdateArray;
+use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsDeleteArray;
 
 class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 
@@ -58,27 +59,32 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 
 			case "update":				
 				return (new OutletsUpdateArray())->returnNormArray($subobjarray);
+
+			case "delete":
+				return (new OutletsDeleteArray())->returnNormArray($subobjarray);
 		}
 	}
 	//if re-use move the atts to config file.	
-	public function getAction(array $subobjarray) : string
+	public function getAction(array $subobjarray) : string     //should be "getSubObjectAction"
 	{
 
-		if ($subobjarray['delete'] == 'yes') {
+		if (isset($subobjarray['delete']) && ($subobjarray['delete'] == 'yes')): 
+			echo "DELETE";
 			return "delete";
 
-		} elseif (isset($subobjarray['outletid']) && (isset($subobjarray['dn'])))  {
+		elseif (isset($subobjarray['outletid']) && (isset($subobjarray['dn']))):  
 			return "update";
 
-		} elseif (isset($subobjarray['dn']))  { 
+		elseif (isset($subobjarray['dn'])):
 			return "read";
 
-		} elseif (isset($subobjarray['outletid']))  { 											
+		elseif (isset($subobjarray['outletid'])):											
 			return "create";
 	
-		} else { 
+		else:
 			throw new \Exception("I don't have a good action!");
-		}
+
+		endif;
 	}
 }
 

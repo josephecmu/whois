@@ -6,6 +6,7 @@ trait TraitActions
 {
 
     protected $onclick = null;
+	protected $click = null;
 
     public function setonclick($onclick_in)
 
@@ -31,4 +32,27 @@ trait TraitActions
 
     }
 
+    public function setclick($click_in)
+
+    {
+
+        if (isset($click_in)) {
+
+            $this->click = $click_in;
+        
+        }
+
+    }
+
+    protected function getHtmlclick()
+
+    {
+
+        if (isset($this->click)) { 
+    
+            return "click=".$this->click;
+
+        }
+
+    }
 }

@@ -14,9 +14,9 @@
 
             $control->processForm();
             
-//                $this->forward( '../code/class/cmu/html/view/success.php' );
+                $this->forward( '../code/class/cmu/html/view/success.php' );
 //				$this->forward ( 'results.php' );
-			header ('Location: http://whois.math.cmu.edu/results.php');				
+//			header ('Location: http://whois.math.cmu.edu/results.php');				
 
 
 

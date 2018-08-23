@@ -43,7 +43,7 @@ class RoomsDTOFactory extends AbstractDTOFactory
 		//we need to remove the subobject from the root entity
 		foreach ($sub_object_map as $sub_name) {
 
-			if (isset($data_array[$sub_name])) {
+			if (isset($data_array[$sub_name])) {   //check config files
 				//create a new variable with the name of the value from sub_object_map (ex. 'outlets')	
 				${$sub_name} = $data_array[$sub_name];
 				unset($data_array[$sub_name]);

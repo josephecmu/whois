@@ -18,7 +18,7 @@ trait TraitLeafBuilder
         //check if key exists
         if (!property_exists($this->obj, $key)) {
             
-            echo "Object does not exist... $key";
+            echo "Property  ' " .  $key . "' does not exist...for " . get_class($this->obj) ;
             return;
             
         } else {
@@ -28,11 +28,11 @@ trait TraitLeafBuilder
 
                 case "append":
 
-                    $replace_value = self::$elementarray[$key] . " " . $value1 . " " . $value2;         //keep the current value and add others
+                    $replace_value = self::$elementarray[$key] ." ".$value1." ". $value2;         //keep the current value and add others
 
                 break;
 
-                case "replace":
+                case "replace":  //also works to add if non exists.
 
                     if (is_array($value1)) {
 

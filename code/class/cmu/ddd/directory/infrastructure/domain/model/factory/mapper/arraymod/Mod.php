@@ -134,6 +134,14 @@ class Mod
 
 	}
 
+	public function delete_empty_key() : self
+	{
+
+		$this->final = $this->s_modify("DeleteEmptyKey");
+		return $this;
+
+	}
+
 	public function reverse_remap_keys() : self
 	{
 

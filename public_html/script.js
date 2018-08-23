@@ -27,3 +27,14 @@ $(document).ready(function () {
     });
 
 });
+
+
+//function deleteSubObj(className) {
+
+//	$(className).attr('value', 'yes');
+
+//}
+
+
+
+

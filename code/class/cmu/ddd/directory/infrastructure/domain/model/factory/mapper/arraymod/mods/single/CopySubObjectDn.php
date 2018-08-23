@@ -9,7 +9,7 @@ class CopySubObjectDn extends AbstractSingleMods
 	{	
 		$sub_object_map = $this->obj->getSubObjectMap();
 
-		if (in_array($k, $sub_object_map)) {			//outlets values from map will match the key.
+		 if (in_array($k, $sub_object_map) && !empty($v)) {
 
 			foreach ($v as $subobj_array) {   //$v is array of objects array (outlets)
 

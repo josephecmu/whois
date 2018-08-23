@@ -35,7 +35,7 @@ class RoomsMapper extends AbstractMapper
 			foreach ($records[$i] as $k => $v){
 
 				if (isset($sub_object_map[$k])) {
-		
+
 					$newkey=$sub_object_map[$k];  //lookup new value based on key
 						
 					$ele = count($v);

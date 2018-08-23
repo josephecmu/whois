@@ -9,10 +9,10 @@ class DeleteKey extends AbstractSingleMods
 	{	
 		$delete_key_map = $this->obj->GetDeleteKeyMap();
 
-			if (!in_array($k, $delete_key_map)) {	//only add if NOT in delete_key_map (deleting by not adding)
-			
-				$this->temp[$k] = $v;
-			}
+		if (!in_array($k, $delete_key_map)) {	//only add if NOT in delete_key_map (deleting by not adding)
+		
+			$this->temp[$k] = $v;
+		}
 	}
 
 }
