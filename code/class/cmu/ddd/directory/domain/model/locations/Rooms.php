@@ -83,7 +83,7 @@ class Rooms extends AbstractEntity
 
 	}
 
-	public function getOutlets() 		//may return null or array
+	public function getOutlets() //: ?array		
 
 	{
 		return $this->outlets ?? null;

@@ -27,21 +27,21 @@ class RoomsRepository extends AbstractRepository
 		return $mapper->return_dto_to_domain_array();
 	}
 
-	public function buildNew(DTO $dto)
+	public function buildNew(DTO $dto) //:void
 	{
 
 		$this->build($dto, 'new');
 
 	}
 
-	public function buildUpdate(DTO $dto)
+	public function buildUpdate(DTO $dto) //:void
 	{
 		
 		$this->build($dto, 'update');
 
 	}
 
-	public function buildDelete(DTO $dto)
+	public function buildDelete(DTO $dto) //:void
 	{
 
 		$room_norm_array = $this->getRoomNormArray($dto);
@@ -56,7 +56,7 @@ class RoomsRepository extends AbstractRepository
 
 		$this->addDelete($room);
 
-		if (isset($outlets)) {	
+		if (!empty($outlets)) {	
 
 			$fact = new RoomsDomainObjectFactory;
 
@@ -77,7 +77,7 @@ class RoomsRepository extends AbstractRepository
 	
 	}
 	//FU  This could be broken up.
-	private function build(DTO $dto, string $state) 
+	private function build(DTO $dto, string $state) //:void
 	
 	{
 
@@ -100,7 +100,7 @@ class RoomsRepository extends AbstractRepository
 
 		$room = (new RoomsDomainObjectFactory())->createObject($room_norm_array);
 
-		if (isset($outlets)) {			
+		if (!empty($outlets)) {			
 
 			$fact = new RoomsDomainObjectFactory;
 
@@ -137,9 +137,6 @@ class RoomsRepository extends AbstractRepository
 				}	
 
 				if ($cur_action == 'delete') {		//the subobject must be removed from the list of outlets
-
-					echo "<br>RoomsRepository.php obj141<pre><br>";
-					print_r($obj);
 
 					$room->removeOutletFromRoom($obj);
 

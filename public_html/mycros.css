@@ -17,6 +17,9 @@ color:#b00;
 
 }
 
+.red {	
+	color:red;
+}
 
 label {
 	width: 300px;
@@ -28,12 +31,12 @@ label {
 
 input[type="submit"] {
 	    font-size: 15px;
-		    margin-top: 5px;
-			margin-left: 325px;
-		}
+		margin-top: 5px;
+		margin-left: 325px;
+}
 
 input.outlets {
-font-size:10px;
+	font-size:10px;
 }
 
 .hint{

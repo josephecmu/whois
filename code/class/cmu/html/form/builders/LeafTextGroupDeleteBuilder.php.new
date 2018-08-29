@@ -1,0 +1,111 @@
+<?php 
+namespace cmu\html\form\builders;
+
+use \cmu\html\form\products\Input;
+
+class LeafTextGroupDeleteBuilder extends AbstractLeafBuilder
+
+{
+
+	function returnLeaf()
+
+	{
+
+		$new_boxes = 2;
+		//get the number of values (existing)
+ 		$numberofvaluesarray = (isset(self::$valuesarray[0])) ? count(self::$valuesarray) : 0  ;
+		$numberoftextboxes = count(self::$metaarray['textboxes']) ;
+		$total = $numberofvaluesarray + $new_boxes;
+	
+		for ($i = 0; $i < $total; $i++) {
+		
+			if ($i < $numberofvaluesarray ) {  //existing values/////////////////////////////
+
+			}
+				$rand = rand(5,10000);	//this sets a single int to reference the related fields per value.
+
+				for ($t = 0; $t < $numberoftextboxes + 1 ; $t++) { //number of checkboxes
+
+				$this->obj = new Input;
+
+					if ( $t == $numberoftextboxes - 1 ) {   //delete  hidden field
+						$this->changeProperty('append', 'class', $rand);
+						$this->changeProperty('replace', 'type', 'hidden');				
+						$this->changeProperty('delete', 'readonly');
+		
+					} elseif  ( $t == $numberoftextboxes ) {   //delete button
+						$this->changeProperty('replace', 'type', 'button');
+						$this->changeProperty('replace', 'name', 'Delete');
+						$this->changeProperty('replace', 'value', 'Delete');
+						$this->changeProperty('delete', 'readonly');
+						$this->changeProperty('replace', 'onclick', "deleteSubObj('." . $rand . "')"  ); 
+						if ($i >= $numberofvaluesarray ) {
+						   	$this->hide();
+					   	}
+
+					} elseif ( $t == $numberoftextboxes - 2 ) { // dn
+						//we need the NAME of the key to return.  It's cleaner to assign to a variable.
+						$key = self::$metaarray['textboxes'][$t];
+						$this->changeProperty( 'replace', 'appendname', '[' . $i   . ']' , '[' . $key . ']' );
+						$this->changeProperty('replace', 'readonly', 'readonly');
+						if ($i >= $numberofvaluesarray ) {
+							$this->hide();
+						}
+						
+						if (isset(self::$valuesarray[$i][$key])) { //only print values if values array exists
+
+							$this->changeProperty('replace', 'value', array_values(self::$valuesarray)[$i][$key]);
+
+						}
+					}elseif ( $t == $numberoftextboxes - 3 ) { //outletid
+
+						//we need the NAME of the key to return.  It's cleaner to assign to a variable.
+						$key = self::$metaarray['textboxes'][$t];
+						$this->changeProperty( 'replace', 'appendname', '[' . $i   . ']' , '[' . $key . ']' );
+						if (isset(self::$valuesarray[$i][$key])) { //only print values if values array exists
+
+							$this->changeProperty('replace', 'value', array_values(self::$valuesarray)[$i][$key]);
+
+						}
+						if ($i < $numberofvaluesarray ) {	
+							$this->changeProperty('replace', 'readonly', 'readonly');
+						}
+					}
+
+					$this->arrayChangeProperty();
+					$this->setProperty();
+					$objects[] = $this->obj;
+				}
+				
+//			} else {   	//new
+//			
+//				$this->obj = new Input;
+//
+//				if (isset(self::$valuesarray[$i]['outletid'])) { //only print values if values array exists
+//
+//					$this->changeProperty('replace', 'value', array_values(self::$valuesarray)[$i]['outletid']);
+//
+//				}
+//				$this->changeProperty( 'replace', 'appendname', '[' . $i   . ']' , 'outletid' );
+//				$this->arrayChangeProperty();
+//				$this->setProperty();
+//				$objects[] = $this->obj;
+//			}
+		
+			
+			//this should go in CompositeTextboxgrouparrayBuilder
+			//we need to return a new close div and open div tag here
+			$objects[]	= new \cmu\html\general\products\Div;
+
+		}
+
+		return $objects;
+
+    }
+
+	private function hide() 
+	{
+		 $this->changeProperty('replace', 'type', 'hidden');		
+	}
+
+}
