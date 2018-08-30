@@ -6,8 +6,8 @@ trait TraitLeafBuilder
 {
 
     protected $obj;
-    //array containing all the metadata 
-    protected $overrides = array();
+    protected $overrides = array();   	//array containing all the metadata
+	protected $counter;					//used for complicated build (rooms/outlets)
 
     abstract function returnLeaf();
     //this method could be converted to STRATEGY PATTERN if much bigger?
