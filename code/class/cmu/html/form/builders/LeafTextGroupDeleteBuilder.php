@@ -2,6 +2,8 @@
 namespace cmu\html\form\builders;
 
 use \cmu\html\form\products\Input;
+use \cmu\html\form\products\Label;
+use \cmu\html\general\products\Div;
 
 class LeafTextGroupDeleteBuilder extends AbstractLeafBuilder
 
@@ -23,8 +25,6 @@ class LeafTextGroupDeleteBuilder extends AbstractLeafBuilder
 		for ($i = 0; $i < $numberofvaluesarray; $i++) {		//$i iteration of values array(i.e. number outlets) 
 
 			$rand = rand(5,10000);	//this sets a single int to reference the related fields per value.
-
-			$rand2 = rand(5,10000);
 
 			for ($t = 0; $t < $numberoftextboxes + 1 ; $t++) { //number of checkboxes + 'delete' button
 
@@ -78,13 +78,15 @@ class LeafTextGroupDeleteBuilder extends AbstractLeafBuilder
 
 				$this->arrayChangeProperty();
 				$this->setProperty();
-				$objects[] = $this->obj;
+					
+				$objects[] = $this->obj; 
+
 
 			}
 
 			//this should go in CompositeTextboxgrouparrayBuilder
 			//we need to return a new close div and open div tag here
-			$objects[]	= new \cmu\html\general\products\Div;
+//			$objects[]	= new \cmu\html\general\products\Div;
 
 		}
 

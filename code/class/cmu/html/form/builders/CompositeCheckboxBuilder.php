@@ -13,7 +13,7 @@ class CompositeCheckboxBuilder extends AbstractCompositeBuilder
 
                                     );
         
-        $fieldset = $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder("Fieldset"));
+        $this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder("Fieldset"));
         
 
         ///////////LEGEND///////////////////////////

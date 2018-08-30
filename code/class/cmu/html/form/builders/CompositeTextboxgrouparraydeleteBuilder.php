@@ -3,6 +3,7 @@ namespace cmu\html\form\builders;
 
 use cmu\html\form\builders\VariableLeafBuilder;
 use cmu\html\form\builders\LeafTextBuilder;
+use cmu\html\general\builders\VariableLeafBuilder as VariableLeafBuilderGeneral;
 
 class CompositeTextboxgrouparraydeleteBuilder extends AbstractCompositeBuilder
 
@@ -12,27 +13,36 @@ class CompositeTextboxgrouparraydeleteBuilder extends AbstractCompositeBuilder
 
     {
 
-        $labeloverrrides = array (  array('append', 'class', 'newtest'),
-
-                                    array('append', 'alt' , 'alttest_labelclass'),
-
-                                    array ('replace', 'id' , 'newid')
-                                     
-                                 );
-        
-	
+        $labeloverrrides = [];
 		$this->addBuilder(new VariableLeafBuilder("Label", $labeloverrrides));
 
-		$textoverrrides =   [   
-											
-				
-							  //      ['replace', 'appendname', '[' . $i . ']' ]
-									 
-						];
-		//loop through the number of values
-		//replace outlets[x] iteration 
-		//iterate, changing the passed iteration
+		$textoverrrides = [
+		
+							        ['append', 'class', 'sub' ]
+		
+		];
+		
+		$divoverrrides = [ 
+					
+							['replace', 'class', 'test'],
+		
+		];
+
+		
+        $fieldsetoverrrides = array (  
+
+                                    );
+        
+		$this->addBuilder(new \cmu\html\form\builders\VariableLeafBuilder("Fieldset"));
+
 		$this->addBuilder( new LeafTextGroupDeleteBuilder($textoverrrides));
+
+		
+        $closefieldsetoverrrides = [];
+        $this->addBuilder( new \cmu\html\form\builders\VariableLeafBuilder("CloseTag", $closefieldsetoverrrides));
+
+
+
 
 		}
 

@@ -7,6 +7,7 @@ class Div extends AbstractGeneralComponent
 
     private $divdata;
 
+
     public function setDivdata($divdata_in)
 
     {
@@ -18,16 +19,15 @@ class Div extends AbstractGeneralComponent
     public function getDivData()
 
     {
-    
-        if (isset($this->obj)) {
 
-            return $this->returnObject();
+		//is this used at all??????????	
+        //if (isset($this->obj)) {
 
-        } else {
+          //  return $this->returnObject();
 
-            return $this->divdata;
+        //}
 
-        }
+		return $this->divdata;
 
     }
 
