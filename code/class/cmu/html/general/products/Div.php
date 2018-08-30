@@ -20,12 +20,12 @@ class Div extends AbstractGeneralComponent
 
     {
 
-		//is this used at all??????????	
-        //if (isset($this->obj)) {
+		
+        if (isset($this->obj)) {
 
-          //  return $this->returnObject();
+          return $this->returnObject();
 
-        //}
+        }
 
 		return $this->divdata;
 
