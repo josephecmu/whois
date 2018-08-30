@@ -20,7 +20,6 @@ class Div extends AbstractGeneralComponent
 
     {
 
-		
         if (isset($this->obj)) {
 
           return $this->returnObject();
