@@ -5,7 +5,7 @@ class LdapValues extends AbstractValues
 
 {
 	//this might work better from Mapper ???
-    private function returnLdapNormValuesArray (array $array)   : array                 //could be recursive function
+    private function returnLdapNormValuesArray (array $array) : array                 //could be recursive function
 
     {
 
@@ -26,7 +26,6 @@ class LdapValues extends AbstractValues
                 if ($k == 'count') {	                            				//dont add [count]
 
                     continue;                                                      
-
                 } 
 
                 $values_ldap[$k] = $v;                                              //add to $values_ldap
@@ -44,18 +43,14 @@ class LdapValues extends AbstractValues
         return $values_ldap;
 
     }
-
-    public function getCheckValue($key)                  //return array, not null, used below
+//FU I am not sure if we need this.  Cant we just call getValue() with the methods below??? do we have to return an array??
+// YES...returnLdapNormValuesArray requires and array
+	//why would we have an empty array?? is array one record???
+	public function getCheckValue($key) : array                 //return array, not null, used below
 
     {
-
-        if (null == $this->values) {
-
-            return array();
-
-        }
-
-        return $this->getValue($key);
+//		shorthand josephe 9-5-18	
+		return $this->getValue($key) ?? [] ;
 
     }
 
@@ -63,23 +58,24 @@ class LdapValues extends AbstractValues
 
     {
 
-        return $this->returnLdapNormValuesArray($this->getCheckValue(0));      //return single array
+       return $this->returnLdapNormValuesArray($this->getCheckValue(0));      //return single array
 
     }
 
-    function returnMultiLdapNormValuesArray()
+    function returnMultiLdapNormValuesArray() : array
 
     {
+		//9-5-18 changed below
+		//$count = $this->values["count"];
+		$count = $this->getValue('count');
 
-        $count = $this->values["count"];
+        for ($i=1; $i < $count; $i++) {  
 
-        for ($i=1; $i<$count; $i++) {  
-
-            $norm_values_array[] =  $this->returnLdapNormValuesArray($this->getCheckValue($i));		//call method above and assign to another array for iteration of multiple records
+            $norm_values_array[] = $this->returnLdapNormValuesArray($this->getCheckValue($i));		//call method above. 
 
         }
 
-        return $norm_values_array;
+        return $norm_values_array ?? [] ;
 
     }
 
