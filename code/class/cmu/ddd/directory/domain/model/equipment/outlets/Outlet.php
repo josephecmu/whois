@@ -17,57 +17,38 @@ class Outlet extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 	protected $computers=[];		//outlets hold multiple computers we only hold reference by ID. Not in aggregate.
 
 	protected function getRequiredFields() : array				//returns array of required properties
-
 	{
-
 		return ["outletid", "dn"];	
-		
 	}
 
-	public function setOutletid ($anoutletid)
-
+	public function setOutletid ($anoutletid) : void
 	{
-
-		$this->outletid =  $anoutletid;
-
+		$this->outletid = $anoutletid;
 	}
-
-    public function setOutletdn (Dn $anoutletdn)
-
+	//is this ever called????
+    public function setOutletdn (Dn $anoutletdn) : void
 	{
-
-		$this->outletdn = $anoutletdn;
-
+//		$this->outletdn = $anoutletdn;			//1-31-19
+		$this->dn = $anoutletdn;
 	}
 	public function getOutletid() : string
 	{
-
 		return $this->outletid;
-
 	}
 
 	public function getOutletdn() : Dn
-
 	{
-
 		return $this->dn;                                                                                         
-
 	}
 
 	public function getComputers() : array
-
 	{
 		return $this->computers;
-
 	}	
 
 	public function addComputerToOutlet (Dn $acomputerdn) 
 
 	{
-
 		$this->computers[] = $acomputerdn;
-
 	}
-
-
 }
