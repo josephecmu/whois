@@ -12,7 +12,6 @@ use cmu\wrappers\LdapWrapper;
 
 
 class DomainObjectAssembler
-
 {
 	protected $factory;
 	private $statments;
@@ -32,7 +31,6 @@ class DomainObjectAssembler
 
 	public function findOne(AbstractIdentityObject $idobj): AbstractEntity
 	{
-
 		$collection = $this->find($idobj);
 		return $collection->next(); 		//return  only ONE (next)
 	}
@@ -77,7 +75,6 @@ class DomainObjectAssembler
 		list($dn, $input) = $addfact->newAdd($obj);    	//get $dn and $input for ldap update() below
 
 		return $this->ldap->add($dn, $input);
-
 	}
 	
 	public function update(AbstractEntity $obj) :bool

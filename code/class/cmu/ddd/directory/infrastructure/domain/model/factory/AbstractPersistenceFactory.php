@@ -42,6 +42,9 @@ abstract class AbstractPersistenceFactory
 			case Outlet::class;
 				return new OutletsPersistenceFactory();
 				break;
+			case Computer::class;
+				return new ComputersPersistenceFactory();
+				break;
 			default: 
 				echo "no class found " . $target_class ." in AbstractPersistenceFactory";
 

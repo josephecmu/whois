@@ -14,7 +14,7 @@ class CompositeTextboxgrouparrayBuilder extends AbstractCompositeBuilder
 
         $labeloverrrides = array (  array('append', 'class', 'newtest'),
 
-                                    array('append', 'alt' , 'alttest_labelclass'),
+//                                    array('append', 'alt' , 'alttest_labelclass'),
 
                                     array ('replace', 'id' , 'newid')
                                      

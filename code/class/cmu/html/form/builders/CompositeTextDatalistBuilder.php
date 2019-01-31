@@ -11,7 +11,7 @@ class CompositeTextDatalistBuilder extends AbstractCompositeBuilder
         //Label///////////////////////////////////////
         $labeloverrrides = array (  //array('replace', 'label', 'datalist'),
 
-                                    array('append', 'alt' , 'alttest_labelclass') 
+//                                    array('append', 'alt' , 'alttest_labelclass') 
                                      
                                  );
 

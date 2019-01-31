@@ -4,10 +4,12 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\repository;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\PeoplePersistenceFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\RoomsPersistenceFactory;
+use cmu\ddd\directory\infrastructure\domain\model\factory\ComputersPersistenceFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;   
 use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\domain\model\actors\people\People;
+use cmu\ddd\directory\domain\model\equipment\computers\Computer;
 
 abstract class AbstractRepository
 {

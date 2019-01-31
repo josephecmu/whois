@@ -7,7 +7,6 @@ use \cmu\ddd\directory\infrastructure\domain\model\factory\query\AbstractQuery;
 use \cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
 
 abstract class AbstractSelectionFactory
-
 {
 
 	use TraitTargetClass;
