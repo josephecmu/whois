@@ -22,9 +22,7 @@ abstract class AbstractRepository
 //	function __construct()
 //	
 //		$this->factory = AbstractPersistenceFactory::getFactory($this->targetClass());	
-//
 //		$this->doa = new DomainObjectAssembler($this->factory);
-//
 //		$this->repo = $this->factory->getRepository(); 
 //
 //	}
@@ -33,91 +31,69 @@ abstract class AbstractRepository
 
 	protected function globalKey(string $unique): string
 	{
-
 		$key = $unique;
 		return $key;
 	}
 	//this is needed for a collection of objects to iterate.  (getFactory)
 	private function getDoaFromObject(AbstractEntity $obj) : DomainObjectAssembler 
 	{
-
 		$class= get_class($obj);
 		$factory = AbstractPersistenceFactory::getFactory($class);
 		$doa = new DomainObjectAssembler($factory);
 		return $doa;
 	}
 
-	protected function add(AbstractEntity $obj)
+	protected function add(AbstractEntity $obj) : void
 	{
-
 		$uniqid = $obj->getUid();
-
 		$this->all[$this->globalKey($uniqid)] = $obj;
 	}
 
 	public function findByDn(string $dn) : AbstractEntity
 	{
-
 		$uniqid = $dn;
-
 		$key = $this->globalKey($uniqid);
 
 		if (array_key_exists($key, $this->all)) {
 			return $this->all[$key];
 		}
-
 	}
 
 	public function findById(string $id) : AbstractEntity
 	{
 		$uniqid = $this->buildDn($id);
-
 		return $this->findByDn($uniqid);
-
 	}
 
 	public function addNew(AbstractEntity $obj)
 	{
-
 		$uniqid = $obj->getUid();
-
 		$key = $this->globalKey($uniqid);
-
 		$this->new[$key] = $obj;
 	}
 
-	public function addDelete(AbstractEntity $obj)
+	public function addDelete(AbstractEntity $obj) : void
 	{
-
 		$uniqid = $obj->getUid();
-
 		$key = $this->globalKey($uniqid);
-
 		$this->delete[$key] = $obj;
-
 	}
 
-	public function addDirty(AbstractEntity $obj)
+	public function addDirty(AbstractEntity $obj) : void
 	{
-
 		$uniqid = $obj->getUid();
-
 		$key = $this->globalKey($uniqid);
-
 		if (! array_key_exists($key, $this->dirty)) {
 
 			$this->dirty[$key] = $obj;
 
 		}
-
 	}
 
 	public function performOperations() : bool
 	{
-
 		foreach ($this->dirty as $key => $obj) {
 			$result[] = $this->getDoaFromObject($obj)->update($obj);
-
 		}
 
 		foreach ($this->new as $key => $obj) {
@@ -127,14 +103,11 @@ abstract class AbstractRepository
 		foreach ($this->delete as $key => $obj) {
 			$result[] = $this->getDoaFromObject($obj)->delete($obj);
 		}
-
 		//reset
 		$this->dirty = [];
 		$this->new = [];
 		$this->delete = [];
 
         return (!in_array(0, $result)) ? true : false;
-
 	}
-
 }

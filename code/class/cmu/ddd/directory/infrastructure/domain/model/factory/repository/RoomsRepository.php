@@ -64,10 +64,9 @@ class RoomsRepository extends AbstractRepository
 		}
 	}
 
-	private function build(DTO $dto, string $state) :void
+	private function build(DTO $dto, string $state) : void
 	{
-		//get the proper function to store the Room.
-		$function = $this->getAddFunction($state);
+		$function = $this->getAddNewOrDirtyFunction($state);
 
 		$room_norm_array = $this->getRoomNormArray($dto);   //runs through the mapper listed above
 
@@ -78,30 +77,24 @@ class RoomsRepository extends AbstractRepository
 
 		$room = (new RoomsDomainObjectFactory())->createObject($room_norm_array);	//final $room
 
-		if (!empty($outlets)) {			
-
+		if (!empty($outlets)) {														//add the outlets to room.
 			$fact = new RoomsDomainObjectFactory;
-			
 			$this->addOutletsToRoom($outlets, $fact, $room);
 		}	
 
 		if ($room->getOutlets()) {
-
 			foreach ($room->getOutlets() as $obj) { 		
-
 				$cur_action = $this->action_array[$obj->getOutletId()];
-
 				$this->addObjToProperty($cur_action, $obj);
-
 				if ($cur_action == 'delete') {		//the subobject must be removed from the list of outlets
 					$room->removeOutletFromRoom($obj);
 				}
 			}
 		}
-		$this->$function($room);
+		$this->$function($room);		//AddNewOrDirty
 	}
 
-	private function getAddFunction(string $state) : string   			//get the proper function to store the Room.
+	private function getAddNewOrDirtyFunction(string $state) : string  	//get the proper function to store the Room.
 	{
 		switch ($state) {
 		case 'new':
@@ -126,11 +119,11 @@ class RoomsRepository extends AbstractRepository
 		}	
 	}
 
-	private function addOutletsToRoom (array $outlets, RoomsDomainObjectFactory $fact, Rooms $room) : void
+	private function addOutletsToRoom (array $outlets, RoomsDomainObjectFactory $roomfact, Rooms $room) : void
 	{
 		foreach($outlets as $outlet) {
-			$action = $fact->getAction($outlet);	
-			$outletnormarray = $fact->returnNormOutletArray($outlet, $action);
+			$action = $roomfact->getAction($outlet);	
+			$outletnormarray = $roomfact->returnNormOutletArray($outlet, $action);
 			$this->action_array[$outletnormarray['outletid']] = $action;
 			$room->assignOutletToRoom($outletnormarray);
 		}

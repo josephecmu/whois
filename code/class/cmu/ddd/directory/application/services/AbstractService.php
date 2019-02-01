@@ -15,9 +15,7 @@ abstract class AbstractService
 	{
 
 		$this->factory = AbstractPersistenceFactory::getFactory($this->targetClass());	
-
 		$this->doa = new DomainObjectAssembler($this->factory);
-
 		$this->repo = $this->factory->getRepository(); 
 
 	}

@@ -10,13 +10,10 @@ use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outl
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsDeleteArray;
 
 class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
-
 {
 
 	public function createObject(array $norm_array) : Rooms
-
 	{
-
 		if (isset($norm_array['outlets'])) {
 			$outlets=$norm_array['outlets'];
 			unset($norm_array['outlets']);
@@ -30,26 +27,19 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 				$norm_outlet =  $this->returnNormOutletArray($outlet, 'read');
 				$room->assignOutletToRoom($norm_outlet);
 			}
-
 		}
-
 		return $room;
-
 	}
 
-	public function returnNewOutlet(array $outlet, string $action)
+	public function returnNewOutlet(array $outlet, string $action) : Outlet
 	{
-
 		$outlet_norm_array = $this->returnNormOutletArray($outlet, $action); 
-
 		return new Outlet($outlet_norm_array);
-
 	}
 	
 	//This can most likely be a Strategy or Visitor pattern and pushed up if we need to re-use
-	public function returnNormOutletArray(array $subobjarray, string $action)
+	public function returnNormOutletArray(array $subobjarray, string $action) : array
 	{
-
 		switch ($action) {
 			case "create":						
 				return (new OutletsCreateArray())->returnNormArray($subobjarray);
@@ -67,7 +57,6 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 	//if re-use move the atts to config file.	
 	public function getAction(array $subobjarray) : string     //should be "getSubObjectAction"
 	{
-
 		if (!empty($subobjarray['delete']) && ($subobjarray['delete'] == 'yes')): 
 			echo " RoomsDomainObjectFactory.php...DELETE";
 			return "delete";

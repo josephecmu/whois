@@ -25,13 +25,9 @@ abstract class AbstractOutlets extends AbstractSubObject
 
 	protected function getIdObjectSearchById(string $id) : OutletsIdentityObject
 	{
-
 		$idobj = new OutletsIdentityObject();
-			
 		$idobj->field("cn")->eq($id);
-
 		return $idobj;
-
 	}
 	
 }

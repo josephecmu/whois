@@ -22,22 +22,17 @@ abstract class AbstractSubObject
 		$this->setLdapHandle();
 	}
 	//this can be optimized - this is called each time the class is instantiated FU
-	protected function setLdapHandle() 
+	protected function setLdapHandle() : void
 	{
 		$ds = LdapWrapper::getLdapDs();
-
 		$this->ldap = new LdapWrapper($ds);        //query LDAP
 	}
 
 	protected function returnRawArrayFromIdobject(AbstractIdentityObject $idobj) : array
 	{
-
 		list ($location, $fields, $filter) = $this->returnSelfact()->newSelection($idobj); 
-	
 		$link = $this->ldap->search($location, $filter, $fields);
-
 		return $this->ldap->getEntries($link);
-
 	}
 
 	protected function returnSingleNormArrayLdapToDomain(array $raw) : array   //return ONE record
