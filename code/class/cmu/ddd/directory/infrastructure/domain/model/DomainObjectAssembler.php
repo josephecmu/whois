@@ -10,7 +10,6 @@ use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\config\site\bin\Registry;
 use cmu\wrappers\LdapWrapper;
 
-
 class DomainObjectAssembler
 {
 	protected $factory;
@@ -89,7 +88,6 @@ class DomainObjectAssembler
 
 
 	public function delete(AbstractEntity $obj) : bool
-
 	{
 
 		$delfactory = $this->factory->getModifyFactory();
