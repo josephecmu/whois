@@ -5,7 +5,7 @@ class LeafSelectBuilder extends AbstractLeafBuilder
 
 {
 
-    function returnLeaf()
+    function returnLeaf() : array
 
     {
 

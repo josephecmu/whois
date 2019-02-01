@@ -20,12 +20,12 @@ class Registry
 		return self::$instance;
 	}
 
-	public static function reset()
+	public static function reset() : void
 	{
 		self::$instance = null;
 	}
 
-	public function setConf(Conf $conf)
+	public function setConf(Conf $conf) : void
 	{
 		$this->conf = $conf;
 	}
@@ -40,47 +40,32 @@ class Registry
 	}
 
 	public function getPass() : string
-
 	{
-
 		$conf = $this->getConf();
 		return $conf->get("pass");
-
 	}
 
 	public function getCred() : string
-
 	{
-
 		$conf = $this->getConf();
 		return $conf->get("cred"); 
-
 	}
 
 	public function getHost() : string
-
 	{
-
 		$conf = $this->getConf();
 		return $conf->get("host"); 
-
 	}
 
 	public function getPort(): int
-
 	{
-
 		$conf = $this->getConf();
 		return $conf->get("port"); 
-
 	}
 	public function getDn(): string
-
 	{
-
 		$conf = $this->getConf();
 		return $conf->get("dn"); 
-
 	}
 
 }

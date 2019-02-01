@@ -14,15 +14,13 @@ class ApplicationHelper
 		$this->reg = Registry::instance();
 	}
 
-	public function init()
+	public function init() : void
 	{
-
 		$this->setupOptions();
 	}
 	
-	private function setupOptions()
+	private function setupOptions() : void
 	{
-
 		if (! file_exists($this->config)) {
 			throw new AppException("Could not find options file");
 			echo "Could not find options file";
@@ -33,7 +31,6 @@ class ApplicationHelper
 		$conf = new Conf($options['ldap_config']);
 
 		$this->reg->setConf($conf);
-
 	}
 
 }

@@ -21,16 +21,13 @@ trait TraitConfig
 
 	protected function getConfigArray(string $file) : array 			//return the parsed .ini file
 	{
-
 		$ini = $this->returnIniFile($file);
 		return parse_ini_file($ini, true);
 	}
 
 	protected function returnConfigObject( array $options) : Conf		//return Conf object, with specified [section] (people,etc.)
 	{
-
 		return new Conf($options);
-
 	}
 
 }

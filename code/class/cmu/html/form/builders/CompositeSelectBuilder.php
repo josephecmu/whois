@@ -9,7 +9,7 @@ class CompositeSelectBuilder extends AbstractCompositeBuilder
 
     {
         ////LABEL///////////////////////////////////////////////
-        $labeloverrrides = array (  array('replace', 'label', 'selectoverride') 
+        $labeloverrrides = array (//  array('replace', 'label', 'selectoverride') 
 
                                  );
         
