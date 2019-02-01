@@ -4,6 +4,7 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory;
 
 use cmu\ddd\directory\domain\model\actors\people\People;
 use cmu\ddd\directory\domain\model\locations\Rooms;
+use cmu\ddd\directory\domain\model\equipment\computers\Computer;
 use cmu\ddd\directory\domain\model\equipment\outlets\Outlet;
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\AbstractDomainObjectFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
@@ -29,9 +30,7 @@ abstract class AbstractPersistenceFactory
 //	abstract public function getDTOFactory(): AbstractDTOFactory;			
 //
 	public static function getFactory($target_class) : AbstractPersistenceFactory
-	
 	{
-
 		switch ($target_class) {
 			case People::class:
 				return new PeoplePersistenceFactory();
@@ -47,7 +46,6 @@ abstract class AbstractPersistenceFactory
 				break;
 			default: 
 				echo "no class found " . $target_class ." in AbstractPersistenceFactory";
-
 
 		}
 	}

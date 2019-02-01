@@ -25,9 +25,9 @@ class AddComputersService extends AbstractComputersService
 		//identity generator reference here??????
 		//also check for existance of gidnumber and uidnumber and homedirectory
 
-		$andrewid = $dto->get('andrewid');
+		$computerid = $dto->get('computerid');
 
-		$dn = $this->repo->buildDn($andrewid);		//get the ID from the repo
+		$dn = $this->repo->buildDn($computerid);		//get the ID from the repo
 		$dto->set('dn', $dn);						//we need to pass the $dn we just constructed
 		$obj = $this->doa->build($dto);				//build the object
 

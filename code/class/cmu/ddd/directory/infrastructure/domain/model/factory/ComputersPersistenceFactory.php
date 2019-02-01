@@ -55,9 +55,7 @@ class ComputersPersistenceFactory extends AbstractPersistenceFactory
 
 	public function getRepository () : AbstractRepository
 	{
-
-		//return new ComputersRepository;
-		return null;
+		return new ComputersRepository;
 	}
 
 }

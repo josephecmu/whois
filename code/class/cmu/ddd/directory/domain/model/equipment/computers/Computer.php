@@ -4,11 +4,12 @@
 *
 *
 */
-namespace cmu\domain\model\directory\equipment\computers;
+namespace cmu\ddd\directory\domain\model\equipment\computers;
 
 use \cmu\ddd\directory\domain\model\lib\Dn;
+use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
-class Computer extends \cmu\domain\model\directory\AbstractEntity
+class Computer extends AbstractEntity
 {
 
 	protected $computerid;			// cn

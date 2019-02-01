@@ -7,7 +7,6 @@ use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
 
 abstract class AbstractService 
-
 {
 	protected $doa;
 	protected $factory;
