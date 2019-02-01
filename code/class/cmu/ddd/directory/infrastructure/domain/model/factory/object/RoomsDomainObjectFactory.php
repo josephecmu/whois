@@ -23,7 +23,6 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 
 		if (isset($outlets)) {
 			foreach ($outlets as $outlet) {
-
 				$norm_outlet =  $this->returnNormOutletArray($outlet, 'read');
 				$room->assignOutletToRoom($norm_outlet);
 			}
