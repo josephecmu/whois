@@ -12,7 +12,7 @@ use cmu\ddd\directory\infrastructure\services\dto\DTO;
 class RoomsRepository extends AbstractRepository 
 {
 
-	private $action_array;
+	private $action_array;							//stores an array of Outlets with associated action.
 
 	public function buildDn(string $id) : string
 	{
@@ -38,35 +38,12 @@ class RoomsRepository extends AbstractRepository
 
 	public function buildDelete(DTO $dto) : void
 	{
-		$room_norm_array = $this->getRoomNormArray($dto);
-
-		if (isset($room_norm_array['outlets'])) {
-			$outlets=$room_norm_array['outlets'];
-			unset($room_norm_array['outlets']);
-		}
-
-		$room = (new RoomsDomainObjectFactory())->createObject($room_norm_array);
-
-		$this->addDelete($room);
-
-		if (!empty($outlets)) {	
-
-			$fact = new RoomsDomainObjectFactory;
-
-			foreach($outlets as $outlet) {
-				$outletnormarray = $fact->returnNormOutletArray($outlet, 'delete');
-				$room->assignOutletToRoom($outletnormarray); //no need to normalize.
-			}
-		}	
-		
-		foreach ($room->getOutlets() as $obj) { 
-			$this->addDelete($obj);	
-		}
+		$this->build($dto, 'delete');
 	}
 
 	private function build(DTO $dto, string $state) : void
 	{
-		$function = $this->getAddNewOrDirtyFunction($state);
+		$function = $this->getAddNewDirtyDeleteFunction($state);
 
 		$room_norm_array = $this->getRoomNormArray($dto);   //runs through the mapper listed above
 
@@ -75,36 +52,49 @@ class RoomsRepository extends AbstractRepository
 			unset($room_norm_array['outlets']);
 		}
 
-		$room = (new RoomsDomainObjectFactory())->createObject($room_norm_array);	//final $room
+		$room = $this->buildRoom($room_norm_array);
 
 		if (!empty($outlets)) {														//add the outlets to room.
 			$fact = new RoomsDomainObjectFactory;
-			$this->addOutletsToRoom($outlets, $fact, $room);
+			$this->assignMultipleOutletsToRoom($outlets, $fact, $room);
 		}	
 
-		if ($room->getOutlets()) {
-			foreach ($room->getOutlets() as $obj) { 		
-				$cur_action = $this->action_array[$obj->getOutletId()];
-				$this->addObjToProperty($cur_action, $obj);
-				if ($cur_action == 'delete') {		//the subobject must be removed from the list of outlets
-					$room->removeOutletFromRoom($obj);
-				}
-			}
+		$deleteall = ($state == 'delete') ? 'deleteall' : null;
+		if ($room->getOutlets()) {						//cycle through current rooms outlets and add AddDirtyDelete
+			$this->handleCurrentRoomOutlets($room, $deleteall);			
 		}
-		$this->$function($room);		//AddNewOrDirty
+
+		$this->$function($room);		//run AddNewOrDirty
 	}
 
-	private function getAddNewOrDirtyFunction(string $state) : string  	//get the proper function to store the Room.
+	private function getAddNewDirtyDeleteFunction(string $state) : string  	//get the proper function to store the Room.
 	{
 		switch ($state) {
 		case 'new':
 			return 'addNew';
 		case 'update':
 			return 'addDirty';
+		case 'delete':
+			return 'addDelete';
 		}
 	}
 
-	private function addObjToProperty(string $cur_action, Outlet $obj) : void
+	private function assignMultipleOutletsToRoom (array $outlets, RoomsDomainObjectFactory $roomfact, Rooms $room) : void
+	{
+		foreach($outlets as $outlet) {
+			$action = $roomfact->getAction($outlet);	
+			$outletnormarray = $roomfact->returnNormOutletArray($outlet, $action);
+			$this->action_array[$outletnormarray['outletid']] = $action;
+			$room->assignOutletToRoom($outletnormarray);
+		}
+	}
+
+	private function buildRoom(array $room_norm_array) : Rooms
+	{
+		return (new RoomsDomainObjectFactory())->createObject($room_norm_array);
+	}
+
+	private function addObjToNewDirtyDelete(string $cur_action, Outlet $obj) : void
 	{
 		switch ($cur_action) {
 			case "create":			
@@ -119,13 +109,18 @@ class RoomsRepository extends AbstractRepository
 		}	
 	}
 
-	private function addOutletsToRoom (array $outlets, RoomsDomainObjectFactory $roomfact, Rooms $room) : void
+	private function handleCurrentRoomOutlets(Rooms $room, string $deleteall=null ) : void
 	{
-		foreach($outlets as $outlet) {
-			$action = $roomfact->getAction($outlet);	
-			$outletnormarray = $roomfact->returnNormOutletArray($outlet, $action);
-			$this->action_array[$outletnormarray['outletid']] = $action;
-			$room->assignOutletToRoom($outletnormarray);
+		foreach ($room->getOutlets() as $obj) { 		
+			if (!empty($deleteall)) {
+				$this->addDelete($obj);				//this eliminates flagging each outlet as 'delete'
+			} else {
+				$cur_action = $this->action_array[$obj->getOutletId()];
+				$this->addObjToNewDirtyDelete($cur_action, $obj);
+				if ($cur_action == 'delete') {		//the subobject must be removed from the list of outlets
+					$room->removeOutletFromRoom($obj);
+				}
+			}
 		}
 	}
 }
