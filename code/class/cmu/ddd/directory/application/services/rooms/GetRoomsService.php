@@ -22,13 +22,11 @@ class GetRoomsService extends AbstractRoomsService
 
 		//check repository if object already exists...
 
-
-		//this could go in the repository
 		$id = new RoomsIdentityObject();
 		$id->field("cn")
 			->eq($cn);
 
-		$obj = $this->doa->findOne($id);
+		$obj = $this->repo->getObj($id);
 
 		$dto_fact = $this->factory->getDTOFactory();
 

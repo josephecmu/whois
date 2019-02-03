@@ -3,7 +3,7 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\object;
 
 use \cmu\ddd\directory\domain\model\locations\Rooms;
-use cmu\ddd\directory\domain\model\equipment\outlets\Outlet;  
+use \cmu\ddd\directory\domain\model\equipment\outlets\Outlet;  
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsCreateArray;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsReadArray;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outlets\OutletsUpdateArray;
@@ -14,6 +14,7 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 
 	public function createObject(array $norm_array) : Rooms
 	{
+
 		if (isset($norm_array['outlets'])) {
 			$outlets=$norm_array['outlets'];
 			unset($norm_array['outlets']);
@@ -27,6 +28,7 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 				$room->assignOutletToRoom($norm_outlet);
 			}
 		}
+
 		return $room;
 	}
 

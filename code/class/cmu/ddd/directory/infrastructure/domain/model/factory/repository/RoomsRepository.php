@@ -8,15 +8,26 @@ use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\RoomsDn;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\RoomsMapper;
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\RoomsDomainObjectFactory;
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\RoomsIdentityObject;
 
 class RoomsRepository extends AbstractRepository 
 {
 
 	private $action_array;							//stores an array of Outlets with associated action.
 
+	public function targetClass(): string
+	{
+		return Rooms::class;
+	}
+
 	public function buildDn(string $id) : string
 	{
 		return RoomsDn::buildDn($id);
+	}
+
+	public function getObj(RoomsIdentityObject $id) : Rooms
+	{
+		return $this->doa->findOne($id);
 	}
 
 	private function getRoomNormArray(DTO $dto) : array
@@ -47,16 +58,15 @@ class RoomsRepository extends AbstractRepository
 
 		$room_norm_array = $this->getRoomNormArray($dto);   //runs through the mapper listed above
 
-		if (!empty($room_norm_array['outlets'])) {			//strip the outlets if they exist.
+		if (!empty($room_norm_array['outlets'])) {			//strip the outlets DNs if they exist.
 			$outlets=$room_norm_array['outlets'];
 			unset($room_norm_array['outlets']);
 		}
 
-		$room = $this->buildRoom($room_norm_array);
+		$room = $this->dofact->createObject($room_norm_array);
 
 		if (!empty($outlets)) {														//add the outlets to room.
-			$fact = new RoomsDomainObjectFactory;
-			$this->assignMultipleOutletsToRoom($outlets, $fact, $room);
+			$this->assignMultipleOutletsToRoom($outlets, $room);
 		}	
 
 		$deleteall = ($state == 'delete') ? 'deleteall' : null;
@@ -64,7 +74,7 @@ class RoomsRepository extends AbstractRepository
 			$this->handleCurrentRoomOutlets($room, $deleteall);			
 		}
 
-		$this->$function($room);		//run AddNewOrDirty
+		$this->$function($room);		//run AddNewDirtyDelete
 	}
 
 	private function getAddNewDirtyDeleteFunction(string $state) : string  	//get the proper function to store the Room.
@@ -79,19 +89,14 @@ class RoomsRepository extends AbstractRepository
 		}
 	}
 
-	private function assignMultipleOutletsToRoom (array $outlets, RoomsDomainObjectFactory $roomfact, Rooms $room) : void
+	private function assignMultipleOutletsToRoom (array $outlets, Rooms $room) : void
 	{
 		foreach($outlets as $outlet) {
-			$action = $roomfact->getAction($outlet);	
-			$outletnormarray = $roomfact->returnNormOutletArray($outlet, $action);
+			$action = $this->dofact->getAction($outlet);	
+			$outletnormarray = $this->dofact->returnNormOutletArray($outlet, $action);
 			$this->action_array[$outletnormarray['outletid']] = $action;
 			$room->assignOutletToRoom($outletnormarray);
 		}
-	}
-
-	private function buildRoom(array $room_norm_array) : Rooms
-	{
-		return (new RoomsDomainObjectFactory())->createObject($room_norm_array);
 	}
 
 	private function addObjToNewDirtyDelete(string $cur_action, Outlet $obj) : void
