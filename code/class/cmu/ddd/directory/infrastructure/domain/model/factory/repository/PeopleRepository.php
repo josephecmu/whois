@@ -11,11 +11,13 @@ use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 class PeopleRepository extends AbstractRepository 
 {
 
+	public function targetClass(): string
+	{
+		return People::class;
+	}
 
 	public function buildDn(string $id) : string
 	{
-	
 		return PeopleDn::buildDn($id);
-
 	}
 }

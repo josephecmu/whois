@@ -18,18 +18,21 @@ abstract class AbstractRepository
 	protected $new = [];
 	protected $dirty = [];
 	protected $delete = [];
+	protected $dofact;
+	protected $doa;
 
-//	function __construct()
-//	
-//		$this->factory = AbstractPersistenceFactory::getFactory($this->targetClass());	
-//		$this->doa = new DomainObjectAssembler($this->factory);
-//		$this->repo = $this->factory->getRepository(); 
-//
-//	}
+	function __construct() 
+	{
+		$fact = AbstractPersistenceFactory::getFactory($this->targetClass());	
+		$this->doa = new DomainObjectAssembler($fact);
+		$this->dofact = $fact->getDomainObjectFactory(); 
+	}
 
 	abstract public function buildDn (string $id) : string;
 
-	protected function globalKey(string $unique): string
+	abstract public function targetClass() : string;
+
+	protected function globalKey(string $unique) : string
 	{
 		$key = $unique;
 		return $key;
@@ -65,7 +68,7 @@ abstract class AbstractRepository
 		return $this->findByDn($uniqid);
 	}
 
-	public function addNew(AbstractEntity $obj)
+	public function addNew(AbstractEntity $obj) : void
 	{
 		$uniqid = $obj->getUid();
 		$key = $this->globalKey($uniqid);
@@ -86,7 +89,6 @@ abstract class AbstractRepository
 		if (! array_key_exists($key, $this->dirty)) {
 
 			$this->dirty[$key] = $obj;
-
 		}
 	}
 

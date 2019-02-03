@@ -10,6 +10,11 @@ use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 
 class ComputersRepository extends AbstractRepository 
 {
+	public function targetClass(): string
+	{
+		return Computer::class;
+	}
+
 	public function buildDn(string $id) : string
 	{
 		return ComputersDn::buildDn($id);

@@ -17,7 +17,7 @@ class AddRoomsService extends AbstractRoomsService
 		$dn = $this->repo->buildDn($roomid);		//get the ID from the repo
 		$dto->set('dn', $dn);						//we need to pass the $dn we just constructed
 
-		$this->repo->buildNew($dto);				//we can't use DOA, so we submit to repo.
+		$this->repo->buildNew($dto);				
 
 		return $this->repo->performOperations();	
 

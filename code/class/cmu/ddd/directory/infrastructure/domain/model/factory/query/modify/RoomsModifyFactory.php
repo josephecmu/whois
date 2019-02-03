@@ -6,23 +6,17 @@ use \cmu\ddd\directory\domain\model\locations\Rooms;
 use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
 class RoomsModifyFactory extends AbstractModifyFactory
-
 {
-	//should be in parent    should rename to getDn  FU
+	//should be in parent should rename to getDn  FU
 	protected function getRdn(AbstractEntity $obj) : string
-
 	{
-		
 		return $obj->dynGet("dn")->dynGet("dn");
 
 	}
 
 	protected function targetClass() : string
 	{
-
 		return Rooms::class;
-
 	}
-
 }
 

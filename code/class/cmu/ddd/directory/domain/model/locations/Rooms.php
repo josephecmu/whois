@@ -24,16 +24,16 @@ class Rooms extends AbstractEntity
 		return ["roomid", "dn", "roomnumber"];	
 	}
 
-    protected function setDn (string $adn)
+    protected function setDn (string $adn) : void
     {
         $this->dn = new Dn($adn);
     }
-	protected function setRoomid(string $aroomid)
+	protected function setRoomid(string $aroomid)  : void  
 	{
 		$this->roomid = $aroomid;		//no ValueObject
 	}
 
-	protected function setRoomnumber(string $aroomnumber)
+	protected function setRoomnumber(string $aroomnumber) : void
 	{
 		$this->roomnumber = $aroomnumber;		//no ValueObject
 	}
@@ -50,31 +50,27 @@ class Rooms extends AbstractEntity
 
 	}
 
-	public function assignOutletToRoom (array $properties) 
+	public function assignOutletToRoom (array $properties)  : void
 	{
 		##we assign the outlet object to the property of this class, a Room.
 		$this->outlets[] = $this->outletFactory($properties);
 
 	}
 	#must iterate through multi-dimensional array, create objects, and assign to $this->outlets.
-	public function setOutlets (array $someoutlets) 
+	public function setOutlets (array $someoutlets)  : void
 	{
-	
 		foreach ( $someoutlets as $someoutlet) {
 			$this->assignOutletToRoom($someoutlet);
 		}
-
 	}
 
-	public function getOutlets() //: ?array		
+	public function getOutlets() : ?array		
 	{
 		return $this->outlets ?? null;
-
 	}
 
-	public function removeOutletFromRoom (Outlet $outlet)
+	public function removeOutletFromRoom (Outlet $outlet) : void
 	{
-
 		$dn = $outlet->getOutletdn()->getDn();	//The Dn is an object 
 
 		foreach ($this->outlets as $k => $v) {
@@ -84,7 +80,5 @@ class Rooms extends AbstractEntity
 			}
 		}
 		unset($this->outlets[$key]);
-
 	}
-
 }

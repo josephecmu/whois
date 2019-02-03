@@ -49,7 +49,7 @@ abstract class AbstractCollection implements \Iterator
 		 
 	}
 
-	public function getTotal()
+	public function getTotal() : int
 	{
 		return $this->total;
 	}
@@ -79,17 +79,17 @@ abstract class AbstractCollection implements \Iterator
 
 	}
 
-	public function rewind()
+	public function rewind() : void
 	{
 		$this->pointer = 0;
 	}
 
-	public function current()
+	public function current() : int
 	{
 		return $this->getRow($this->pointer);
 	}
 
-	public function key()
+	public function key() : int
 	{
 		return $this->pointer;
 	}
@@ -111,16 +111,14 @@ abstract class AbstractCollection implements \Iterator
 	}
 
 	////josephe 8-9 to return raw without creating object
-	public function returnRawKey($key) {
-
+	public function returnRawKey($key) : int
+	{
 		return $this->raw[$key];
-
 	}
 
-	public function returnRaw() {
-
+	public function returnRaw()  : array
+	{
 		return $this->raw;
 	}
-
 
 }

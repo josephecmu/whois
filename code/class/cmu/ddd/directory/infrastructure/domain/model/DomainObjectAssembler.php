@@ -17,15 +17,12 @@ class DomainObjectAssembler
 	protected $ldap = null;   
 	public $ds;									//might be more efficient to keep the $ds handle avalailable?
 
-	public function __construct(AbstractPersistenceFactory $factory) {
+	public function __construct(AbstractPersistenceFactory $factory) 
+	{
 		$this->factory = $factory;											//we need to determine what obj to build
-
 		$reg = Registry::instance();
-
         $this->ds = LdapWrapper::getLdapDs();
-
         $this->ldap = new LdapWrapper($this->ds);        //query LDAP
-	
 	}
 
 	public function findOne(AbstractIdentityObject $idobj): AbstractEntity
@@ -61,40 +58,27 @@ class DomainObjectAssembler
 		$dofact = $this->factory->getDomainObjectFactory();
 		$obj = $dofact->createObject($domain_array); 
 
-
 		return $obj;
-
 	}
 
 	public function add(AbstractEntity $obj) : bool
 	{
-
 		$addfact = $this->factory->getModifyFactory();
-
 		list($dn, $input) = $addfact->newAdd($obj);    	//get $dn and $input for ldap update() below
-
 		return $this->ldap->add($dn, $input);
 	}
 	
 	public function update(AbstractEntity $obj) :bool
 	{
-
 		$updatefact = $this->factory->getModifyFactory();
-
 		list($dn, $input) = $updatefact->newUpdate($obj);    	//get $dn and $input for ldap update() below
-
 		return $this->ldap->update($dn, $input);
 	}
 
-
 	public function delete(AbstractEntity $obj) : bool
 	{
-
 		$delfactory = $this->factory->getModifyFactory();
-
 		$dn = $delfactory->newDelete($obj);		
-
 		return $this->ldap->delete($dn);	
-
 	}
 }
