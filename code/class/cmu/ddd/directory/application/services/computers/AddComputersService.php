@@ -16,9 +16,8 @@ class AddComputersService extends AbstractComputersService
 
 		$dn = $this->repo->buildDn($computerid);		//get the ID from the repo
 		$dto->set('dn', $dn);							//we need to pass the $dn we just constructed
-		$obj = $this->doa->build($dto);					//build the object  --MOVE TO REPO?? 2-1-19
 
-		$this->repo->addNew($obj);
+		$this->repo->buildNew($dto);
 		return $this->repo->performOperations();	
 	}
 }

@@ -8,13 +8,13 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFac
 
 abstract class AbstractService 
 {
-	protected $doa;			//we can delete
-	protected $factory;		//we can delete	
+//	protected $doa;			//we can delete
+	protected $factory;	
 	protected $repo;
+
 	function __construct()
 	{
 		$this->factory = AbstractPersistenceFactory::getFactory($this->targetClass());	
-		$this->doa = new DomainObjectAssembler($this->factory);
 		$this->repo = $this->factory->getRepository(); 
 	}
 

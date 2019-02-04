@@ -19,4 +19,5 @@ class ComputersRepository extends AbstractRepository
 	{
 		return ComputersDn::buildDn($id);
 	}
+
 }

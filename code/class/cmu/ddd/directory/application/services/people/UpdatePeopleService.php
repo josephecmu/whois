@@ -18,10 +18,8 @@ class UpdatePeopleservice extends AbstractPeopleService
 
 //		$dto->set('andrewid', $id);					//sets $id from above to Entity 'key' andrewid, etc.
 		////////////////////////////////////////////////////////
-		$obj = $this->doa->build($dto);
 
-		$this->repo->addDirty($obj);
-
+		$this->repo->buildUpdate($dto);
 		return $this->repo->performOperations();	
 
 	}

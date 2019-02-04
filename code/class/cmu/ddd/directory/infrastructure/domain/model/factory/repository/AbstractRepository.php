@@ -2,14 +2,11 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\repository;
 
-use cmu\ddd\directory\infrastructure\domain\model\factory\PeoplePersistenceFactory;
-use cmu\ddd\directory\infrastructure\domain\model\factory\RoomsPersistenceFactory;
-use cmu\ddd\directory\infrastructure\domain\model\factory\ComputersPersistenceFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;   
 use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
-use cmu\ddd\directory\domain\model\actors\people\People;
-use cmu\ddd\directory\domain\model\equipment\computers\Computer;
+use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
 
 abstract class AbstractRepository
 {
@@ -18,19 +15,47 @@ abstract class AbstractRepository
 	protected $new = [];
 	protected $dirty = [];
 	protected $delete = [];
-	protected $dofact;
 	protected $doa;
+	protected $function;
 
 	function __construct() 
 	{
-		$fact = AbstractPersistenceFactory::getFactory($this->targetClass());	
+		$fact = AbstractPersistenceFactory::getFactory($this->targetClass());
 		$this->doa = new DomainObjectAssembler($fact);
-		$this->dofact = $fact->getDomainObjectFactory(); 
 	}
 
 	abstract public function buildDn (string $id) : string;
 
 	abstract public function targetClass() : string;
+
+	public function getObj(AbstractIdentityObject $id) : AbstractEntity
+	{
+		return $this->doa->findOne($id);
+	}
+
+	public function buildNew(DTO $dto) : void
+	{
+		$this->function="addNew";
+		$this->build($dto);
+	}
+
+	public function buildUpdate(DTO $dto) : void
+	{
+		$this->function="addDirty";
+		$this->build($dto);
+	}
+
+	public function buildDelete(DTO $dto) : void
+	{
+		$this->function="addDelete";
+		$this->build($dto);
+	}
+
+	protected function build(DTO $dto) : void
+	{
+		$obj = $this->doa->build($dto);
+		$this->{$this->function}($obj);      //run AddNewDirtyDelete
+	}
 
 	protected function globalKey(string $unique) : string
 	{
@@ -87,7 +112,6 @@ abstract class AbstractRepository
 		$uniqid = $obj->getUid();
 		$key = $this->globalKey($uniqid);
 		if (! array_key_exists($key, $this->dirty)) {
-
 			$this->dirty[$key] = $obj;
 		}
 	}

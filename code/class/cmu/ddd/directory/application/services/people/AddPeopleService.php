@@ -29,9 +29,9 @@ class AddPeopleService extends AbstractPeopleService
 
 		$dn = $this->repo->buildDn($andrewid);		//get the ID from the repo
 		$dto->set('dn', $dn);						//we need to pass the $dn we just constructed
-		$obj = $this->doa->build($dto);				//build the object
 
-		$this->repo->addNew($obj);
+		$this->repo->buildNew($dto);				
+
 		return $this->repo->performOperations();	
 
 	}
