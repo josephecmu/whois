@@ -39,6 +39,7 @@ ul {
 <li><a href="http://whois.math.cmu.edu/form.php?ou=ou=people">Create New User</a></li>
 <li><a href="http://whois.math.cmu.edu/form.php?ou=ou=rooms">Create New Room</a></li>
 <li><a href="http://whois.math.cmu.edu/form.php?dn=cn=Wh6102,ou=rooms,dc=mcs,dc=cmu,dc=edu">Edit Room 6102</a></li>
+<li><a href="http://whois.math.cmu.edu/form.php?ou=ou=computers">Create New Computer</a></li>
 </ul>
 </div>
 </div?
