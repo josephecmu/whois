@@ -34,7 +34,7 @@ class ComputersPersistenceFactory extends AbstractPersistenceFactory
 
 	public function getCollection(array $raw) : AbstractCollection
 	{
-		return new ComputersCollection($raw);
+		return new ComputersCollection($raw, $this->getDomainObjectFactory() );
 	}
 
 	public function getMapper(array $raw) : AbstractMapper
@@ -49,8 +49,7 @@ class ComputersPersistenceFactory extends AbstractPersistenceFactory
 
 	public function getDTOFactory () : AbstractDTOFactory
 	{
-		//return new ComputersDTOFactory($this); //$this is needed to get the mapper inside the ComputersDTOFactory
-		return null;
+		return new ComputersDTOFactory($this); //$this is needed to get the mapper inside the ComputersDTOFactory
 	}
 
 	public function getRepository () : AbstractRepository

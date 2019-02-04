@@ -10,7 +10,7 @@ class ComputersSelectionFactory extends AbstractSelectionFactory
 {
 	protected function getDn() : string
 	{
-		return "ou=computers";
+		return "ou=computers,ou=devices";
 	}
 
 	protected function targetClass() : string

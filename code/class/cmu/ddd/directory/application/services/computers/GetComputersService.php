@@ -15,11 +15,11 @@ class GetComputersService extends AbstractComputersService
 	{
 		$dn = $dto->get('dn');							//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
 
-		$andrewid = ldap_explode_dn($dn, 1)[0];		//we have to find by $id, can't search currently with DN
+		$computerid = ldap_explode_dn($dn, 1)[0];		//we have to find by $id, can't search currently with DN
 
-		$id = new PeopleIdentityObject();
+		$id = new ComputersIdentityObject();
 
-		$id->field("uid")->eq($andrewid);
+		$id->field("cn")->eq($computerid);
 
 		$object = $this->repo->getObj($id);
 	
