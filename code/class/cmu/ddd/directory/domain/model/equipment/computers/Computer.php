@@ -33,9 +33,9 @@ class Computer extends AbstractEntity
 		$this->computername = $acomputername;
 	}
 
-	protected function setOperatingsystem(string $acomputeros) : void
+	protected function setOperatingsystem(string $aoperatingsystem) : void
 	{
-		$this->computeros = $acomputeros;
+		$this->operatingsystem = $aoperatingsystem;
 	}
 
     protected function setDn (string $adn) : void
