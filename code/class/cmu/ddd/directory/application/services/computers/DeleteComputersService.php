@@ -20,10 +20,7 @@ class DeleteComputersService extends AbstractComputersService
 
 //		$dto->set('andrewid', $andrewid);
 ////////////////////////////////////////////////////////////////////////
-
-		$obj = $this->doa->build($dto);
-
-		$this->repo->addDelete($obj);
+		$this->repo->buildDelete($dto);
 
 		return $this->repo->performOperations();	
 
