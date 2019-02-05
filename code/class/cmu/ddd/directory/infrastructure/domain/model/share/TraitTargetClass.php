@@ -4,7 +4,6 @@ namespace cmu\ddd\directory\infrastructure\domain\model\share;
 
 trait TraitTargetClass
 {
-	
 	abstract protected function targetClass() : string;
 
 	protected function verifyTargetClass($obj)
@@ -15,7 +14,5 @@ trait TraitTargetClass
 			 throw new \Exception("This should be a {$class} object");
 
 		 }
-
 	 }
-
 }

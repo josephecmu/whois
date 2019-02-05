@@ -5,9 +5,8 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\
 class ReverseRemapKeys extends AbstractSingleMods
 {
 
-	public function s_modify($k, $v)
+	public function s_modify($k, $v) : void
 	{
-
 		$name_map = $this->obj->getNameMap();
 		$name_map = array_flip($name_map);
 	
@@ -15,12 +14,5 @@ class ReverseRemapKeys extends AbstractSingleMods
 			$k=$name_map[$k];
 		}
 		$this->temp[$k] = $v; 
-
 	}
-
 }
-
-
-
-
-

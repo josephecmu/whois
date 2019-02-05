@@ -12,28 +12,25 @@ trait TraitValidator
 		}	
 	}			
 
-	protected function validAll ($key, string $string)  : bool
+	protected function validAll ($key, string $string) : bool
 	{
 		return true;
 	}
 
-
-	protected function notNull ($key, $value)  : bool
+	protected function notNull ($key, $value) : bool
 	{
 		if ( $value === null) {
-
 			throw new \InvalidArgumentException("'$key' can not be null");
 		}
 		return true;
 	}
 	
-	protected function validLettersOnly ($key, string $string) 	: bool
+	protected function validLettersOnly ($key, string $string) : bool
 	{
 		if (!preg_match("/^[a-zA-Z'-]+$/",$string)) {
 				 throw new \InvalidArgumentException("'$key':: pattern does not match");
 		} 
 		return true;
-
 	}
 
 	protected function validPath ($key, string $string ) : bool
@@ -59,5 +56,4 @@ trait TraitValidator
 		}
 		return true;
 	}
-
 }

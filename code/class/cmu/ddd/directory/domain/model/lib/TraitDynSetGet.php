@@ -12,7 +12,6 @@ Trait TraitDynSetGet
     //"dynamic" accessors from https://www.sitepoint.com/implementing-a-unit-of-work/
 	protected function dynSet($name, $value)//we call the setter in the child class
 	{                              
-
         if (!property_exists($this, $name)) {
             throw new \InvalidArgumentException("**Property does not exist**" . "  " . $name);
         }

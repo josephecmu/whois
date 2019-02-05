@@ -5,25 +5,16 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\
 class CopySubObjectDn extends AbstractSingleMods
 {
 
-	public function s_modify($k, $v)
+	public function s_modify($k, $v) : void
 	{	
 		$sub_object_map = $this->obj->getSubObjectMap();
-
 		 if (in_array($k, $sub_object_map) && !empty($v)) {
-
 			foreach ($v as $subobj_array) {   //$v is array of objects array (outlets)
-
 				$array[] = $subobj_array['dn']['dn']; //return the Dn object, then return the property.
-
 			}
-
 			$this->temp[$k] = $array;
-
 		} else {
-
 			$this->temp[$k] = $v;
 		}
-
 	}
-
 }

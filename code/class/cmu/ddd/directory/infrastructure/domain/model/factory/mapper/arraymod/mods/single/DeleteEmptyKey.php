@@ -5,11 +5,9 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\
 class DeleteEmptyKey extends AbstractSingleMods
 {
 
-	public function s_modify($k, $v)
+	public function s_modify($k, $v) : void
 	{	
-
 		if (isset($v)) {	//only add if NOT empty (deleting by not adding)
-
 			$this->temp[$k] = $v;
 		}
 	}
