@@ -26,7 +26,7 @@ Trait TraitDynSetGet
         $this->$name = $value;                                                  //no setter method, just assign value.
     }
     
-	public function dynGet($name) : string
+	public function dynGet($name)
 	{
         if ($this->$name === null) {
             throw new \InvalidArgumentException("**empty property**" . $name);
