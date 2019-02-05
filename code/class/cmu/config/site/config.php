@@ -6,4 +6,5 @@ $os = [ 'Windows 7',
 		'Windows 10',
         'Ubuntu 18.04', 
         'Ubuntu 16.04', 
-        'Ubuntu 14.04'];
+		'Ubuntu 14.04'
+	];

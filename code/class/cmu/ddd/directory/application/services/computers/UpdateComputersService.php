@@ -3,7 +3,6 @@
 namespace cmu\ddd\directory\application\services\computers;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
-use cmu\ddd\directory\infrastructure\domain\model\factory\repository\ComputersRepository;
 
 class UpdateComputersservice extends AbstractComputersService 
 {
@@ -18,9 +17,6 @@ class UpdateComputersservice extends AbstractComputersService
 
 //		$dto->set('andrewid', $id);					//sets $id from above to Entity 'key' andrewid, etc.
 		////////////////////////////////////////////////////////
-//		$obj = $this->doa->build($dto);
-
-//		$this->repo->addDirty($obj);
 
 		$this->repo->buildUpdate($dto);
 

@@ -7,12 +7,10 @@ use cmu\ddd\directory\application\services\AbstractService;
 
 abstract class AbstractComputersService extends AbstractService 
 {
-
 	protected $repo;
 
-	public function targetClass(): string
+	public function targetClass() : string
 	{
 		return Computer::class;
 	}
-
 }

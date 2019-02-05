@@ -3,14 +3,10 @@
 namespace cmu\ddd\directory\application\services\people;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
-use cmu\ddd\directory\infrastructure\domain\model\factory\repository\PeopleRepository;
 
 class AddPeopleService extends AbstractPeopleService
-
 {
-
 	public function execute(DTO $dto) : bool
-
 	{
 		// FU  we can remove this in mapper and not clutter Services??????????????????
 		// mapper works on ARRAYS, DTO is already an object
@@ -33,7 +29,5 @@ class AddPeopleService extends AbstractPeopleService
 		$this->repo->buildNew($dto);				
 
 		return $this->repo->performOperations();	
-
 	}
-
 }

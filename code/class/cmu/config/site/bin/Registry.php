@@ -3,7 +3,6 @@
 namespace cmu\config\site\bin;
 
 class Registry
-
 {
 
 	private static $instance = null;
@@ -35,7 +34,6 @@ class Registry
 		if (is_null($this->conf)) {
 			$this->conf = new Conf();
 		}
-
 		return $this->conf;
 	}
 

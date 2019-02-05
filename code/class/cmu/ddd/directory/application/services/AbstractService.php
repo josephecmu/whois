@@ -3,12 +3,10 @@
 namespace cmu\ddd\directory\application\services;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
-use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
 
 abstract class AbstractService 
 {
-//	protected $doa;			//we can delete
 	protected $factory;	
 	protected $repo;
 
@@ -20,5 +18,4 @@ abstract class AbstractService
 
 	abstract function execute (DTO $dto);  //can return DTO(R), or can return bool (CUD)
 	abstract function targetClass() : string;
-
 }

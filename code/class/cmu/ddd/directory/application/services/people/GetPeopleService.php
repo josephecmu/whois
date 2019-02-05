@@ -4,7 +4,6 @@ namespace cmu\ddd\directory\application\services\people;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject;
-use cmu\ddd\directory\infrastructure\domain\model\factory\repository\PeopleRepository;
 
 class GetPeopleService extends AbstractPeopleService 
 {

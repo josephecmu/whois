@@ -3,19 +3,16 @@
 namespace cmu\config\site\bin;
 
 trait TraitConfig
-
 {
 
 	private function returnIniFile(string $file) : string
 	{
-
 		$fileandpath = CONFDIR . $file;
 
 		if (! file_exists($fileandpath)) {
 			throw new \Exception("Could not find options file");
 			echo "Could not find options file";
 		}
-
 		return $fileandpath;
 	}
 

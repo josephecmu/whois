@@ -12,14 +12,12 @@ class Conf
 		$this->vals = $vals;
 	}
 
-	public function get(string $key)
+	public function get(string $key) //: string array or null
 	{
-		
 		return $this->vals[$key] ?? null;
-
 	}
 
-	public function set(string $key, $val)
+	public function set(string $key, $val) : void
 	{
 		$this->vals[$key] = $val;
 	}

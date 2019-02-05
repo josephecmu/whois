@@ -3,7 +3,6 @@
 namespace cmu\ddd\directory\application\services\rooms;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
-use cmu\ddd\directory\infrastructure\domain\model\factory\repository\RoomsRepository;
 
 class AddRoomsService extends AbstractRoomsService
 {
@@ -20,7 +19,6 @@ class AddRoomsService extends AbstractRoomsService
 		$this->repo->buildNew($dto);				
 
 		return $this->repo->performOperations();	
-
 	}
 }
 

@@ -3,7 +3,6 @@
 namespace cmu\config\site\bin;
 
 class ApplicationHelper
-
 {
 
 	private $config = __DIR__ . "/../config.ini";
@@ -25,12 +24,8 @@ class ApplicationHelper
 			throw new AppException("Could not find options file");
 			echo "Could not find options file";
 		}
-
 		$options = parse_ini_file($this->config, true);
-
 		$conf = new Conf($options['ldap_config']);
-
 		$this->reg->setConf($conf);
 	}
-
 }

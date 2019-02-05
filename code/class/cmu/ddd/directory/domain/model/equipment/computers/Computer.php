@@ -17,7 +17,6 @@ class Computer extends AbstractEntity
     protected $operatingsystem;		// operatingSystem
     protected $dn;					
 
-
 	protected function getRequiredFields() : array				//returns array of required properties
 	{
 		return ["dn", "computerid"];	

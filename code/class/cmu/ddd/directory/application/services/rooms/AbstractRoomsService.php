@@ -7,10 +7,8 @@ use cmu\ddd\directory\application\services\AbstractService;
 
 abstract class AbstractRoomsService extends AbstractService 
 {
-	
 	public function targetClass(): string
 	{
 		return Rooms::class;
 	}
-
 }

@@ -4,14 +4,10 @@ namespace cmu\ddd\directory\application\services\computers;
 
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\ComputersIdentityObject;
-use cmu\ddd\directory\infrastructure\domain\model\factory\repository\ComputersRepository;
 
 class GetComputersService extends AbstractComputersService 
-
 {
-//must mod for computers.......................
 	public function execute(DTO $dto) : DTO
-
 	{
 		$dn = $dto->get('dn');							//returns uid=jacke,ou=people,dc=mcs,dc=cmu,dc=edu
 
@@ -26,7 +22,5 @@ class GetComputersService extends AbstractComputersService
 		$dto_fact = $this->factory->getDTOFactory();
 
 		return $dto_fact->getDTO($object);
-
 	}
-
 }
