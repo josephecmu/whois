@@ -5,17 +5,17 @@
  */
 namespace cmu\ddd\directory\domain\model\actors\people;
 
-class Email extends \cmu\ddd\directory\domain\model\lib\AbstractImmutable
+use \cmu\ddd\directory\domain\model\lib\AbstractImmutable;
+
+
+namespace cmu\ddd\directory\domain\model\actors\people;
+
+class Email extends AbstractImmutable
 {
+	protected $email = [];
 
-		protected $email = [];
-
-		function __construct ( array $email) 
-
-		{
-
-			$this->email = $email;
-
-		}
-
+	function __construct (array $email) 
+	{
+		$this->email = $email;
+	}
 }

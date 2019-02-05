@@ -6,8 +6,12 @@
 */
 namespace cmu\ddd\directory\domain\model\actors\people;
 
-class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
+use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
+use cmu\ddd\directory\domain\model\locations\Rooms;
+use cmu\ddd\directory\domain\model\equipment\computers\Computer;
+use \cmu\ddd\directory\domain\model\lib\Dn;
 
+class People extends AbstractEntity
 {
 
     protected $name;
@@ -20,85 +24,57 @@ class People extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 	protected $homedirectory;
 
 	protected function getRequiredFields() : array				//returns array of required properties
-
 	{
-
 		return ["name", "dn", "gidnumber", "uidnumber", "homedirectory", "andrewid"];	
-		
 	}
-
     //setters below called by Dynamic setter
-	protected function setName(array $aname)
-
+	protected function setName(array $aname) :void
 	{
-
 		$this->name = new Name($aname);
-
 	}
 
-    protected function setAndrewid (string $anid)
-
+    protected function setAndrewid (string $anid) :void
     {
-
          $this->andrewid = new AndrewID($anid);
-
     }
 	
-	protected function setRoles (array $roles)
+	protected function setRoles (array $roles) : void
 	{
-
 		$this->roles = $roles;
-
 	}
 
-	protected function setEmail (array $email)
+	protected function setEmail (array $email) : void
 	{
-
 		$this->email = new Email($email);
-
 	}
 
-    protected function setDn (string $adn)
-
+    protected function setDn (string $adn) : void
     {
-
-        $this->dn = new \cmu\ddd\directory\domain\model\lib\Dn($adn);
-
+        $this->dn = new Dn($adn);
     }
-	protected function setUidnumber (int $auidnumber)
-	{
 
+	protected function setUidnumber (int $auidnumber) : void
+	{
 		$this->uidnumber = new UidNumber($auidnumber);	
-
 	}
-	protected function setGidnumber (int $agidnumber)
-	{
 
+	protected function setGidnumber (int $agidnumber) : void
+	{
 		$this->gidnumber = new GidNumber($agidnumber);	
-
 	}
 
-	protected function setHomedirectory($ahomedirectory)
+	protected function setHomedirectory($ahomedirectory) : void
 	{
-
 		$this->homedirectory = new HomeDirectory($ahomedirectory);
-
 	}
-
     //The room must exist in the code below.  The Service layer should make sure of that. (findRoomOrFail)
-    public function assignUserToRoom($room) : cmu\ddd\directory\domain\model\locations\Rooms
-
+    public function assignUserToRoom($room) : Rooms
     {
-
-		return new cmu\ddd\directory\domain\model\locations\Rooms ($this->dn, $room);
-
+		return new Rooms ($this->dn, $room);
     }
 	#The computer must be assigned to a room before assigned to a user. The service layer should verify?
-	public function assignUserToComputer($computer) : cmu\ddd\directory\domain\model\equipment\computers\Computer
-
+	public function assignUserToComputer($computer) : Computer
 	{
-		return new cmu\ddd\directory\domain\model\equipment\computers\Computer ($this->dn, $computer);
-
+		return new Computer ($this->dn, $computer);
 	}
-
 }
