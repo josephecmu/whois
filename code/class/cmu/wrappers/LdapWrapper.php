@@ -6,9 +6,7 @@ use cmu\config\site\bin\Conf;
 use cmu\config\site\bin\TraitConfig;
 
 class LdapWrapper 
-
 {
-
 	use TraitConfig;
 
     private $ds;      	//returned by ldap_connect(server, port)
@@ -38,7 +36,6 @@ class LdapWrapper
 		self::setConnectionParams();
         return ldap_connect(self::$host, self::$port);
     }
-
     //called in constructor
     private function connect() : void
     {
