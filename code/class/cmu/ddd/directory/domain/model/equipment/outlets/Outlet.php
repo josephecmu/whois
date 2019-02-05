@@ -7,9 +7,9 @@
 namespace cmu\ddd\directory\domain\model\equipment\outlets;
 
 use \cmu\ddd\directory\domain\model\lib\Dn;
+use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
-class Outlet extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
-
+class Outlet extends AbstractEntity
 {
 
     protected $outletid;
@@ -47,7 +47,6 @@ class Outlet extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
 	}	
 
 	public function addComputerToOutlet (Dn $acomputerdn) 
-
 	{
 		$this->computers[] = $acomputerdn;
 	}
