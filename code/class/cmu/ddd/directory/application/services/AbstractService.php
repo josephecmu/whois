@@ -9,11 +9,13 @@ abstract class AbstractService
 {
 	protected $factory;	
 	protected $repo;
+	protected $idobj;
 
 	function __construct()
 	{
 		$this->factory = AbstractPersistenceFactory::getFactory($this->targetClass());	
 		$this->repo = $this->factory->getRepository(); 
+		$this->idobj = $this->factory->getIdentityObject();
 	}
 
 	abstract function execute (DTO $dto);  //can return DTO(R), or can return bool (CUD)

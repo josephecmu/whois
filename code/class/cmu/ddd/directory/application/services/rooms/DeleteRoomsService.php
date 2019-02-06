@@ -2,15 +2,10 @@
 
 namespace cmu\ddd\directory\application\services\rooms;
 
-use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\application\services\TraitDeleteService;
 
 class DeleteRoomsService extends AbstractRoomsService 
 {
-
-	public function execute(DTO $dto) : bool
-	{
-		$this->repo->buildDelete($dto);
-		return $this->repo->performOperations();	
-	}
+	use TraitDeleteService;
 }
 
