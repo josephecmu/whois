@@ -4,12 +4,9 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\collection;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\AbstractDomainObjectFactory; 
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
-use cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
 
 abstract class AbstractCollection implements \Iterator
 {
-
-	use TraitTargetClass;
 
 	protected $dofact = null;
 	protected $total = 0;
@@ -26,12 +23,8 @@ abstract class AbstractCollection implements \Iterator
 		$this->total = count($raw) ?: 0;
 	}
 
-	abstract public function targetClass(): string;
-
 	public function add(AbstractEntity $object)
 	{
-		 $this->VerifyTargetClass($object);
-
 		 $this->notifyAccess();
 		 $this->objects[$this->total] = $object;
 		 $this->total++;
