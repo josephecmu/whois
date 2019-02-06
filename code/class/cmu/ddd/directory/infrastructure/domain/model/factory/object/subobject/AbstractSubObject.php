@@ -4,7 +4,6 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject
 
 use cmu\wrappers\LdapWrapper;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;  
-use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors\LdapToDomainConverter;
 
 abstract class AbstractSubObject
 {
@@ -38,7 +37,6 @@ abstract class AbstractSubObject
 	protected function returnSingleNormArrayLdapToDomain(array $raw) : array   //return ONE record
 	{
 		return $this->returnMapper($raw)->return_ldap_array_to_domain(); 
-
 	}
 
 }
