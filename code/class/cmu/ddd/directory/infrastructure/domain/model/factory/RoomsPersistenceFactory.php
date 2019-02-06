@@ -18,64 +18,50 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\AbstractM
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\RoomsModifyFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\RoomsRepository;
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\RoomsIdentityObject;
 
 class RoomsPersistenceFactory extends AbstractPersistenceFactory
-
 {
 
 	public function getDomainObjectFactory(): AbstractDomainObjectFactory
 	{
-
 		return new RoomsDomainObjectFactory();		
-
 	}
 
 	public function getSelectionFactory() : AbstractSelectionFactory
-	
 	{
-
 		return new RoomsSelectionFactory();
-
 	}
 
 	public function getCollection(array $raw) : AbstractCollection
-
 	{
-
 		return new RoomsCollection($raw, $this->getDomainObjectFactory()) ;
-
 	}
 
 	public function getMapper(array $raw) : AbstractMapper
-
 	{
-
 		return new RoomsMapper($raw);
-
 	}
 
 	public function getModifyFactory() : AbstractModifyFactory 
-	
 	{
-		
 		return new RoomsModifyFactory($this);	//$this is needed to get the mapper inside the RoomsUpdateFactory
-
 	}
 
 	public function getDTOFactory () : AbstractDTOFactory
-	
 	{
-
 		return new RoomsDTOFactory($this); //$this is needed to get the mapper inside the RoomsDTOFactory
-
 	}
 
 	public function getRepository () : AbstractRepository
-
 	{
-
 		return new RoomsRepository;
 	}
 
+	public function getIdentityObject() : AbstractIdentityObject
+	{
+		return new RoomsIdentityObject;
+	}
 }
 
