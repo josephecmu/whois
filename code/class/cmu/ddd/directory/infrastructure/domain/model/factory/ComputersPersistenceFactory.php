@@ -18,6 +18,8 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\AbstractM
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\ComputersModifyFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\ComputersRepository;
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\ComputersIdentityObject;
 
 class ComputersPersistenceFactory extends AbstractPersistenceFactory
 {
@@ -57,5 +59,9 @@ class ComputersPersistenceFactory extends AbstractPersistenceFactory
 		return new ComputersRepository;
 	}
 
+	public function getIdentityObject() : AbstractIdentityObject
+	{
+		return new ComputersIdentityObject;
+	}
 }
 
