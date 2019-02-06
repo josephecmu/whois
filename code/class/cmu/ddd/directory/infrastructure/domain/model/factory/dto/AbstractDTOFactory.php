@@ -10,8 +10,6 @@ use cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
 
 abstract class AbstractDTOFactory
 {
-	use TraitTargetClass;
-
 	protected $factory;
 
 	function __construct(AbstractPersistenceFactory $factory)
@@ -21,7 +19,6 @@ abstract class AbstractDTOFactory
 
 	public function getDTO(AbstractEntity $obj) : DTO
 	{
-		$this->verifyTargetClass($obj);
 		$raw = $this->object_to_array($obj); 
 		$mapper = $this->factory->getMapper($raw);
 		$data_array = $mapper->return_object_to_dto_array();
@@ -30,8 +27,6 @@ abstract class AbstractDTOFactory
 	//CASTS to array
 	protected function object_to_array(AbstractEntity $obj) : array
 	{
-		$this->verifyTargetClass($obj);
-
 		function obj_to_arr ($obj) {
 			if(is_object($obj)) {
 			   	$obj = (array) $obj;
