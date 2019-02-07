@@ -10,7 +10,7 @@ class PeopleDn extends AbstractDn
 		//we need to create a proper DN to insert. IDENTITY
 		$ou = $this->options['people']['dnprefix'];
 		$idatt = $this->options['people']['idatt'];
-		return  self::$idatt . "=" . $id . "," . $ou . "," . $this->dc ;
+		return  $idatt . "=" . $id . "," . $ou . "," . $this->dc ;
 	}
 
 }
