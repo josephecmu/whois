@@ -20,6 +20,8 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\repository\PeopleRepos
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject;
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\AbstractDn;
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\PeopleDn;
 
 class PeoplePersistenceFactory extends AbstractPersistenceFactory
 {
@@ -63,5 +65,10 @@ class PeoplePersistenceFactory extends AbstractPersistenceFactory
 	public function getIdentityObject() : AbstractIdentityObject
 	{
 		return new PeopleIdentityObject;
+	}
+
+	public function getDn() : AbstractDn
+	{
+		return new PeopleDn;
 	}
 }

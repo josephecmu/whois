@@ -20,6 +20,9 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\repository\RoomsReposi
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\RoomsIdentityObject;
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\AbstractDn;
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\RoomsDn;
+
 
 class RoomsPersistenceFactory extends AbstractPersistenceFactory
 {
@@ -62,6 +65,11 @@ class RoomsPersistenceFactory extends AbstractPersistenceFactory
 	public function getIdentityObject() : AbstractIdentityObject
 	{
 		return new RoomsIdentityObject;
+	}
+
+	public function getDn() : AbstractDn
+	{
+		return new RoomsDn;
 	}
 }
 

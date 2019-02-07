@@ -20,6 +20,8 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\repository\ComputersRe
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\ComputersIdentityObject;
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\AbstractDn;
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\ComputersDn;
 
 class ComputersPersistenceFactory extends AbstractPersistenceFactory
 {
@@ -62,6 +64,11 @@ class ComputersPersistenceFactory extends AbstractPersistenceFactory
 	public function getIdentityObject() : AbstractIdentityObject
 	{
 		return new ComputersIdentityObject;
+	}
+
+	public function getDn() : AbstractDn
+	{
+		return new ComputersDn;
 	}
 }
 

@@ -18,6 +18,8 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\dto\OutletsDTOFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\AbstractModifyFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\OutletsModifyFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\AbstractDn;
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\OutletsDn;
 
 class OutletsPersistenceFactory extends AbstractPersistenceFactory
 {
@@ -46,6 +48,10 @@ class OutletsPersistenceFactory extends AbstractPersistenceFactory
 	{
 		return new OutletsIdentityObject;
 	}
-	
+
+	public function getDn() : AbstractDn
+	{
+		return new OutletsDn;
+	}
 }
 

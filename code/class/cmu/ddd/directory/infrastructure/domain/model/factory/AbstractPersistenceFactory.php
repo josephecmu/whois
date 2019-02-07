@@ -16,7 +16,7 @@ use cmu\ddd\directory\infrastructure\domain\model\factory\dto\AbstractDTOFactory
 use cmu\ddd\directory\infrastructure\domain\model\factory\query\modify\AbstractModifyFactory;
 use cmu\ddd\directory\infrastructure\domain\model\factory\repository\AbstractRepository;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
-
+use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\AbstractDn;
 abstract class AbstractPersistenceFactory
 
 {
@@ -26,6 +26,7 @@ abstract class AbstractPersistenceFactory
 	abstract public function getSelectionFactory(): AbstractSelectionFactory;
 	abstract public function getModifyFactory(): AbstractModifyFactory;
 	abstract public function getIdentityObject() : AbstractIdentityObject;
+	abstract public function getDN() : AbstractDn;
 
 	public static function getFactory($target_class) : AbstractPersistenceFactory
 	{
