@@ -6,12 +6,9 @@ use cmu\config\site\bin\Conf;
 
 class OutletsMapper extends AbstractMapper
 {
-
 	protected function returnConcreteConfigObject(array $options) : Conf
 	{	
 		return $this->returnConfigObject($options['outlets']) ;
-
 	}	
-
 }
 

@@ -4,7 +4,6 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\modify;
 
 use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use \cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
-use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
 
 abstract class AbstractModifyFactory
 {

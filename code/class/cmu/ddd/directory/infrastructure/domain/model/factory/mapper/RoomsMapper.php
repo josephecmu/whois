@@ -11,13 +11,11 @@ class RoomsMapper extends AbstractMapper
 	protected function returnConcreteConfigObject(array $options) : Conf
 	{	
 		return $this->returnConfigObject($options['rooms']) ;
-
 	}	
 	//reading.  pull direct from database.
 	//we need a special mapper for rooms to handle the aggregate (rooms/outlets), override the parent
 	public function return_ldap_collection_array_to_domain() : array 
 	{
-
 		//total ldap records
 		$count = $this->raw['count'];
 	
@@ -33,23 +31,16 @@ class RoomsMapper extends AbstractMapper
 			$sub_object_map=$this->getSubObjectMap();
 
 			foreach ($records[$i] as $k => $v){
-
 				if (isset($sub_object_map[$k])) {
-
 					$newkey=$sub_object_map[$k];  //lookup new value based on key
-						
 					$ele = count($v);
 					for($z=0;$z<$ele;$z++) {
 						$records[$i][$newkey][]['dn']=$v[$z];  //we must return an array of subobjects (consistent).
 						unset($records[$i][$k]);
 					}
-		
-
 				}	
-
 			}
 		}
-
 		return $records;
 	}
 }

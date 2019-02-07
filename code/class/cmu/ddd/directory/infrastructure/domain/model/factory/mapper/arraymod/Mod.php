@@ -5,7 +5,6 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
 
 class Mod
-
 {
 	private $final; 											//our array
 	private $obj; 												//concrete Mapper
@@ -14,9 +13,7 @@ class Mod
 	{
 		//this class is only instantiated ONCE, we must populate the final array to start mods.
 		$this->final = $raw;
-			
 		$this->obj = $obj;
-
 	}
 		
 	private function s_modify(string $class_name) : array   		//helper function to avoid typing below 
@@ -45,125 +42,94 @@ class Mod
 
 	//modifiers...they call the 'mods' using the helper functions above...fluent interface
 	public function remap_keys() : self
-
 	{
 		$this->final = $this->s_modify("RemapKeys");
 		return $this;
-
 	}
 
 	public function remove_int_keys() : self
 	{
-
 		 $this->final = $this->s_modify("RemoveIntKeys");
 		 return $this;
-
 	}
 	
 	public function group_elements() : self
-
 	{
 		$this->final = $this->s_modify("GroupElements");
 		return $this;
-
 	}
 
 
 	public function single_elements() : self
 	{
-
 		$this->final = $this->s_modify("SingleElements");
 		return $this;
-
 	}
 
 	public function remove_key() : self
 	{
-
 		$this->final = $this->s_modify("RemoveKey"); 
 		return $this;
-
 	}
 
 	public function to_array() : self
 	{
-
 		$this->final = $this->s_modify("ToArray");
 		return $this;
-	
 	}
 
 	public function move_elements_up_if_not_in_entity_map() : self
 	{
-
 		$this->final = $this->s_modify("MoveElementsUpIfNotInEntityMap");
 		return $this;
-
 	}
 
 	public function expose_protected() : self
 	{
-
 		$this->final = $this->s_modify("ExposeProtected");
 		return $this;
-
 	}
-
 
 	public function expose_private() : self
 	{
-
 		$this->final = $this->s_modify("ExposePrivate"); 
 		return $this;
-
 	}
 
 	public function reverse_to_array() : self
 	{
-
 		$this->final = $this->s_modify("ReverseToArray"); 
 		return $this;
-
 	}
 
 	public function delete_key() : self
 	{
-
 		$this->final = $this->s_modify("DeleteKey");
 		return $this;
-
 	}
 
 	public function delete_empty_key() : self
 	{
-
 		$this->final = $this->s_modify("DeleteEmptyKey");
 		return $this;
-
 	}
 
 	public function reverse_remap_keys() : self
 	{
-
 		$this->final = $this->s_modify("ReverseRemapKeys");
 		return $this;
-
 	}
 
 	public function copy_sub_obj_dn() : self
 	{
-
 		 $this->final = $this->s_modify("CopySubObjectDn");
 		 return $this;
-
 	}
 
 	public function add_object_class() : self
 	{
-
 		$this->final = $this->a_modify("AddObjectClass");
 		return $this;
-
 	}
 
 	public function remove_count_recursive() : self
@@ -174,17 +140,13 @@ class Mod
 	
 	public function recurse_expose_private_and_protected() : self
 	{
-
 		$this->final=$this->r_modify("ExposePrivateAndProtected");
 		return $this;
 
 	}
 	//end modifiers
 	public function returnFinalArray() : array
-
 	{
 		return $this->final;
-
 	}
-
 }

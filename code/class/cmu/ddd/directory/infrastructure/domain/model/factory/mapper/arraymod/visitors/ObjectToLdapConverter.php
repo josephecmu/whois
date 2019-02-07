@@ -2,12 +2,8 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\visitors;
 
-use \cmu\ddd\directory\infrastructure\domain\model\factory\mapper\AbstractMapper;
-
 class ObjectToLdapConverter extends AbstractVisitor
-
 {
-
 	public function returnConvertedArray() : array
 	{
 		//Fluent Interface 
@@ -21,9 +17,5 @@ class ObjectToLdapConverter extends AbstractVisitor
 			;
 		
 		return $record;
-		
-
-
 	}
-
 }

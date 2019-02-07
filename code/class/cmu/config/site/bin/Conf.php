@@ -2,6 +2,7 @@
 
 namespace cmu\config\site\bin;
 //class to hold the .ini values in object.  no business logic
+//wrapper class
 
 class Conf 
 {
@@ -12,7 +13,7 @@ class Conf
 		$this->vals = $vals;
 	}
 
-	public function get(string $key) //: string array or null
+	public function get(string $key) //: string, array or null
 	{
 		return $this->vals[$key] ?? null;
 	}

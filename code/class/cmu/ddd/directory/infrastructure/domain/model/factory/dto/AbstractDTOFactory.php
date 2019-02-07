@@ -46,9 +46,6 @@ abstract class AbstractDTOFactory
 			}
 			return $new; 
 		};
-
 		return obj_to_arr($obj);
-
 	}
-
 }

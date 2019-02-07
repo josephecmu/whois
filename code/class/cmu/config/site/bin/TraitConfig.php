@@ -22,7 +22,7 @@ trait TraitConfig
 		return parse_ini_file($ini, true);
 	}
 
-	protected function returnConfigObject( array $options) : Conf		//return Conf object, with specified [section] (people,etc.)
+	protected function returnConfigObject(array $options) : Conf		//return Conf object, with specified [section] (people,etc.)
 	{
 		return new Conf($options);
 	}
