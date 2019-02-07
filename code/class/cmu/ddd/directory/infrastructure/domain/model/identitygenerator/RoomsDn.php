@@ -6,13 +6,13 @@ class RoomsDn extends AbstractDn
 
 {
 
-	static $ou = "ou=rooms";
-	static $idatt = "cn";
 	
-	public static function buildDn($roomid) : string
+	public static function buildDn(string $id) : string
 	{
+		$ou = $this->options['rooms']['dnprefix'];
+		$idatt = $this->options['rooms']['idatt'];
 		//we need to create a proper DN to insert. IDENTITY
-		return  self::$idatt . "=" . $roomid . "," . self::$ou . "," . self::$dc ;
+		return  $idatt . "=" . $id . "," . $ou . "," . this->$dc ;
 	}
 
 

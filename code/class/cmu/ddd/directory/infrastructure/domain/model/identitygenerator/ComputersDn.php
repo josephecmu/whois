@@ -5,14 +5,12 @@ namespace cmu\ddd\directory\infrastructure\domain\model\identitygenerator;
 class ComputersDn extends AbstractDn
 {
 
-	static $ou = "ou=computers,ou=devices";
-	static $idatt = "cn";
-	
-	public static function buildDn($computerid) : string
+	public function buildDn(string $id) : string
 	{
+		$ou = $this->options['computers']['dnprefix'];
+		$idatt = $this->options['computers']['idatt'];
 		//we need to create a proper DN to insert. IDENTITY
-		return  self::$idatt . "=" . $computerid . "," . self::$ou . "," . self::$dc ;
+		return  $idatt . "=" . $id . "," . $ou . "," . $this->dc ;
 	}
-
 
 }

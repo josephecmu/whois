@@ -3,17 +3,14 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\identitygenerator;
 
 class PeopleDn extends AbstractDn
-
 {
 
-	static $ou = "ou=people";
-	static $idatt = "uid";
-	
-	public static function buildDn($andrewid) : string
+	public static function buildDn(string $id) : string
 	{
 		//we need to create a proper DN to insert. IDENTITY
-		return  self::$idatt . "=" . $andrewid . "," . self::$ou . "," . self::$dc ;
+		$ou = $this->options['people']['dnprefix'];
+		$idatt = $this->options['people']['idatt'];
+		return  self::$idatt . "=" . $id . "," . $ou . "," . $this->dc ;
 	}
-
 
 }
