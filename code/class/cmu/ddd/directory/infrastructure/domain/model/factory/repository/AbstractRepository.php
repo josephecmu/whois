@@ -17,14 +17,14 @@ abstract class AbstractRepository
 	protected $delete = [];
 	protected $doa;
 	protected $function;
+	protected $fact;
 
 	function __construct() 
 	{
-		$fact = AbstractPersistenceFactory::getFactory($this->targetClass());
-		$this->doa = new DomainObjectAssembler($fact);
+		$this->fact = AbstractPersistenceFactory::getFactory($this->targetClass());
+		$this->doa = new DomainObjectAssembler($this->fact);
 	}
 
-	abstract public function buildDn (string $id) : string;
 
 	abstract public function targetClass() : string;
 
@@ -49,6 +49,12 @@ abstract class AbstractRepository
 	{
 		$this->function="addDelete";
 		$this->build($dto);
+	}
+
+	public function buildDn(string $id) : string
+	{
+		$dnfact = $this->fact->getDn();
+		return $dnfact->buildDn($id);
 	}
 
 	protected function build(DTO $dto) : void

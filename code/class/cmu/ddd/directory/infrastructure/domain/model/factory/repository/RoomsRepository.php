@@ -1,14 +1,13 @@
 <?php
-//This handles and agregate, a Trait may be required if we have more entities of this type.
+//This handles and agregate, a Trait  or Abs Class may be required if we have more entities of this type.
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\repository;
 
-use \cmu\ddd\directory\domain\model\equipment\outlets\Outlet;
-use \cmu\ddd\directory\domain\model\locations\Rooms;
-use cmu\ddd\directory\infrastructure\domain\model\identitygenerator\RoomsDn;
+use cmu\ddd\directory\domain\model\equipment\outlets\Outlet;
+use cmu\ddd\directory\domain\model\locations\Rooms;
 use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\RoomsMapper;
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\RoomsDomainObjectFactory;
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
-use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
+use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
 
 class RoomsRepository extends AbstractRepository 
 {
@@ -18,18 +17,13 @@ class RoomsRepository extends AbstractRepository
 
 	function __construct()
 	{
-		parent::__construct();							
-		$this->dofact = new RoomsDomainObjectFactory;
+		parent::__construct();				
+		$this->dofact = $this->fact->getDomainObjectFactory();
 	}
 
 	public function targetClass(): string
 	{
 		return Rooms::class;
-	}
-
-	public function buildDn(string $id) : string
-	{
-		return RoomsDn::buildDn($id);
 	}
 
 	private function getNormArray(DTO $dto) : array
