@@ -2,14 +2,23 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\selection;
 
-use \cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
-use \cmu\ddd\directory\infrastructure\domain\model\factory\query\AbstractQuery;
-//use \cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
+use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
+use cmu\ddd\directory\infrastructure\domain\model\factory\query\AbstractQuery;
+use cmu\config\site\bin\TraitConfig;
 
 abstract class AbstractSelectionFactory
 {
 
-	abstract protected function getDn() : string;
+	use TraitConfig;
+	
+	protected $options;
+
+	function __construct()
+	{
+		$this->options = $this->getConfigArray("config.ini");		
+	}
+
+	abstract protected function getOu() : string;
 
 	public function buildFilter(AbstractIdentityObject $obj): string
 	{
@@ -32,7 +41,7 @@ abstract class AbstractSelectionFactory
 
 	public function newSelection(AbstractIdentityObject $obj): array
 	{
-		$dn = $this->getDn();								//concrete implementation
+		$dn = $this->getOu();								//concrete implementation
 		$fields = $obj->getObjectFields();
 		$filter = $this->buildFilter($obj);
 		$location = $this->getLocation($dn);

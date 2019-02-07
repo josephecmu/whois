@@ -7,13 +7,18 @@ use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
+use cmu\config\site\bin\TraitConfig;
 
 abstract class AbstractDTOFactory
 {
+	use TraitConfig;
+
 	protected $factory;
+	protected $options;		//multi-array of parsed .ini file
 
 	function __construct(AbstractPersistenceFactory $factory)
 	{
+		$this->options = $this->getConfigArray("config.ini");
 		$this->factory = $factory;
 	}
 

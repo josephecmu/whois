@@ -7,8 +7,8 @@ use cmu\ddd\directory\infrastructure\domain\model\idobject\RoomsIdentityObject;
 
 class RoomsSelectionFactory extends AbstractSelectionFactory
 {
-	protected function getDn() : string
+	protected function getOu() : string
 	{
-		return "ou=rooms";
+		return $this->options['rooms']['dnprefix'];
 	}
 }

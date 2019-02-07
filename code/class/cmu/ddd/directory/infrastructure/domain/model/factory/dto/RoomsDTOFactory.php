@@ -10,12 +10,11 @@ class RoomsDTOFactory extends AbstractDTOFactory
 {
 	protected function returnEntity() : string
 	{
-		return 'rooms';
+		return $this->options['rooms']['entity'];
 	}
 	//override parent to allow for breakout of subObjects
 	public function getDTO(AbstractEntity $obj) : DTO
 	{
-		$this->verifyTargetClass($obj);
 		$raw = $this->object_to_array($obj); // convert Object to array for Mapper
 		$mapper = $this->factory->getMapper($raw);
 		$data_array = $mapper->return_object_to_dto_array();  

@@ -6,6 +6,6 @@ class ComputersDTOFactory extends AbstractDTOFactory
 {
 	protected function returnEntity() : string
 	{
-		return 'computers';
+		return $this->options['computers']['entity'];
 	}
 }

@@ -7,9 +7,9 @@ use cmu\ddd\directory\infrastructure\domain\model\idobject\OutletsIdentityObject
 
 class OutletsSelectionFactory extends AbstractSelectionFactory
 {
-	protected function getDn() : string
+	protected function getOu() : string
 	{
-		return "ou=outlets,ou=devices";
+		return $this->options['outlets']['dnprefix'];
 	}
 }
 

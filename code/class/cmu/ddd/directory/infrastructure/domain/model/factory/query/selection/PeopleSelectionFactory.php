@@ -7,8 +7,8 @@ use cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject;
 
 class PeopleSelectionFactory extends AbstractSelectionFactory
 {
-	protected function getDn() : string
+	protected function getOu() : string
 	{
-		return "ou=people";
+		return $this->options['people']['dnprefix'];
 	}
 }

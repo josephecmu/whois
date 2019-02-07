@@ -7,8 +7,8 @@ use cmu\ddd\directory\infrastructure\domain\model\idobject\ComputersIdentityObje
 
 class ComputersSelectionFactory extends AbstractSelectionFactory
 {
-	protected function getDn() : string
+	protected function getOu() : string
 	{
-		return "ou=computers,ou=devices";
+		return $this->options['computers']['dnprefix'];
 	}
 }
