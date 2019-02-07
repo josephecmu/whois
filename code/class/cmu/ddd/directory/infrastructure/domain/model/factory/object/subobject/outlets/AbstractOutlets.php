@@ -8,7 +8,6 @@ use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObjec
 
 abstract class AbstractOutlets extends AbstractSubObject
 {
-
 	protected function targetClass() : string
 	{   
 		return Outlet::class;

@@ -12,7 +12,6 @@ abstract class AbstractSubObject extends AbstractDomainObjectFactory
 
 	protected $ldap;
 	protected $select_factory;
-	protected $mapper;
 	protected $fact;
 
 	abstract public function returnNormArray(array $subobjarray) : array ;
