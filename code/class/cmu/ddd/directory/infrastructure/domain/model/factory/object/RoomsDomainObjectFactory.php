@@ -12,6 +12,11 @@ use \cmu\ddd\directory\infrastructure\domain\model\factory\object\subobject\outl
 class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 {
 
+	protected function getIdName() : string
+	{
+		return $this->options['rooms']['idname'];
+	}
+
 	public function createObject(array $norm_array) : Rooms
 	{
 
@@ -20,7 +25,13 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 			unset($norm_array['outlets']);
 		}
 
-		$room = new Rooms($norm_array);
+		$roomclassname = Rooms::class;
+
+		if (! $room = $this->getFromMap($roomclassname, $norm_array[$this->idname])) {
+			$room = new Rooms($norm_array);
+		}
+
+		$this->addToMap($room);
 
 		if (isset($outlets)) {
 			foreach ($outlets as $outlet) {
@@ -35,7 +46,16 @@ class RoomsDomainObjectFactory extends AbstractRootDomainObjectFactory
 	public function returnNewOutlet(array $outlet, string $action) : Outlet
 	{
 		$outlet_norm_array = $this->returnNormOutletArray($outlet, $action); 
-		return new Outlet($outlet_norm_array);
+
+		$outletclassname = Outlet::class;
+
+		if (! $outlet = $this->getFromMap($outletclassname, $outlet_norm_array[$this->idname])) {
+			$outlet = new Outlet($norm_array);
+		}
+
+		$this->addToMap($outlet);
+
+		return $outlet;
 	}
 	
 	//This can most likely be a Strategy or Visitor pattern and pushed up if we need to re-use

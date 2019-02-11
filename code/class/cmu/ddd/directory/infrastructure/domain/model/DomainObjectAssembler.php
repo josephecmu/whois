@@ -15,20 +15,20 @@ class DomainObjectAssembler
 	protected $factory;
 	private $statments;
 	protected $ldap = null;   
-	public $ds;									//might be more efficient to keep the $ds handle avalailable?
+	public $ds;																//might be more efficient to keep the $ds handle avalailable?
 
 	public function __construct(AbstractPersistenceFactory $factory) 
 	{
 		$this->factory = $factory;											//we need to determine what obj to build
 		$reg = Registry::instance();
         $this->ds = LdapWrapper::getLdapDs();
-        $this->ldap = new LdapWrapper($this->ds);        //query LDAP
+        $this->ldap = new LdapWrapper($this->ds);       					 //query LDAP
 	}
 
 	public function findOne(AbstractIdentityObject $idobj): AbstractEntity
 	{
 		$collection = $this->find($idobj);
-		return $collection->next(); 		//return  only ONE (next)
+		return $collection->next(); 										//return only ONE (next)
 	}
 
 	public function find(AbstractIdentityObject $idobj) : AbstractCollection

@@ -12,5 +12,4 @@ class ComputersDn extends AbstractDn
 		//we need to create a proper DN to insert. IDENTITY
 		return  $idatt . "=" . $id . "," . $ou . "," . $this->dc ;
 	}
-
 }

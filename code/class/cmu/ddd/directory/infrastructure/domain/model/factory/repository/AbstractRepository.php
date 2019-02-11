@@ -25,7 +25,6 @@ abstract class AbstractRepository
 		$this->doa = new DomainObjectAssembler($this->fact);
 	}
 
-
 	abstract public function targetClass() : string;
 
 	public function getObj(AbstractIdentityObject $id) : AbstractEntity
@@ -68,10 +67,10 @@ abstract class AbstractRepository
 		$key = $unique;
 		return $key;
 	}
-	//this is needed for a collection of objects to iterate.  (getFactory)
+	//this is needed for a collection of objects to iterate.  (getFactory)  performOperations()
 	private function getDoaFromObject(AbstractEntity $obj) : DomainObjectAssembler 
 	{
-		$class= get_class($obj);
+		$class = get_class($obj);
 		$factory = AbstractPersistenceFactory::getFactory($class);
 		$doa = new DomainObjectAssembler($factory);
 		return $doa;

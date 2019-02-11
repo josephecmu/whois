@@ -6,29 +6,37 @@ use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
 class ObjectWatcher
 {
-	private $all = [];
+	private static $all = [];
+	private static $instance = null;
 
-	public function globalKey(AbstractEntity $obj): string
+	public static function instance(): self
 	{
-			$key = $obj->getId();
-
-			return $key;
+		if (!isset(static::$instance)) {
+			static::$instance = new ObjectWatcher;
+		}
+		return static::$instance;
 	}
 
-	public function add(AbstractEntity $obj)
+	public function idMapKey(AbstractEntity $obj): string
 	{
-		$this->all[$this->globalKey($obj)] = $obj;
+		$key = $obj->getUid();
+		return $key;
 	}
 
-	public function exists($classname, $id)
+	public static function add(AbstractEntity $obj) : void
 	{
-		$inst = self::instance();
+		$inst = static::instance();
+		static::$all[$inst->idMapKey($obj)] = $obj;
+	}
+
+	public static function exists($classname, $id) : ?object
+	{
+		$inst = static::instance();
 		$key = "{$classname} . {$id}";
 
 		if (isset($inst->all[$key])) {
 			return $inst->all[$key];
 		}
-
 		return null;
 	}
 }

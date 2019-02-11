@@ -57,7 +57,6 @@ abstract class AbstractCollection implements \Iterator
 			  $this->objects[$num] = $this->dofact->createObject($this->raw[$num]);
 			  return $this->objects[$num];
 		 }
-
 	}
 
 	public function rewind() : void

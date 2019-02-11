@@ -20,6 +20,7 @@ abstract class AbstractSubObject extends AbstractDomainObjectFactory
 
 	function __construct()
 	{
+		parent::__construct();
 		$this->fact = $this->getFactory($this->targetClass());
 		$this->setLdapHandle();
 		$this->select_factory = $this->fact->getSelectionFactory();

@@ -3,7 +3,6 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\query\selection;
 
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
-use cmu\ddd\directory\infrastructure\domain\model\factory\query\AbstractQuery;
 use cmu\config\site\bin\TraitConfig;
 
 abstract class AbstractSelectionFactory

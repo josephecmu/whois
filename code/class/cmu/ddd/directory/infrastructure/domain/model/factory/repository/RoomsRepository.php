@@ -4,10 +4,7 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\repository;
 
 use cmu\ddd\directory\domain\model\equipment\outlets\Outlet;
 use cmu\ddd\directory\domain\model\locations\Rooms;
-use cmu\ddd\directory\infrastructure\domain\model\factory\mapper\RoomsMapper;
-use cmu\ddd\directory\infrastructure\domain\model\factory\object\RoomsDomainObjectFactory;
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
-use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;
 
 class RoomsRepository extends AbstractRepository 
 {
@@ -17,8 +14,8 @@ class RoomsRepository extends AbstractRepository
 
 	function __construct()
 	{
-		parent::__construct();				
-		$this->dofact = $this->fact->getDomainObjectFactory();
+		parent::__construct();			
+		$this->dofact = $this->fact->getDomainObjectFactory();	
 	}
 
 	public function targetClass(): string
@@ -29,7 +26,7 @@ class RoomsRepository extends AbstractRepository
 	private function getNormArray(DTO $dto) : array
 	{
 		$raw = $dto->getDataArray();
-		$mapper = new RoomsMapper($raw);
+		$mapper = $this->fact->getMapper($raw);
 		return $mapper->return_dto_to_domain_array();
 	}
 

@@ -10,7 +10,5 @@ class RoomsModifyFactory extends AbstractModifyFactory
 	protected function getRdn(AbstractEntity $obj) : string
 	{
 		return $obj->dynGet("dn")->dynGet("dn");
-
 	}
 }
-

@@ -77,10 +77,12 @@ abstract class AbstractMapper
 	{
 		return $this->raw;
 	}
+
 	public function getEntityMap() : array
 	{
 		return $this->entity_map ?? [];
 	}
+
 	public function getObjectClassMap() : array
 	{
 		return $this->object_class_map;

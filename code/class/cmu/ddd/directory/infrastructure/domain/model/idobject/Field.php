@@ -18,7 +18,7 @@ class Field
 
 	// add the operator and the value for the test
 	//     // (> 40, for example) and add to the $comps property	
-	public function addTest(string $operator, $value)
+	public function addTest(string $operator, $value) : void
 	{
 		$this->comps[] = [
 			'name' => $this->name,

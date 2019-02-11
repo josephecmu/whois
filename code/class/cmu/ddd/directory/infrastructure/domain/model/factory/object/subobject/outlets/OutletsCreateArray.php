@@ -6,7 +6,8 @@ class OutletsCreateArray extends AbstractOutlets
 {
 	public function returnNormArray(array $dataarray) : array
 	{
-		$outletid = $dataarray['outletid'];
+
+		$outletid = $dataarray[$this->idname];
 		$idobj = $this->getIdObjectSearchById($outletid);
 		if (!$this->returnRawArrayFromIdobject($idobj)['count'] == 0) {
 			throw new \Exception("This " .  $outletid . "  exists!!");

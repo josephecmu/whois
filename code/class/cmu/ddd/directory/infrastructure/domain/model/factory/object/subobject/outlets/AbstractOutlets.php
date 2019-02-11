@@ -13,6 +13,11 @@ abstract class AbstractOutlets extends AbstractSubObject
 		return Outlet::class;
     }		
 
+	protected function getIdName() : string
+	{
+		return $this->options['outlets']['idname'];
+	}
+
 	protected function getIdObjectSearchById(string $id) : AbstractIdentityObject
 	{
 		$idobj = $this->fact->getIdentityObject();
