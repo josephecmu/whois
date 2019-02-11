@@ -2,17 +2,19 @@
 
 namespace cmu\ddd\directory\application\services\rooms;
 
-use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\application\services\TraitAddService;
 
 class AddRoomsService extends AbstractRoomsService
 {
 
-	public function execute(DTO $dto) : bool
-	{
+	use TraitAddService;
 
-		$this->repo->buildNew($dto);				
-
-		return $this->repo->performOperations();	
-	}
+//	public function execute(DTO $dto) : bool
+//	{
+//
+//		$this->repo->buildNew($dto);				
+//
+//		return $this->repo->performOperations();	
+//	}
 }
 
