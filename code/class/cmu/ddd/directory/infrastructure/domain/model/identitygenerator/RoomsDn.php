@@ -9,6 +9,6 @@ class RoomsDn extends AbstractDn
 		$ou = $this->options['rooms']['dnprefix'];
 		$idatt = $this->options['rooms']['idatt'];
 		//we need to create a proper DN to insert. IDENTITY
-		return  $idatt . "=" . $id . "," . $ou . "," . this->$dc ;
+		return  $idatt . "=" . $id . "," . $ou . "," . $this->dc ;
 	}
 }
