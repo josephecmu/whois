@@ -11,5 +11,10 @@ class PeopleRepository extends AbstractRepository
 	{
 		return People::class;
 	}
+
+	protected function getIdName() : string
+    {   
+		return $this->options['people']['idname'];
+	} 
 }
 

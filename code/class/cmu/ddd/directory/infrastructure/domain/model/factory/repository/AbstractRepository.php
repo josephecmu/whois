@@ -3,37 +3,53 @@
 namespace cmu\ddd\directory\infrastructure\domain\model\factory\repository;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;   
-use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
 use cmu\ddd\directory\infrastructure\domain\model\idobject\AbstractIdentityObject;
+use cmu\ddd\directory\infrastructure\services\objectwatcher\ObjectWatcher;
+use cmu\ddd\directory\infrastructure\domain\model\DomainObjectAssembler;
+use cmu\config\site\bin\TraitConfig;
 
 abstract class AbstractRepository
 {
 
-	protected $all = [];
-	protected $new = [];
-	protected $dirty = [];
-	protected $delete = [];
-	protected $doa;
+	use TraitConfig;
+
 	protected $function;
+	protected $objwatcher;
+	protected $doa;
 	protected $fact;
+	protected $options;
 
 	function __construct() 
 	{
+		$this->options = $this->getConfigArray("config.ini");
 		$this->fact = AbstractPersistenceFactory::getFactory($this->targetClass());
 		$this->doa = new DomainObjectAssembler($this->fact);
+		$this->objwatcher = ObjectWatcher::instance();
 	}
 
 	abstract public function targetClass() : string;
 
+	abstract protected function getIdName() : string;
+
 	public function getObj(AbstractIdentityObject $id) : AbstractEntity
 	{
-		return $this->doa->findOne($id);
+		$obj = $this->doa->findOne($id);
+		$this->objwatcher::add($obj);
+		return $obj;
 	}
 
 	public function buildNew(DTO $dto) : void
 	{
+		$dto->unset('ou'); 								//this service key is not needed here.
+
+		$idname = $this->getIdName();
+	
+		$id = $dto->get($idname);
+		$dn = $this->buildDn($id);						//get the ID from here
+		$dto->set('dn', $dn);							//we need to pass the $dn we just constructed
+
 		$this->function="addNew";
 		$this->build($dto);
 	}
@@ -59,86 +75,29 @@ abstract class AbstractRepository
 	protected function build(DTO $dto) : void
 	{
 		$obj = $this->doa->build($dto);
-		$this->{$this->function}($obj);      //run AddNewDirtyDelete
-	}
-
-	protected function globalKey(string $unique) : string
-	{
-		$key = $unique;
-		return $key;
-	}
-	//this is needed for a collection of objects to iterate.  (getFactory)  performOperations()
-	private function getDoaFromObject(AbstractEntity $obj) : DomainObjectAssembler 
-	{
-		$class = get_class($obj);
-		$factory = AbstractPersistenceFactory::getFactory($class);
-		$doa = new DomainObjectAssembler($factory);
-		return $doa;
-	}
-
-	protected function add(AbstractEntity $obj) : void
-	{
-		$uniqid = $obj->getUid();
-		$this->all[$this->globalKey($uniqid)] = $obj;
-	}
-
-	public function findByDn(string $dn) : AbstractEntity
-	{
-		$uniqid = $dn;
-		$key = $this->globalKey($uniqid);
-
-		if (array_key_exists($key, $this->all)) {
-			return $this->all[$key];
-		}
-	}
-
-	public function findById(string $id) : AbstractEntity
-	{
-		$uniqid = $this->buildDn($id);
-		return $this->findByDn($uniqid);
-	}
-
-	public function addNew(AbstractEntity $obj) : void
-	{
-		$uniqid = $obj->getUid();
-		$key = $this->globalKey($uniqid);
-		$this->new[$key] = $obj;
-	}
-
-	public function addDelete(AbstractEntity $obj) : void
-	{
-		$uniqid = $obj->getUid();
-		$key = $this->globalKey($uniqid);
-		$this->delete[$key] = $obj;
-	}
-
-	public function addDirty(AbstractEntity $obj) : void
-	{
-		$uniqid = $obj->getUid();
-		$key = $this->globalKey($uniqid);
-		if (! array_key_exists($key, $this->dirty)) {
-			$this->dirty[$key] = $obj;
-		}
+		$this->objwatcher::{$this->function}($obj);
 	}
 
 	public function performOperations() : bool
 	{
-		foreach ($this->dirty as $key => $obj) {
-			$result[] = $this->getDoaFromObject($obj)->update($obj);
-		}
-
-		foreach ($this->new as $key => $obj) {
-			$result[] = $this->getDoaFromObject($obj)->add($obj);
-		}
-
-		foreach ($this->delete as $key => $obj) {
-			$result[] = $this->getDoaFromObject($obj)->delete($obj);
-		}
-		//reset
-		$this->dirty = [];
-		$this->new = [];
-		$this->delete = [];
-
-        return (!in_array(0, $result)) ? true : false;
+		return $this->objwatcher->performOperations();
 	}
+
+	//is this used??????????????????????????????????????????
+//	public function findByDn(string $dn) : AbstractEntity
+//	{
+//		$uniqid = $dn;
+//		$key = $this->globalKey($uniqid);
+//
+//		if (array_key_exists($key, $this->objwatcher->all)) {
+//			return $this->objectwatcher->all[$key];
+//		}
+//	}
+//	//is this used?????????????????????????????/
+//	public function findById(string $id) : AbstractEntity
+//	{
+//		$uniqid = $this->buildDn($id);
+//		return $this->findByDn($uniqid);
+//	}
+
 }

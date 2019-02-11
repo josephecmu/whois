@@ -5,6 +5,7 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\repository;
 use cmu\ddd\directory\domain\model\equipment\outlets\Outlet;
 use cmu\ddd\directory\domain\model\locations\Rooms;
 use cmu\ddd\directory\infrastructure\services\dto\DTO;
+use cmu\ddd\directory\infrastructure\domain\model\factory\AbstractPersistenceFactory;   
 
 class RoomsRepository extends AbstractRepository 
 {
@@ -17,6 +18,11 @@ class RoomsRepository extends AbstractRepository
 		parent::__construct();			
 		$this->dofact = $this->fact->getDomainObjectFactory();	
 	}
+
+	protected function getIdName() : string
+    {   
+		return $this->options['rooms']['idname'];
+	} 
 
 	public function targetClass(): string
 	{
@@ -50,20 +56,20 @@ class RoomsRepository extends AbstractRepository
 			$this->handleCurrentRoomOutlets($room, $deleteall);						//this assigns outlets to the the correct addDirtyDeleteNew	
 		}
 		
-		$this->{$this->function}($room);      //run AddNewDirtyDelete for Rooms
+		$this->objwatcher::{$this->function}($room);      //run AddNewDirtyDelete for Rooms
 	}
 
 	private function addObjToNewDirtyDelete(string $cur_action, Outlet $obj) : void
 	{
 		switch ($cur_action) {
 			case "create":			
-				$this->addNew($obj);
+				$this->objwatcher::addNew($obj);
 				break;
 			case "update":				
-				$this->addDirty($obj);
+				$this->objwatcher::AddDirty($obj);
 				break;
 			case "delete":
-				$this->addDelete($obj);
+				$this->objwatcher::addDelete($obj);
 				break;
 		}	
 	}

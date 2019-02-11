@@ -11,4 +11,8 @@ class ComputersRepository extends AbstractRepository
 		return Computer::class;
 	}
 
+	protected function getIdName() : string
+    {   
+		return $this->options['computers']['idname'];
+	} 
 }
