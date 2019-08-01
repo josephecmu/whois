@@ -47,7 +47,6 @@ class Rooms extends AbstractEntity
 		$properties["dn"] = new Dn($properties["dn"]);
 
 		return new Outlet ($properties);
-
 	}
 
 	public function assignOutletToRoom (array $properties)  : void
@@ -71,7 +70,7 @@ class Rooms extends AbstractEntity
 
 	public function removeOutletFromRoom (Outlet $outlet) : void
 	{
-		$dn = $outlet->getOutletdn()->getDn();	//The Dn is an object 
+		$dn = $outlet->getOutletdn()->getDn();	//The Dn is returend the object passwde above.
 
 		foreach ($this->outlets as $k => $v) {
 			if ($v->getOutletDn()->getDn() == $dn) {
