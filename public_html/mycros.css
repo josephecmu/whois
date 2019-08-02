@@ -35,7 +35,7 @@ input[type="submit"] {
 		margin-left: 325px;
 }
 
-input.outlets {
+input.computers, input.outlets {
 	font-size:10px;
 }
 

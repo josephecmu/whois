@@ -18,8 +18,9 @@ class Rooms extends AbstractEntity
 	protected $roomid;
 	protected $roomnumber;
 	protected $outlets = null; 							//should be list of ethernet outlet objects 
+	protected $computers = null;						//array of Computer DN strings
 
-	protected function getRequiredFields() : array				//returns array of required properties
+	protected function getRequiredFields() : array		//returns array of required properties
 	{
 		return ["roomid", "dn", "roomnumber"];	
 	}
@@ -27,7 +28,8 @@ class Rooms extends AbstractEntity
     protected function setDn (string $adn) : void
     {
         $this->dn = new Dn($adn);
-    }
+    } 
+
 	protected function setRoomid(string $aroomid)  : void  
 	{
 		$this->roomid = $aroomid;		//no ValueObject
@@ -37,6 +39,17 @@ class Rooms extends AbstractEntity
 	{
 		$this->roomnumber = $aroomnumber;		//no ValueObject
 	}
+
+	public function assignComputerToRoom (Computer $computer) : void
+    {
+		$this->computers[] = $computer->getComputerdn();
+	}
+
+    public function removeComputerFromRoom (Computer $computer) : void
+    {
+        $key = $computer->getOutletdn();
+        unset ($this->computers[$key]);
+    }
 
 	private function outletFactory (array $properties) : Outlet
 	{   

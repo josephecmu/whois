@@ -38,7 +38,7 @@ class LeafTextGroupDeleteBuilder extends AbstractLeafBuilder
 					 $this->changeProperty('replace', 'type', 'hidden');
 				} elseif ( $t == $numberoftextboxes - 3 ) {
 
-					$this->changeProperty('replace', 'placeholder', 'New OutletID');
+//					$this->changeProperty('replace', 'placeholder', 'New OutletID');
 				}
 
 				if ( $t == $numberoftextboxes - 1 ) {   //delete field

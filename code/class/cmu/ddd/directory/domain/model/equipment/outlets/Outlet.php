@@ -14,7 +14,6 @@ class Outlet extends AbstractEntity
 
     protected $outletid;
 	protected $dn;
-	protected $computers=[];		//outlets hold multiple computers we only hold reference by ID. Not in aggregate.
 
 	protected function getRequiredFields() : array				//returns array of required properties
 	{
@@ -39,15 +38,5 @@ class Outlet extends AbstractEntity
 	public function getOutletdn() : Dn
 	{
 		return $this->dn;                                                                                         
-	}
-
-	public function getComputers() : array
-	{
-		return $this->computers;
-	}	
-
-	public function addComputerToOutlet (Dn $acomputerdn) 
-	{
-		$this->computers[] = $acomputerdn;
 	}
 }

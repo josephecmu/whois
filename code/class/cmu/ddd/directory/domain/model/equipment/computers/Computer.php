@@ -22,6 +22,11 @@ class Computer extends AbstractEntity
 		return ["dn", "computerid"];	
 	}
 
+	public function getComputerdn() : Dn
+	{
+		return $this->dn;                                                                                         
+	}
+
     protected function setComputerid (string $acomputerid) : void
     {
         $this->computerid = $acomputerid;
@@ -41,5 +46,4 @@ class Computer extends AbstractEntity
     {
         $this->dn = new Dn($adn);
 	}
-
 }
