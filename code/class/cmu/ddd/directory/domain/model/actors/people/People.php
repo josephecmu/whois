@@ -14,9 +14,9 @@ use \cmu\ddd\directory\domain\model\lib\Dn;
 class People extends AbstractEntity
 {
 
-    protected $name;
-    protected $andrewid;
-    protected $dn;       
+	protected $name;
+    	protected $andrewid;
+    	protected $dn;       
 	protected $roles=[];  				                           //can be BOTH Staff and Faculty	
 	protected $email;
 	protected $uidnumber;
@@ -27,7 +27,7 @@ class People extends AbstractEntity
 	{
 		return ["name", "dn", "gidnumber", "uidnumber", "homedirectory", "andrewid"];	
 	}
-    //setters below called by Dynamic setter
+	//setters below called by Dynamic setter
 	protected function setName(array $aname) :void
 	{
 		$this->name = new Name($aname);
@@ -48,10 +48,10 @@ class People extends AbstractEntity
 		$this->email = new Email($email);
 	}
 
-    protected function setDn (string $adn) : void
-    {
-        $this->dn = new Dn($adn);
-    }
+    	protected function setDn (string $adn) : void
+    	{
+        	$this->dn = new Dn($adn);
+    	}	
 
 	protected function setUidnumber (int $auidnumber) : void
 	{
@@ -67,11 +67,11 @@ class People extends AbstractEntity
 	{
 		$this->homedirectory = new HomeDirectory($ahomedirectory);
 	}
-    //The room must exist in the code below.  The Service layer should make sure of that. (findRoomOrFail)
-    public function assignUserToRoom($room) : Rooms
-    {
+	//The room must exist in the code below.  The Service layer should make sure of that. (findRoomOrFail)
+	public function assignUserToRoom($room) : Rooms
+	{
 		return new Rooms ($this->dn, $room);
-    }
+    	}
 	#The computer must be assigned to a room before assigned to a user. The service layer should verify?
 	public function assignUserToComputer($computer) : Computer
 	{

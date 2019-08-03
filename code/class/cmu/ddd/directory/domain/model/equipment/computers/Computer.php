@@ -13,9 +13,9 @@ class Computer extends AbstractEntity
 {
 
 	protected $computerid;			// cn
-    protected $computername; 		// ?? must map to another attribute
-    protected $operatingsystem;		// operatingSystem
-    protected $dn;					
+	protected $computername; 		// ?? must map to another attribute
+	protected $operatingsystem;		// operatingSystem
+	protected $dn;					
 
 	protected function getRequiredFields() : array				//returns array of required properties
 	{
@@ -27,8 +27,8 @@ class Computer extends AbstractEntity
 		return $this->dn;                                                                                         
 	}
 
-    protected function setComputerid (string $acomputerid) : void
-    {
+	protected function setComputerid (string $acomputerid) : void
+    	{
         $this->computerid = $acomputerid;
 	}
 
@@ -42,8 +42,8 @@ class Computer extends AbstractEntity
 		$this->operatingsystem = $aoperatingsystem;
 	}
 
-    protected function setDn (string $adn) : void
-    {
+    	protected function setDn (string $adn) : void
+    	{
         $this->dn = new Dn($adn);
 	}
 }
