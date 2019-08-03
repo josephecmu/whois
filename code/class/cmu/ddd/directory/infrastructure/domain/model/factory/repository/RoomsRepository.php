@@ -45,17 +45,22 @@ class RoomsRepository extends AbstractRepository
 			unset($room_norm_array['outlets']);
 		}
 
+		if (!empty($room_norm_array['computers'])) {									//strip the outlets DNs if they exist.
+			$computers=$room_norm_array['computers'];
+			unset($room_norm_array['computers']);
+		}
+
 		$room = $this->dofact->createObject($room_norm_array);
 
 		if (!empty($outlets)) {														//add the outlets to room.
 			$this->assignMultipleOutletsToRoom($outlets, $room);
 		}	
-
-		//if (!empty($room_norm_array['computers'])) {
-			//foreach($room_norm_array['computers'] as $computer) {
-				//$room->assignComputerToRoom($computer);
-			//}
-		//}
+		//Assign computers if the exist
+		if (!empty($computers)) {
+			foreach($computers as $computer) {
+				$room->assignComputerToRoom($computer);
+			}
+		}
 		
 		$deleteall = ($this->function == 'addDelete') ? 'deleteall' : null;
 		if ($room->getOutlets()) {													

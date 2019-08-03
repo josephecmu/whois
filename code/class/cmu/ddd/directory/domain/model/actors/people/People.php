@@ -33,10 +33,10 @@ class People extends AbstractEntity
 		$this->name = new Name($aname);
 	}
 
-    protected function setAndrewid (string $anid) :void
-    {
-         $this->andrewid = new AndrewID($anid);
-    }
+	protected function setAndrewid (string $anid) :void
+	{
+	     $this->andrewid = new AndrewID($anid);
+	}
 	
 	protected function setRoles (array $roles) : void
 	{
