@@ -17,6 +17,8 @@ class ObjectToLdapConverterAdd extends AbstractVisitor
 			->delete_empty_key()			//new 8-18
 			->returnFinalArray() 
 			;
+		echo $this->final;
+
 
 		return $record;
 	}
