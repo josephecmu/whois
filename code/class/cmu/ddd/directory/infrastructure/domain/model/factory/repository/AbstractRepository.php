@@ -42,13 +42,13 @@ abstract class AbstractRepository
 
 	public function buildNew(DTO $dto) : void
 	{
-		$dto->unset('ou'); 								//this service key is not needed here.
+		$dto->unset('ou'); 		//this service key is not needed here.
 
 		$idname = $this->getIdName();
 	
 		$id = $dto->get($idname);
-		$dn = $this->buildDn($id);						//get the ID from here
-		$dto->set('dn', $dn);							//we need to pass the $dn we just constructed
+		$dn = $this->buildDn($id);	//get the ID from here
+		$dto->set('dn', $dn);		//we need to pass the $dn we just constructed
 
 		$this->function="addNew";
 		$this->build($dto);

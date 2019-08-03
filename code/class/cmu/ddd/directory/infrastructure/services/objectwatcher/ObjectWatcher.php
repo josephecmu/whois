@@ -107,7 +107,7 @@ class ObjectWatcher
 		$this->new = [];
 		$this->delete = [];
 
-        return (!in_array(0, $result)) ? true : false;
+        	return (!in_array(0, $result)) ? true : false;
 	}
 }
 
