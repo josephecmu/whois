@@ -51,6 +51,12 @@ class RoomsRepository extends AbstractRepository
 			$this->assignMultipleOutletsToRoom($outlets, $room);
 		}	
 
+		//if (!empty($room_norm_array['computers'])) {
+			//foreach($room_norm_array['computers'] as $computer) {
+				//$room->assignComputerToRoom($computer);
+			//}
+		//}
+		
 		$deleteall = ($this->function == 'addDelete') ? 'deleteall' : null;
 		if ($room->getOutlets()) {													
 			$this->handleCurrentRoomOutlets($room, $deleteall);						//this assigns outlets to the the correct addDirtyDeleteNew	

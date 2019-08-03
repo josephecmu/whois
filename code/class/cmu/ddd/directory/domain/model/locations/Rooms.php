@@ -39,17 +39,17 @@ class Rooms extends AbstractEntity
 	{
 		$this->roomnumber = $aroomnumber;		//no ValueObject
 	}
-
-	public function assignComputerToRoom (Computer $computer) : void
+	//we may just want to pass the DN
+	public function assignComputerToRoom (string $acomputerdn) : void
     {
-		$this->computers[] = $computer->getComputerdn();
+		$this->computers[] = new Dn($acomputerdn);
 	}
 
-    public function removeComputerFromRoom (Computer $computer) : void
-    {
-        $key = $computer->getOutletdn();
-        unset ($this->computers[$key]);
-    }
+//    public function removeComputerFromRoom (Computer $computer) : void
+//    {
+//        $key = $computer->getOutletdn();
+//        unset ($this->computers[$key]);
+//    }
 
 	private function outletFactory (array $properties) : Outlet
 	{   
