@@ -45,23 +45,27 @@ class RoomsRepository extends AbstractRepository
 			unset($room_norm_array['outlets']);
 		}
 
-		if (!empty($room_norm_array['computers'])) {									//strip the outlets DNs if they exist.
+		if (!empty($room_norm_array['computers'])) {
 			$computers=$room_norm_array['computers'];
 			unset($room_norm_array['computers']);
+			echo "RoomsRepository.php computers <pre>";
+			print_r($computers);
 		}
 
 		$room = $this->dofact->createObject($room_norm_array);
 
-		if (!empty($outlets)) {														//add the outlets to room.
+		if (!empty($outlets)) {				//add the outlets to room.
 			$this->assignMultipleOutletsToRoom($outlets, $room);
 		}	
 		//Assign computers if the exist
 		if (!empty($computers)) {
 			foreach($computers as $computer) {
-				$room->assignComputerToRoom($computer);
+				$room->assignComputerToRoom($computer['computerdn']);
 			}
 		}
-		
+		echo "RoomsRepository.php Rooms Entity Object <pre>";
+		print_r($room);
+
 		$deleteall = ($this->function == 'addDelete') ? 'deleteall' : null;
 		if ($room->getOutlets()) {													
 			$this->handleCurrentRoomOutlets($room, $deleteall);						//this assigns outlets to the the correct addDirtyDeleteNew	

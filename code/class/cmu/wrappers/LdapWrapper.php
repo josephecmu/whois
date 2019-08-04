@@ -81,6 +81,9 @@ class LdapWrapper
     //add
     public function add($rdn, array $input) : bool
     {
+        echo "LdapWrapper.php Input <br>";
+        print_r($input);
+
         return ldap_add($this->ds, $rdn, $input);
     }
     //update

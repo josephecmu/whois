@@ -6,6 +6,8 @@ class ObjectToLdapConverterAdd extends AbstractVisitor
 {
 	public function returnConvertedArray() : array
 	{
+//		echo "ObjectToLdapConverterAdd.php  mod obj <pre>";
+//		print_r($this->mod);
 		//Fluent Interface 
 		$record = $this->mod
 			->recurse_expose_private_and_protected()
@@ -17,8 +19,8 @@ class ObjectToLdapConverterAdd extends AbstractVisitor
 			->delete_empty_key()			//new 8-18
 			->returnFinalArray() 
 			;
-		echo $this->final;
-
+//		echo "ObjectToLdapConverterAdd.php  FINAL Record <pre>";
+//		print_r($record);
 
 		return $record;
 	}

@@ -42,7 +42,7 @@ class Rooms extends AbstractEntity
 
 	public function assignComputerToRoom (string $acomputerdn) : void
     	{
-		$this->computers[] = new Dn($acomputerdn);
+		$this->computers[] = $acomputerdn;
 	}
 
 //    public function removeComputerFromRoom (Computer $computer) : void
