@@ -4,13 +4,9 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\
 
 class AddObjectClass extends AbstractAppendMods
 {
-
-	public function a_modify()
+	public function a_modify() : void
 	{
 		$object_class_map = $this->obj->getObjectClassMap();	
-
 		$this->temp['objectclass'] = $object_class_map;
-
 	}	
-
 }

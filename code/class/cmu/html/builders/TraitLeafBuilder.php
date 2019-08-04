@@ -6,19 +6,19 @@ trait TraitLeafBuilder
 {
 
     protected $obj;
-    //array containing all the metadata 
-    protected $overrides = array();
+    protected $overrides = array();   	//array containing all the metadata
+	protected $counter;					//used for complicated build (rooms/outlets)
 
     abstract function returnLeaf();
     //this method could be converted to STRATEGY PATTERN if much bigger?
-    protected function changeProperty($action, $key, $value1, $value2 = null)
+    protected function changeProperty($action, $key, $value1=null, $value2 = null)
 
     {
         
         //check if key exists
         if (!property_exists($this->obj, $key)) {
             
-            echo "Object does not exist... $key";
+            echo "Property  ' " .  $key . "' does not exist...for " . get_class($this->obj) ;
             return;
             
         } else {
@@ -28,11 +28,11 @@ trait TraitLeafBuilder
 
                 case "append":
 
-                    $replace_value = self::$elementarray[$key] . " " . $value1 . " " . $value2;         //keep the current value and add others
+                    $replace_value = self::$elementarray[$key] ." ".$value1." ". $value2;         //keep the current value and add others
 
                 break;
 
-                case "replace":
+                case "replace":  //also works to add if non exists.
 
                     if (is_array($value1)) {
 
@@ -67,7 +67,11 @@ trait TraitLeafBuilder
                     }
 
                 break;
+				case "delete";
 
+					unset(self::$elementarray[$key]);
+					return;	
+					
                 default:
                     
                     echo "incorrect action specified";
@@ -76,11 +80,11 @@ trait TraitLeafBuilder
 
         }
             
-            self::$elementarray[$key] =  $replace_value;                                                    //assign to array key
+            self::$elementarray[$key] =  $replace_value;                               //assign to array key
 
     }
     
-    protected function arrayChangeProperty()                                                                //calls function above, iterate through [object]OVERRRIDES making changes
+    protected function arrayChangeProperty()   //calls function above, iterate through [object]OVERRRIDES making changes
     
     {
         
@@ -88,7 +92,9 @@ trait TraitLeafBuilder
     
             foreach ($this->overrides as $value) {
 
-                $this->changeProperty($value[0], $value[1], $value[2], $value[3] = null);
+				$value[3] = $value[3] ?? null ;
+
+                $this->changeProperty($value[0], $value[1], $value[2], $value[3]);
 
             }
 

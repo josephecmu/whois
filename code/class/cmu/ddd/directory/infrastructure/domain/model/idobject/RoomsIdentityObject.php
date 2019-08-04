@@ -2,11 +2,14 @@
 
 namespace cmu\ddd\directory\infrastructure\domain\model\idobject;
 
-class RoomsIdentityObject extends IdentityObject
-{
-	public function __construct(string $field = null)
-	{
-		parent::__construct($field, ['roomnumber']);
-	}
-}
+use cmu\config\site\bin\Conf;
 
+class RoomsIdentityObject extends AbstractIdentityObject
+{
+
+	protected function returnConcreteConfigObject(array $options) : Conf
+	{
+		return $this->returnConfigObject($options['rooms']);
+	}
+
+}

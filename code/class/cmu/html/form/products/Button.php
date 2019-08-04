@@ -4,7 +4,7 @@ namespace cmu\html\form\products;
 class Button extends AbstractControls
     
 {
-    use TraitDisabled, TraitForm, TraitAutofocus, TraitValue, TraitType;
+    use TraitDisabled, TraitForm, TraitAutofocus, TraitValue, TraitType, TraitActions;
 
     private $formaction;
     private $formtarget;

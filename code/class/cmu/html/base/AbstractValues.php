@@ -7,7 +7,7 @@ abstract class AbstractValues
 
     protected $values = [];
 
-    function setValues(array $values_in)
+    function setValues(array $values_in) //void
 
     {
 
@@ -19,7 +19,7 @@ abstract class AbstractValues
     
     {
 
-		return $this->values;
+		return $this->values ?? [] ;
 
     }
 
@@ -27,17 +27,9 @@ abstract class AbstractValues
 
     {
 
-		return $this->values[$key] ?? null;
+		return $this->values[$key] ?? null;	
 
-//        if ( isset( $this->values[$key] ) ) {
-//
-//            return $this->values[$key];
-//
-//        }
-//
-//        return null;
-
-    }
+	}		
 
 	//3/28/18
 	public function contains(string $search_key) : bool

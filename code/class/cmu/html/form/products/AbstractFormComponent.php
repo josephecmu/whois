@@ -135,7 +135,7 @@ abstract class AbstractFormComponent extends \cmu\html\products\AbstractProduct
 /*
  * USED FOR POST PROCESSING - mimic a $_POST submission
  * This method takes the values for each object 'value' field and converts them to an array, either multi-array values or single array value (hidden)
- * It makes this decision based on whter or not brackets append the 'name'.
+ * It makes this decision based on whether or not brackets append the 'name'.
  * It sets the value of self::$post.
  * name: cmu\html\form\products::AbstractFormComponent::buildPost()
  * @return:null
@@ -144,24 +144,32 @@ abstract class AbstractFormComponent extends \cmu\html\products\AbstractProduct
     protected function buildPost()                                      
 
     {
-        
-        if (null !== $this->getKeyValueForm()) {                                            //check if return key/value pair is empty
+
+        if (null !== $this->getKeyValueForm()) {           			//check if return key/value pair is empty
 
             $pieces = explode(';', $this->getKeyValueForm());
 
-            $key = $pieces[0];                                                              //most likely $this->name
+            $key = $pieces[0];                             			//most likely $this->name
 
             $value = $pieces[1];
-                                          
-            if ($this->appendname == "[]") {                                                 //check if the append is '[]'                                    
+			
+            if ($this->appendname == "[]") {        	  			//check if the append is '[]'         
 
-                self::$post[$key][] = $value;                                                //add array of values    []
+                self::$post[$key][] = $value;                		//add array of values    []
 
-                return;                                                                     //stop and return array
+                return;                                             //stop and return array
 
             } 
+			//regex check  looking for [0][outletid]
+			if  (preg_match('/\[(\d*)\]\[(.*)\]/', $this->appendname, $matches)) { 
 
-            self::$post[$key] = $value;                                                      //NOT array
+				self::$post[$key][$matches[1]][$matches[2]] = $value;
+
+				return;
+
+			}
+
+            self::$post[$key] = $value;                              //NOT array
 
         }
 

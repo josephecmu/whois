@@ -12,11 +12,8 @@ abstract class AbstractVisitor
 
 	function __construct(AbstractMapper $mapper, array $raw_in = null)
 	{
-
 		$raw = ($raw_in) ?: $mapper->getRaw();
-
 		$this->mod = new Mod($mapper, $raw);
-
 	}
 
 	abstract public function returnConvertedArray() : array;

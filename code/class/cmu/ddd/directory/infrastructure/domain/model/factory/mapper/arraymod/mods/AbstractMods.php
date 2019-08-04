@@ -8,18 +8,15 @@ abstract class AbstractMods
 {
 
 	protected $temp = [];
-
 	protected $obj; 							//the [ENTITY] Mapper Object (People, etc)
 
 	function __construct(AbstractMapper $obj)
 	{
 		$this->obj = $obj;
-
 	}
 
 	public function returnTemp() : array
 	{
 		return $this->temp;
 	}
-
 }

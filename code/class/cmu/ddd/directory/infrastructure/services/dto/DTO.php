@@ -20,14 +20,6 @@ class DTO
 
 		return $this->data_array[$key] ?? null;
 
-//		if (array_key_exists($key, $this->data_array)) {
-//
-//			return $this->data_array[$key];
-//		
-//		}
-//
-//		return null;
-
 	}
 
 	public function set($key, $value)

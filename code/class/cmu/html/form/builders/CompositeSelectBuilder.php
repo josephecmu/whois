@@ -9,7 +9,7 @@ class CompositeSelectBuilder extends AbstractCompositeBuilder
 
     {
         ////LABEL///////////////////////////////////////////////
-        $labeloverrrides = array (  array('replace', 'label', 'selectoverride') 
+        $labeloverrrides = array (//  array('replace', 'label', 'selectoverride') 
 
                                  );
         
@@ -21,7 +21,7 @@ class CompositeSelectBuilder extends AbstractCompositeBuilder
 
                                     //array('replace','selectedvalue', array_values(self::$valuesarray)[0]) //we should only have one value here, only 1 can be selected.
     
-                                    array('replace', 'appendname', "[]")
+//                                    array('replace', 'appendname', "[]")
 
                                   );
         

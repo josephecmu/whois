@@ -148,10 +148,6 @@ abstract class AbstractProduct
 
             ////print_r($objectarray['externalarray']);
 
-            //print_r($objectarray);
-            //echo "<br />";
-            //echo "<br />";
-
             $this->setExternalarray($objectarray['externalarray']);
 
             unset($objectarray['externalarray']);  //we don't need

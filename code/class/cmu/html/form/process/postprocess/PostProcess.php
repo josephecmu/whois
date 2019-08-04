@@ -21,8 +21,6 @@ class PostProcess
 
     {
 
-        echo "PostProcess";
-
         return true;
 
     }

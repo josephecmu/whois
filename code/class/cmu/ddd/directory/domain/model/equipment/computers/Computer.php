@@ -4,24 +4,46 @@
 *
 *
 */
-namespace cmu\domain\model\directory\equipment\computers;
+namespace cmu\ddd\directory\domain\model\equipment\computers;
 
-class Computer extends \cmu\domain\model\directory\AbstractEntity
+use \cmu\ddd\directory\domain\model\lib\Dn;
+use cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
+class Computer extends AbstractEntity
 {
 
-    protected $computername;
-    protected $computeros;
-    protected $computerrdn;
-	protected $roomrdn;									//reference to Room Entity
+	protected $computerid;			// cn
+	protected $computername; 		// ?? must map to another attribute
+	protected $operatingsystem;		// operatingSystem
+	protected $dn;					
 
-    //setters
-	protected function setRoomrdn ($roomrdn)
-
+	protected function getRequiredFields() : array				//returns array of required properties
 	{
-
-        $this->roomrdn= $roomrdn;
-
+		return ["dn", "computerid"];	
 	}
-    
+
+	public function getComputerdn() : Dn
+	{
+		return $this->dn;                                                                                         
+	}
+
+	protected function setComputerid (string $acomputerid) : void
+    	{
+        $this->computerid = $acomputerid;
+	}
+
+	protected function setComputername(string $acomputername) : void
+	{
+		$this->computername = $acomputername;
+	}
+
+	protected function setOperatingsystem(string $aoperatingsystem) : void
+	{
+		$this->operatingsystem = $aoperatingsystem;
+	}
+
+    	protected function setDn (string $adn) : void
+    	{
+        $this->dn = new Dn($adn);
+	}
 }

@@ -20,6 +20,8 @@ abstract class AbstractIdentityObject
 	protected $and = null;   //<--what is this for?
 	protected $enforce = [];
 	
+	private $globalcondition="&";
+
 	// an identity object can start off empty, or with a field
 	 public function __construct(string $field = null)
 	 {
@@ -34,6 +36,15 @@ abstract class AbstractIdentityObject
 				 $this->field($field);
 			 }
 	 }
+	public function setGlobalCondition($cond_in) : void
+	{
+		$this->globalcondition = $cond_in;
+	}
+
+	public function getGlobalCondition() : string
+	{
+		return $this->globalcondition;
+	}
 
 	// field names to which this is constrained
 	public function getObjectFields() : array
@@ -55,7 +66,6 @@ abstract class AbstractIdentityObject
 			$this->currentfield = new Field($fieldname);
 			$this->fields[$fieldname] = $this->currentfield;
 		}
-
 		return $this;					//Fluent Interface
 	}
 
@@ -102,31 +112,25 @@ abstract class AbstractIdentityObject
 	  		if ($this->isVoid()) {
 	   			throw new \Exception("no object field defined");
 			}
-	  
 	   		$this->currentfield->addTest($symbol, $value);
-	  	
 			return $this;
 	  }
 
 	  public function getComps(): array
 	  {
-		   $ret = [];
-
-		   foreach ($this->fields as $field) {
+	  		$ret = [];
+		   	foreach ($this->fields as $field) {
 		   		$ret = array_merge($ret, $field->getComps());
-		   }
-
-	      return $ret;
+		   	}
+	  		return $ret;
 	  }
 
 	  public function __toString() : string
 	  {
 		  $ret = [];
-
 		  foreach ($this->getComps() as $compdata) {
 			  $ret[] = "{$compdata['name']} {$compdata['operator']} {$compdata['value']}";
 		  }
-
 		  return implode(" AND ", $ret);
 	  }
 }

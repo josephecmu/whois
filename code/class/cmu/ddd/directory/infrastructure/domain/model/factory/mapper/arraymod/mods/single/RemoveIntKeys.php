@@ -5,7 +5,7 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\
 class RemoveIntKeys extends AbstractSingleMods
 {
 
-	public function s_modify($k, $v)
+	public function s_modify($k, $v) : void
 	{
 		if (!is_int($k)) {
 			$this->temp[$k]=$v;

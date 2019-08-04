@@ -2,65 +2,29 @@
 
 namespace cmu\ddd\directory\application\services\people;
 
-use cmu\ddd\directory\infrastructure\services\dto\DTO;
-use cmu\ddd\directory\infrastructure\domain\model\idobject\PeopleIdentityObject;
+use cmu\ddd\directory\application\services\TraitAddService;
 
 class AddPeopleService extends AbstractPeopleService
-
 {
 
-	public function execute(DTO $dto) : bool
+	use TraitAddService;
 
-	{
-		$ou_eq = $dto->get('ou');			//the DTO for 'ADD' contains the key 'ou'
-
-		$dto->unset('ou'); 					//this administrative key is not needed here.
-
-		//identity generator reference here??????
-		//also check for existance of gidnumber and uidnumber and homedirectory
-
-        //Check for uniquness of gidnumber, andrewid, uidnumber and homedirectory
-        //TODO: better way to pass the array, maye with the mapper?
-        /**
-        $basedn = $this->ou . "," . $this->dc;
-        $unique = array("uidnumber" => "uidnumber",
-                        "uid" => "andrewid",
-                        "gidnumber" => "gidnumber",
-                        "homedirectory" => "homedirectory");
-        if(!$this->doa->verifyUnique($dto, $basedn, $unique, 0)) {
-            print_r("NOT UNIQUE!");
-            Throw new \ErrorException("Not Unique");
-        }
-         * **/
-
-        //TODO: Update AbstractSelectionFactory to work better with both AND and OR
-        $id = new PeopleIdentityObject();
-        $id->field("uid")
-            ->eq($dto->get("andrewid"))
-            ->field("gidnumber")
-            ->eq($dto->get("gidnumber"))
-            ->field("uidnumber")
-            ->eq($dto->get("uidnumber"))
-            ->field("homedirectory")
-            ->eq($dto->get("homedirectory"));
-
-        if(!$this->doa->verifyUnique($id)) {
-            print_r("NOT UNIQUE!");
-            Throw new \ErrorException("Not Unique");
-        }
-
-
-		$andrewid = $dto->get('andrewid');
-
-		//we need to create a proper DN to insert.
-		$dn = $this->idatt . "=" . $andrewid . "," . $this->ou . "," . $this->dc ;
-
-		$dto->set('dn', $dn);		//we need to pass the $dn we just constructed
-
-		$obj = $this->doa->build($dto);
-
-		return $this->doa->add($obj);	
-
-	}
-
+//	public function execute(DTO $dto) : bool
+//	{
+//		// FU  we can remove this in mapper and not clutter Services??????????????????
+//		// mapper works on ARRAYS, DTO is already an object
+//		// special DTO that calls  mapper???
+//		// maybe:
+//		//$mapper = $this->factory->getMapper($dto->getDataArray());
+//		//$dto = new DTO($mapper->return_dto_to_domain_array());
+//		//
+//
+//		////some checking confirming the a userID does not already exist	
+//		//identity generator reference here??????
+//		//also check for existance of gidnumber and uidnumber and homedirectory
+//
+//		$this->repo->buildNew($dto);				
+//
+//		return $this->repo->performOperations();	
+//	}
 }

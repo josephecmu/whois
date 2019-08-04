@@ -8,7 +8,7 @@ abstract class AbstractLeafBuilder extends AbstractFormBuilder
 {
     use TraitLeafBuilder;
        
-    function __construct(array $overrides_in = null)
+    function __construct(array $overrides_in = null, string $counter_in=null)
 
     {
         //sanitize and check metaarray here
@@ -26,7 +26,8 @@ abstract class AbstractLeafBuilder extends AbstractFormBuilder
 
         }
 
-        $this->overrides = $overrides_in;
+		$this->overrides = $overrides_in;  		//is this declared anywhere?
+		$this->counter = $counter_in;
 
     }
 

@@ -5,7 +5,7 @@ class Input extends AbstractControls
     
 {
 
-    use TraitTextValidate, TraitDisabled, TraitPlaceholder, TraitAutofocus, TraitValue, TraitType;
+    use TraitTextValidate, TraitDisabled, TraitPlaceholder, TraitAutofocus, TraitValue, TraitType, TraitActions;
 
     private $checked;
     //private $required; //required attribute, will try with custom required code

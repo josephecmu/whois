@@ -1,40 +1,22 @@
 <?php 
 
-namespace cmu\infrastructure\identitygenerator\directory;
+namespace cmu\ddd\directory\infrastructure\domain\model\identitygenerator;
 
-class PeopleDn extends AbstractDn
+use cmu\config\site\bin\TraitConfig;
 
+abstract class AbstractDn
 {
+	
+	use TraitConfig;
 
-    protected $dn;
+	protected $dc = "dc=mcs,dc=cmu,dc=edu";
+	protected $options;
 
-    function __construct()
+	function __construct()
+	{
+		$this->options = $this->getConfigArray("config.ini");		
+	}
 
-    {
-
-        
-
-    }
-
-    abstract protected function generateDn();
-
-    protected function create() : string
-
-    {
-
-        $this->generateDn();
-
-        return $this->returnDn();
-
-    }
-
-    protected function returnDn() : string
-
-    {
-        
-        return $this->dn;
-
-    }
-
+	abstract public function buildDn (string $id) : string;
 
 }

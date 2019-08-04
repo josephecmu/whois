@@ -27,3 +27,26 @@ $(document).ready(function () {
     });
 
 });
+
+
+function deleteSubObj(className) {
+
+	var hiddenField = $(className),
+		        val = hiddenField.val();
+
+	    hiddenField.val(val === "yes" ? "no" : "yes");
+	
+
+	var hiddenButField = $(className+"button"),
+		        val = hiddenButField.val();
+
+	    hiddenButField.val(val === "Delete" ? "Don't Delete" : "Delete");
+
+
+	$(className+"button").toggleClass('red');
+
+	//	$(className).attr('value', 'yes');
+
+    $(className+"outlet").toggleClass('red');
+}
+

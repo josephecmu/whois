@@ -1,7 +1,11 @@
 <?php
 namespace cmu\html\general\products;
 
-class CloseTag extends AbstractFormComponent
+//use cmu\html\form\products\AbstractFormComponent;
+
+
+class CloseTag extends AbstractGeneralComponent
+
 
 {
 

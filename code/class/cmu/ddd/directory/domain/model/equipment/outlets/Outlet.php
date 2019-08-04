@@ -6,57 +6,37 @@
 */
 namespace cmu\ddd\directory\domain\model\equipment\outlets;
 
-class Outlet extends \cmu\ddd\directory\domain\model\lib\AbstractEntity
+use \cmu\ddd\directory\domain\model\lib\Dn;
+use \cmu\ddd\directory\domain\model\lib\AbstractEntity;
 
+class Outlet extends AbstractEntity
 {
 
     protected $outletid;
-	protected $outletrdn;
-	protected $computerrdn=[];		//outlets hold multiple computers we only hold reference by ID. Not in aggregate.
+	protected $dn;
 
-	public function setOutletid ($anoutletid)
-
+	protected function getRequiredFields() : array				//returns array of required properties
 	{
-
-		$this->outletid =  $anoutletid;
-
+		return ["outletid", "dn"];	
 	}
 
+	public function setOutletid ($anoutletid) : void
+	{
+		$this->outletid = $anoutletid;
+	}
+	//is this ever called????
+    public function setOutletdn (Dn $anoutletdn) : void
+	{
+//		$this->outletdn = $anoutletdn;			//1-31-19
+		$this->dn = $anoutletdn;
+	}
 	public function getOutletid() : string
 	{
-
 		return $this->outletid;
-
 	}
 
-	public function getOutletdn() : string
-
+	public function getOutletdn() : Dn
 	{
-
-		return $this->outletrdn;                                                                                         
-
+		return $this->dn;                                                                                         
 	}
-
-	public function getComputerrdn() : array
-
-	{
-		return $this->computerrdn;
-
-	}	
-    public function setOutletrdn (\cmu\ddd\directory\domain\model\lib\Dn $anoutletrdn)
-
-	{
-
-		$this->outletrdn = $anoutletrdn;
-
-	}
-
-	public function addComputerToOutlet (\cmu\ddd\directory\domain\model\lib\Dn $acomputerrdn) 
-
-	{
-
-		$this->computerrdn[] = $acomputerrdn;
-
-	}
-
 }

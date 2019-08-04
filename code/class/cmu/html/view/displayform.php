@@ -1,7 +1,5 @@
 <?php
 
-    include'../code/class/cmu/config/site/people.conf';
-
 	$dic = new \cmu\html\form\SingMetaQueryDic(); 
 
     $control = $dic->returnDisplayObject();                                 //returns new instance of FormClient()
@@ -12,17 +10,18 @@
 
         if ($control->checkChangeForm()) {                 //see if the form has changed before we go any further!!
   
-            try {
+  			try {
 
             $control->processForm();
             
-                $this->forward( '../code/class/cmu/html/view/success.php' );
-        
-            } catch ( \Exception $e ) {
+//              $this->forward( '../code/class/cmu/html/view/success.php' );
+//				$this->forward ( 'results.php' );
+//				header ('Location: http://whois.math.cmu.edu');				
 
-              $this->forward( '../code/class/cmu/html/view/error.php' );
+      		} catch ( \Exception $e ) {
+		   		$this->forward( '../code/class/cmu/html/view/error.php' );
 
-           }
+		 }
 
       } 
 

@@ -172,21 +172,9 @@ class CompositeForm extends AbstractComposite
     public function buildAndReturnPost()
 
     {
-
         $this->buildPost();
 
-
 		return self::$post ?? null;
-
-//        if (isset(self::$post)) { 
-//
-//            return $this->returnPost();
-//
-//        } else {
-//
-//            return null;
-//
-//        }
 
     }
 

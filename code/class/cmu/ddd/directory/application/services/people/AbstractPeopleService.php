@@ -7,9 +7,7 @@ use cmu\ddd\directory\application\services\AbstractService;
 
 abstract class AbstractPeopleService extends AbstractService 
 {
-	
-	protected $ou = "ou=people";
-	protected $idatt = "uid";
+	protected $repo;
 
 	public function targetClass(): string
 	{

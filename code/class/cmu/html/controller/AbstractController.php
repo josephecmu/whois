@@ -13,16 +13,4 @@ abstract class AbstractController {
  
     }
  
-    //function getRequest() {
-
-    //    return \cmu\html\registry\RequestRegistry::getRequest();
-
-    //}
-
-    //function getMeta() {
-
-     //   return \cmu\html\registry\MetaRegistry::getMeta();
-
-    //}
-
 }

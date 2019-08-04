@@ -35,14 +35,6 @@ abstract class AbstractRegistry
 
 		return  $this->values[$key] ?? null;
 
-//        if ( isset( $this->values[$key] ) ) {
-//
-//            return $this->values[$key];
-//
-//        }
-//
-//        return null;
-
     }
  
     function set( $key, $val ) 

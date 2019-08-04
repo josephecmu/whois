@@ -6,30 +6,22 @@
  */
 namespace cmu\ddd\directory\domain\model\actors\people;
 
-class UidNumber extends \cmu\ddd\directory\domain\model\lib\AbstractImmutable
+use \cmu\ddd\directory\domain\model\lib\AbstractImmutable;
 
+class UidNumber extends AbstractImmutable
 {
-		private $uidnumber;
+	private $uidnumber;
 
-		function __construct (int $auidnumber) 
-
-		{
-
-			$validator=["validInteger"];
-
-			if ($this->isValid("uidnumber", $auidnumber, $validator)) {			
-
-					$this->uidnumber = $auidnumber;
-		
-			}
+	function __construct (int $auidnumber) 
+	{
+		$validator=["validInteger"];
+		if ($this->isValid("uidnumber", $auidnumber, $validator)) {			
+				$this->uidnumber = $auidnumber;
 		}
+	}
 
-		public function getUidnumber () : int 
-		
-		{
-
-			return $this->uidnumber;
-
-		}
-
+	public function getUidnumber () : int 
+	{
+		return $this->uidnumber;
+	}
 }

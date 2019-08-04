@@ -5,7 +5,7 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\mapper\arraymod\
 class MoveElementsUpIfNotInEntityMap extends AbstractSingleMods
 {
 
-	public function s_modify($k, $v)
+	public function s_modify($k, $v) : void
 	{
 		//If the key is NOT in entitymap (move up)
 		$entity_map = $this->obj->getEntityMap();	
@@ -18,15 +18,10 @@ class MoveElementsUpIfNotInEntityMap extends AbstractSingleMods
 			){
 				//move the elements up one level
 				foreach($v as $k1 => $v1) {
-
 					$this->temp[$k1] = $v1;			
-
 				} 
-
 			} else {       											//leave it alone
 				$this->temp[$k] = $v;
 		}
-
 	}	
-
 }

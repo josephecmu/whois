@@ -19,8 +19,12 @@ abstract class AbstractProcess
         $this->returnpostobj = $returnpostobj_in;
 
         $this->dn = $dn_in;
+		//ADD only passes ou, others pass DN
+		$dnorou = $dn_in ?: $returnpostobj_in->getValue('ou');
 
-		$this->dto = DTOAssembler::returnDTO($returnpostobj_in->getValues());
+		$entity = ldap_explode_dn($dnorou, 1)[0];
+
+		$this->dto = DTOAssembler::returnDTO($returnpostobj_in->getValues(), $entity);
 
 	}
 

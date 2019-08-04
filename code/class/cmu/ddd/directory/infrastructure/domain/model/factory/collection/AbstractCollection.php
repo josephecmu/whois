@@ -4,14 +4,9 @@ namespace cmu\ddd\directory\infrastructure\domain\model\factory\collection;
 
 use cmu\ddd\directory\infrastructure\domain\model\factory\object\AbstractDomainObjectFactory; 
 use cmu\ddd\directory\domain\model\lib\AbstractEntity;
-use cmu\ddd\directory\infrastructure\domain\model\share\TraitTargetClass;
-
 
 abstract class AbstractCollection implements \Iterator
-
 {
-
-	use TraitTargetClass;
 
 	protected $dofact = null;
 	protected $total = 0;
@@ -23,24 +18,21 @@ abstract class AbstractCollection implements \Iterator
 
 	public function __construct(array $raw = [], AbstractDomainObjectFactory $dofact = null)
 	{
-		if (count($raw) && ! is_null($dofact)) {
-			$this->raw = $raw;
-			$this->total = count($raw);
-		}
-
 		$this->dofact = $dofact;
+		$this->raw = $raw;
+		$this->total = count($raw) ?: 0;
 	}
 
-	abstract public function targetClass(): string;
-
-	 public function add(AbstractEntity $object)
-	 {
-		 $this->VerifyTargetClass($object);
-
+	public function add(AbstractEntity $object)
+	{
 		 $this->notifyAccess();
 		 $this->objects[$this->total] = $object;
 		 $this->total++;
-		 
+	}
+
+	public function getTotal() : int
+	{
+		return $this->total;
 	}
 
 	protected function notifyAccess()
@@ -65,38 +57,45 @@ abstract class AbstractCollection implements \Iterator
 			  $this->objects[$num] = $this->dofact->createObject($this->raw[$num]);
 			  return $this->objects[$num];
 		 }
-
 	}
 
-	public function rewind()
+	public function rewind() : void
 	{
 		$this->pointer = 0;
 	}
 
-	public function current()
+	public function current() : int
 	{
 		return $this->getRow($this->pointer);
 	}
 
-	public function key()
+	public function key() : int
 	{
 		return $this->pointer;
 	}
 
-	public function next()
+	public function next() : object
 	{
 		$row = $this->getRow($this->pointer);
 
 		if ($row) {
 			$this->pointer++;
 		}
-
 		return $row;
 	}
 
-	public function valid()
+	public function valid() : bool
 	{
 		return (! is_null($this->current()));
 	}
+	////josephe 8-9 to return raw without creating object
+	public function returnRawKey($key) : int
+	{
+		return $this->raw[$key];
+	}
 
+	public function returnRaw() : array
+	{
+		return $this->raw;
+	}
 }
